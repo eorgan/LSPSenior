@@ -1,0 +1,45 @@
+## Ignore Visual Studio Code files
+.vscode/**
+.vscode-test/**
+
+## Ignore build files
+*.vsix
+node_modules/**
+out/**
+dist/**
+
+## Ignore development files
+.eslintrc.json
+.gitignore
+tsconfig.json
+webpack.config.js
+
+## Ignore documentation sources (keep compiled README)
+*.md
+!README.md
+!CHANGELOG.md
+
+## Ignore test files
+test/**
+*.test.js
+*.spec.js
+
+## Ignore CI/CD files
+.github/**
+.gitlab-ci.yml
+azure-pipelines.yml
+
+## Ignore editor files
+.DS_Store
+Thumbs.db
+.idea/**
+*.swp
+*.swo
+
+## Keep only necessary files for extension
+!package.json
+!language-configuration.json
+!syntaxes/**
+!snippets/**
+!images/**
+!LICENSE

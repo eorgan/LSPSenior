@@ -1,0 +1,708 @@
+@-- Consulta e Vendas Intenar Conciliadas --@
+
+/*
+ * @Author: Eliezer Organ
+ * @Email: eorgan@organ.eti.br
+ * @Date: 2025-07-29 21:41:08
+ * @Last Modified by: Eliezer Organ
+ * @Last Modified time: 2025-10-05 15:44:39
+ * @Description: Description
+ */
+
+/* Transação de Tesouraria para ser utilizada na base do cliente: 90662
+   Transação de Baixa do contas a Receber utilizada na base do cliente: 90350
+*/
+
+@-- Definir WSs Internos --@
+
+@-- Declarar Funções --@
+   Definir Funcao BuscarParamWS();
+   Definir Funcao SolicitarGeracaoRemessa();
+   Definir Funcao MonitorarStatusRemessa();
+   Definir Funcao ListarRemessa();
+   Definir Funcao DownloadRemessaPaginada();
+   Definir Funcao ProcessarRegistrosRemessa();
+   Definir Funcao ParamChamadaHttp();
+   Definir Funcao f_GravaLog();
+   Definir Funcao GravaBanco2();
+   Definir Funcao BaixarTituloCR();
+   Definir Funcao GerarLctTES();
+   Definir Funcao BuscarSeqCCO();
+   Definir Funcao EnviarEmailErro();
+   Definir Funcao ProcessarERP();
+
+
+
+@-- Declarar Variaveis --@
+   Definir Alfa aCodEmp;
+   Definir Alfa aSqlCom;
+   Definir Alfa aSqlInt;
+   Definir Alfa aAuth;
+   Definir Alfa aToken;
+   Definir Alfa aEmail;
+   Definir Alfa aUrl;
+   Definir Alfa aLimPro;
+   Definir Alfa aLimIte;
+   Definir Alfa aToken64;
+   Definir Alfa aRotCon;
+   Definir Alfa aSqlPen;
+   Definir Alfa aSqlCom;
+   Definir Alfa aAutorizacao;
+   Definir Data dData;
+   Definir Alfa aData;
+   Definir Alfa aDocumento;
+   Definir Alfa aDocumentoCliente;
+   Definir Alfa aFlagCancelamento;
+   Definir Alfa aIdEstabelecimentoErp;
+   Definir Alfa aIdFormaPagamento;
+   Definir Alfa aIdTransacao;
+   Definir Alfa aLocalizador;
+   Definir Alfa aNomeCliente;
+   Definir Alfa aNsu;
+   Definir Alfa aNumeroUnicoErp; 
+   Definir Alfa aObservacaoTransacao;
+   Definir Alfa aObservacaoVenda;
+   Definir Alfa aTid;
+   Definir Alfa aValor;
+   Definir Alfa aNumeroPedido;
+   Definir Alfa aJson;
+   Definir Alfa aIdAdquirente;
+   Definir Alfa aIdBandeira;
+   Definir Alfa aIdMeioCaptura;
+   Definir Alfa aParcelas;
+   Definir Alfa aEndApi;
+   Definir Alfa aJsonRet;
+   Definir Alfa aCabecalho;
+   Definir Alfa aMsgRet;
+   Definir Alfa aChaTab;
+   Definir Alfa aRetorno;
+
+   Definir Alfa aTabela;
+   Definir Alfa aTipLog;
+   Definir Alfa xCommandBanco;
+   Definir Alfa xMensagem;
+   Definir Alfa aSituacao;
+   Definir Alfa aConciliacao;
+   Definir Alfa aSigInt;
+   Definir Alfa aTaxa;
+   Definir Alfa aVlrAbe;
+   Definir Alfa aTipRetB;
+   Definir Alfa aResultB;
+   Definir Alfa aMsgRetB;
+   Definir Alfa aTipRet;
+   Definir Alfa aErroEx;
+   Definir Alfa aRetRet;
+
+@-- Variaveis para Remessa --@
+   Definir Alfa aIdRemessaCfg;    @-- ID da configuração de remessa selecionada --@
+   Definir Alfa aIdRemessa;       @-- ID da remessa gerada --@
+   Definir Alfa aSituacaoRemessa; @-- Status da remessa (AGUARDANDO_PROCESSAMENTO, EM_PROCESSAMENTO, CONCLUIDO, ERRO) --@
+   Definir Alfa aDataInicial;     @-- Data inicial para filtro (formato DD/MM/YYYY) --@
+   Definir Alfa aDataFinal;       @-- Data final para filtro (formato DD/MM/YYYY) --@
+   Definir Numero nQuantidadePaginas; @-- Quantidade de páginas da remessa --@
+   Definir Numero nPaginaAtual;   @-- Página atual sendo processada --@
+   Definir Numero nTentativas;    @-- Contador de tentativas de monitoramento --@
+   Definir Numero nMaxTentativas; @-- Máximo de tentativas de monitoramento --@
+   Definir Numero nIntervalo;     @-- Intervalo entre tentativas em segundos --@
+   Definir Alfa aQuantPag;        @-- Quantidade de páginas em formato alfa --@
+   Definir Alfa aSqlPen;          @-- Handle SQL para pendências --@
+   Definir Numero nCodRet;        @-- Código de retorno HTTP --@
+   Definir Numero nQtd;           @-- Quantidade de registros --@
+   Definir Numero nId;            @-- ID do registro --@
+   Definir Numero nStaReg;        @-- Status do registro --@
+   Definir Numero nPosStr;        @-- Posição de string --@
+
+   Definir Data dDiaHoj;
+   Definir Alfa aDiaHoj;
+   Definir Alfa xSelecaotab;
+   Definir Alfa aSeqCco;
+   Definir Alfa vMais;
+   Definir Alfa aTnsBai;
+   Definir Alfa aTnsTes;
+   Definir Alfa aRotGre;
+   Definir Alfa aRotLre;
+   Definir Alfa aRotAre;
+   Definir Alfa aEmlDes;
+   Definir Alfa aIdeAdq;
+   Definir Alfa vHTTP;
+   Definir Alfa aCamposJson;
+   Definir Alfa aObteve;
+   Definir Alfa aEstabelecimento;
+   Definir Alfa aMovimento;
+   Definir Alfa aBandeira;
+   Definir Alfa aConta;
+   Definir Alfa aSinalDiferenca;
+   Definir Alfa aBanco;
+   Definir Alfa aDtVencimento;
+   Definir Alfa aTerminal;
+   Definir Alfa aLoteUnico;
+   Definir Alfa aNsu;
+   Definir Alfa aDtVenda;
+   Definir Alfa aVlLiquido;
+   Definir Alfa aNsr;
+   Definir Alfa aMotivoAnula;
+   Definir Alfa aIdProduto;
+   Definir Alfa aClienteNome;
+   Definir Alfa aProduto;
+   Definir Alfa aIdMovimento;
+   Definir Alfa aClienteCodigo;
+   Definir Alfa aNrPedido;
+   Definir Alfa aAutorizacao;
+   Definir Alfa aTaxa;
+   Definir Alfa aHrVenda;
+   Definir Alfa aAdquirente;
+   Definir Alfa aLote;
+   Definir Alfa aFiliacao;
+   Definir Alfa aVlBruto;
+   Definir Alfa aIdBandeira;  
+   Definir Alfa aIdUnicoNegocio;
+   Definir Alfa aVdaConc;
+   Definir Alfa aSinal;
+   Definir Alfa aIdAdquirente;
+   Definir Alfa aIdUnicoErp;
+   Definir Alfa aIdMovFinan;
+   Definir Alfa aVdaStatus;
+   Definir Alfa aAgencia;
+   Definir Alfa aEstabelecimentoErp;
+   Definir Alfa aParcela;
+   Definir Alfa aTid;
+   Definir Alfa aCartao;
+   Definir Alfa aDtMovimento;
+   Definir Alfa aVlDiferenca;
+   Definir Alfa aParcelas;
+   Definir Alfa aAchou;
+
+   Definir Alfa aEmlAss;
+   Definir Alfa aEmlCor;
+   Definir Alfa aEmlRem;
+   Definir Alfa aEmlAnexo;
+   Definir Alfa aEmlFrm;
+   Definir Alfa aCab;
+   Definir Alfa sDiaHoj;
+   Definir Alfa aEmlDes;
+   Definir Alfa aEmlDes1;
+   Definir Alfa aEmlDes2;
+   
+
+   Definir Alfa vHTTP;
+   Definir Alfa vHTTPGet;
+   Definir Alfa vHTML;
+   Definir Data dDiaAnt;
+   Definir Alfa aDiaAnt;
+   Definir Alfa aCodFil;
+   Definir Alfa aNumTit;
+   Definir Alfa aCodTpt;
+   Definir Alfa aVlrAbe;
+   Definir Alfa aNumCco;
+   Definir Alfa aChaTab;
+
+@-- Atribui Valores Variaveis --@
+   IntParaAlfa(CodEmp, aCodEmp);
+   IntParaAlfa(CodFil, aCodFil);
+   nModExec = 1;
+
+   dDiaHoj = DatSis;
+   dDiaAnt = dDiaHoj - 1;
+   ConverteMascara(3,dDiaHoj,aDiaHoj,"DD/MM/YYYY");
+   ConverteMascara(3,dDiaAnt,aDiaAnt,"DD/MM/YYYY");
+   ConverteDataBanco(dDiaHoj, sDiaHoj);
+
+   @-- Inicializar variáveis de controle de remessa --@
+   aDataInicial = aDiaAnt;
+   aDataFinal = aDiaHoj;
+   nMaxTentativas = 5;  @-- Máximo de 60 tentativas (5 minutos se intervalo for 5 seg) --@
+   nIntervalo = 10000;   @-- Intervalo 10000 é igual a 10 segundos entre verificações --@
+   @-- aIdRemessa = "10000000001041024"; --@
+
+@-- Inicio do Processamento --@
+   BuscarParamWS();
+   SolicitarGeracaoRemessa();
+
+   Se(nErrRemessa = 0)
+      {
+         MonitorarStatusRemessa();
+
+         @-- Se remessa foi concluída com sucesso, processar os dados --@
+         Se(aSituacaoRemessa = "CONCLUIDO")
+            {
+               xCommandBanco = "INSERT INTO USU_TEQUREM (USU_IDEREM, USU_DATMOV, USU_NUMPAG, USU_CODEMP, USU_CODFIL, USU_OBSEQU, USU_MODULO) VALUES ('" + aIdRemessa + "', SYSDATE, " + aQuantPag + 
+                                                         ", " + aCodEmp + ", " + aCodFil + ", 'Remessa Gerada', 'Vendas Internas')";
+               GravaBanco2();
+               DownloadRemessaPaginada();
+            }
+      }
+   
+@-- Chamada das Funções --@
+Funcao BuscarParamWS();
+   Inicio
+
+      aSqlCom = "SELECT USU_TOKPRD, USU_URLPRD, USU_EMAIL, USU_ROTGRE, USU_TNSBAI, USU_SIGINT, USU_ROTLRE, USU_ROTARE, USU_IDEREM, USU_INTNET " +   
+                 " FROM USU_TPAREQU WHERE USU_CODEMP = " + aCodEmp;
+
+      SQL_Criar(aSqlInt);
+      SQL_UsarSqlSenior2(aSqlInt, 0);
+      SQL_UsarAbrangencia(aSqlInt, 0);
+      SQL_DefinirComando(aSqlInt, aSqlCom);
+      SQL_AbrirCursor(aSqlInt);
+      Se(SQL_EOF(aSqlInt) = 0)
+         {
+            SQL_RetornarAlfa(aSqlInt, "USU_TOKPRD", aToken);
+            SQL_RetornarAlfa(aSqlInt, "USU_URLPRD", aUrl);
+            SQL_RetornarAlfa(aSqlInt, "USU_EMAIL", aEmail);
+            SQL_RetornarAlfa(aSqlInt, "USU_ROTGRE", aRotGre); @-- Rota Gerar remessa --@
+            SQL_RetornarAlfa(aSqlInt, "USU_TNSBAI", aTnsBai); @-- Transação de baixa --@
+            SQL_RetornarAlfa(aSqlInt, "USU_SIGINT", aSigInt); @-- Sigla do sistema de integração --@
+            SQL_RetornarAlfa(aSqlInt, "USU_ROTLRE", aRotLre); @-- Rota Listar remessa --@
+            SQL_RetornarAlfa(aSqlInt, "USU_ROTARE", aRotAre); @-- Rota Acessar remessa --@
+            SQL_RetornarAlfa(aSqlInt, "USU_IDEREM", aIdRemessaCfg); @-- ID da configuração de remessa --@
+            SQL_RetornarAlfa(aSqlInt, "USU_INTNET", aEmlDes); @-- Email Destinatário para envio de erros --@
+
+            aToken64 = aEmail + ":" + aToken;
+
+            Base64Encode(aToken64, aAuth);
+
+            aAuth = "Basic " + aAuth;
+         }
+
+      Se(SQL_EOF(aSqlInt) = 1)
+         {
+            aRetorno = "Empresa sem configuração de integração com Equals. Verifique!";
+            aTipLog = "E";
+            aTabela = "USU_TEQUPEN";
+            aChaTab = "N/A";
+            nStaReg = 1;
+            f_GravaLog();
+            EnviarEmailErro();
+         }
+      SQL_FecharCursor(aSqlInt);
+      SQL_Destruir(aSqlInt);
+
+   Fim;
+
+Funcao SolicitarGeracaoRemessa();
+   Inicio
+      nErrRemessa = 0;
+
+      @-- Solicita a geração da remessa com filtro de data --@
+      aEndApi = aUrl + aRotGre; @-- Rota para gerar remessa --@
+
+      aJson = "{" +
+              "\"idMovFinanCfg\": " + aIdRemessaCfg + "," +
+              "\"dataMovimentacaoInicial\": \"" + aDataInicial + "\"," +
+              "\"dataMovimentacaoFinal\": \"" + aDataFinal + "\"" +
+              "}";
+
+      ParamChamadaHttp();
+      HttpPost(vHTTP, aEndApi, aJson, aJsonRet);
+      HttpLeCodigoResposta(vHTTP, nCodRet);
+
+      Se ((nCodRet = 200) OU (nCodRet = 201))
+         {
+            @-- Obter o ID da remessa gerada --@
+            aCabecalho = "{ \"Retorno\": " + aJsonRet + " }";
+            ValorElementoJson(aCabecalho, "Retorno", "id", aIdRemessa);
+
+            Se(aIdRemessa = "")
+               {
+                  aRetorno = "Erro: ID da remessa não retornado pela API.";
+                  xCommandBanco = "UPDATE USU_TEQUREM SET USU_OBSEQU = 'Erro na solicitação' WHERE USU_IDEREM = '" + aIdRemessa + "'";
+                  GravaBanco2();
+                  aTipLog = "E";
+                  aTabela = "USU_TEQUPEN";
+                  aChaTab = "N/A";
+                  nStaReg = 1;
+                  f_GravaLog();
+                  EnviarEmailErro();
+                  nErrRemessa = 1;
+               }
+            Senao 
+               {
+                  aRetorno = "Remessa ID: " + aIdRemessa + " solicitada com sucesso. Aguardando processamento...";
+                  aTipLog = "I";
+                  aTabela = "USU_TEQUPEN";
+                  aChaTab = "N/A";
+                  nStaReg = 1;
+                  f_GravaLog();
+
+               }
+         }
+      Senao
+         {
+            Definir Alfa aCodRetStr;
+            IntParaAlfa(nCodRet, aCodRetStr);
+            aRetorno = "Erro ao solicitar geração de remessa. Código HTTP: " + aCodRetStr + " - Resposta: " + aJsonRet;
+            xCommandBanco = "UPDATE USU_TEQUREM SET USU_OBSEQU = 'Erro na solicitação' WHERE USU_IDEREM = '" + aIdRemessa + "'";
+            GravaBanco2();
+            aTipLog = "E";
+            aTabela = "USU_TEQUPEN";
+            aChaTab = "N/A";
+            nStaReg = 1;
+            f_GravaLog();
+            EnviarEmailErro();
+            nErrRemessa = 1;
+         }
+
+   Fim;
+
+Funcao MonitorarStatusRemessa();
+   Inicio
+
+      @-- Monitora o status da remessa até conclusão ou erro --@
+      nTentativas = 0;
+
+      ListarRemessa();
+
+      Enquanto((aSituacaoRemessa <> "CONCLUIDO") E (aSituacaoRemessa <> "ERRO") E (nTentativas < nMaxTentativas) E (nCodRet = 200))
+         {
+            @-- Aguardar intervalo antes de verificar (exceto primeira tentativa) --@
+            Se(nTentativas > 0)
+               {
+                  Sleep(nIntervalo);
+               }
+
+            ListarRemessa();
+
+            nTentativas = nTentativas + 1;
+         }
+
+      @-- Verificar se excedeu o tempo máximo de espera --@
+      Se((aSituacaoRemessa <> "CONCLUIDO") E (nTentativas >= nMaxTentativas))
+         {
+            aRetorno = "Timeout ao aguardar processamento da remessa ID: " + aIdRemessa + ". Status: " + aSituacaoRemessa;
+            aTipLog = "E";
+            aTabela = "USU_TEQUPEN";
+            aChaTab = "N/A";
+            nStaReg = 1;
+            f_GravaLog();
+            EnviarEmailErro();
+         }
+
+   Fim;
+
+Funcao ListarRemessa();
+   Inicio
+
+      aEndApi = aUrl + aRotLre + "?id=" + aIdRemessa; @-- Rota para gerar remessa --@
+
+      ParamChamadaHttp();
+      HttpGet(vHTTP,aEndApi,aJsonRet); 
+      HttpLeCodigoResposta(vHTTP, nCodRet);
+
+      Se (nCodRet = 200)
+         {
+            @-- Obter o ID da remessa gerada --@
+            aCabecalho = "{ \"Retorno\": " + aJsonRet + " }";
+            ValorElementoJson(aCabecalho, "Retorno", "situacao", aSituacaoRemessa);
+            ValorElementoJson(aCabecalho, "Retorno", "quantidadePaginas", aQuantPag);
+            AlfaParaInt(aQuantPag, nQuantPag);
+
+            
+         }
+      Senao
+         {
+            Definir Alfa aCodRetStr;
+            IntParaAlfa(nCodRet, aCodRetStr);
+            aRetorno = "Erro ao Monitorar o status da remessa. Remessa: " + aIdRemessa + " - Código HTTP: " + aCodRetStr + " - Resposta: " + aJsonRet;
+            aTipLog = "E";
+            aTabela = "USU_TEQUPEN";
+            aChaTab = "N/A";
+            nStaReg = 1;
+            f_GravaLog();
+            EnviarEmailErro();
+         }
+
+   Fim;
+
+Funcao DownloadRemessaPaginada();
+   Inicio
+
+      @-- Processar cada página da remessa --@
+      Definir Alfa aPagAtual;
+      Definir Alfa aQtdPag;
+      Definir Alfa aCodRetStr;
+
+      nPaginaAtual = 1;
+
+      Enquanto(nPaginaAtual <= nQuantPag)
+         {
+            @-- Solicitar download da página --@
+            aEndApi = aUrl + aRotAre;
+
+            IntParaAlfa(nPaginaAtual, aPagAtual);
+
+            aJson = "{" +
+                    "\"id\": " + aIdRemessa + "," +
+                    "\"pagina\": " + aPagAtual +
+                    "}";
+
+            ParamChamadaHttp();
+            HttpPost(vHTTP, aEndApi, aJson, aJsonRet);
+            PosicaoAlfa ("{}",aJsonRet,nPos);
+            HttpLeCodigoResposta(vHTTP, nCodRet);
+
+            Se((nCodRet = 200) e (nPos = 0))
+               {
+                  @-- Processar registros da página --@
+                  ProcessarRegistrosRemessa();
+
+                  IntParaAlfa(nQuantidadePaginas, aQtdPag);
+
+                  aRetorno = "Página " + aPagAtual + " de " + aQtdPag + " processada com sucesso.";
+                  xCommandBanco = "UPDATE USU_TEQUREM SET USU_OBSEQU = 'processada com sucesso' WHERE USU_IDEREM = '" + aIdRemessa + "'";
+                  GravaBanco2();
+                  aTipLog = "I";
+                  aTabela = "USU_TEQUPEN";
+                  aChaTab = "N/A";
+                  nStaReg = 1;
+                  f_GravaLog();
+               }
+            Senao
+               {
+                  IntParaAlfa(nCodRet, aCodRetStr);
+
+                  Se(nPos = 0)
+                     {
+                        aRetorno = "Retorno com Json vazio.. ";
+                     }
+                  Senao
+                     {
+                        aRetorno = "Erro ao baixar o Json  - " + aPagAtual + ". Código HTTP: " + aCodRetStr;
+                     }
+                  
+                  xCommandBanco = "UPDATE USU_TEQUREM SET USU_OBSEQU = 'processada com Erro' WHERE USU_IDEREM = '" + aIdRemessa + "'";
+                  GravaBanco2();
+                  aTipLog = "E";
+                  aTabela = "USU_TEQUPEN";
+                  aChaTab = "N/A";
+                  nStaReg = 1;
+                  f_GravaLog();
+                  EnviarEmailErro();
+               }
+
+         nPaginaAtual = nPaginaAtual + 1;
+
+         }
+
+   Fim;
+
+Funcao ProcessarRegistrosRemessa();
+   Inicio
+
+      @-- Processar cada registro da remessa baixada conforme Retorno --@
+      @-- Estrutura: { "id": ..., "pagina": ..., "registros": { "registro": [...] } } exemplo arquivo RetornoIntegraçãoOficial.json--@
+      aCab = "{\"id\":" + aIdRemessa + ",\"pagina\":" + aPagAtual + ",\"registros\":";
+      SubstAlfa(aCab, "", aJsonRet);
+
+      aCab = "}]}}";
+      SubstAlfa(aCab, "}]}", aJsonRet);
+
+      ListaRegraCriarLista(nTabelaReg);
+      aCamposJson = "ESTABELECIMENTO;MOVIMENTO;BANDEIRA;CONTA;SINALDIFERENCA;BANCO;DTVENCIMENTO;TERMINAL;LOTEUNICO;NSU;DTVENDA;VLLIQUIDO;NSR;MOTIVOANULA;" +
+                    "IDPRODUTO;CLIENTE_NOME;PRODUTO;IDMOVIMENTO;CLIENTE_CODIGO;NRPEDIDO;AUTORIZACAO;VLCOMISSAO;HRVENDA;ADQUIRENTE;LOTE;FILIACAO;VLBRUTO;" +
+                    "IDBANDEIRA;IDUNICONEGOCIO;VDA_CONC;SINAL;IDADQUIRENTE;IDUNICOERP;IDMOVFINAN;VDA_STATUS;AGENCIA;ESTABELECIMENTOERP;PARCELA;TID;CARTAO;" +
+                    "DTMOVIMENTO;VLDIFERENCA;PARCELAS";
+
+      ListaRegraCarregarJson(nTabelaReg, aJsonRet, "registro", aCamposJson);
+      ListaRegraPrimeiro(nTabelaReg, aObteve);
+
+      Enquanto(aObteve = "S")
+         {
+
+            ListaRegraObterValorAlfa(nTabelaReg,"ESTABELECIMENTO", aEstabelecimento, aAchou);   @-- Nome que identifica o estabelecimento para o cliente --@
+            ListaRegraObterValorAlfa(nTabelaReg,"MOVIMENTO", aMovimento, aAchou);               @-- Descrição que identifica o tipo do movimento. Ver Item 3 - Movimentos --@
+            ListaRegraObterValorAlfa(nTabelaReg,"BANDEIRA", aBandeira, aAchou);                 @-- Nome da Bandeira. Ver Item 4.2 - Bandeiras --@   
+            ListaRegraObterValorAlfa(nTabelaReg,"CONTA", aConta, aAchou);                       @-- Conta corrente do domicílio bancário --@
+            ListaRegraObterValorAlfa(nTabelaReg,"SINALDIFERENCA", aSinalDiferenca, aAchou);     @-- Sinal da diferença entre o valor da venda na adquirente e o valor da venda conciliada. "C" quando positivo, "D" quando negativo.--@
+            ListaRegraObterValorAlfa(nTabelaReg,"BANCO", aBanco, aAchou);                       @-- Banco do domicílio bancário --@
+            ListaRegraObterValorAlfa(nTabelaReg,"DTVENCIMENTO", aDtVencimento, aAchou);         @-- Data de vencimento da parcela (AAAA-MM-DD). Somente para vendas capturadas e desagendamentos --@
+            ListaRegraObterValorAlfa(nTabelaReg,"TERMINAL", aTerminal, aAchou);                 @-- Identificação do terminal pelo qual a transação foi capturada --@  
+            ListaRegraObterValorAlfa(nTabelaReg,"LOTEUNICO", aLoteUnico, aAchou);               @-- Número do lote único na adquirente --@
+            ListaRegraObterValorAlfa(nTabelaReg,"NSU", aNsu, aAchou);                           @-- NSU da adquirente --@
+            ListaRegraObterValorAlfa(nTabelaReg,"DTVENDA", aDtVenda, aAchou);                   @-- Data da venda no formato AAAA-MM-DD --@
+            ListaRegraObterValorAlfa(nTabelaReg,"VLLIQUIDO", aVlLiquido, aAchou);               @-- Valor líquido do movimento --@
+            ListaRegraObterValorAlfa(nTabelaReg,"NSR", aNsr, aAchou);                           @-- Número sequencial a cada registro do arquivo --@
+            ListaRegraObterValorAlfa(nTabelaReg,"MOTIVOANULA", aMotivoAnula, aAchou);           @-- Motivo da anulação quando aplicável --@
+            ListaRegraObterValorAlfa(nTabelaReg,"IDPRODUTO", aIdProduto, aAchou);               @-- Código do Produto. Ver Item 4.3 - Produto --@   
+            ListaRegraObterValorAlfa(nTabelaReg,"CLIENTE_NOME", aClienteNome, aAchou);          @-- Nome do cliente encaminhado no arquivo de venda interna --@
+            ListaRegraObterValorAlfa(nTabelaReg,"PRODUTO", aProduto, aAchou);                   @-- Descrição do Produto. Ver Item 4.3 - Produto --@   
+            ListaRegraObterValorAlfa(nTabelaReg,"IDMOVIMENTO", aIdMovimento, aAchou);           @-- Código que identifica o tipo do movimento. Ver Item 3 - Movimentos --@
+            ListaRegraObterValorAlfa(nTabelaReg,"CLIENTE_CODIGO", aClienteCodigo, aAchou);      @-- Código do cliente encaminhado no arquivo de venda interna --@
+            ListaRegraObterValorAlfa(nTabelaReg,"NRPEDIDO", aNrPedido, aAchou);                 @-- Número do pedido junto a adquirente --@
+            ListaRegraObterValorAlfa(nTabelaReg,"AUTORIZACAO", aAutorizacao, aAchou);           @-- Autorização da adquirente --@
+            ListaRegraObterValorAlfa(nTabelaReg,"VLCOMISSAO", aTaxa, aAchou);                   @-- Valor de comissão do movimento --@
+            SubstAlfa(".", ",", aTaxa);
+            ListaRegraObterValorAlfa(nTabelaReg,"HRVENDA", aHrVenda, aAchou);                   @-- Hora da venda no formato HH:MM:SS --@  
+            ListaRegraObterValorAlfa(nTabelaReg,"ADQUIRENTE", aAdquirente, aAchou);             @-- Nome da Adquirente. Ver Item 4.1 - Adquirentes --@
+            ListaRegraObterValorAlfa(nTabelaReg,"LOTE", aLote, aAchou);                         @-- Número do lote na adquirente --@
+            ListaRegraObterValorAlfa(nTabelaReg,"FILIACAO", aFiliacao, aAchou);                 @-- Número da filiação do estabelecimento na adquirente --@
+            ListaRegraObterValorAlfa(nTabelaReg,"VLBRUTO", aVlBruto, aAchou);                   @-- Valor bruto do movimento --@
+            SubstAlfa(".", ",", aVlBruto);
+            ListaRegraObterValorAlfa(nTabelaReg,"IDBANDEIRA", aIdBandeira, aAchou);             @-- Código da Bandeira. Ver Item 4.2 - Bandeiras--@
+            ListaRegraObterValorAlfa(nTabelaReg,"IDUNICONEGOCIO", aIdUnicoNegocio, aAchou);     @-- Identificador do pedido --@
+            ListaRegraObterValorAlfa(nTabelaReg,"VDA_CONC", aVdaConc, aAchou);                  @-- 1 - Em Aberto, 2 - Divergente, 3 - Conciliada, 4 - Conciliada Manualmente, 5 - Justificada, 6 - Não Aplicável--@
+            ListaRegraObterValorAlfa(nTabelaReg,"SINAL", aSinal, aAchou);                       @-- "C" para crédito, "D" para débito, "N/A" quando não aplicável --@
+            ListaRegraObterValorAlfa(nTabelaReg,"IDADQUIRENTE", aIdAdquirente, aAchou);         @-- Código da Adquirente. Ver Item 4.1 - Adquirentes --@
+            ListaRegraObterValorAlfa(nTabelaReg,"IDUNICOERP", aIdUnicoErp, aAchou);             @-- Identificador único para identificar a venda no ERP --@
+            ListaRegraObterValorAlfa(nTabelaReg,"IDMOVFINAN", aIdMovFinan, aAchou);             @-- Id da Remessa --@
+            ListaRegraObterValorAlfa(nTabelaReg,"VDA_STATUS", aVdaStatus, aAchou);              @-- 1 - Acatada, 2 - Rejeitada, 3 - Cancelada, 4 - Liquidada --@
+            ListaRegraObterValorAlfa(nTabelaReg,"AGENCIA", aAgencia, aAchou);                   @-- Agência do domicílio bancário --@
+            ListaRegraObterValorAlfa(nTabelaReg,"ESTABELECIMENTOERP", aEstabelecimentoErp, aAchou); @-- Código que identifica o estabelecimento para o cliente --@
+            ListaRegraObterValorAlfa(nTabelaReg,"PARCELA", aParcela, aAchou);                   @-- Número da parcela quando aplicável --@
+            ListaRegraObterValorAlfa(nTabelaReg,"TID", aTid, aAchou);                           @-- Número da TID da venda gerada pela adquirente --@
+            ListaRegraObterValorAlfa(nTabelaReg,"CARTAO", aCartao, aAchou);                     @-- Número do cartão em que a transação foi capturada --@
+            ListaRegraObterValorAlfa(nTabelaReg,"DTMOVIMENTO", aDtMovimento, aAchou);           @-- Data no formato AAAA-MM-DD --@
+            ListaRegraObterValorAlfa(nTabelaReg,"VLDIFERENCA", aVlDiferenca, aAchou);           @-- Valor da diferença entre o valor da venda na adquirente e o valor da venda conciliada --@
+            ListaRegraObterValorAlfa(nTabelaReg,"PARCELAS", aParcelas, aAchou);                 @-- QNúmero de parcelas do comprovante de venda --@   
+            
+            ProcessarERP();
+
+            ListaRegraProximo(nTabelaReg, aObteve);
+         }
+         ListaRegrafim(nTabelaReg, aObteve);
+              
+   Fim;
+
+Funcao ProcessarERP();
+   Inicio
+
+      @-- Buscar dados do título na tabela de pendências --@
+      aSqlCom = "SELECT USU_CODEMP, USU_CODFIL, USU_NUMTIT, USU_CODTPT, USU_VLRABE, USU_NUMCCO, " +
+               "('CodEmp = ' || USU_CODEMP || ' / CodFil = ' || USU_CODFIL || ' / NumTit = ' || USU_NUMTIT || ' / CodTpt = ' || USU_CODTPT) ChaTab " +
+               "FROM USU_TEQUPEN WHERE USU_ERPUNI = '" + aIdUnicoErp + "' AND (USU_SITEQU <> 3 OR USU_SITEQU <> 4 OR USU_SITEQU <> 6 OR USU_SITEQU <> 7)";
+
+      SQL_Criar(aSqlPen);
+      SQL_UsarSqlSenior2(aSqlPen, 0);
+      SQL_UsarAbrangencia(aSqlPen, 0);
+      SQL_DefinirComando(aSqlPen, aSqlCom);
+      SQL_AbrirCursor(aSqlPen);
+
+      Se(SQL_EOF(aSqlPen) = 0)
+         {
+            SQL_RetornarAlfa(aSqlPen, "USU_CODEMP", aCodEmp);
+            SQL_RetornarAlfa(aSqlPen, "USU_CODFIL", aCodFil);
+            SQL_RetornarAlfa(aSqlPen, "USU_NUMTIT", aNumTit);
+            SQL_RetornarAlfa(aSqlPen, "USU_CODTPT", aCodTpt);
+            SQL_RetornarFlutuante(aSqlPen, "USU_VLRABE", nVlrAbe);
+            ConverteMascara(2,nVlrAbe,aVlrAbe,"Z.ZZZ.ZZZ.ZZZ.ZZ9,99");
+            LimpaEspacos(aVlrAbe);
+            SQL_RetornarAlfa(aSqlPen, "USU_NUMCCO", aNumCco);
+            SQL_RetornarAlfa(aSqlPen, "ChaTab", aChaTab);
+
+            @-- Verificar se está conciliado --@
+            @-- VDA_STATUS = 1 (Ativo) e VDA_CONC = 3 (Conciliado) e MOVIMENTO = "Venda Conciliada" --@
+            Se((aIdMovimento = "A3") OU (aIdMovimento = "A4"))
+               {
+                  aRetorno = "Venda NSU " + aNsu + " conciliada com sucesso.";
+                  aTipLog = "I";
+                  aTabela = "USU_TEQUPEN";
+                  nStaReg = 1;
+
+                  xCommandBanco = "UPDATE USU_TEQUPEN SET USU_SITEQU = 2, USU_IDEREM = '" + aIdRemessa + "', USU_NUMPAG = " + aPagAtual + " WHERE USU_ERPUNI = '" + aIdUnicoErp + "' AND USU_CODEMP = " + aCodEmp;
+
+                  GravaBanco2();
+
+                  f_GravaLog();
+
+               }
+            Senao
+               {
+                  aRetorno = "Venda NSU " + aNsu + " IDMOVIMENTO: " + aIdMovimento + " / Movimento: " + aMovimento;
+                  aTipLog = "I";
+                  aTabela = "USU_TEQUPEN";
+                  nStaReg = 1;
+                  f_GravaLog();
+                  EnviarEmailErro();
+               }
+         }
+
+      SQL_FecharCursor(aSqlPen);
+      SQL_Destruir(aSqlPen);
+
+   Fim;
+
+Funcao ParamChamadaHttp();
+   Inicio
+
+      HttpObjeto(vHTTP);
+      HttpDesabilitaErroResposta(vHTTP);
+      HttpAlteraCodifCaracPadrao(vHTTP, "utf-8");
+      HttpAlteraCabecalhoRequisicao(vHTTP, "Content-Type", "application/json");
+      HttpAlteraCabecalhoRequisicao(vHTTP, "Authorization", aAuth);
+
+   Fim;
+
+Funcao EnviarEmailErro();
+   Inicio
+
+      @-- Função para enviar email em caso de erro --@
+      @-- Implementar conforme necessidade do cliente --@
+      @-- Exemplo usando serviço de email do Senior --@
+
+      aEmlAss = "Erro no Processamento da Integração Equals";
+
+      RetornaValorCFG("com.senior.network.email.user",aEmlRem);
+
+      aEmlAss  = "Ref. a Devolução aguardando Emissão de Nota Fiscal";
+      aEmlAnexo = "";
+      aEmlFrm = "H";
+      
+
+      aEmlCor = "<html>" +
+                "<head>" +
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">" +
+                "<style>" +
+                "</style>" +
+                "</head>" + 
+                "<body>" + 
+                "<br>" +
+                aEmlAss +
+                "<br>" +
+                "<br>" +
+                "<br> Ocorreu um erro no processamento da integração com Equals." +
+                "<br>" +
+                "<br> Erro: " + aRetorno +
+                "<br>" +
+                "<br> Data/Hora: " + aDiaHoj +
+                "<br>" +
+                "<br>"+
+                "Enviado automaticamente - Gestão Empresarial Zeus do Brasil." + 
+                "</body>" + 
+                "</html>";
+   
+      
+      EnviarEmail(aEmlRem, aEmlAss, aEmlDes, aEmlDes1, aEmlDes2, aEmlCor, aEmlAnexo, aEmlFrm);
+
+   Fim;
+
+Funcao f_GravaLog();
+   {
+      Definir interno.custom.senior.g5.logs.gravarLog sGravaLogMmo;
+      
+      sGravaLogMmo.IdeLog = "EQI";
+      sGravaLogMmo.NomTab = aTabela;  
+      sGravaLogMmo.TipLog = aTipLog;  
+      sGravaLogMmo.ChaTab = aChaTab;  
+      sGravaLogMmo.NomFrm = "Conciliação Equals";  
+      sGravaLogMmo.DesLog = aRetorno;  
+      sGravaLogMmo.StaReg = nStaReg;  
+      sGravaLogMmo.InfAdi = "Registro inserido via regra.";
+      
+      sGravaLogMmo.ModoExecucao = 1;
+      
+      sGravaLogMmo.Executar();  
+   }
+
+Funcao GravaBanco2();
+   Inicio
+
+      @-- Grava alterações no banco --@
+      ExecSQLEx (xCommandBanco, xErro, xMensagem); 
+         Se (xErro = 1) {
+            aMsgRet = xMensagem;
+            aRetorno = "Erro ao executar comando no banco erro: " + aMsgRet;
+            aTipLog = "I";
+            nStaReg = 1;
+            f_GravaLog();
+         }
+      
+   Fim;

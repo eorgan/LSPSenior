@@ -1,0 +1,525 @@
+@-- Importar Arquivo CSV para tabela Temporaria --@
+
+/*
+ * @Author: Eliezer Organ
+ * @Email: eliezer.organ@consultorseniorsistemas.com.br
+ * @Date: 2025-09-21 20:10:59
+ * @Last Modified by: Eliezer Organ
+ * @Last Modified time: 2025-09-30 19:50:50
+ * @Description: Description
+ */
+
+
+/******************************************************************************
+Desenvolvido por: Eliezer Organ
+Motivo: Projeto LINKCALL 
+******************************************************************************/
+
+@-- Definir Funções --@
+   Definir Funcao SplitVariavelArq();
+   Definir Funcao LerDadosArq();
+   Definir Funcao ValidaNulo();
+   Definir Funcao CriaLinhaItem();
+   Definir Funcao GeraIdeExt();
+   Definir Funcao GravaBanco();
+   Definir Funcao ZeraVar();
+   Definir Funcao BuscarAnoAtual();
+   Definir Funcao BuscarDadosCtr();
+   Definir Funcao BuscarDadosServ();
+   Definir Funcao ValidaQtdServ(); 
+
+
+@-- Definir Variaveis --@
+   Definir Alfa aArqLeitura;
+   Definir Alfa aArqGrava;
+   Definir Numero nCodReg;
+   Definir Alfa aOpeExe;
+   Definir Alfa aFecPed;
+   Definir Numero nCodEmp;
+   Definir Alfa aCodEmp;
+   Definir Numero nCodFil;
+   Definir Alfa aCodFil;
+   Definir Numero nTipPed;
+   Definir Alfa aTipPed;
+   Definir Numero nPrcPed;
+   Definir Alfa aPrcPed;
+   Definir Alfa aTnsPro;
+   Definir Data dDatEmi;
+   Definir Alfa aDatEmi;
+   Definir Data dDatPrv;
+   Definir Alfa aDatPrv;
+   Definir Alfa aObsPed;
+   Definir Alfa aObsMot;
+   Definir Numero nCodCli;
+   Definir Alfa aCodCli;
+   Definir Numero nSeqEnt;
+   Definir Alfa aSeqEnt;
+   Definir Alfa aPedCli;
+   Definir Numero nCodRep;
+   Definir Alfa aCodRep;
+   Definir Alfa aCodMoe;
+   Definir Alfa aCodCpg;
+   Definir Alfa aPgtAnt;
+   Definir Alfa aCifFob;
+   Definir Alfa aTemPar;
+   Definir Numero nIdeExt;
+   Definir Alfa aCtrExt;
+   Definir Alfa aCodPro;
+   Definir Alfa aCodDer;
+   Definir Alfa aCodDep;
+   Definir Numero nQtdPed;
+   Definir Alfa aQtdPed;
+   Definir Numero nQtdAbe;
+   Definir Alfa aQtdAbe;
+   Definir Alfa aUniMed;
+   Definir Numero nPreUni;
+   Definir Alfa aPreUni;
+   Definir Data dDatEnt;
+   Definir Alfa aDatEnt;
+   Definir Data dDatAne;
+   Definir Alfa aDatAne;
+   Definir Data dDatPoc;
+   Definir Alfa aDatPoc;
+   Definir Numero nGerNec;
+   Definir Alfa aGerNec;
+   Definir Alfa aGerCga;
+   Definir Alfa aResMan;
+   Definir Alfa aIndAed;
+   Definir Data dDatGer;
+   Definir Alfa aDatGer;
+   Definir Alfa aCmpKit;
+   Definir Alfa aUniVen;
+   Definir Numero nQtdVen;
+   Definir Alfa aQtdVen;
+   Definir Numero nPreVen;
+   Definir Alfa aPreVen;
+   Definir Alfa aDados;
+   Definir Alfa aLinha;
+   Definir Alfa aVarEve;
+   Definir Alfa aVar1;
+   Definir Alfa aVar2;
+   Definir Alfa aVar3;
+   Definir Alfa aVar4;
+   Definir Alfa aVar5;
+   Definir Alfa aVar6;
+   Definir Alfa aVar7;
+   Definir Alfa aVar8;
+   Definir Alfa aVar9;
+   Definir Alfa aVar10;
+   Definir Alfa aVar11;
+   Definir Alfa aVar12;
+   Definir Alfa aVar13;
+   Definir Alfa aVar14;
+   Definir Alfa aVar15;
+   Definir Alfa aVar16;
+   Definir Alfa aVar17;
+   Definir Alfa aVar18;
+   Definir Alfa aVar19;
+   Definir Alfa aVar20;
+   Definir Alfa aVar21;
+   Definir Alfa aVar22;
+   Definir Alfa aVar23;
+   Definir Alfa aCodReg;
+   Definir Alfa aIdeExt;
+   Definir Alfa aSitObs;
+   Definir Alfa aTipInf;
+   Definir Alfa aCodTra;
+   Definir Alfa aObtMot;
+   Definir Alfa aObsObs;
+
+@-- Variveis --@
+   Definir Alfa aMsgRet;
+   Definir Alfa aSub;
+   Definir alfa xCommandBanco;
+   Definir alfa xQbraLinha;
+   Definir Alfa aIDeUni;
+   Definir Alfa aMontaChave;
+   Definir Alfa aRetorno;
+   Definir Alfa xMensagem;
+
+   Definir Alfa Imp_CamFil;
+   Definir Alfa xSelecaotab;
+   Definir Alfa vMais;
+   Definir Alfa aAno;
+   Definir Alfa aDatCpt;
+   Definir Alfa aSqlComC;
+   Definir Alfa aSqlCtr;
+   Definir Alfa aDesFil;
+   Definir Alfa aDesCli;
+   Definir Alfa aNumOfi;
+   Definir Alfa aDesCcu;
+   Definir Alfa aCodCcu;
+   Definir Alfa aDesSer;
+   Definir Alfa aCodSer;
+   Definir Alfa aQtdSer;
+   Definir Alfa aVlrTot;
+   Definir Alfa aDatCor;
+   Definir Alfa aCodRel;
+   Definir Alfa aCplisp;
+   Definir Alfa aSqlComS;
+   Definir Alfa aSqlSer;
+   Definir Alfa aLogImp;
+   Definir Alfa aStaReg;
+   Definir Alfa aNumReg;
+
+@-- Atribui valores as Variaveis de caminho local--@
+   aArqLeitura = Imp_CamFil;
+
+@-- Atribui valores as Variaveis de caminho Cloud--@
+
+   /* aArqLeitura = "\\\\Vmfs01sen\\lefpi$\\ImpPed\\carteira_100_pedidos.csv"; */ 
+
+@-- Atribui valor as variaveis --@
+   aSub = ";";
+   nLin = 0;
+   nSuc = 0;
+   RetornaAscII(10, xQbraLinha);
+
+LerDadosArq();
+Se(nSuc > 0)
+   {
+      IntParaAlfa(nSuc, aNumReg);
+      aMsgRet = "Total de Registros Importados: " + aNumReg + ".";
+   } Senao {
+      aMsgRet = "Nenhum registro importado.";
+   }
+
+Mensagem(Retorna, aMsgRet);
+
+x = 1;
+
+Funcao LerDadosArq();
+   Inicio
+
+      Se((aArqLeitura <> "") e (ArqExiste(aArqLeitura)))
+         {
+            aDados = "";
+            nArqLeitura = Abrir(aArqLeitura, LerNL);
+            Enquanto(LerNL(nArqLeitura, aLinha) = 1)
+               {
+                  aDados = aLinha;
+                  aVarEve = aDados;
+                  ZeraVar();
+                  SplitVariavelArq();
+
+                  aDatCpt = aVar1;
+
+                  Se(nRet = 1)
+                     {
+                        GeraIdeExt();
+                        aDesFil = aVar2;
+                        aDesCli = aVar3;
+                        aNumOfi = aVar4;
+                        BuscarDadosCtr();
+                        aDesCcu = aVar5;
+                        aCodCcu = aVar6;
+                        aDesSer = aVar7;
+                        aCodSer = aVar8;
+                        Se(aStaReg = "N")
+                           {
+                              BuscarDadosServ();
+                           }
+                        aQtdSer = aVar9;
+                        Se(aStaReg = "N")
+                           {
+                              ValidaQtdServ();
+                           }
+                        SubstAlfa(",", ".", aQtdSer);
+                        aPreUni = aVar10;
+                        SubstAlfa(",", ".", aPreUni);
+                        aVlrTot = aVar11;
+                        SubstAlfa(",", ".", aVlrTot);
+                        aDatCor = "CONVERT(DATE, '" + aVar12 + "', 103)";
+                        aCodRel = aVar13;
+                        aCplIsp = aVar14;
+                              
+                        CriaLinhaItem();
+                                        
+                     }               
+               }
+
+            Fechar(nArqLeitura);
+
+         }
+      
+   Fim;
+    
+Funcao SplitVariavelArq();
+   Inicio
+
+      @-- Extrai Variavel 1 --@
+      aVar1 = aVarEve;
+      nIni = 1;
+      PosicaoAlfa(aSub, aVar1, nPos);
+      CopiarAlfa(aVar1, nIni, nPos);
+      SubstAlfa(aSub, "", aVar1);
+      VerificaNumero(aVar1,nRet);
+
+      Se(nRet = 1)
+         {
+            BuscarAnoAtual();
+            AlfaParaInt(aAno, nAno);
+            AlfaParaInt(aVar1, nMes);
+            MontaData (1, nMes, nAno, nData);
+            ConverteDataBanco(nData, aVar1);
+   
+            @-- Extrai Variavel 2 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar2 = aVarEve;
+            PosicaoAlfa(aSub, aVar2, nPos);
+            CopiarAlfa(aVar2, nIni, nPos);
+            SubstAlfa(aSub, "", aVar2);
+
+            @-- Extrai Variavel 3 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar3 = aVarEve;
+            PosicaoAlfa(aSub, aVar3, nPos);
+            CopiarAlfa(aVar3, nIni, nPos);
+            SubstAlfa(aSub, "", aVar3);
+            
+            @-- Extrai Variavel 4 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar4 = aVarEve;
+            PosicaoAlfa(aSub, aVar4, nPos);
+            CopiarAlfa(aVar4, nIni, nPos);
+            SubstAlfa(aSub, "", aVar4);
+
+            @-- Extrai Variavel 5 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar5 = aVarEve;
+            PosicaoAlfa(aSub, aVar5, nPos);
+            CopiarAlfa(aVar5, nIni, nPos);
+            SubstAlfa(aSub, "", aVar5);
+
+            @-- Extrai Variavel 6 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar6 = aVarEve;
+            PosicaoAlfa(aSub, aVar6, nPos);
+            CopiarAlfa(aVar6, nIni, nPos);
+            SubstAlfa(aSub, "", aVar6);
+
+            @-- Extrai Variavel 7 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar7 = aVarEve;
+            PosicaoAlfa(aSub, aVar7, nPos);
+            CopiarAlfa(aVar7, nIni, nPos);
+            SubstAlfa(aSub, "", aVar7);
+
+            @-- Extrai Variavel 8 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar8 = aVarEve;
+            PosicaoAlfa(aSub, aVar8, nPos);
+            CopiarAlfa(aVar8, nIni, nPos);
+            SubstAlfa(aSub, "", aVar8);
+
+            @-- Extrai Variavel 9 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar9 = aVarEve;
+            PosicaoAlfa(aSub, aVar9, nPos);
+            CopiarAlfa(aVar9, nIni, nPos);
+            SubstAlfa(aSub, "", aVar9);
+
+            @-- Extrai Variavel 10 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar10 = aVarEve;
+            PosicaoAlfa(aSub, aVar10, nPos);
+            CopiarAlfa(aVar10, nIni, nPos);
+            SubstAlfa(aSub, "", aVar10);
+
+            @-- Extrai Variavel 11 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar11 = aVarEve;
+            PosicaoAlfa(aSub, aVar11, nPos);
+            CopiarAlfa(aVar11, nIni, nPos);
+            SubstAlfa(aSub, "", aVar11);
+
+            @-- Extrai Variavel 12 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar12 = aVarEve;
+            PosicaoAlfa(aSub, aVar12, nPos);
+            CopiarAlfa(aVar12, nIni, nPos);
+            SubstAlfa(aSub, "", aVar12);
+
+            @-- Extrai Variavel 13 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar13 = aVarEve;
+            PosicaoAlfa(aSub, aVar13, nPos);
+            CopiarAlfa(aVar13, nIni, nPos);
+            SubstAlfa(aSub, "", aVar13);
+
+            @-- Extrai Variavel 14 --@
+            DeletarAlfa(aVarEve, nIni, nPos);
+            aVar14 = aVarEve;
+            SubstAlfa(aSub, "", aVar14);
+
+            ValidaNulo();
+
+         }
+
+   Fim;
+
+Funcao ValidaNulo();
+   Inicio
+      
+      EstaNulo(aVar1, nVar1);
+      EstaNulo(aVar2, nVar2);
+      EstaNulo(aVar3, nVar3);
+      EstaNulo(aVar4, nVar4);
+      EstaNulo(aVar5, nVar5);
+      EstaNulo(aVar6, nVar6);
+      EstaNulo(aVar7, nVar7);
+      EstaNulo(aVar8, nVar8);
+      EstaNulo(aVar9, nVar9);
+      EstaNulo(aVar10, nVar10);
+      EstaNulo(aVar11, nVar11);
+      EstaNulo(aVar12, nVar12);
+      EstaNulo(aVar13, nVar13);
+      EstaNulo(aVar14, nVar14);
+   Fim;
+
+Funcao CriaLinhaItem();
+   Inicio
+
+      Se(aStaReg = "E")
+         {
+            aCodEmp = "0";
+            aCodFil = "0";
+         }
+
+      xCommandBanco = "INSERT INTO usu_timpctr (usu_id, usu_datcpt, usu_filial, usu_numofi, usu_desccu, usu_codccu, usu_desser, usu_codser, usu_qtdser, usu_preuni, " +
+                                              " usu_vlrtot, usu_datcor, usu_codrel, usu_cplisp, usu_obscvs, usu_logimp, usu_stareg, usu_codemp, usu_numctr, usu_numped,  " +
+                                              " usu_seqcvs, usu_seqisp, usu_datimp) " +
+                                      " VALUES ('" + aIDeUni + "', " + aDatCpt + ", " + aCodFil + ", '" + aNumOfi + "', '"+ aDesCcu + "', '" + aCodCcu + "', '" + aDesser + 
+                                            "', '" + aCodSer + "', " + aQtdSer + ", " + aPreUni + ", " + aVlrTot + ", " + aDatCor + ", '" + aCodRel + "', '" + aCplisp + 
+                                            "', ' ', '" + aLogImp + "', '" + aStaReg + "', " + aCodEmp + ", 0, 0, 0, 0, CONVERT(DATE, GETDATE(), 103))";
+    
+      GravaBanco();
+      
+   Fim;
+
+Funcao GravaBanco();
+   Inicio
+ 
+      @-- Grava alterações no banco --@
+      ExecSQLEx (xCommandBanco, xErro, xMensagem); 
+         Se (xErro = 1) 
+            {
+               aMsgRet = "Linha: " + aDados + " Comando:" + xCommandBanco + " Erro:" + xMensagem;
+               Mensagem(Erro, aMsgRet);
+               
+            } Senao {
+               nSuc++;
+            }
+      
+   Fim;
+
+Funcao GeraIdeExt(); @- Gera Chave Externa para gravar nas tabelas -@
+   Inicio
+
+      ObterGuid(aIDeUni);
+
+   Fim;
+
+Funcao ZeraVar();
+   Inicio
+
+      aVar1 = "";
+      aVar2 = "";
+      aVar3 = "";
+      aVar4 = "";
+      aVar5 = "";
+      aVar6 = "";
+      aVar7 = "";
+      aVar8 = "";
+      aVar9 = "";
+      aVar10 = "";
+      aVar11 = "";
+      aVar12 = "";
+      aVar13 = "";
+      aVar14 = "";
+      aCodEmp = "";
+      aCodFil = "";
+      xErr = 0;
+      aLogImp = "";
+      aStaReg = "N";
+
+   Fim;
+
+Funcao BuscarAnoAtual();
+   Inicio
+
+      aAno = "";
+
+      xSelecaotab = "YEAR(GETDATE()) as AnoAtual";
+
+      SelecaoTabelas(xSelecaotab, aAno, vMais);
+
+
+   Fim;
+
+Funcao BuscarDadosCtr(); 
+   Inicio
+      
+      aSqlComC = "SELECT codemp, codfil FROM e160ctr WHERE numofi = '" + aNumOfi + "' ";
+
+      SQL_Criar(aSqlCtr);
+      SQL_UsarSqlSenior2(aSqlCtr, 0);
+      SQL_UsarAbrangencia(aSqlCtr, 0);
+      SQL_DefinirComando(aSqlCtr, aSqlComC);
+      SQL_AbrirCursor(aSqlCtr);
+         SE(SQL_EOF(aSqlCtr) = 0)
+            Inicio
+
+               SQL_RetornarAlfa(aSqlCtr, "codemp", aCodEmp);
+               SQL_RetornarAlfa(aSqlCtr, "codfil", aCodFil);
+
+            Fim;
+
+         SE(SQL_EOF(aSqlCtr) = 1)
+            Inicio
+
+               aStaReg = "E";
+               aLogImp = "O contrato: " + aNumOfi + " não foi encontrado na base de dados.";
+
+            Fim;
+
+      SQL_FecharCursor(aSqlCtr);
+      SQL_Destruir(aSqlCtr);
+
+
+   Fim;
+
+Funcao BuscarDadosServ(); @-- Rever --@
+   Inicio
+
+      aSqlComS = "SELECT desser, desnfv, cplser, unimed, codstr FROM e080ser s WHERE s.codemp = " + aCodEmp + " AND s.codser = '" + aCodSer + "' ";
+
+      SQL_Criar(aSqlSer);
+      SQL_UsarSqlSenior2(aSqlSer, 0);
+      SQL_UsarAbrangencia(aSqlSer, 0);
+      SQL_DefinirComando(aSqlSer, aSqlComS);
+      SQL_AbrirCursor(aSqlSer);
+         SE(SQL_EOF(aSqlSer) = 1)
+            Inicio
+               
+               aStaReg = "E";
+               aLogImp = "O Serviço: " + aCodSer + " não foi encontrado na base de dados.";
+
+            Fim;
+
+      SQL_FecharCursor(aSqlSer);
+      SQL_Destruir(aSqlSer);
+
+   Fim;
+
+Funcao ValidaQtdServ(); @-- Rever --@
+   Inicio
+
+      AlfaParaDecimal(aQtdSer,nQtdSer);
+      Se(nQtdSer <= 0.01)
+         {
+            aStaReg = "E";
+            aLogImp = "A quantidade do serviço: " + aCodSer + " está inválida.";
+         }
+
+   Fim;

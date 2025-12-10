@@ -1,0 +1,314 @@
+{
+   "LSPT Header": {
+      "prefix": "lspt-header",
+      "body": [
+         "@-- ${1:Título do arquivo} --@",
+         "",
+         "/*",
+         " * @Author: ${2:Nome do Autor}",
+         " * @Email: ${3:email@example.com}",
+         " * @Date: ${4:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}}",
+         " * @Last Modified by: ${2:Nome do Autor}",
+         " * @Last Modified time: ${4:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}}",
+         " * @Description: ${5:Descrição}",
+         " */",
+         "",
+         "$0"
+      ],
+      "description": "Cabeçalho padrão para arquivos LSPT"
+   },
+   "Definir Função": {
+      "prefix": "def-funcao",
+      "body": [
+         "Definir Funcao ${1:NomeFuncao}();"
+      ],
+      "description": "Declarar uma função"
+   },
+   "Função Completa": {
+      "prefix": "funcao",
+      "body": [
+         "Funcao ${1:NomeFuncao}();",
+         "   Inicio",
+         "      $0",
+         "   Fim;"
+      ],
+      "description": "Estrutura completa de função"
+   },
+   "Definir Variável Alfa": {
+      "prefix": "def-alfa",
+      "body": "Definir Alfa ${1:aNomeVar};$0",
+      "description": "Definir variável tipo Alfa"
+   },
+   "Definir Variável Numero": {
+      "prefix": "def-numero",
+      "body": "Definir Numero ${1:nNomeVar};$0",
+      "description": "Definir variável tipo Numero"
+   },
+   "Definir Variável Data": {
+      "prefix": "def-data",
+      "body": "Definir Data ${1:dNomeVar};$0",
+      "description": "Definir variável tipo Data"
+   },
+   "Se": {
+      "prefix": "se",
+      "body": [
+         "Se(${1:condicao})",
+         "   {",
+         "      $0",
+         "   }"
+      ],
+      "description": "Estrutura condicional Se"
+   },
+   "Se Inicio Fim": {
+      "prefix": "se-inicio",
+      "body": [
+         "Se(${1:condicao})",
+         "   Inicio",
+         "      $0",
+         "   Fim;"
+      ],
+      "description": "Estrutura condicional Se com Inicio/Fim"
+   },
+   "Se Senao": {
+      "prefix": "se-senao",
+      "body": [
+         "Se(${1:condicao})",
+         "   {",
+         "      ${2}",
+         "   }",
+         "Senao",
+         "   {",
+         "      ${3}",
+         "   }"
+      ],
+      "description": "Estrutura condicional Se/Senao"
+   },
+   "Se Senao Se": {
+      "prefix": "se-senao-se",
+      "body": [
+         "Se(${1:condicao1})",
+         "   {",
+         "      ${2}",
+         "   }",
+         "Senao Se (${3:condicao2})",
+         "   {",
+         "      ${4}",
+         "   }",
+         "Senao",
+         "   {",
+         "      ${5}",
+         "   }"
+      ],
+      "description": "Estrutura condicional Se/Senao Se/Senao"
+   },
+   "Enquanto": {
+      "prefix": "enquanto",
+      "body": [
+         "Enquanto(${1:condicao})",
+         "   {",
+         "      $0",
+         "   }"
+      ],
+      "description": "Loop Enquanto"
+   },
+   "Enquanto Inicio Fim": {
+      "prefix": "enquanto-inicio",
+      "body": [
+         "Enquanto(${1:condicao})",
+         "   Inicio",
+         "      $0",
+         "   Fim;"
+      ],
+      "description": "Loop Enquanto com Inicio/Fim"
+   },
+   "Para": {
+      "prefix": "para",
+      "body": [
+         "Para(${1:nLin}=0;${1:nLin}<${2:nQtd};${1:nLin}++)",
+         "   {",
+         "      $0",
+         "   }"
+      ],
+      "description": "Loop Para"
+   },
+   "Cursor Tipo 1": {
+      "prefix": "cursor1",
+      "body": [
+         "Definir Cursor ${1:Cur_Tabela};",
+         "",
+         "${1:Cur_Tabela}.Sql \"SELECT ${2:campos} FROM ${3:tabela} WHERE ${4:condicao}\";",
+         "",
+         "${1:Cur_Tabela}.AbrirCursor();",
+         "",
+         "Se (${1:Cur_Tabela}.Achou)",
+         "   Inicio",
+         "      @-- Encontrou o Registro. --@",
+         "      $0",
+         "   Fim;",
+         "",
+         "${1:Cur_Tabela}.fecharCursor();"
+      ],
+      "description": "Cursor Tipo 1 (antigo)"
+   },
+   "Cursor Tipo 2": {
+      "prefix": "cursor2",
+      "body": [
+         "Definir Alfa ${1:aSqlCom};",
+         "Definir Alfa ${2:aSqlInt};",
+         "",
+         "${1:aSqlCom} = \"SELECT ${3:campos} FROM ${4:tabela} WHERE ${5:condicao}\";",
+         "",
+         "SQL_Criar(${2:aSqlInt});",
+         "SQL_UsarSqlSenior2(${2:aSqlInt}, 0);",
+         "SQL_UsarAbrangencia(${2:aSqlInt}, 0);",
+         "SQL_DefinirComando(${2:aSqlInt}, ${1:aSqlCom});",
+         "SQL_AbrirCursor(${2:aSqlInt});",
+         "Se(SQL_EOF(${2:aSqlInt}) = 0) @-- Se encontrou registro --@",
+         "   {",
+         "      SQL_RetornarAlfa(${2:aSqlInt}, \"${6:campo}\", ${7:aVariavel});",
+         "      $0",
+         "   }",
+         "",
+         "SQL_FecharCursor(${2:aSqlInt});",
+         "SQL_Destruir(${2:aSqlInt});"
+      ],
+      "description": "Cursor Tipo 2 (recomendado)"
+   },
+   "Cursor Tipo 2 com Enquanto": {
+      "prefix": "cursor2-enquanto",
+      "body": [
+         "Definir Alfa ${1:aSqlCom};",
+         "Definir Alfa ${2:aSqlInt};",
+         "",
+         "${1:aSqlCom} = \"SELECT ${3:campos} FROM ${4:tabela} WHERE ${5:condicao}\";",
+         "",
+         "SQL_Criar(${2:aSqlInt});",
+         "SQL_UsarSqlSenior2(${2:aSqlInt}, 0);",
+         "SQL_UsarAbrangencia(${2:aSqlInt}, 0);",
+         "SQL_DefinirComando(${2:aSqlInt}, ${1:aSqlCom});",
+         "SQL_AbrirCursor(${2:aSqlInt});",
+         "Enquanto(SQL_EOF(${2:aSqlInt}) = 0) @-- Se encontrou registro --@",
+         "   {",
+         "      SQL_RetornarAlfa(${2:aSqlInt}, \"${6:campo}\", ${7:aVariavel});",
+         "      $0",
+         "      SQL_Proximo(${2:aSqlInt});",
+         "   }",
+         "",
+         "SQL_FecharCursor(${2:aSqlInt});",
+         "SQL_Destruir(${2:aSqlInt});"
+      ],
+      "description": "Cursor Tipo 2 com loop Enquanto"
+   },
+   "Comentário Linha": {
+      "prefix": "com-linha",
+      "body": "@-- ${1:comentário} --@$0",
+      "description": "Comentário de linha"
+   },
+   "Comentário Bloco": {
+      "prefix": "com-bloco",
+      "body": [
+         "/*",
+         " * ${1:comentário}",
+         " */$0"
+      ],
+      "description": "Comentário de bloco"
+   },
+   "Mensagem Retorna": {
+      "prefix": "msg-ret",
+      "body": "Mensagem(Retorna, ${1:aMensagem});$0",
+      "description": "Exibir mensagem de retorno"
+   },
+   "Mensagem Erro": {
+      "prefix": "msg-erro",
+      "body": "Mensagem(Erro, ${1:aMensagem});$0",
+      "description": "Exibir mensagem de erro"
+   },
+   "ExecSQL": {
+      "prefix": "execsql",
+      "body": [
+         "ExecSQLEx(${1:aComando}, xErro, xMensagem);",
+         "Se (xErro = 0) {",
+         "   @-- Sucesso --@",
+         "   $0",
+         "} Senao {",
+         "   @-- Erro --@",
+         "   Mensagem(Erro, xMensagem);",
+         "}"
+      ],
+      "description": "Executar comando SQL com tratamento de erro"
+   },
+   "Definir WebService": {
+      "prefix": "def-ws",
+      "body": "Definir interno.com.senior.g5.${1:modulo}.${2:servico} ${3:wNome};$0",
+      "description": "Definir WebService interno"
+   },
+   "HTTP Post": {
+      "prefix": "http-post",
+      "body": [
+         "HttpObjeto(vHTTP);",
+         "HttpDesabilitaErroResposta(vHTTP);",
+         "HttpAlteraCodifCaracPadrao(vHTTP, \"utf-8\");",
+         "HttpAlteraCabecalhoRequisicao(vHTTP, \"Content-Type\", \"application/json\");",
+         "HttpPost(vHTTP, ${1:aUrl}, ${2:aJson}, ${3:aJsonRet});",
+         "HttpLeCodigoResposta(vHTTP, nCodRet);$0"
+      ],
+      "description": "Realizar requisição HTTP POST"
+   },
+   "Função com Parâmetros": {
+      "prefix": "funcao-params",
+      "body": [
+         "Definir Funcao ${1:NomeFuncao}(Numero ${2:pParam1}, Numero end ${3:pResultado});",
+         "",
+         "Funcao ${1:NomeFuncao}(Numero ${2:pParam1}, Numero end ${3:pResultado});",
+         "   Inicio",
+         "      ${3:pResultado} = ${2:pParam1} ${4:* 2};",
+         "      $0",
+         "   Fim;"
+      ],
+      "description": "Função com parâmetros de entrada e saída (baseado na doc oficial)"
+   },
+   "Cancel": {
+      "prefix": "cancel",
+      "body": [
+         "Cancel(${1:1}); @-- Cancel(1): Cancela execução / Cancel(2): Imprime ValStr / Cancel(3): Exclui registro --@$0"
+      ],
+      "description": "Cancelar execução da regra (Cancel)"
+   },
+   "Continue": {
+      "prefix": "continue",
+      "body": "Continue;$0",
+      "description": "Continuar execução de loop (Continue)"
+   },
+   "Abrir Arquivo": {
+      "prefix": "abrir-arquivo",
+      "body": [
+         "Definir Numero ${1:nArq};",
+         "",
+         "${1:nArq} = Abrir(\\\"${2:arquivo.txt}\\\", ${3:Ler}); @-- Ler ou Gravar --@",
+         "Se(${1:nArq} \u003e 0)",
+         "   Inicio",
+         "      $0",
+         "      Fechar(${1:nArq});",
+         "   Fim;"
+      ],
+      "description": "Abrir arquivo para leitura ou gravação"
+   },
+   "Ler Linha de Arquivo": {
+      "prefix": "ler-linha",
+      "body": [
+         "Definir Alfa ${1:aLinha};",
+         "",
+         "Enquanto(LerNL(${2:nArq}, ${1:aLinha}) = 1)",
+         "   Inicio",
+         "      @-- Processar linha --@",
+         "      $0",
+         "   Fim;"
+      ],
+      "description": "Ler linhas de arquivo (LerNL)"
+   },
+   "Atualizar Campos": {
+      "prefix": "atualizar-campos",
+      "body": "AtualizarCampos();$0",
+      "description": "Atualizar todos os campos da tela (AtualizarCampos/RefreshFields)"
+   }
+}

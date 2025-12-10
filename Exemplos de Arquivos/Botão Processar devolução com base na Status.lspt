@@ -1,0 +1,969 @@
+@-- Botão Processar, processa a devolução com base na Status, cada Status tem uma regra --@
+
+/*
+ * @Author: Eliezer Organ
+ * @Email: eorgan@organ.eti.br
+ * @Date: 2025-05-23 09:30:34
+ * @Last Modified by: Eliezer Organ
+ * @Last Modified time: 2025-10-05 08:26:55
+ * @Description: Description
+ */
+
+@-- Função para validar os itens da devolução --@
+   Definir Funcao ValidaItensDevolucao();
+   Definir Funcao GravaBanco();
+   Definir Funcao GravaBanco2();
+   Definir Funcao SelecionaDados();
+   Definir Funcao ConsultaValidacao();
+   Definir Funcao GravarDadosGerais();
+   Definir Funcao GravarDadosItem();
+   Definir Funcao DispararEmail();
+   Definir Funcao MontaItensEmailAprovado();
+   Definir Funcao MontaItensEmailReprovado();
+   Definir Funcao BuscaDadosEmail();
+   Definir Funcao f_GravaLog();
+   Definir Funcao AtualizaSitNFC();
+   Definir Funcao BuscaDadosNFEmail();
+   Definir Funcao ConsultaPolitica();
+   Definir Funcao ConsPoljaInserida();
+
+
+@-- Definir Variaveis --@
+   Definir Alfa aCodEmp;
+   Definir Alfa aCodFil;
+   Definir Alfa aCodSnf;
+   Definir Alfa aNumNfv;
+   Definir Alfa aSeqIpv;
+   Definir Alfa aCodPro;
+   Definir Alfa aCodDer;
+   Definir Alfa aQtaDev;
+   Definir Alfa aUniMed;
+   Definir Alfa aPreUni;
+   Definir Alfa aSitDev;
+   Definir Alfa aSql;
+   Definir Alfa aSqlVal;
+   Definir Alfa aSqlComVal;
+   Definir Alfa aSqlCom;
+   Definir Alfa aSqlIpv;
+   Definir Alfa aSitGer;
+   Definir Alfa aComando;
+   Definir Alfa xMensagem;
+   Definir Alfa sMessage;
+   Definir Alfa aTemMais;
+   Definir Alfa aCodCli;
+   Definir Alfa aQtdLib;
+   Definir Alfa aQtdNfd;
+   Definir Alfa aDevApr;
+   Definir Alfa aQtdFat;
+   Definir Alfa aDesPro;
+   Definir Alfa aDesDer;
+   Definir Alfa aEmlAss; @-- Assunto do email --@
+   Definir Alfa aEmlDes; @-- Email do destinatário --@
+   Definir Alfa aEmlDes1; @-- Email Destinatário 2 --@
+   Definir Alfa aEmlDes2; @-- Email Destinatário 3 --@
+   Definir Alfa aEmlCor; @-- Corpo do email --@
+   Definir Alfa aEmlRem; @-- Email Remetente --@
+   Definir Alfa aEmlAnexo; @-- Anexo do email --@
+   Definir Alfa aEmlFrm; @-- Formato de email --@
+   Definir Alfa aEmlRelNotas; @-- Relação das notas fiscais --@
+
+   Definir Alfa aNomFil;
+   Definir Alfa aNumCgc;
+   Definir Alfa aInsEst;
+   Definir Alfa aEndFil;
+   Definir Alfa aBaiFil;
+   Definir Alfa aCepFil;
+   Definir Alfa aCidFil;
+   Definir Alfa aSigufs;
+   Definir Alfa aNomCli;
+   Definir Alfa aIdeUni;
+   Definir Alfa aNumDev;
+   Definir Alfa aSnfDev;
+
+   Definir Alfa aSqlComand;
+   Definir Alfa aSqlDados;
+   Definir Alfa aTabela;
+   Definir Alfa aTipLog;
+   Definir Alfa aChaTab;
+   Definir Alfa aRetorno;
+   Definir Alfa aVlr1;
+   Definir Alfa aVlr2;
+   Definir Alfa aReaRep;
+   Definir Alfa aTipCal;
+   Definir Alfa aSqlMai;
+   Definir Alfa aSqlItem;
+   Definir Alfa aEmlRelItensApr; @-- Relação dos Itens Aprovados --@
+   Definir Alfa aEmlRelItensRep; @-- Relação dos Itens Reprovados --@
+   Definir Alfa aCodDep;
+   Definir Alfa aCodPol;
+   Definir Alfa aSitPol;
+   Definir Alfa aInsPol;
+   
+
+@-- Inicio da Regra --@
+   aEmlRelItensApr = "";
+   aEmlRelItensRep = "";
+   aEmlCor = "";
+   SelecionaDados();
+   
+   AtualizarTabela("usu_tmpdevg");
+   AtualizarTabela("usu_tmpdevi");
+
+
+@-- Fim da Regra --@
+
+@-- Função para selecionar os dados da devolução --@
+Funcao SelecionaDados();
+   Inicio
+
+      nTemRep = 0;
+
+      Se(P1_Status = "1")
+         {
+
+            aSqlCom = "SELECT i.usu_codemp, i.usu_codfil, i.usu_codsnf, i.usu_numnfv, i.usu_seqipv, usu_codpro, usu_codder, z.CodDep, usu_qtdfat, usu_qtddev, usu_unimed, usu_preuni, i.usu_sitdev, usu_qtadev, " + 
+                            " usu_qtdlib, usu_qtdnfd, usu_devapr, d.usu_codcli, i.usu_qtdfat, p.despro, e.desder, i.usu_ideuni, " +
+                            " (SELECT COUNT(usu_seqipv) FROM usu_tdevipd WHERE usu_codemp = i.usu_codemp AND usu_codfil = i.usu_codfil AND usu_codsnf = i.usu_codsnf AND usu_numnfv = i.usu_numnfv " +
+                            " AND USU_IDEUNI = i.USU_IDEUNI) AS QTD, " +
+                            " ROW_NUMBER() OVER (PARTITION BY i.usu_codemp, i.usu_codfil, i.usu_codsnf, i.usu_numnfv ORDER BY i.usu_codemp, i.usu_codfil, i.usu_codsnf, i.usu_numnfv) AS SeqLin, " +
+                            " d.USU_NUMDEV, d.USU_SNFDEV " +
+                       " FROM usu_tdevipd i JOIN usu_tdevger d ON d.usu_codemp = i.usu_codemp AND d.usu_codfil = i.usu_codfil AND d.usu_codsnf = i.usu_codsnf AND d.usu_numnfv = i.usu_numnfv " +
+                       "  AND d.USU_IDEUNI = i.USU_IDEUNI JOIN e075pro p ON p.codemp = i.usu_codemp AND p.codpro = i.usu_codpro " +
+                       " JOIN e075der e ON e.codemp = i.usu_codemp AND e.codpro = i.usu_codpro AND e.codder = i.usu_codder " +
+                       " JOIN E140IPV z ON i.USU_CODEMP = z.CODEMP AND i.USU_CODFIL = z.CODFIL AND i.USU_CODSNF = z.CODSNF AND i.USU_NUMNFV = z.NUMNFV AND i.USU_SEQIPV = z.SEQIPV " +
+                      " WHERE d.usu_sitdev = '" + P1_Status + "' ORDER BY i.usu_codemp, i.usu_codfil, i.usu_codsnf, i.usu_numnfv, i.usu_seqipv";
+            
+         } Senao {
+
+            aSqlCom = "SELECT i.usu_codemp, i.usu_codfil, i.usu_codsnf, i.usu_numnfv, i.usu_seqipv, usu_codpro, usu_codder, z.CodDep, usu_qtdfat, usu_qtddev, usu_unimed, usu_preuni, i.usu_sitdev, usu_qtadev, " + 
+                            " usu_qtdlib, usu_qtdnfd, usu_devapr, d.usu_codcli, i.usu_qtdfat, p.despro, e.desder, i.usu_ideuni, " +
+                            " (SELECT COUNT(1) FROM usu_tdevipd WHERE usu_codemp = i.usu_codemp AND usu_codfil = i.usu_codfil AND usu_codsnf = i.usu_codsnf AND usu_numnfv = i.usu_numnfv " +
+                            " AND USU_IDEUNI = i.USU_IDEUNI) AS QTD, " +
+                            " ROW_NUMBER() OVER (PARTITION BY i.usu_codemp, i.usu_codfil, i.usu_codsnf, i.usu_numnfv ORDER BY i.usu_codemp, i.usu_codfil, i.usu_codsnf, i.usu_numnfv) AS SeqLin, " +
+                            " d.USU_NUMDEV, d.USU_SNFDEV " +
+                       " FROM usu_tdevipd i JOIN usu_tdevger d ON d.usu_codemp = i.usu_codemp AND d.usu_codfil = i.usu_codfil AND d.usu_codsnf = i.usu_codsnf AND d.usu_numnfv = i.usu_numnfv " +
+                       "  AND d.USU_IDEUNI = i.USU_IDEUNI JOIN e075pro p ON p.codemp = i.usu_codemp AND p.codpro = i.usu_codpro " +
+                       " JOIN e075der e ON e.codemp = i.usu_codemp AND e.codpro = i.usu_codpro AND e.codder = i.usu_codder " +
+                       " JOIN E140IPV z ON i.USU_CODEMP = z.CODEMP AND i.USU_CODFIL = z.CODFIL AND i.USU_CODSNF = z.CODSNF AND i.USU_NUMNFV = z.NUMNFV AND i.USU_SEQIPV = z.SEQIPV " +
+                      " WHERE d.usu_sitdev = '" + P1_Status + "' AND NOT EXISTS (SELECT 1 FROM usu_tdevipd z WHERE z.usu_codemp = i.usu_codemp AND z.usu_codfil = i.usu_codfil AND z.usu_codsnf = i.usu_codsnf " +
+                        " AND z.usu_numnfv = i.usu_numnfv AND z.usu_ideuni = i.usu_ideuni AND (z.usu_devapr = ' ' OR z.usu_devapr IS NULL))" + 
+                      " ORDER BY i.usu_codemp, i.usu_codfil, i.usu_codsnf, i.usu_numnfv, i.usu_seqipv";
+            
+         }
+
+      SQL_Criar(aSqlIpv);
+      SQL_UsarSqlSenior2(aSqlIpv, 0);
+      SQL_UsarAbrangencia(aSqlIpv, 0);
+      SQL_DefinirComando(aSqlIpv, aSqlCom);
+      SQL_AbrirCursor(aSqlIpv);
+      Enquanto(SQL_EOF(aSqlIpv) = 0)
+         Inicio
+         
+            SQL_RetornarInteiro(aSqlIpv, "usu_codemp", nCodEmp);
+            IntParaAlfa(nCodEmp, aCodEmp);
+            SQL_RetornarInteiro(aSqlIpv, "usu_codfil", nCodFil);
+            IntParaAlfa(nCodFil, aCodFil);
+            SQL_RetornarAlfa(aSqlIpv, "usu_codsnf", aCodSnf);
+            SQL_RetornarInteiro(aSqlIpv, "usu_numnfv", nNumNfv);
+            IntParaAlfa(nNumNfv, aNumNfv);
+            SQL_RetornarInteiro(aSqlIpv, "usu_seqipv", nSeqIpv);
+            IntParaAlfa(nSeqIpv, aSeqIpv);
+            SQL_RetornarAlfa(aSqlIpv, "usu_codpro", aCodPro);
+            SQL_RetornarAlfa(aSqlIpv, "usu_codder", aCodDer);
+            SQL_RetornarAlfa(aSqlIpv, "CodDep", aCodDep);
+            SQL_RetornarFlutuante(aSqlIpv, "usu_qtadev", nQtaDev);
+            IntParaAlfa(nQtaDev, aQtaDev);
+            SQL_RetornarAlfa(aSqlIpv, "usu_unimed", aUniMed);
+            SQL_RetornarFlutuante(aSqlIpv, "usu_preuni", rPreUni);
+            IntParaAlfa(rPreUni, aPreUni);
+            SQL_RetornarAlfa(aSqlIpv, "usu_sitdev", aSitDev);
+            SQL_RetornarFlutuante(aSqlIpv, "usu_qtdlib", nQtdLib);
+            IntParaAlfa(nQtdLib, aQtdLib);
+            SQL_RetornarFlutuante(aSqlIpv, "usu_qtdnfd", nQtdNfd);
+            IntParaAlfa(nQtdNfd, aQtdNfd);
+            SQL_RetornarAlfa(aSqlIpv, "usu_devapr", aDevApr);
+            SQL_RetornarInteiro(aSqlIpv, "usu_codcli", nCodCli);
+            IntParaAlfa(nCodCli, aCodCli);
+            SQL_RetornarFlutuante(aSqlIpv, "usu_qtdfat", nQtdFat);
+            IntParaAlfa(nQtdFat, aQtdFat);
+            SQL_RetornarAlfa(aSqlIpv, "despro", aDesPro);
+            SQL_RetornarAlfa(aSqlIpv, "desder", aDesDer);
+            SQL_RetornarAlfa(aSqlIpv, "usu_ideuni", aIdeUni);
+            SQL_RetornarInteiro(aSqlIpv, "QTD", nQtd);
+            SQL_RetornarInteiro(aSqlIpv, "SeqLin", nSeqLin);
+            SQL_RetornarInteiro(aSqlIpv, "USU_NUMDEV", nNumDev);
+            IntParaAlfa(nNumDev, aNumDev);
+            SQL_RetornarAlfa(aSqlIpv, "USU_SNFDEV", aSnfDev);
+
+
+            Se(P1_Status = "1")
+               {
+                  ValidaItensDevolucao();
+                  aDevApr = "";
+                  GravarDadosItem();
+                  Se(nSeqLin = nQtd)
+                     {
+                        GravarDadosGerais();
+                        Se(nTemRep = 0)
+                           {
+                              sMessage = "Nota dentro da política de devolução da empresa. Não será necessário aprovação. Aguarde a emissão da Nota Fiscal de Devolução.";
+                              Mensagem(Retorna, sMessage);
+                              BuscaDadosNFEmail();
+                              DispararEmail();
+                              aEmlRelItensApr = "";
+                           }
+                        sMessage = "Nota processadas com sucesso!";
+                        Mensagem(Retorna, sMessage);
+
+                        nTemRep = 0; @-- Zera variavel nTemRep for igual a 0 --@
+                     }
+                  
+               } Senao {
+                  Se((P1_Status = "2"))
+                     {
+                        Se(nSeqLin <> nQtd)
+                           {
+                              Se(aDevApr = "S")
+                                 {
+                                    MontaItensEmailAprovado();
+                                 }
+                              Senao 
+                                 {
+                                    MontaItensEmailReprovado();
+                                 }
+                           } 
+                        Senao 
+                           {
+                              Se(aDevApr = "S")
+                                 {
+                                    MontaItensEmailAprovado();
+                                 }
+                              Senao 
+                                 {
+                                    MontaItensEmailReprovado();
+                                 }
+                              DispararEmail();
+                              aEmlRelItensApr = "";
+                              aEmlRelItensRep = "";
+                              aEmlCor = "";
+                              GravarDadosGerais();
+                              sMessage = "Nota processadas com sucesso!";
+                              Mensagem(Retorna, sMessage);
+                           }
+                     }
+                  
+                  Se(P1_Status = "4")
+                     {
+                        Se(nSeqLin = nQtd)
+                           {
+                              GravarDadosGerais();
+                              AtualizaSitNFC();
+                              sMessage = "Nota processadas com sucesso!";
+                              Mensagem(Retorna, sMessage);
+                           }
+                     }
+                  
+               }
+            
+            SQL_Proximo(aSqlIpv);
+
+         Fim;
+      SQL_FecharCursor(aSqlIpv);
+      SQL_Destruir(aSqlIpv);
+      
+   Fim;
+
+@-- Função para validar os itens da devolução --@
+Funcao ValidaItensDevolucao();
+   Inicio
+
+      @-- Validação dos itens de devolução --@
+      @-- Verificando se o prazo de devolução está dentro do prazo máximo Situação 4 --@
+
+      aCodPol = "001"; @-- Código da Política de Devolução 001 - Quantidade de dias máximo para devolução --@
+
+      aSqlComVal = "SELECT COALESCE(p.USU_DiaDev,0) VALOR1, CASE WHEN (p.USU_DiaDev - (TRUNC(SYSDATE) - TRUNC(n.datemi))) >= 0 THEN '1' ELSE '4' END AS VALOR2 FROM E140IPV i " +  
+                  " JOIN E140NFV n ON n.CODEMP = i.CODEMP AND n.CODFIL = i.CODFIL AND n.CODSNF = i.CODSNF AND n.NUMNFV = i.NUMNFV " + 
+                  " JOIN E075PRO p ON p.CODEMP = i.CODEMP AND p.CODPRO = i.CODPRO WHERE i.CODEMP = " + aCodEmp + " AND i.CODFIL = " + aCodFil + 
+                     " AND i.NUMNFV = " + aNumNfv + " AND i.CODSNF = '" + aCodSnf + "' AND i.SEQIPV = " + aSeqIpv;
+
+      ConsultaValidacao();
+
+      Se(aVlr1 = "0")
+         {
+            aRetorno = "Produto com data de devolução = 0, favor verificar.";
+            Mensagem(retorna, aRetorno);
+         }
+
+      aSitDev = aVlr2;
+
+      @-- Ajusta Dias para devolução na tabela de controle de devolução --@
+      aComando = "UPDATE usu_tdevipd SET USU_DiaDev = " + aVlr1 + " WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                        "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+      GravaBanco2();
+
+      aComando = "UPDATE USU_TmpDevI SET USU_DiaDev = " + aVlr1 + " WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                        "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+      GravaBanco2();
+
+      ConsultaPolitica();
+      Se((aSitDev = "4") E (aSitPol = "A"))
+         {
+            ConsPoljaInserida(); 
+            Se(aInsPol = "S")
+               {
+                  aComando = "INSERT INTO USU_TDEVAPR (USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, USU_DEVAPR, USU_GERAPR, " +
+                              " USU_DATAPR, USU_HORAPR, USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, USU_CODPOL, " + 
+                              " USU_DATGER, USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI) " +
+                        " SELECT USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, 'N' USU_DEVAPR, USU_GERAPR, USU_DATAPR, USU_HORAPR, " + 
+                              " USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, '" + aCodPol + "' USU_CODPOL, " + 
+                              " SYSDATE USU_DATGER, '" + aSitDev + "' USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI " +
+                        " FROM USU_TDEVIPD WHERE USU_IDEUNI = '" + aIdeUni + "' AND USU_CODEMP = " + aCodEmp + " AND USU_CODFIL = " + aCodFil + 
+                           " AND USU_CODSNF = '" + aCodSnf + "' AND USU_NUMNFV = " + aNumNfv + " AND USU_SEQIPV = " + aSeqIpv;
+
+                  GravaBanco2();
+
+               }
+            
+            nTemRep++;
+         }
+
+      @-- Verificar parametrização do Estoque --@
+      @-- Comentario de Ajuste: Ajustado os paramentros de estoque incluidos na nova EF o campo é o  IndEma Pagina 7 --@
+      aSqlComVal = "SELECT COALESCE(e.IndEma, ' ') VALOR1, COALESCE(d.IndEma, ' ') VALOR2, d.CODPRO, d.CODDER, d.CODDEP FROM E210EST d JOIN E070EMP e ON e.CODEMP = d.CODEMP " +
+                     " WHERE d.codemp = " + aCodEmp + " AND d.codpro = '" + aCodPro + "' AND d.coddep = '" + aCodDep + "'";
+                  
+      ConsultaValidacao();
+
+      aReaRep = aVlr1; @-- Realiza a Reposição de Estoque --@
+      aTipCal = aVlr2; @-- Tipo de Cálculo --@
+
+      @-- Ajusta Reposição de Estoque e Tipo de Cálculo na tabela de controle de devolução --@
+         aComando = "UPDATE usu_tdevipd SET usu_rearep = '" + aVlr1 + "', usu_tipcal = '" + aVlr2 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                     "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+         GravaBanco2();
+
+         aComando = "UPDATE USU_TmpDevI SET usu_rearep = '" + aVlr1 + "', usu_tipcal = '" + aVlr2 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                           "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+         GravaBanco2();
+
+      @-- Verificar Calculo de Reposição de Estoque Situação 3 se os paramentros forem (aReaRep = "S") e (aTipCal = "P") --@
+      
+      aCodPol = "002"; @-- Código da Política de Devolução 002 - Quant maior que quant. mínima de reposição --@
+
+      Se((aReaRep = "S") e (aTipCal = "P")) @-- Comentario de Ajuste: Ajustado os paramentros de estoque incluidos na nova EF o campo é o  IndEma Pagina 7 --@
+         Inicio
+
+            aSqlComVal = "SELECT (SUM(EstMin)) VALOR1, CASE WHEN ((SUM(EstMin)) > (" + aQtaDev + ")) THEN '1' ELSE '3' END VALOR2 FROM e205dep d JOIN e210est e ON d.codemp = e.codemp " +
+                           " AND d.coddep = e.coddep JOIN e075pro p ON p.codemp = e.codemp AND p.codpro = e.codpro WHERE d.codemp = " + aCodEmp + 
+                           " AND e.codpro = '" + aCodPro + "'";
+
+            ConsultaValidacao();
+
+               @-- Ajusta Soma do Estoque Minimo na tabela de controle de devolução --@
+               aComando = "UPDATE usu_tdevipd SET usu_summin = '" + aVlr1 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                           "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+               GravaBanco2();
+
+               aComando = "UPDATE USU_TmpDevI SET usu_summin = '" + aVlr1 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                                 "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+               GravaBanco2();
+
+            aSitDev = aVlr2;
+
+            ConsultaPolitica();
+            Se((aSitDev = "3") E (aSitPol = "A"))
+               {
+                  ConsPoljaInserida(); 
+                  Se(aInsPol = "S")
+                     {
+                        aComando = "INSERT INTO USU_TDEVAPR (USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, USU_DEVAPR, USU_GERAPR, " +
+                                 " USU_DATAPR, USU_HORAPR, USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, USU_CODPOL, " + 
+                                 " USU_DATGER, USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI) " +
+                           " SELECT USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, 'N' USU_DEVAPR, USU_GERAPR, USU_DATAPR, USU_HORAPR, " + 
+                                 " USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, '" + aCodPol + "' USU_CODPOL, " + 
+                                 " SYSDATE USU_DATGER, '" + aSitDev + "' USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI " +
+                              " FROM USU_TDEVIPD WHERE USU_IDEUNI = '" + aIdeUni + "' AND USU_CODEMP = " + aCodEmp + " AND USU_CODFIL = " + aCodFil + 
+                              " AND USU_CODSNF = '" + aCodSnf + "' AND USU_NUMNFV = " + aNumNfv + " AND USU_SEQIPV = " + aSeqIpv;
+
+                           GravaBanco2();
+
+                     }
+
+                  nTemRep++;
+               }
+
+         Fim;
+         Senao
+
+      @-- Verificar Estoque Minimo Situação 3 se os paramentros forem (aReaRep <> "S") e (aTipCal <> "P") --@
+         Inicio
+
+            aSqlComVal = "SELECT EstMin VALOR1, CASE WHEN ((EstMin) > (" + aQtaDev + ")) THEN '1' ELSE '3' END VALOR2 FROM e205dep d JOIN e210est e ON d.codemp = e.codemp AND d.coddep = e.coddep " +
+                        " JOIN e140ipv p ON p.codemp = e.codemp AND p.codpro = e.codpro AND p.coddep = e.coddep WHERE p.codemp = " + aCodEmp + " AND p.codfil = " + aCodFil + 
+                           " AND p.codsnf = '" + aCodSnf + "' AND p.numnfv = " + aNumNfv + " AND p.seqipv = " + aSeqIpv;
+
+            ConsultaValidacao();
+
+               @-- Ajusta Estoque Minimo na tabela de controle de devolução --@
+               aComando = "UPDATE usu_tdevipd SET usu_EstMin = '" + aVlr1 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                           "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+               GravaBanco2();
+
+               aComando = "UPDATE USU_TmpDevI SET usu_EstMin = '" + aVlr1 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                                 "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+               GravaBanco2();
+
+      
+            aSitDev = aVlr2;
+
+            ConsultaPolitica();
+            Se((aSitDev = "3") E (aSitPol = "A"))
+               {
+                  ConsPoljaInserida(); 
+                  Se(aInsPol = "S")
+                     {
+                        aComando = "INSERT INTO USU_TDEVAPR (USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, USU_DEVAPR, USU_GERAPR, " +
+                                 " USU_DATAPR, USU_HORAPR, USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, USU_CODPOL, " + 
+                                 " USU_DATGER, USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI) " +
+                           " SELECT USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, 'N' USU_DEVAPR, USU_GERAPR, USU_DATAPR, USU_HORAPR, " + 
+                                 " USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, '" + aCodPol + "' USU_CODPOL, " + 
+                                 " SYSDATE USU_DATGER, '" + aSitDev + "' USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI " +
+                              " FROM USU_TDEVIPD WHERE USU_IDEUNI = '" + aIdeUni + "' AND USU_CODEMP = " + aCodEmp + " AND USU_CODFIL = " + aCodFil + 
+                              " AND USU_CODSNF = '" + aCodSnf + "' AND USU_NUMNFV = " + aNumNfv + " AND USU_SEQIPV = " + aSeqIpv;
+
+                        GravaBanco2();
+
+                     }
+                  nTemRep++;
+               }
+            
+         Fim;
+
+      @-- Verificar Saldo de Estoque Situação 5 --@
+
+      aCodPol = "003"; @-- Código da Política de Devolução 003 - Produto sem Estoque Disponivel --@
+
+      aSqlComVal = "SELECT e.qtdest VALOR1, CASE WHEN (e.qtdest > 0) THEN '1' ELSE '5' END VALOR2 FROM e210est e JOIN e140ipv p ON p.codemp = e.codemp AND p.codpro = e.codpro " +
+                           " AND p.coddep = e.coddep WHERE p.codemp = " + aCodEmp + " AND p.codfil = " + aCodFil + " AND p.codsnf = '" + aCodSnf + "' AND p.numnfv = " + aNumNfv + 
+                           " AND p.seqipv = " + aSeqIpv;
+
+      ConsultaValidacao();
+
+      @-- Ajusta Saldo do Estoque na tabela de controle de devolução --@
+      aComando = "UPDATE usu_tdevipd SET usu_qtdest = '" + aVlr1 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                  "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+      GravaBanco2();
+
+      aComando = "UPDATE USU_TmpDevI SET usu_qtdest = '" + aVlr1 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                        "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+      GravaBanco2();
+
+      aSitDev = aVlr2;
+
+      ConsultaPolitica();
+      Se((aSitDev = "5") E (aSitPol = "A"))
+         {
+            ConsPoljaInserida(); 
+            Se(aInsPol = "S")
+               {
+                  aComando = "INSERT INTO USU_TDEVAPR (USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, USU_DEVAPR, USU_GERAPR, " +
+                           " USU_DATAPR, USU_HORAPR, USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, USU_CODPOL, " + 
+                           " USU_DATGER, USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI) " +
+                     " SELECT USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, 'N' USU_DEVAPR, USU_GERAPR, USU_DATAPR, USU_HORAPR, " + 
+                           " USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, '" + aCodPol + "' USU_CODPOL, " + 
+                           " SYSDATE USU_DATGER, '" + aSitDev + "' USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI " +
+                        " FROM USU_TDEVIPD WHERE USU_IDEUNI = '" + aIdeUni + "' AND USU_CODEMP = " + aCodEmp + " AND USU_CODFIL = " + aCodFil + 
+                        " AND USU_CODSNF = '" + aCodSnf + "' AND USU_NUMNFV = " + aNumNfv + " AND USU_SEQIPV = " + aSeqIpv;
+
+                  GravaBanco2();
+
+               }
+            
+            nTemRep++;
+         }
+     
+
+      @-- Verificar Status de Produto Situação 2 --@
+
+      aCodPol = "004"; @-- Código da Política de Devolução 004 - Produto fora de linha (produto inativo] --@
+
+      aSqlComVal = "SELECT e.sitpro VALOR1, CASE WHEN (e.sitpro = 'A') THEN '1' ELSE '2' END VALOR2 FROM e075pro e JOIN e140ipv p ON p.codemp = e.codemp AND p.codpro = e.codpro " +
+                     " WHERE p.codemp = " + aCodEmp + " AND p.codfil = " + aCodFil + "  AND p.codsnf = '" + aCodSnf + "' AND p.numnfv = " + aNumNfv + " AND p.seqipv = " + aSeqIpv;
+
+      ConsultaValidacao();
+
+      @-- Ajusta Situação do Produto na tabela de controle de devolução --@
+      aComando = "UPDATE usu_tdevipd SET usu_sitpro = '" + aVlr1 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                  "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+      GravaBanco2();
+
+      aComando = "UPDATE USU_TmpDevI SET usu_sitpro = '" + aVlr1 + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                        "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+      GravaBanco2();
+
+      aSitDev = aVlr2;
+
+      ConsultaPolitica();
+      Se((aSitDev = "2") E (aSitPol = "A"))
+         {
+            ConsPoljaInserida(); 
+            Se(aInsPol = "S")
+               {
+                  aComando = "INSERT INTO USU_TDEVAPR (USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, USU_DEVAPR, USU_GERAPR, " +
+                           " USU_DATAPR, USU_HORAPR, USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, USU_CODPOL, " + 
+                           " USU_DATGER, USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI) " +
+                     " SELECT USU_IDEUNI, USU_CODEMP, USU_CODFIL, USU_CODSNF, USU_NUMNFV, USU_SEQIPV, USU_CODPRO, USU_CODDER, 'N' USU_DEVAPR, USU_GERAPR, USU_DATAPR, USU_HORAPR, " + 
+                           " USU_MOTIVO, USU_DATEXP, USU_REAREP, USU_TIPCAL, USU_SUMMIN, USU_QTDEST, USU_SITPRO, USU_DIADEV, USU_ESTMIN, '" + aCodPol + "' USU_CODPOL, " + 
+                           " SYSDATE USU_DATGER, '" + aSitDev + "' USU_REGRA, USU_UNIMED, USU_QTDDEV, USU_QTDFAT, USU_PREUNI " +
+                        " FROM USU_TDEVIPD WHERE USU_IDEUNI = '" + aIdeUni + "' AND USU_CODEMP = " + aCodEmp + " AND USU_CODFIL = " + aCodFil + 
+                        " AND USU_CODSNF = '" + aCodSnf + "' AND USU_NUMNFV = " + aNumNfv + " AND USU_SEQIPV = " + aSeqIpv;
+
+                  GravaBanco2();
+
+               }
+            
+            nTemRep++;
+         }
+
+   Fim;
+
+Funcao ConsultaPolitica(); @-- Vericar se a Politica está ativa --@
+   Inicio
+
+      aSqlComVal = "SELECT USU_SITREG FROM USU_TPARDEV WHERE USU_CODPOL = '" + aCodPol + "'";
+
+      SQL_Criar(aSqlVal);
+      SQL_UsarSqlSenior2(aSqlVal, 0);
+      SQL_UsarAbrangencia(aSqlVal, 0);
+      SQL_DefinirComando(aSqlVal, aSqlComVal);
+      SQL_AbrirCursor(aSqlVal);
+      Se(SQL_EOF(aSqlVal) = 0)
+         {
+            SQL_RetornarAlfa(aSqlVal, "USU_SITREG", aSitPol);
+         }
+      SQL_FecharCursor(aSqlVal);
+      SQL_Destruir(aSqlVal);
+
+   Fim;
+
+Funcao ConsPoljaInserida(); @-- Verificar se a Politica já foi inserida na tabela de Aprovação --@
+   Inicio
+
+      aInsPol = "S";
+
+      aSqlComVal = "SELECT 1 FROM USU_TDEVAPR WHERE USU_IDEUNI = '" + aIdeUni + "' AND USU_SEQIPV = " + aSeqIpv + " AND USU_CODPOL = '" + aCodPol + "'";
+
+      SQL_Criar(aSqlVal);
+      SQL_UsarSqlSenior2(aSqlVal, 0);
+      SQL_UsarAbrangencia(aSqlVal, 0);
+      SQL_DefinirComando(aSqlVal, aSqlComVal);
+      SQL_AbrirCursor(aSqlVal);
+      Se(SQL_EOF(aSqlVal) = 0)
+         {
+            aInsPol = "N";
+         }
+      SQL_FecharCursor(aSqlVal);
+      SQL_Destruir(aSqlVal);
+
+   Fim;
+
+Funcao ConsultaValidacao(); @-- Função para consulta de validação --@
+   Inicio
+
+      SQL_Criar(aSqlVal);
+      SQL_UsarSqlSenior2(aSqlVal, 0);
+      SQL_UsarAbrangencia(aSqlVal, 0);
+      SQL_DefinirComando(aSqlVal, aSqlComVal);
+      SQL_AbrirCursor(aSqlVal);
+      Se(SQL_EOF(aSqlVal) = 0)
+         {
+            SQL_RetornarAlfa(aSqlVal, "VALOR1", aVlr1);
+            SQL_RetornarAlfa(aSqlVal, "VALOR2", aVlr2);
+
+         }
+      SQL_FecharCursor(aSqlVal);
+      SQL_Destruir(aSqlVal);
+
+   Fim;
+
+Funcao GravaBanco(); @-- Função para gravação no banco com log --@
+   Inicio
+
+      ExecSQLEx (aComando, xErro, xMensagem); 
+         Se (xErro = 0) {
+            f_GravaLog();
+            
+         } Senao {
+            sMessage = "Erro ao inserir os itens na tabela de controle de devolução ";
+            sMessage = sMessage + xMensagem;
+            aRetorno = "Erro ao gravar os dados na tabela " + aTabela + " - " + xMensagem;
+            nStaReg = 2;
+            f_GravaLog();
+            Mensagem(Erro, sMessage);
+
+         }
+      
+   Fim;
+
+Funcao GravaBanco2(); @-- Função para gravação no banco sem log --@
+   Inicio
+
+      @-- Grava alterações no banco --@
+      ExecSQLEx (aComando, xErro, xMensagem); 
+         Se (xErro = 1) {
+            sMessage = "Erro ao inserir os itens na tabela de controle de devolução ";
+            sMessage = sMessage + xMensagem;
+            Mensagem(Erro, sMessage);
+         } 
+      
+   Fim;
+
+Funcao GravarDadosItem(); @-- Função para gravar os dados do item --@
+   Inicio
+      
+      Se(P1_Status = "1")
+         {
+            @-- Atualização da situação do item na tabela de controle de devolução --@
+
+            Se(nTemRep = 0)
+               {
+                  aDevApr = "S";
+                  aSitDev = "3";
+                  aComando = "UPDATE usu_tdevipd SET usu_sitdev = '" + aSitDev + "', usu_devapr = '" + aDevApr + "', usu_qtdlib = " + aQtaDev + " WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                              "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+               } 
+               Senao {
+                  aSitDev = "2";
+                  aComando = "UPDATE usu_tdevipd SET usu_sitdev = '" + aSitDev + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                              "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+               }
+            
+
+            @-- Variaveis de Log --@
+               aTabela = "usu_tdevipd";
+               aTipLog = "A";
+               aChaTab = "CodEmp = " + aCodEmp + " / CodFil = " + aCodFil + " / CodCli = " + aCodCli + " / NumNfv = " + aNumNfv + " /";
+               aRetorno = "Atualiado a situação da devolução na tabela de itens de devolução.";
+               nStaReg = 1;
+            
+            GravaBanco();
+
+            @-- Atualização da situação do item na tabela temporária de devolução --@
+
+            Se(nTemRep = 0)
+               {
+                  aDevApr = "S";
+                  aSitDev = "3";
+                  aComando = "UPDATE USU_TmpDevI SET usu_sitdev = '" + aSitDev + "', usu_devapr = '" + aDevApr + "', usu_qtdlib = " + aQtaDev + " WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                              "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+               } 
+               Senao {
+                  aSitDev = "2";
+                  aComando = "UPDATE USU_TmpDevI SET usu_sitdev = '" + aSitDev + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                              "' AND usu_numnfv = " + aNumNfv + " AND usu_seqipv = " + aSeqIpv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+               }
+
+            GravaBanco2();
+            
+         }
+      
+   Fim;
+
+
+Funcao GravarDadosGerais(); @-- Função para gravar os dados gerais --@
+   Inicio
+
+      Se(P1_Status = "1")
+         Inicio
+            Se(nTemRep = 0)
+               {
+                  aSitGer = "3";
+               } 
+            Senao 
+               {
+                  aSitGer = "2";
+               }
+
+         Fim;
+
+      Se(P1_Status = "2")
+         Inicio
+            aSitGer = "3";
+
+         Fim;
+
+      Se(P1_Status = "4")
+         Inicio
+            aSitGer = "9";
+
+         Fim;
+
+      @-- Atualização da situação do item na tabela de controle de devolução --@
+      aComando = "UPDATE usu_tdevger SET usu_sitdev = '" + aSitGer + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                  "' AND usu_numnfv = " + aNumNfv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+      @-- Variaveis de Log --@
+         aTabela = "usu_tmpdevg";
+         aTipLog = "A";
+         aChaTab = "CodEmp = " + aCodEmp + " / CodFil = " + aCodFil + " / CodCli = " + aCodCli + " / NumNfv = " + aNumNfv + " /";
+         aRetorno = "Atualiado a situação da devolução na tabela de dados gerais.";
+         nStaReg = 1;
+
+      GravaBanco();
+
+      @-- Atualização da situação do item na tabela temporária de devolução --@
+      aComando = "UPDATE USU_TmpDevG SET usu_sitdev = '" + aSitGer + "' WHERE usu_codemp = " + aCodEmp + " AND usu_codfil = " + aCodFil + " AND usu_codsnf = '" + aCodSnf + 
+                  "' AND usu_numnfv = " + aNumNfv + " AND usu_ideuni = '" + aIdeUni + "'";
+
+      GravaBanco();
+
+   Fim;
+
+
+Funcao DispararEmail(); @-- Função para disparo de email --@
+   Inicio
+      
+      BuscaDadosEmail();
+
+      RetornaValorCFG("com.senior.network.email.user",aEmlRem);
+
+      /* aEmlRem = "naoresponda@segurimax.com.br";
+      aEmlDes  = "solano.@senior.com.br"; */
+
+      aEmlAss  = "Ref. a Devolução aguardando Emissão de Nota Fiscal";
+      aEmlAnexo = "";
+      aEmlFrm = "H";
+      
+
+      aEmlCor = "<html>" +
+                "<head>" +
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">" +
+                "<style>" +
+                "table, th, td {"+
+                "border: 1px solid black;" +
+                "border-collapse: collapse;" +
+                "}" + 
+                "th, td {" +
+                "padding: 5px;" + 
+                "}" + 
+                "</style>" +
+                "</head>" + 
+                "<body>" + 
+                "<br>" +
+                "REF. DEVOLUÇÃO DA NOTA: " + aNumNfv + " APROVADA - SEGUE DADOS PARA EMISSÃO DA NOTA DE DEVOLUÇÃO !!!"+
+                "<br>" +
+                "<br>" +
+                "<br> Dados da Nota de Origem:" +
+                "<br>" +
+                "<table style='width:100%'>" +
+                "<tr> <th>Empresa. </th> <th>Filial. </th> <th>Serie.</th> <th>Numero.</th></tr>" +
+                "<tr>" +
+                "<td>" + aCodEmp + "</td>" +
+                "<td>" + aCodFil + "</td>" +
+                "<td>" + aCodSnf + "</td>" +
+                "<td>" + aNumNfv + "</td>" +
+                "</tr>" +
+                "</table>" +
+                "<br>" +
+                "<hr style='border: 1px solid #ccc; width: 100%;'>" +
+                "<br>" +
+                "<br> Dados do Destinatário:" +
+                "<br>" +
+                "<table style='width:100%'>" +
+                "<tr> <th>Nome </th> <th>Cnpj </th> <th>Insc. Estadual </th> <th>Endereço </th> <th>Bairro</th> <th>CEP</th> <th>Cidade</th> <th>UF</th> </tr>" +
+                "<tr>" +
+                "<td>" + aNomFil + "</td>" +
+                "<td>" + aNumCgc + "</td>" +
+                "<td>" + aInsEst + "</td>" +
+                "<td>" + aEndFil + "</td>" +
+                "<td>" + aBaiFil + "</td>" +
+                "<td>" + aCepFil + "</td>" +
+                "<td>" + aCidFil + "</td>" +
+                "<td>" + aSigufs + "</td>" +
+                "</tr>" +
+                "</table>" +
+                "<br>" +
+                "<hr style='border: 1px solid #ccc; width: 100%;'>" +
+                "<br>" +
+                "<br> Itens Aprovado para Devolução:" +
+                "<br>" +
+                "<table style='width:100%'>" +
+                "<tr> <th>Seq. </th> <th>Cod. Pro</th> <th>Cod. Der.</th> <th>Produto - Derivação.</th> <th>Quant Faturada.</th> <th>Quant Devolvida.</th> <th>Status.</th> </tr>" + 
+                aEmlRelItensApr + 
+                "</table>" + 
+                "<br>";
+               aEmlCor = aEmlCor + "<br> Itens Reprovado para Devolução:" +
+                "<br>" +
+                "<table style='width:100%'>" +
+                "<tr> <th>Seq. </th> <th>Cod. Pro</th> <th>Cod. Der.</th> <th>Produto - Derivação.</th> <th>Quant Faturada.</th> <th>Quant Devolvida.</th> <th>Status.</th> </tr>" + 
+                aEmlRelItensRep + 
+                "</table>" + 
+                "<br>"+
+                "<br>"+
+                "Enviado automaticamente - Gestão Empresarial Zeus do Brasil." + 
+                "</body>" + 
+                "</html>";
+   
+      
+      EnviarEmail(aEmlRem, aEmlAss, aEmlDes, aEmlDes1, aEmlDes2, aEmlCor, aEmlAnexo, aEmlFrm);
+      Mensagem(Retorna, "Email enviado com sucesso!!!");
+      
+      @-- Variaveis de Log --@
+         aTabela = "usu_tmpdevg";
+         aTipLog = "I";
+         aChaTab = "CodEmp = " + aCodEmp + " / CodFil = " + aCodFil + " / CodSnf = " + aCodSnf + " / NumNfv = " + aNumNfv + " /";
+         aRetorno = "Tipo de Devolução atualizado na tabela de devoluções dados gerais.";
+         nStaReg = 1;
+
+         f_GravaLog();
+
+   Fim;
+
+Funcao MontaItensEmailAprovado(); @-- Função para montar os itens aprovados no email --@
+   Inicio
+
+      aEmlRelItensApr = aEmlRelItensApr + "<tr>" + 
+                                    "<td>" + aSeqIpv + "</td>" +
+                                    "<td>" + aCodPro + "</td>" +
+                                    "<td>" + aCodDer + "</td>" +
+                                    "<td>" + aDesPro + " - " + aDesDer + "</td>" +
+                                    "<td>" + aQtdFat + "</td>" +
+                                    "<td>" + aQtdLib + "</td>" +
+                                    "<td> Aprovado </td>" +
+                                    "</tr>";
+
+   Fim;
+
+Funcao MontaItensEmailReprovado(); @-- Função para montar os itens reprovados no email --@
+   Inicio
+
+      aEmlRelItensRep = aEmlRelItensRep + "<tr>" + 
+                                    "<td>" + aSeqIpv + "</td>" +
+                                    "<td>" + aCodPro + "</td>" +
+                                    "<td>" + aCodDer + "</td>" +
+                                    "<td>" + aDesPro + " - " + aDesDer + "</td>" +
+                                    "<td>" + aQtdFat + "</td>" +
+                                    "<td>" + aQtdLib + "</td>" +
+                                    "<td> Reprovado </td>" +
+                                    "</tr>";
+
+
+   Fim;
+
+Funcao BuscaDadosEmail(); @-- Função para buscar os dados do email --@
+   Inicio
+
+      aSqlComand = "SELECT f.nomfil, f.numcgc, f.insest, (f.endfil || ', ' || f.NenFil) AS EndFil, f.baifil, f.cepfil, f.cidfil, f.sigufs, c.nomcli, t.USU_INTNET FROM e070fil f " +
+                    " JOIN USU_TMPDEVG t ON t.USU_CODEMP = f.CODEMP AND t.USU_CODFIL = f.CODFIL JOIN e085cli c ON c.codcli = t.USU_CODCLI WHERE t.USU_CODEMP = " + aCodEmp + 
+                     " AND t.USU_CODFIL = " + aCodFil + " AND t.USU_CODSNF = '" + aCodSnf + "'  AND t.USU_NUMNFV = " + aNumNfv + " AND t.USU_IDEUNI = '" + aIdeUni + "'";
+
+      SQL_Criar(aSqlDados);
+      SQL_UsarSqlSenior2(aSqlDados, 0);
+      SQL_UsarAbrangencia(aSqlDados, 0);
+      SQL_DefinirComando(aSqlDados, aSqlComand);
+      SQL_AbrirCursor(aSqlDados);
+         Se(SQL_EOF(aSqlDados) = 0)
+            {
+                SQL_RetornarAlfa(aSqlDados, "nomfil", aNomFil);
+                SQL_RetornarInteiro(aSqlDados, "numcgc", nNumCgc);
+                ConverteMascara(1,nNumCgc,aNumCgc,"99.999.999/9999-99");
+                SQL_RetornarAlfa(aSqlDados, "insest", aInsEst);
+                SQL_RetornarAlfa(aSqlDados, "EndFil", aEndFil);
+                SQL_RetornarAlfa(aSqlDados, "baifil", aBaiFil);
+                SQL_RetornarInteiro(aSqlDados, "cepfil", nCepFil);
+                ConverteMascara(1,nCepFil,aCepFil,"99.999-999");
+                SQL_RetornarAlfa(aSqlDados, "cidfil", aCidFil);
+                SQL_RetornarAlfa(aSqlDados, "sigufs", aSigufs);
+                SQL_RetornarAlfa(aSqlDados, "nomcli", aNomCli);
+                SQL_RetornarAlfa(aSqlDados, "USU_INTNET", aEmlDes);
+            
+            }
+      SQL_FecharCursor(aSqlDados);
+      SQL_Destruir(aSqlDados);
+
+   Fim;
+
+Funcao f_GravaLog(); @-- Função para gravação de log --@
+   {
+      Definir interno.custom.senior.g5.logs.gravarLog sGravaLogMmo;
+      
+      sGravaLogMmo.IdeLog = "DEV";
+      sGravaLogMmo.NomTab = aTabela;  
+      sGravaLogMmo.TipLog = aTipLog;  
+      sGravaLogMmo.ChaTab = aChaTab;  
+      sGravaLogMmo.NomFrm = "Controle de Devoluções";  
+      sGravaLogMmo.DesLog = aRetorno;  
+      sGravaLogMmo.StaReg = nStaReg;  
+      sGravaLogMmo.InfAdi = "Registro inserido via regra.";
+      
+      sGravaLogMmo.ModoExecucao = 1;
+      
+      sGravaLogMmo.Executar();  
+   }
+
+Funcao AtualizaSitNFC(); @-- Função para atualizar a situação da nota fiscal de devolução --@
+   Inicio
+
+      aComando = "UPDATE E440NFC SET SITNFC = '2' " +  
+                      " WHERE codemp = " + aCodEmp + " AND codfil = " + aCodFil + " AND codsnf = '" + aSnfDev + "' AND codfor = " + aCodCli + " AND numnfc = " + aNumDev;
+
+      GravaBanco();
+
+   Fim;
+
+Funcao BuscaDadosNFEmail(); @-- Função para buscar os dados da nota fiscal no email --@
+   Inicio
+
+            aSqlMai = "SELECT i.usu_seqipv, i.usu_codpro, i.usu_codder, i.usu_qtdfat, i.usu_sitdev, i.usu_qtdlib, p.despro FROM usu_tdevipd i " +
+                       " JOIN e075pro p ON p.codemp = i.usu_codemp AND p.codpro = i.usu_codpro " +
+                       " JOIN e075der e ON e.codemp = i.usu_codemp AND e.codpro = i.usu_codpro AND e.codder = i.usu_codder " +
+                      " WHERE i.usu_codemp = " + aCodEmp + " AND i.usu_codfil = " + aCodFil + " AND i.usu_codsnf = '" + aCodSnf + "' AND i.usu_numnfv = " + aNumNfv + 
+                        " AND i.USU_IDEUNI = '" + aIdeUni + "' ORDER BY i.usu_codemp, i.usu_codfil, i.usu_codsnf, i.usu_numnfv, i.usu_seqipv ";
+            
+
+      SQL_Criar(aSqlItem);
+      SQL_UsarSqlSenior2(aSqlItem, 0);
+      SQL_UsarAbrangencia(aSqlItem, 0);
+      SQL_DefinirComando(aSqlItem, aSqlMai);
+      SQL_AbrirCursor(aSqlItem);
+      Enquanto(SQL_EOF(aSqlItem) = 0)
+         Inicio
+         
+
+            SQL_RetornarInteiro(aSqlItem, "usu_seqipv", nSeqIpv);
+            IntParaAlfa(nSeqIpv, aSeqIpv);
+            SQL_RetornarAlfa(aSqlItem, "usu_codpro", aCodPro);
+            SQL_RetornarAlfa(aSqlItem, "usu_codder", aCodDer);
+            SQL_RetornarFlutuante(aSqlItem, "usu_qtdfat", nQtdFat);
+            IntParaAlfa(nQtdFat, aQtdFat);
+            SQL_RetornarAlfa(aSqlItem, "usu_sitdev", aSitDev);
+            SQL_RetornarFlutuante(aSqlItem, "usu_qtdlib", nQtdLib);
+            IntParaAlfa(nQtdLib, aQtdLib);
+            SQL_RetornarAlfa(aSqlItem, "despro", aDesPro);
+
+            MontaItensEmailAprovado();
+
+            SQL_Proximo(aSqlItem);
+
+         Fim;
+      SQL_FecharCursor(aSqlItem);
+      SQL_Destruir(aSqlItem);
+      
+   Fim;

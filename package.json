@@ -1,0 +1,73 @@
+{
+   "name": "lspt-language-support",
+   "displayName": "LSPT Language Support",
+   "description": "Suporte completo para a linguagem LSP (Linguagem Senior de Programação) com syntax highlighting, snippets e auto-completion",
+   "version": "1.3.2",
+   "publisher": "eliezer-organ",
+   "author": {
+      "name": "Eliezer Organ",
+      "email": "eorgan@organ.eti.br"
+   },
+   "engines": {
+      "vscode": "^1.60.0"
+   },
+   "categories": [
+      "Programming Languages",
+      "Snippets"
+   ],
+   "keywords": [
+      "lspt",
+      "lsp",
+      "senior",
+      "g5",
+      "erp"
+   ],
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/eliezer-organ/LSPSenior"
+   },
+   "license": "MIT",
+   "icon": "images/icon.png",
+   "main": "./extension.js",
+   "activationEvents": [
+      "onLanguage:lspt"
+   ],
+   "contributes": {
+      "languages": [
+         {
+            "id": "lspt",
+            "aliases": [
+               "LSPT",
+               "LSP",
+               "Linguagem Senior de Programação"
+            ],
+            "extensions": [
+               ".lspt",
+               ".lsp"
+            ],
+            "configuration": "./language-configuration.json"
+         }
+      ],
+      "grammars": [
+         {
+            "language": "lspt",
+            "scopeName": "source.lspt",
+            "path": "./syntaxes/lspt.tmLanguage.json"
+         }
+      ],
+      "snippets": [
+         {
+            "language": "lspt",
+            "path": "./snippets/lspt-snippets.json"
+         }
+      ]
+   },
+   "scripts": {
+      "package": "vsce package",
+      "publish": "ovsx publish"
+   },
+   "devDependencies": {
+      "@vscode/vsce": "^2.19.0",
+      "ovsx": "^0.8.0"
+   }
+}

@@ -1,0 +1,391 @@
+@-- Enviar Pendencias para a Equals --@
+
+/*
+ * @Author: Eliezer Organ
+ * @Email: eorgan@organ.eti.br
+ * @Date: 2025-07-29 21:41:08
+ * @Last Modified by: Eliezer Organ
+ * @Last Modified time: 2025-10-05 15:44:59
+ * @Description: Description
+ */
+
+@-- Declarar Funções --@
+   Definir Funcao BuscarParamWS();
+   Definir Funcao BuscarPendencias();
+   Definir Funcao MontaJsonPendencias();
+   Definir Funcao ParamChamadaHttp();
+   Definir Funcao LerCabecalhoJson();
+   Definir Funcao ChamaWS();
+   Definir Funcao f_GravaLog();
+   Definir Funcao GravaBanco2();
+   Definir Funcao EnviarEmailErro();
+
+@-- Declarar Variaveis --@
+   Definir Alfa aCodEmp;
+   Definir Alfa aSqlCom;
+   Definir Alfa aSqlInt;
+   Definir Alfa aAuth;
+   Definir Alfa aToken;
+   Definir Alfa aEmail;
+   Definir Alfa aUrl;
+   Definir Alfa aLimPro;
+   Definir Alfa aLimIte;
+   Definir Alfa aToken64;
+   Definir Alfa aRotVnd;
+   Definir Alfa aSqlPen;
+   Definir Alfa aSqlCom;
+   Definir Alfa aAutorizacao;
+   Definir Data dData;
+   Definir Alfa aData;
+   Definir Alfa aDocumento;
+   Definir Alfa aDocumentoCliente;
+   Definir Alfa aFlagCancelamento;
+   Definir Alfa aIdEstabelecimentoErp;
+   Definir Alfa aIdFormaPagamento;
+   Definir Alfa aIdTransacao;
+   Definir Alfa aLocalizador;
+   Definir Alfa aNomeCliente;
+   Definir Alfa aNsu;
+   Definir Alfa aNumeroUnicoErp; 
+   Definir Alfa aObservacaoTransacao;
+   Definir Alfa aObservacaoVenda;
+   Definir Alfa aTid;
+   Definir Alfa aValor;
+   Definir Alfa aNumeroPedido;
+   Definir Alfa aJson;
+   Definir Alfa aIdAdquirente;
+   Definir Alfa aIdBandeira;
+   Definir Alfa aIdMeioCaptura;
+   Definir Alfa aParcelas;
+   Definir Alfa aEndApi;
+   Definir Alfa aJsonRet;
+   Definir Alfa aCabecalho;
+   Definir Alfa aMsgRet;
+   Definir Alfa aChaTab;
+   Definir Alfa aRetorno;
+   Definir Alfa aMsgRet;
+   Definir Alfa aTabela;
+   Definir Alfa aTipLog;
+   Definir Alfa xCommandBanco;
+   Definir Alfa xMensagem;
+   Definir Alfa aIdeAdq;
+
+   Definir Alfa aEmlAss;
+   Definir Alfa aEmlCor;
+   Definir Alfa aEmlRem;
+   Definir Alfa aEmlAnexo;
+   Definir Alfa aEmlFrm;
+   Definir Alfa aCab;
+   Definir Alfa sDiaHoj;
+   Definir Alfa aEmlDes;
+   Definir Alfa aEmlDes1;
+   Definir Alfa aEmlDes2;
+   Definir Alfa aDiaHoj;
+   Definir Data dDiaHoj;
+
+@-- Atribui Valores Variaveis --@
+   IntParaAlfa(CodEmp, aCodEmp);
+   dDiaHoj = DatSis;
+   ConverteMascara(3,dDiaHoj,aDiaHoj,"DD/MM/YYYY");
+
+@-- Inicio do Processamento --@
+   BuscarParamWS();
+   BuscarPendencias();
+
+   
+@-- Chamada das Funções --@
+Funcao BuscarParamWS();
+   Inicio
+      
+      aSqlCom = "SELECT USU_TOKPRD, USU_URLPRD, USU_LIMPRO, USU_LIMITM, USU_EMAIL, USU_ROTVND, USU_INTNET FROM USU_TPAREQU WHERE USU_CODEMP = " + aCodEmp;
+
+      SQL_Criar(aSqlInt);
+      SQL_UsarSqlSenior2(aSqlInt, 0);
+      SQL_UsarAbrangencia(aSqlInt, 0);
+      SQL_DefinirComando(aSqlInt, aSqlCom);
+      SQL_AbrirCursor(aSqlInt);
+      Se(SQL_EOF(aSqlInt) = 0)
+         {
+            SQL_RetornarAlfa(aSqlInt, "USU_TOKPRD", aToken);
+            SQL_RetornarAlfa(aSqlInt, "USU_URLPRD", aUrl);
+            SQL_RetornarAlfa(aSqlInt, "USU_LIMPRO", aLimPro);
+            SQL_RetornarAlfa(aSqlInt, "USU_LIMITM", aLimIte);
+            SQL_RetornarAlfa(aSqlInt, "USU_EMAIL", aEmail);
+            SQL_RetornarAlfa(aSqlInt, "USU_ROTVND", aRotVnd);
+            SQL_RetornarAlfa(aSqlInt, "USU_INTNET", aEmlDes); @-- Email Destinatário para envio de erros --@
+
+            aToken64 = aEmail + ":" + aToken;
+
+            Base64Encode(aToken64, aAuth);
+
+            aAuth = "Basic " + aAuth;
+            aEndApi = aUrl + aRotVnd; @-- Endereço da API --@
+         }
+
+      Se(SQL_EOF(aSqlInt) = 1)
+         {
+            aRetorno = "Empresa sem configuração de integração com Equals. Verifique!";
+            aTipLog = "E";
+            aTabela = "USU_TEQUPEN";
+            aChaTab = "N/A";
+            nStaReg = 1;
+            f_GravaLog();
+            EnviarEmailErro();
+         }
+      SQL_FecharCursor(aSqlInt);
+      SQL_Destruir(aSqlInt);
+
+   Fim;
+
+Funcao BuscarPendencias();
+   Inicio
+
+      aSqlCom = "SELECT COUNT(*) OVER() AS QTD, ROWNUM ID, t.CATTEF autorizacao, t.DATEMI data, ' ' documento, c.CGCCPF documentoCliente, ' ' flagCancelamento, 2 idAdquirente, t.BANCAR idBandeira, " +
+                      " e.USU_IDEEST idEstabelecimentoErp, f.USU_FORPAG idFormaPagamento, 6 idMeioCaptura, USU_NSUTEF idTransacao, (p.USU_CODEMP || p.USU_CODFIL || p.USU_NUMTIT || p.USU_CODTPT) localizador, " + 
+                      " c.NOMCLI nomeCliente, USU_NSUTEF nsu, (p.USU_CODEMP || p.USU_CODFIL || p.USU_NUMTIT || p.USU_CODTPT) numeroUnicoErp, t.OBSTCR observacaoTransacao, ' ' observacaoVenda, t.PARCAR parcelas, " + 
+                      " t.CATTEF tid, t.VLRORI valor, (p.USU_CODEMP || p.USU_CODFIL || p.USU_NUMTIT || p.USU_CODTPT) numeroPedido, " + 
+                      " ('CodEmp = ' || p.USU_CODEMP || ' / CodFil = ' || p.USU_CODFIL || ' / NumTit = ' || p.USU_NUMTIT || ' / CodTpt = ' || p.USU_CODTPT) ChaTab FROM USU_TEQUPEN p " + 
+                 " JOIN E301TCR t ON t.CODEMP = p.USU_CODEMP AND t.CODFIL = p.USU_CODFIL AND t.NUMTIT = p.USU_NUMTIT AND t.CODTPT = p.USU_CODTPT JOIN E085CLI c ON c.CODCLI = t.CODCLI " + 
+                 " JOIN USU_TEQUEST e ON e.USU_CODEMP = p.USU_CODEMP AND e.USU_CODFIL = p.USU_CODFIL " +
+                 " LEFT JOIN USU_TPAGEQU f ON f.USU_CODEMP = t.CODEMP AND f.USU_CODFPG = t.CODFPG " + 
+                 " LEFT JOIN USU_TEQUCAP h ON h.USU_CODEMP = t.CODEMP AND h.USU_CODTNS = t.CODTNS WHERE USU_SITEQU IN (1,4) AND ROWNUM <=" + aLimIte;
+
+      SQL_Criar(aSqlPen);
+      SQL_UsarSqlSenior2(aSqlPen, 0);
+      SQL_UsarAbrangencia(aSqlPen, 0);
+      SQL_DefinirComando(aSqlPen, aSqlCom);
+      SQL_AbrirCursor(aSqlPen);
+      Enquanto(SQL_EOF(aSqlPen) = 0)
+         {
+            SQL_RetornarInteiro(aSqlPen, "QTD", nQtd);
+            SQL_RetornarInteiro(aSqlPen, "ID", nId);
+            SQL_RetornarAlfa(aSqlPen, "autorizacao", aAutorizacao);
+            SQL_RetornarData(aSqlPen, "data", dData);
+            ConverteMascara(3,dData,aData,"YYYY-MM-DD");
+            SQL_RetornarAlfa(aSqlPen, "documento", aDocumento);
+            SQL_RetornarAlfa(aSqlPen, "documentoCliente", aDocumentoCliente);
+            SQL_RetornarAlfa(aSqlPen, "flagCancelamento", aFlagCancelamento);
+            SQL_RetornarInteiro(aSqlPen, "idAdquirente", nIdAdquirente);
+            IntParaAlfa(nIdAdquirente, aIdAdquirente);
+            SQL_RetornarAlfa(aSqlPen, "idBandeira", aIdBandeira);
+            SQL_RetornarAlfa(aSqlPen, "idEstabelecimentoErp", aIdEstabelecimentoErp);
+            SQL_RetornarAlfa(aSqlPen, "idFormaPagamento", aIdFormaPagamento);
+            SQL_RetornarInteiro(aSqlPen, "idMeioCaptura", nIdMeioCaptura);
+            IntParaAlfa(nIdMeioCaptura, aIdMeioCaptura);
+            SQL_RetornarAlfa(aSqlPen, "idTransacao", aIdTransacao);
+            SQL_RetornarAlfa(aSqlPen, "localizador", aLocalizador);
+            SQL_RetornarAlfa(aSqlPen, "nomeCliente", aNomeCliente);
+            SQL_RetornarAlfa(aSqlPen, "nsu", aNsu);
+            SQL_RetornarAlfa(aSqlPen, "numeroUnicoErp", aNumeroUnicoErp);
+            SQL_RetornarAlfa(aSqlPen, "observacaoTransacao", aObservacaoTransacao);
+            SQL_RetornarAlfa(aSqlPen, "observacaoVenda", aObservacaoVenda);
+            SQL_RetornarInteiro(aSqlPen, "parcelas", nParcelas);
+            IntParaAlfa(nParcelas, aParcelas);
+            SQL_RetornarAlfa(aSqlPen, "tid", aTid);
+            SQL_RetornarFlutuante(aSqlPen, "valor", nValor);
+            ConverteMascara(2,nValor, aValor,"ZZZZZZZZZZZZ9,99");
+            SubstAlfa(",", ".", aValor);
+            SQL_RetornarAlfa(aSqlPen, "numeroPedido", aNumeroPedido);
+            SQL_RetornarAlfa(aSqlPen, "ChaTab", aChaTab);
+
+            MontaJsonPendencias();
+            ChamaWS();
+            
+            SQL_Proximo(aSqlPen);
+         }
+      SQL_FecharCursor(aSqlPen);
+      SQL_Destruir(aSqlPen);
+
+   Fim;
+
+Funcao MontaJsonPendencias();
+   Inicio
+
+      aJson = "[{" +
+              "\"autorizacao\": \"" + aAutorizacao + "\"," +
+              "\"data\": \"" + aData + "\"," +
+              "\"documento\": \"" + aDocumento + "\"," +
+              "\"documentoCliente\": \"" + aDocumentoCliente + "\"," +
+              "\"flagCancelamento\": \"" + aFlagCancelamento + "\"," +
+              "\"idAdquirente\": " + aIdAdquirente + "," +
+              "\"idBandeira\": " + aIdBandeira + "," +
+              "\"idEstabelecimentoErp\": \"" + aIdEstabelecimentoErp + "\"," +
+              "\"idFormaPagamento\": \"" + aIdFormaPagamento + "\"," +
+              "\"idMeioCaptura\": " + aIdMeioCaptura + "," +
+              "\"idTransacao\": \"" + aIdTransacao + "\"," +
+              "\"informacaoAdicional1Pagamento\": \"\"," +
+              "\"informacaoAdicional1Venda\": \"\"," +
+              "\"informacaoAdicional2Pagamento\": \"\"," +
+              "\"informacaoAdicional2Venda\": \"\"," +
+              "\"localizador\": \"" + aLocalizador + "\"," +
+              "\"nomeCliente\": \"" + aNomeCliente + "\"," +
+              "\"nsu\": \"" + aNsu + "\"," +
+              "\"numeroUnicoErp\": \"" + aNumeroUnicoErp + "\"," +
+              "\"observacaoTransacao\": \"" + aObservacaoTransacao + "\"," +
+              "\"observacaoVenda\": \"" + aObservacaoVenda + "\"," +
+              "\"parcelas\": " + aParcelas + "," +
+              "\"tid\": \"" + aTid + "\"," +
+              "\"valor\": " + aValor + "," +
+              "\"numeroPedido\": \""+ aNumeroPedido +"\"}]";
+
+   Fim;
+
+Funcao ParamChamadaHttp();
+   Inicio
+
+      Definir Alfa vHTTP;
+      Definir Alfa vHTML;
+      Definir Alfa aEnter;
+
+      CaracterParaAlfa(13,aEnter);
+      HttpObjeto(vHTTP);
+      HttpDesabilitaErroResposta(vHTTP);
+      HttpAlteraCodifCaracPadrao(vHTTP, "utf-8");
+      HttpAlteraCabecalhoRequisicao(vHTTP, "Content-Type", "application/json");
+      HttpAlteraCabecalhoRequisicao(vHTTP, "Authorization", aAuth);
+      
+   Fim;
+
+Funcao ChamaWS();
+   Inicio
+
+      ParamChamadaHttp();
+      
+      HttpPost(vHTTP, aEndApi, aJson, aJsonRet);
+
+      HttpLeCodigoResposta(vHTTP, nCodRet);
+      LerCabecalhoJson();
+
+   Fim;
+
+Funcao LerCabecalhoJson();
+   Inicio
+
+      @-- Variaveis de Log --@
+         aTabela = "USU_TEQUPEN";
+         aTipLog = "E";
+         nStaReg = 1;
+      
+      aCabecalho = "{ \"Retorno\": [" + aJsonRet + " ] }";
+
+      Se ((nCodRet = 401) ou (nCodRet = 403) ou (nCodRet = 400))
+         {
+            PosicaoAlfa("errors", aCabecalho, nPosStr);
+            Se(nPosStr > 0)
+               {
+                  ValorElementoJson(aCabecalho, "Retorno", "errors", aRetorno);
+                  f_GravaLog();
+                  
+                  xCommandBanco = "UPDATE USU_TEQUPEN SET USU_SITEQU = 4 WHERE USU_ERPUNI = '" + aNumeroUnicoErp + "'";
+
+                  GravaBanco2();
+               } 
+            Senao
+               {
+                  ValorElementoJson(aCabecalho, "Retorno", "error", aRetorno);
+                  f_GravaLog();
+
+                  xCommandBanco = "UPDATE USU_TEQUPEN SET USU_SITEQU = 4 WHERE USU_ERPUNI = '" + aNumeroUnicoErp + "'";
+
+                  GravaBanco2();
+               }     
+         } 
+
+      Se (nCodRet = 500)
+         {
+            PosicaoAlfa("error", aCabecalho, nPosStr);
+            Se(nPosStr > 0)
+            {
+               ValorElementoJson(aCabecalho, "Retorno", "message", aRetorno);
+               f_GravaLog();
+
+               xCommandBanco = "UPDATE USU_TEQUPEN SET USU_SITEQU = 4 WHERE USU_ERPUNI = '" + aNumeroUnicoErp + "'";
+
+               GravaBanco2();
+            }
+         }
+      
+      Se (nCodRet = 201)
+         {
+            ValorElementoJson(aCabecalho, "Retorno", "message", aRetorno);
+            f_GravaLog();
+
+            xCommandBanco = "UPDATE USU_TEQUPEN SET USU_SITEQU = 2 WHERE USU_ERPUNI = '" + aNumeroUnicoErp + "'";
+
+            GravaBanco2();
+
+         }
+   Fim;
+
+Funcao f_GravaLog();
+   {
+      Definir interno.custom.senior.g5.logs.gravarLog sGravaLogMmo;
+      
+      sGravaLogMmo.IdeLog = "EQI";
+      sGravaLogMmo.NomTab = aTabela;  
+      sGravaLogMmo.TipLog = aTipLog;  
+      sGravaLogMmo.ChaTab = aChaTab;  
+      sGravaLogMmo.NomFrm = "Controle de Devoluções";  
+      sGravaLogMmo.DesLog = aRetorno;  
+      sGravaLogMmo.StaReg = nStaReg;  
+      sGravaLogMmo.InfAdi = "Registro inserido via regra.";
+      
+      sGravaLogMmo.ModoExecucao = 1;
+      
+      sGravaLogMmo.Executar();  
+   }
+
+Funcao GravaBanco2();
+   Inicio
+
+      @-- Grava alterações no banco --@
+      ExecSQLEx (xCommandBanco, xErro, xMensagem); 
+         Se (xErro = 1) {
+            aMsgRet = xMensagem;
+            Mensagem(Erro, aMsgRet);
+         }
+      
+   Fim;
+
+Funcao EnviarEmailErro();
+   Inicio
+
+      @-- Função para enviar email em caso de erro --@
+      @-- Implementar conforme necessidade do cliente --@
+      @-- Exemplo usando serviço de email do Senior --@
+
+      aEmlAss = "Erro no Processamento da Integração Equals";
+
+      RetornaValorCFG("com.senior.network.email.user",aEmlRem);
+
+      aEmlAss  = "Ref. a Devolução aguardando Emissão de Nota Fiscal";
+      aEmlAnexo = "";
+      aEmlFrm = "H";
+      
+
+      aEmlCor = "<html>" +
+                "<head>" +
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">" +
+                "<style>" +
+                "</style>" +
+                "</head>" + 
+                "<body>" + 
+                "<br>" +
+                aEmlAss +
+                "<br>" +
+                "<br>" +
+                "<br> Ocorreu um erro no processamento da integração com Equals." +
+                "<br>" +
+                "<br> Erro: " + aRetorno +
+                "<br>" +
+                "<br> Data/Hora: " + aDiaHoj +
+                "<br>" +
+                "<br>"+
+                "Enviado automaticamente - Gestão Empresarial Zeus do Brasil." + 
+                "</body>" + 
+                "</html>";
+   
+      
+      EnviarEmail(aEmlRem, aEmlAss, aEmlDes, aEmlDes1, aEmlDes2, aEmlCor, aEmlAnexo, aEmlFrm);
+
+   Fim;

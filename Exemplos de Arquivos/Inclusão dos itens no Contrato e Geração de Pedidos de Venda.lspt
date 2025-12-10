@@ -1,0 +1,481 @@
+@-- Inclusão dos itens no Contrato e Geração de Pedidos de Venda --@
+
+/*
+ * @Author: Eliezer Organ
+ * @Email: eliezer.organ@consultorseniorsistemas.com.br
+ * @Date: 2025-09-08 17:54:53
+ * @Last Modified by: Eliezer Organ
+ * @Last Modified time: 2025-09-30 19:50:47
+ * @Description: Description
+ */
+
+@-- Declaração WS --@
+   Definir interno.com.senior.g5.co.mcm.ven.pedidos.GravarPedidos_15 WSPedido;
+ 
+@-- Declarar Funções --@
+   Definir Funcao BuscarDadosImpCtr();
+   Definir Funcao BuscarDadosImpPed();
+   Definir Funcao BuscarDadosCtr();
+   Definir Funcao BuscarDadosServ();
+   Definir Funcao GravaDadosCTR();
+   Definir Funcao GravaCommandBanco();
+   Definir Funcao GravaLog();
+   Definir Funcao GravaDadosPedido();
+   Definir Funcao ChamaWSParaGravacao();
+   Definir Funcao BuscarDadosItensPedN();
+   Definir Funcao BuscarDadosItensPedS();
+
+@-- Declarar Variaveis --@
+   Definir Alfa aSqlCom;
+   Definir Alfa aSqlComC;
+   Definir Alfa aSqlComS;
+   Definir Alfa aSql;
+   Definir Alfa aSqlCtr;
+   Definir Alfa aSqlSer;
+   Definir Alfa aId;
+   Definir Alfa aNumOfi;
+   Definir Alfa aCodSer;
+   Definir Data dDatCpt;
+   Definir Alfa aDatCpt;
+   Definir Alfa aCplCvs;
+   Definir Alfa aObsCvs;
+   Definir Alfa aCodCpg;
+   Definir Alfa aCodFpg;
+   Definir Alfa aNumCtr;
+   Definir Alfa aTnsSer;
+   Definir Alfa aDesSer;
+   Definir Alfa aDesNFV;
+   Definir Alfa aCplSer;
+   Definir Alfa aUniMed;
+   Definir Alfa aCodStr;
+   Definir Alfa xCommand;
+   Definir Alfa xMensagem;
+   Definir Alfa aCodEmp;
+   Definir Alfa aCodFil;
+   Definir Alfa aNumCtr;
+   Definir Alfa aQtdCvs;
+   Definir Alfa aPerDsc;
+   Definir Alfa aVlrFat;
+   Definir Alfa aVlrTot;
+   Definir Alfa aMsg;
+   Definir Alfa xCommandLog;
+   Definir Alfa aSigInt;
+   Definir Data dDatEmi;
+   Definir Alfa aDatEmi;
+
+   Definir Alfa aMsgRet;
+   Definir Alfa aRetDesRet;
+   Definir Alfa aSitPed;
+   Definir Alfa aRetPed;
+   Definir Alfa aErro;
+   Definir Alfa aTipRet;
+
+   Definir Alfa aNumPedRet;
+   Definir Alfa aRetPar;
+   Definir Alfa aCodEmpSer;
+   Definir Alfa aCodFilSer;
+   Definir Alfa aSeqIspSer;
+   Definir Alfa aSitIspSer;
+   Definir Alfa aRetornoSer;
+   Definir Alfa aSeqCvs;
+   Definir Alfa aSeqIsp;
+   Definir Alfa aTnsPro;
+   Definir Alfa aRetObs;
+   Definir Alfa aCodCcu;
+   Definir Alfa aSerImp;
+   Definir Alfa xQuebra;
+	Definir Alfa acmpUsu;
+   Definir Alfa avlrUsu;	
+
+@-- Inicio da Exceção --@
+   dDatEmi = DatSis;
+      convertemascara(3,dDatEmi,aDatEmi,"DD/MM/YYYY");
+
+   aSigInt = "INTERNO";
+
+   RetornaAscii(10,xQuebra);
+
+   BuscarDadosCtr();
+   BuscarDadosServ();
+
+   BuscarDadosImpCtr();
+   BuscarDadosImpPed();
+
+@-- Função --@
+Funcao BuscarDadosImpCtr();
+   Inicio
+
+      aSqlCom = "SELECT usu_id, usu_numofi, c.codemp, c.codfil, c.numctr, usu_datcpt, c.tnsser, usu_codser, usu_cplisp, usu_qtdser, usu_obscvs, usu_preuni, usu_vlrtot, " +
+                      " usu_numctr, usu_numped, c.codcpg, c.codFpg, c.clifat, s.desser, s.desnfv, s.cplser, s.unimed, s.codstr, " +
+                      "((SELECT COALESCE(MAX(seqcvs), 0) FROM e160cvs cs WHERE cs.codemp = c.codemp AND cs.codfil = c.codfil AND cs.numctr = c.numctr) + " + 
+                      " ROW_NUMBER() OVER (PARTITION BY usu_numofi ORDER BY usu_id)) AS seqcvs," + 
+                      " ROW_NUMBER() OVER (PARTITION BY usu_numofi ORDER BY usu_id) AS SeqIsp FROM usu_timpctr i JOIN e160ctr c ON c.numofi = i.usu_numofi " +
+                 " JOIN e080ser s ON s.codemp = c.codemp AND s.codser = i.usu_codser " +
+                " WHERE usu_stareg = 'N' AND usu_numctr = 0 ORDER BY ROW_NUMBER() OVER (PARTITION BY usu_numofi ORDER BY usu_id) ";
+
+      SQL_Criar(aSql);
+      SQL_UsarSqlSenior2(aSql, 0);
+      SQL_UsarAbrangencia(aSql, 0);
+      SQL_DefinirComando(aSql, aSqlCom);
+      SQL_AbrirCursor(aSql);
+         Enquanto(SQL_EOF(aSql) = 0)
+            Inicio
+
+               xErro = 0;
+               SQL_RetornarAlfa(aSql, "usu_id", aId);
+               SQL_RetornarAlfa(aSql, "usu_numofi", aNumOfi);
+               SQL_RetornarInteiro(aSql, "codemp", nCodEmp);
+                  IntParaAlfa(nCodEmp, aCodEmp);
+               SQL_RetornarInteiro(aSql, "codfil", nCodFil);
+                  IntParaAlfa(nCodFil, aCodFil);
+               SQL_RetornarInteiro(aSql, "numctr", nNumCtr);
+                  IntParaAlfa(nNumCtr, aNumCtr);
+               SQL_RetornarData(aSql, "usu_datcpt", dDatCpt);
+               ConverteDataBanco(dDatCpt,aDatCpt);
+               SQL_RetornarAlfa(aSql, "tnsser", aTnsSer);
+               SQL_RetornarAlfa(aSql, "usu_codser", aCodSer);
+               SQL_RetornarAlfa(aSql, "usu_cplisp", aCplCvs);
+               SQL_RetornarAlfa(aSql, "usu_qtdser", aQtdCvs);
+               SubstAlfa(",", ".", aQtdCvs);
+               LimpaEspacos(aQtdCvs);
+               SQL_RetornarAlfa(aSql, "usu_obscvs", aObsCvs);
+               SQL_RetornarAlfa(aSql, "usu_preuni", aVlrFat);
+               SubstAlfa(",", ".", aVlrFat);
+               LimpaEspacos(aVlrFat);
+               SQL_RetornarAlfa(aSql, "usu_vlrtot", aVlrTot);
+               SubstAlfa(",", ".", aVlrTot);
+               LimpaEspacos(aVlrTot);
+               SQL_RetornarInteiro(aSql, "usu_numctr", nNumCtrI);
+               SQL_RetornarInteiro(aSql, "usu_numped", nNumPed);
+               SQL_RetornarAlfa(aSql, "codcpg", aCodCpg);
+               SQL_RetornarAlfa(aSql, "codFpg", aCodFpg);
+               SQL_RetornarInteiro(aSql, "clifat", nClifat);
+               SQL_RetornarAlfa(aSql, "desser", aDesSer);
+               SQL_RetornarAlfa(aSql, "desnfv", aDesNFV);
+               SQL_RetornarAlfa(aSql, "cplser", aCplSer);
+               SQL_RetornarAlfa(aSql, "unimed", aUniMed);
+               SQL_RetornarAlfa(aSql, "codstr", aCodStr);
+               SQL_RetornarInteiro(aSql, "seqcvs", nSeqCvs);
+                  IntParaAlfa(nSeqCvs, aSeqCvs);
+               SQL_RetornarInteiro(aSql, "SeqIsp", nSeqIsp);
+               IntParaAlfa(nSeqIsp, aSeqIsp);
+
+               GravaDadosCTR();
+
+               SQL_Proximo(aSql);
+
+            Fim;
+
+            aMsg = "Serviços importados para o contrato com sucesso!! ";
+            mensagem(Retorna, aMsg);
+            
+
+      SQL_FecharCursor(aSql);
+      SQL_Destruir(aSql);
+
+   Fim;
+
+Funcao BuscarDadosImpPed();
+   Inicio
+
+      aSqlCom = "SELECT DISTINCT c.codemp, c.codfil, c.numctr, c.tnsser, c.codcpg, c.codFpg, c.clifat, s.serimp FROM e160ctr c " +
+                 " JOIN usu_timpctr i ON i.usu_numofi = c.numofi JOIN e080ser s ON s.codemp = i.usu_codemp AND s.codser = i.usu_codser " +
+                " WHERE i.usu_stareg = 'N' AND i.usu_numped = 0 ";
+
+      SQL_Criar(aSql);
+      SQL_UsarSqlSenior2(aSql, 0);
+      SQL_UsarAbrangencia(aSql, 0);
+      SQL_DefinirComando(aSql, aSqlCom);
+      SQL_AbrirCursor(aSql);
+         Enquanto(SQL_EOF(aSql) = 0)
+            Inicio
+
+               xErro = 0;
+               SQL_RetornarInteiro(aSql, "codemp", nCodEmp);
+                  IntParaAlfa(nCodEmp, aCodEmp);
+               SQL_RetornarInteiro(aSql, "codfil", nCodFil);
+                  IntParaAlfa(nCodFil, aCodFil);
+               SQL_RetornarInteiro(aSql, "numctr", nNumCtr);
+                  IntParaAlfa(nNumCtr, aNumCtr);
+               SQL_RetornarAlfa(aSql, "tnsser", aTnsSer);
+               SQL_RetornarAlfa(aSql, "codcpg", aCodCpg);
+               SQL_RetornarAlfa(aSql, "codFpg", aCodFpg);
+               SQL_RetornarInteiro(aSql, "clifat", nClifat);
+               SQL_RetornarAlfa(aSql, "serimp", aSerImp);
+               
+               aTnsPro = "";
+
+               WSPedido.sigInt = aSigInt;
+               WSPedido.pedido.CriarLinha();
+               WSPedido.pedido.opeExe = "I";
+               WSPedido.pedido.fecPed = "S";
+               WSPedido.pedido.tipPed = "1";
+               WSPedido.pedido.prcPed = 3;
+               WSPedido.pedido.tnsPro = aTnsPro;
+               WSPedido.pedido.tnsSer = "90105";
+               WSPedido.pedido.codEmp = nCodEmp;
+               WSPedido.pedido.codFil = nCodFil;
+               WSPedido.pedido.codRep = "1";
+               WSPedido.pedido.datEmi = aDatEmi;
+               WSPedido.pedido.codCli = nClifat;
+               WSPedido.pedido.codCpg = aCodCpg;
+               WSPedido.pedido.codFpg = aCodFpg;
+               WSPedido.pedido.temPar = "S";
+               WSPedido.pedido.acePar = "N";
+               WSPedido.pedido.obsMot = "Pedido gerado automaticamente pelo processo de inclusão dos itens no contrato.";
+               WSPedido.pedido.pedBlo = "S";
+               /* WSPedido.pedido.parcelas.CriarLinha();
+               WSPedido.pedido.parcelas.opeExe = "I";
+               WSPedido.pedido.parcelas.perPar = "100"; */
+
+               BuscarDadosItensPedN();
+               ChamaWSParaGravacao();
+
+               SQL_Proximo(aSql);
+
+            Fim;
+
+         Se(nTipRetPed = 1)
+            {
+               aMsg = "Pedidos gerados com sucesso!! ";
+               mensagem(Retorna, aMsg);
+            } Senao {
+               aMsg = "Erro ao gerar Pedido do contrato: " + aNumCtr + " - Erro: " + aRetPed;
+               mensagem(Retorna, aMsg);
+            }
+         
+
+      SQL_FecharCursor(aSql);
+      SQL_Destruir(aSql);
+      
+   Fim;
+
+Funcao BuscarDadosCtr(); @-- Rever --@
+   Inicio
+
+      aSqlComC = "SELECT i.usu_id, i.usu_numofi FROM usu_timpctr i WHERE NOT EXISTS (SELECT * FROM e160ctr c WHERE c.numofi = i.usu_numofi)";
+
+      SQL_Criar(aSqlCtr);
+      SQL_UsarSqlSenior2(aSqlCtr, 0);
+      SQL_UsarAbrangencia(aSqlCtr, 0);
+      SQL_DefinirComando(aSqlCtr, aSqlComC);
+      SQL_AbrirCursor(aSqlCtr);
+         Enquanto(SQL_EOF(aSqlCtr) = 0)
+            Inicio
+
+               SQL_RetornarAlfa(aSqlCtr, "usu_id", aId);
+               SQL_RetornarAlfa(aSqlCtr, "usu_numofi", aNumOfi);
+
+               aMsg = "O contrato: " + aNumOfi + " não foi encontrado na base de dados.";
+               xCommandLog = "UPDATE usu_timpctr SET usu_stareg = 'E', usu_logimp = '" + aMsg + "' WHERE usu_id = '" + aId + "'";
+               GravaLog();
+
+               SQL_Proximo(aSqlCtr);
+
+            Fim;
+
+      SQL_FecharCursor(aSqlCtr);
+      SQL_Destruir(aSqlCtr);
+
+
+   Fim;
+
+Funcao BuscarDadosServ(); @-- Rever --@
+   Inicio
+
+      aSqlComS = "SELECT i.usu_id, i.usu_codser FROM usu_timpctr i WHERE NOT EXISTS (SELECT * FROM e080ser s WHERE s.codser = i.usu_codser)";
+
+      SQL_Criar(aSqlSer);
+      SQL_UsarSqlSenior2(aSqlSer, 0);
+      SQL_UsarAbrangencia(aSqlSer, 0);
+      SQL_DefinirComando(aSqlSer, aSqlComS);
+      SQL_AbrirCursor(aSqlSer);
+         ENQUANTO(SQL_EOF(aSqlSer) = 0)
+            Inicio
+
+               SQL_RetornarAlfa(aSqlSer, "usu_id", aId);
+               SQL_RetornarAlfa(aSqlSer, "usu_codser", aCodSer);
+
+               aMsg = "O Serviço: " + aCodSer + " não foi encontrado na base de dados.";
+               xCommandLog = "UPDATE usu_timpctr SET usu_stareg = 'E', usu_logimp = '" + aMsg + "' WHERE usu_id = '" + aId + "'";
+               GravaLog();
+
+               SQL_Proximo(aSqlSer);
+
+            Fim;
+
+      SQL_FecharCursor(aSqlSer);
+      SQL_Destruir(aSqlSer);
+
+   Fim;
+
+Funcao BuscarDadosItensPedN(); @-- Rever --@
+   Inicio
+
+      aSqlComS = "SELECT i.usu_seqisp, s.codser, " + 
+                       " CONCAT('QTD.:', REPLACE(FORMAT(i.usu_qtdser, '0.##0###'),'.', ','), ' VLR. UNI.:', REPLACE(FORMAT(i.usu_preuni, '0.##0###'),'.', ','), " +
+                             " ' VLR. TOT.:', REPLACE(FORMAT(i.usu_vlrtot, '0.##0###'),'.', ','), ' - ', i.usu_codrel, ' - ', s.cplcvs)cplcvs, " +
+                       " s.unimed, s.qtdcvs, s.obscvs, s.vlrfat, s.vlrtot, i.usu_codccu FROM e160cvs s " +
+                  " JOIN e080ser a ON a.codemp = s.codemp AND a.codser = s.codser " +
+                  " JOIN usu_timpctr i ON i.usu_codser = a.codser AND i.usu_numped = 0 AND i.usu_stareg = 'N' AND i.usu_numctr = s.numctr AND i.usu_seqcvs = s.seqcvs " +
+                 " WHERE s.codemp = " + aCodEmp + " AND s.codfil = " + aCodFil + " AND s.numctr = " + aNumCtr + " AND a.serimp = '" + aSerImp + "' AND s.qtdcvs <> 0 " +
+                 " AND i.usu_stareg = 'N' ORDER BY i.usu_seqisp";
+
+      SQL_Criar(aSqlSer);
+      SQL_UsarSqlSenior2(aSqlSer, 0);
+      SQL_UsarAbrangencia(aSqlSer, 0);
+      SQL_DefinirComando(aSqlSer, aSqlComS);
+      SQL_AbrirCursor(aSqlSer);
+
+         Enquanto(SQL_EOF(aSqlSer) = 0)
+            Inicio
+
+               SQL_RetornarInteiro(aSqlSer, "usu_seqisp", nSeqIsp);
+                  IntParaAlfa(nSeqIsp, aSeqIsp);
+               SQL_RetornarAlfa(aSqlSer, "codser", aCodSer);
+               SQL_RetornarAlfa(aSqlSer, "cplcvs", aCplSer);
+               SQL_RetornarAlfa(aSqlSer, "unimed", aUniMed);
+               SQL_RetornarAlfa(aSqlSer, "qtdcvs", aQtdCvs);
+               AlfaParaDecimal(aQtdCvs, nQtdCvs);
+               LimpaEspacos(aQtdCvs);
+               SQL_RetornarAlfa(aSqlSer, "obscvs", aObsCvs);
+               SQL_RetornarFlutuante(aSqlSer, "vlrfat", nVlrFat);
+               ConverteMascara(2,nVlrFat,aVlrFat,"ZZZZZZZZ9,999999");
+               LimpaEspacos(aVlrFat);
+               SQL_RetornarAlfa(aSqlSer, "vlrtot", aVlrTot);
+               SQL_RetornarAlfa(aSqlSer, "usu_codccu", aCodCcu);
+
+               WSPedido.pedido.servico.CriarLinha();
+               WSPedido.pedido.servico.opeExe = "I";
+               WSPedido.pedido.servico.seqIsp = nSeqIsp;
+               WSPedido.pedido.servico.codSer = aCodSer;
+               WSPedido.pedido.servico.cplIsp = aCplSer;
+               WSPedido.pedido.servico.qtdPed = aQtdCvs;
+               WSPedido.pedido.servico.uniMed = aUniMed;
+               WSPedido.pedido.servico.preUni = aVlrFat;
+               WSPedido.pedido.servico.codCcu = aCodCcu;
+               WSPedido.pedido.servico.usuario.CriarLinha();
+               WSPedido.pedido.servico.usuario.cmpUsu = "usu_id";	
+               WSPedido.pedido.servico.usuario.vlrUsu	= aId;
+
+               SQL_Proximo(aSqlSer);
+
+            Fim;
+            
+      SQL_FecharCursor(aSqlSer);
+      SQL_Destruir(aSqlSer);
+
+   Fim;
+
+Funcao GravaDadosCTR();
+   Inicio
+
+      xCommand = "INSERT INTO e160cvs (codemp, codfil, numctr, datcpt, seqcvs, codser, cplcvs, qtdctr, qtdcan, qtdcvs, unimed, codtpr, preuni, prepad, prerep, perdsc, periss, " + 
+                                    " perirf, perins, percom, filnfv, codsnf, numnfv, seqisv, sitcvs, codmot, obsmot, qtdbfp, datgar, numprj, codfpj, ctafin, ctared, codccu, " + 
+                                    " datini, obscvs, tnsser, codclf, codstr, peripi, pericm, codmoe, datmoe, cotmoe, qtdfat, inivig, fimvig, prorat, codpro, codder, vlrdsc, " + 
+                                    " perpit, percsl, percrt, perour, fimvgo, seqcsg, codtrd, codtic, codtst, prdrea, inirea, ultrea, perrea, prdrre, inirre, ultrre, perrre, " + 
+                                    " prdrpa, inirpa, ultrpa, perrpa, datuft, propar, proreq, cptreq, traqtd, trafat, tramed, trapro, qtdmin, qtdmax, vlrfat, vlrtot, varser, " + 
+                                    " perdif, alifus, alifnt, idenbs, usu_id) " +
+                           " VALUES (" + aCodEmp + ", " + aCodFil + ", " + aNumCtr + ", " + aDatCpt + ", " + aSeqCvs + ", '" + aCodSer + "', '" + aCplCvs + "', NULL, NULL, " + aQtdCvs + 
+                                   ", '" + aUniMed + "', ' ', " + aVlrFat + ", " + aVlrFat + ", 0, 0, 0, 0, 0, 0, 0, ' ', 0, 0, 'A', 0, ' ', 0, TRY_CONVERT(DATE, '12/31/1900', 103), 0, 0, 0, 0, ' ', GETDATE(), '" + aObsCvs + 
+                                   "', '" + aTnsSer + "', '" + aCodCpg + "', '" + aCodStr + "', 0, 0, '01', TRY_CONVERT(DATE, '12/31/1900', 103), 0, " + aQtdCvs + ", TRY_CONVERT(DATE, '12/31/1900', 103), TRY_CONVERT(DATE, '12/31/1900', 103), 'N', " +
+                                   "' ', ' ', 0, 0, 0, 0, 0, NULL, NULL, ' ', ' ', ' ', 0, TRY_CONVERT(DATE, '12/31/1900', 103), TRY_CONVERT(DATE, '12/31/1900', 103), NULL, " + 
+                                   " 0, TRY_CONVERT(DATE, '12/31/1900', 103), TRY_CONVERT(DATE, '12/31/1900', 103), NULL, 0, TRY_CONVERT(DATE, '12/31/1900', 103), TRY_CONVERT(DATE, '12/31/1900', 103), NULL, TRY_CONVERT(DATE, '12/31/1900', 103), " + 
+                                   " 0, NULL, NULL, 0, 0, ' ', ' ', 0, 0, " + aVlrFat + ", " + aVlrTot + ", NULL, 0, 0, 0, NULL, '" + aId + "')";
+
+      GravaCommandBanco();    
+
+   Fim;
+
+Funcao ChamaWSParaGravacao();
+   Inicio
+      
+      WSPedido.ModoExecucao = 1;
+      WSPedido.Executar();
+
+      aTipRet = WSPedido.tipoRetorno;		@-- Obrigatório	Integer	Tipo do Retorno (0 = Erro, 1 = Aviso, 2 = Sucesso) --@
+      aMsgRet = WSPedido.mensagemRetorno;		@-- Obrigatório	String	Mensagem do Retorno --@
+      nNumPedRet = WSPedido.respostaPedido.numPed;		@-- Obrigatório	Integer	Número do Pedido --@
+      IntParaAlfa(nNumPedRet, aNumPedRet);
+      aSitPed = WSPedido.respostaPedido.sitPed;       @-- Obrigatório	String	Situação do Pedido (A = Aberto, F = Faturado, C = Cancelado) --@
+      nTipRetPed = WSPedido.respostaPedido.tipRet;       @-- Obrigatório	Integer	Tipo de retorno. Valores: 1 - Processado com sucess; 2 - Ocorreram Erros. --@
+      aRetPed = WSPedido.respostaPedido.retorno;      @-- Obrigatório	String	 Retorno do processamento. --@
+      aRetPar = WSPedido.respostaPedido.gridPar.retorno;      @-- Obrigatório	String	(Obrigatório) - Number(100) - Retorno do processamento. --@
+      aRetObs = WSPedido.respostaPedido.gridObs.retorno;      @-- Obrigatório	String	(Obrigatório) - Number(100) - Retorno do processamento. --@
+      aErro = WSPedido.erroExecucao;      @-- Obrigatório	String	Erro na execução do serviço. --@
+      
+
+      SE (nTipRetPed = 1)
+         {
+            
+            xQtd = WSPedido.respostaPedido.gridSer.QtdLinhas;
+
+            Para(nLin=0;nLin<xQtd;nLin++)
+               Inicio
+
+                  WSPedido.respostaPedido.gridSer.LinhaAtual = nLin;
+                  aCodEmpSer = WSPedido.respostaPedido.gridSer.codEmp;	@-- String	(Obrigatório) - Number(004) - Código da empresa --@
+                  aCodFilSer = WSPedido.respostaPedido.gridSer.codFil;	@-- String	(Obrigatório) - Number(005) - Código da filial --@
+                  aSeqIspSer = WSPedido.respostaPedido.gridSer.seqIsp;	@-- String	(Opcional) - Number(003) - Sequência do item de serviço no pedido (usado para indicar para qual item de serviço o item do pedido pertence) --@
+                  aSitIspSer = WSPedido.respostaPedido.gridSer.sitIsp;	@-- String	(Obrigatório) - Number(001) Situação do item de serviço do pedido --@
+                  aRetornoSer = WSPedido.respostaPedido.gridSer.retorno;	@-- String	(Obrigatório) - Number(100) - Retorno do processamento. --@
+
+                  aMsg = "Itens do Pedido inseridos com sucesso!! ";
+                  xCommandLog = "UPDATE usu_timpctr SET usu_numped = " + aNumPedRet + ",usu_stareg = 'S', usu_logimp = '" + aMsg + "' WHERE usu_numctr = " + aNumCtr + " AND usu_numped = 0 AND usu_seqisp = " + aSeqIspSer;
+                  GravaLog();
+
+               Fim;
+
+         } SENAO {
+
+            xQtd = WSPedido.respostaPedido.gridSer.QtdLinhas;
+
+            Para(nLin=0;nLin<xQtd;nLin++)
+               Inicio
+
+                  WSPedido.respostaPedido.gridSer.LinhaAtual = nLin;
+                  aCodEmpSer = WSPedido.respostaPedido.gridSer.codEmp;	@-- String	(Obrigatório) - Number(004) - Código da empresa --@
+                  aCodFilSer = WSPedido.respostaPedido.gridSer.codFil;	@-- String	(Obrigatório) - Number(005) - Código da filial --@
+                  aSeqIspSer = WSPedido.respostaPedido.gridSer.seqIsp;	@-- String	(Opcional) - Number(003) - Sequência do item de serviço no pedido (usado para indicar para qual item de serviço o item do pedido pertence) --@
+                  aSitIspSer = WSPedido.respostaPedido.gridSer.sitIsp;	@-- String	(Obrigatório) - Number(001) Situação do item de serviço do pedido --@
+                  aRetornoSer = WSPedido.respostaPedido.gridSer.retorno;	@-- String	(Obrigatório) - Number(100) - Retorno do processamento. --@
+
+                  aMsg = "Erro ao gravar Pedido: " + aRetPed + " - " + aRetornoSer;
+                  xCommandLog = "UPDATE usu_timpctr SET usu_stareg = 'E', usu_logimp = '" + aMsg + "' WHERE usu_numctr = " + aNumCtr + " AND usu_seqcvs = " + aSeqIspSer;
+                  GravaLog();
+
+               Fim;           
+            }
+
+
+   Fim;
+
+Funcao GravaCommandBanco(); @-- Grava comandos no banco --@
+   Inicio
+       
+       ExecSQLEx (xCommand, xErro, xMensagem); 
+           Se (xErro = 0) {
+               aMsg = "Itens do contrato inseridos com sucesso!! ";
+               xCommandLog = "UPDATE usu_timpctr SET usu_numctr = " + aNumCtr + ", usu_seqcvs = " + aSeqCvs + ", usu_seqisp = " + aSeqIsp + ", usu_logimp = '" + aMsg + "' WHERE usu_id = '" + aId + "'";
+               GravaLog();
+
+           } Senao {
+               aMsg = "Erro ao gravar dados no banco: " + xMensagem;
+               xCommandLog = "UPDATE usu_timpctr SET usu_stareg = 'E', usu_logimp = '" + aMsg + "' WHERE usu_id = '" + aId + "'";
+               GravaLog();
+           }
+   
+   Fim;
+
+Funcao GravaLog(); @-- Grava comandos no banco --@
+   Inicio
+       
+       ExecSQLEx (xCommandLog, xErro, xMensagem); 
+           Se (xErro = 0) {
+
+           } Senao {
+               aMsg = "Erro ao gravar log: " + xMensagem;
+               mensagem(erro, aMsg);
+           }
+   
+   Fim;

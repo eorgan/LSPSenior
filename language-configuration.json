@@ -1,0 +1,121 @@
+{
+   "comments": {
+      "lineComment": "@--",
+      "blockComment": [
+         "/*",
+         "*/"
+      ]
+   },
+   "brackets": [
+      [
+         "{",
+         "}"
+      ],
+      [
+         "[",
+         "]"
+      ],
+      [
+         "(",
+         ")"
+      ],
+      [
+         "Inicio",
+         "Fim"
+      ],
+      [
+         "Se",
+         "Fim"
+      ],
+      [
+         "Enquanto",
+         "Fim"
+      ],
+      [
+         "Para",
+         "Fim"
+      ],
+      [
+         "Funcao",
+         "Fim"
+      ]
+   ],
+   "autoClosingPairs": [
+      {
+         "open": "{",
+         "close": "}"
+      },
+      {
+         "open": "[",
+         "close": "]"
+      },
+      {
+         "open": "(",
+         "close": ")"
+      },
+      {
+         "open": "\"",
+         "close": "\"",
+         "notIn": [
+            "string"
+         ]
+      },
+      {
+         "open": "'",
+         "close": "'",
+         "notIn": [
+            "string",
+            "comment"
+         ]
+      },
+      {
+         "open": "Inicio",
+         "close": "Fim;"
+      },
+      {
+         "open": "Se(",
+         "close": ")"
+      },
+      {
+         "open": "Enquanto(",
+         "close": ")"
+      },
+      {
+         "open": "Para(",
+         "close": ")"
+      }
+   ],
+   "surroundingPairs": [
+      [
+         "{",
+         "}"
+      ],
+      [
+         "[",
+         "]"
+      ],
+      [
+         "(",
+         ")"
+      ],
+      [
+         "\"",
+         "\""
+      ],
+      [
+         "'",
+         "'"
+      ]
+   ],
+   "folding": {
+      "markers": {
+         "start": "^\\s*@--.*--@|Inicio|Se\\(|Enquanto\\(|Para\\(|Funcao",
+         "end": "Fim;?"
+      }
+   },
+   "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+   "indentationRules": {
+      "increaseIndentPattern": "^.*\\b(Inicio|Se\\(|Senao|Senao\\s+Se\\(|Enquanto\\(|Para\\(|Funcao)\\b.*$",
+      "decreaseIndentPattern": "^\\s*\\b(Fim;?|Senao|Senao\\s+Se\\()\\b.*$"
+   }
+}
