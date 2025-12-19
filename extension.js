@@ -31,28 +31,54 @@ function activate(context) {
       'lspt',
       {
          provideCompletionItems(document, position) {
-            const linePrefix = document.lineAt(position).text.substr(0, position.character);
+            const linePrefix = document.lineAt(position).text.substring(0, position.character);
 
-            // Verifica se o usuário digitou "Dev."
-            if (!linePrefix.endsWith('Dev.')) {
+            // Verifica se o usuário digitou "Dev." ou "dev." (case-insensitive)
+            const lowerPrefix = linePrefix.toLowerCase();
+            if (!lowerPrefix.endsWith('dev.')) {
                return undefined;
             }
 
             // Retorna todas as funções como sugestões
             const completions = Object.keys(FUNCTIONS_DATA).map(funcName => {
                const funcData = FUNCTIONS_DATA[funcName];
+
+               // Validação de dados
+               if (!funcData) {
+                  console.warn(`Dados inválidos para função: ${funcName}`);
+                  return null;
+               }
+
                const item = new vscode.CompletionItem(funcName, vscode.CompletionItemKind.Function);
 
                // Detalhes mostrados no autocomplete
-               item.detail = funcData.signature;
-               item.documentation = new vscode.MarkdownString(funcData.description);
+               item.detail = funcData.signature || funcName;
+               item.documentation = new vscode.MarkdownString(funcData.description || '');
 
-               // O que será inserido ao selecionar
-               const paramsStr = funcData.params.map(p => `${p.type} ${p.name}`).join(', ');
-               item.insertText = new vscode.SnippetString(`${funcName}(${paramsStr});`);
+               // Cria a assinatura completa com parâmetros usando snippets
+               // Exemplo: AnoBissexto(Data aDataIni, Numero end aBissexto);
+               if (funcData.params && funcData.params.length > 0) {
+                  // Cria snippets com placeholders para cada parâmetro
+                  const paramsSnippet = funcData.params.map((p, index) => {
+                     return `\${${index + 1}:${p.type} ${p.name}}`;
+                  }).join(', ');
+
+                  item.insertText = new vscode.SnippetString(`${funcName}(${paramsSnippet});`);
+               } else {
+                  // Função sem parâmetros
+                  item.insertText = new vscode.SnippetString(`${funcName}();`);
+               }
+
+               // Remove o "Dev." ou "dev." do texto
+               item.additionalTextEdits = [
+                  vscode.TextEdit.delete(new vscode.Range(
+                     position.translate(0, -4),
+                     position
+                  ))
+               ];
 
                return item;
-            });
+            }).filter(item => item !== null);
 
             return completions;
          }

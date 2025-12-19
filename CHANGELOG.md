@@ -5,6 +5,38 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.4.3] - 2025-12-19
+
+### ✨ Melhorado
+- **Autocomplete case-insensitive**: Agora aceita tanto `Dev.` quanto `dev.` (maiúsculo ou minúsculo)
+- **Assinatura completa**: Ao selecionar uma função, insere a assinatura completa com parâmetros
+  - Exemplo: `AnoBissexto(Data aDataIni, Numero end aBissexto);`
+- **Snippets navegáveis**: Use `Tab` para navegar entre os parâmetros após inserir a função
+- **Remoção automática do trigger**: O prefixo `dev.` ou `Dev.` é removido automaticamente ao inserir a função
+
+### 🎯 Experiência do Usuário
+- Digite `dev.` → Lista de funções aparece
+- Selecione a função → Assinatura completa é inserida
+- Use `Tab` → Navegue entre os parâmetros
+- O `dev.` é removido automaticamente
+
+## [1.4.2] - 2025-12-19
+
+### 🐛 Corrigido
+- **BUG CRÍTICO**: Substituído método obsoleto `substr()` por `substring()` que causava travamento da aplicação
+- **Autocomplete melhorado**: `insertText` agora insere apenas o nome da função (ao invés de toda a assinatura), permitindo que o usuário digite os parâmetros manualmente
+- Adicionada validação de dados em `FUNCTIONS_DATA` para prevenir erros com funções malformadas
+- Filtro de itens `null` na lista de autocomplete para melhor estabilidade
+
+### ⚡ Melhorado
+- Performance do Completion Provider otimizada
+- Melhor experiência de autocomplete ao digitar `Dev.`
+- Mensagens de erro mais informativas no console
+
+### 📝 Notas
+- Esta versão resolve problemas relatados de travamento e autocomplete não funcionando
+- O autocomplete agora é mais leve e responsivo
+
 ## [1.4.1] - 2025-12-19
 
 ### 📖 Melhorado

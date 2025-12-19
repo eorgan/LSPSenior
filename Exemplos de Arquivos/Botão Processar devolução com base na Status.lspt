@@ -109,8 +109,8 @@
    AtualizarTabela("usu_tmpdevg");
    AtualizarTabela("usu_tmpdevi");
 
-
 @-- Fim da Regra --@
+
 
 @-- Função para selecionar os dados da devolução --@
 Funcao SelecionaDados();
