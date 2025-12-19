@@ -7,6 +7,37 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+
+## [1.5.2] - 2025-12-19
+
+### 🛡️ Segurança e Qualidade de Código
+
+#### Melhorias Implementadas
+- **Output Channel estruturado** substituindo console.log
+  - Logs organizados e acessíveis via painel "Output"
+  - Informações de inicialização e debug profissionais
+- **Try-catch em todos os providers** para maior robustez
+  - CompletionProvider com tratamento de erro
+  - SignatureHelpProvider com tratamento de erro
+  - HoverProvider com tratamento de erro
+  - DefinitionProvider com tratamento de erro
+- **Validação defensiva de parâmetros**
+  - Verificação `Array.isArray()` antes de `forEach()`
+  - Proteção contra `params` undefined ou null
+  - Previne crashes em dados inconsistentes
+
+#### Benefícios
+- ✅ Maior estabilidade - Extensão não trava mais em casos extremos
+- ✅ Melhor debugging - Logs estruturados no Output Channel
+- ✅ Código profissional - Segue melhores práticas do VS Code
+- ✅ Zero vulnerabilidades críticas identificadas na auditoria
+
+### 📊 Auditoria de Segurança
+- Análise completa de segurança realizada
+- Nota de segurança: ⭐⭐⭐⭐☆ (4/5)
+- Sem problemas críticos encontrados
+- Todas as recomendações de alta prioridade implementadas
+
 ## [1.5.1] - 2025-12-19
 
 ### ✨ Adicionado
