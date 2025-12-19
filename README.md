@@ -1,205 +1,374 @@
-# LSPT Language Support
+# LSPT Language Support - Guia do Usuário
 
-![Version](https://img.shields.io/badge/version-1.3.2-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+> Extensão completa para desenvolvimento em **LSP** (Linguagem Senior de Programação) com IntelliSense, syntax highlighting e autocomplete para **369+ funções built-in**.
 
-Extensão completa para suporte à **Linguagem Senior de Programação (LSPT)** no VS Code e editores compatíveis.
+## 🚀 Instalação Rápida
 
-> **Versão 1.3.0**: 🎨 Paleta de cores redesenhada para **conforto visual**!  
-> 🟢 Comentários em **verde** para melhor legibilidade  
-> 👁️ Otimizado para **reduzir fadiga ocular** em temas escuros  
-> Baseado na [documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/)! 🎉
-
-
-
-
-## 📋 Características
-
-- ✨ **Syntax Highlighting** completo
-- 🚀 **Snippets** para estruturas comuns
-- 🔧 **Auto-completion** inteligente
-- 📦 **Bracket Matching** e indentação automática
-- 💡 **Code Folding** para blocos de código
-- 📝 **Comentários** com suporte a anotações (@Author, @Date, etc.)
-
-## 🎯 Funcionalidades
-
-### Syntax Highlighting
-
-A extensão reconhece e destaca:
-
-- **Palavras-chave**: `Se`, `Senao`, `Enquanto`, `Para`, `Inicio`, `Fim`, `Funcao`, `Definir`
-- **Tipos de dados**: `Alfa`, `Numero`, `Data`, `Decimal`, `Flutuante`
-- **Funções SQL**: `SQL_Criar`, `SQL_AbrirCursor`, `SQL_RetornarAlfa`, etc.
-- **Funções nativas**: `Mensagem`, `IntParaAlfa`, `ConverteMascara`, `HttpPost`, etc.
-- **WebServices**: `interno.com.senior.g5.*`
-- **Comentários**: `@-- --@`, `@ @`, `/* */`
-- **Strings e números**
-- **Operadores**: `=`, `<>`, `>`, `<`, `E`, `OU`, `NAO`
-
-### Snippets Disponíveis
-
-| Prefixo | Descrição |
-|---------|-----------|
-| `lspt-header` | Cabeçalho padrão com anotações |
-| `funcao` | Estrutura completa de função |
-| `funcao-params` | Função com parâmetros (entrada/saída) |
-| `def-funcao` | Declaração de função |
-| `def-alfa` | Definir variável Alfa |
-| `def-numero` | Definir variável Numero |
-| `def-data` | Definir variável Data |
-| `se` | Estrutura condicional Se |
-| `se-senao` | Estrutura Se/Senao |
-| `se-senao-se` | Estrutura Se/Senao Se/Senao |
-| `enquanto` | Loop Enquanto |
-| `para` | Loop Para |
-| `continue` | Continue (pular iteração do loop) |
-| `cancel` | Cancel (cancelar execução) |
-| `cursor1` | Cursor Tipo 1 (antigo) |
-| `cursor2` | Cursor Tipo 2 (recomendado) |
-| `cursor2-enquanto` | Cursor com loop |
-| `msg-ret` | Mensagem de retorno |
-| `msg-erro` | Mensagem de erro |
-| `execsql` | ExecSQL com tratamento de erro |
-| `def-ws` | Definir WebService |
-| `http-post` | Requisição HTTP POST |
-| `abrir-arquivo` | Abrir arquivo (Ler/Gravar) |
-| `ler-linha` | Ler linhas de arquivo |
-| `atualizar-campos` | Atualizar campos da tela |
-
-## 📦 Instalação
-
-### Via Open VSX Registry
-
+### Método 1: Via VSIX (Recomendado)
 ```bash
-# Buscar a extensão
-code --install-extension eliezer-organ.lspt-language-support
+code --install-extension lspt-language-support-1.4.0.vsix
 ```
 
-### Instalação Manual
-
-1. Baixe o arquivo `.vsix` da release
-2. Abra o VS Code
-3. Vá em **Extensions** → **...** → **Install from VSIX...**
-4. Selecione o arquivo baixado
-
-## 🚀 Uso
-
-1. Crie ou abra um arquivo com extensão `.lspt` ou `.lsp`
-2. A extensão será ativada automaticamente
-3. Comece a usar os snippets digitando o prefixo e pressionando `Tab`
-
-### Exemplo
-
-Digite `lspt-header` e pressione `Tab` para criar um cabeçalho:
-
-```lspt
-@-- Título do arquivo --@
-
-/*
- * @Author: Seu Nome
- * @Email: seu@email.com
- * @Date: 2025-12-09 09:00:00
- * @Last Modified by: Seu Nome
- * @Last Modified time: 2025-12-09 09:00:00
- * @Description: Descrição
- */
+### Método 2: Compilar do Código Fonte
+```bash
+git clone https://github.com/eliezer-organ/LSPSenior.git
+cd LSPSenior
+npm run package
+code --install-extension lspt-language-support-1.4.0.vsix
 ```
-
-## 📚 Documentação LSPT
-
-### Links Úteis
-
-- [Sintaxe de Comandos e Operadores](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/sintaxe-de-comandos-e-operadores.htm)
-- [Funções Gerais](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais.html)
-- [Índice das Funções de Programador](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/#regra_funcoes/indice_funcoes.htm)
-
-### Convenções de Nomenclatura
-
-- **Variáveis Alfa**: prefixo `a` (ex: `aNomeCliente`)
-- **Variáveis Numero**: prefixo `n` (ex: `nCodigo`)
-- **Variáveis Data**: prefixo `d` (ex: `dDataEmissao`)
-- **Variáveis Decimal/Flutuante**: prefixo `r` ou `n` (ex: `rValor`)
-
-### Estruturas de Controle
-
-```lspt
-@-- Se com chaves --@
-Se(condicao)
-   {
-      // código
-   }
-
-@-- Se com Inicio/Fim --@
-Se(condicao)
-   Inicio
-      // código
-   Fim;
-
-@-- Enquanto --@
-Enquanto(condicao)
-   {
-      // código
-   }
-
-@-- Para --@
-Para(i=0;i<10;i++)
-   {
-      // código
-   }
-```
-
-### Cursores SQL
-
-```lspt
-@-- Cursor Tipo 2 (recomendado) --@
-Definir Alfa aSqlCom;
-Definir Alfa aSqlInt;
-
-aSqlCom = "SELECT campo FROM  tabela WHERE condicao";
-
-SQL_Criar(aSqlInt);
-SQL_UsarSqlSenior2(aSqlInt, 0);
-SQL_UsarAbrangencia(aSqlInt, 0);
-SQL_DefinirComando(aSqlInt, aSqlCom);
-SQL_AbrirCursor(aSqlInt);
-Se(SQL_EOF(aSqlInt) = 0)
-   {
-      SQL_RetornarAlfa(aSqlInt, "campo", aVariavel);
-   }
-SQL_FecharCursor(aSqlInt);
-SQL_Destruir(aSqlInt);
-```
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Para contribuir:
-
-1. Fork o repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
-
-## 📝 Changelog
-
-Veja [CHANGELOG.md](CHANGELOG.md) para detalhes das mudanças.
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 👤 Autor
-
-**Eliezer Organ**
-- Email: eorgan@organ.eti.br
-- GitHub: [@eliezer-organ](https://github.com/eliezer-organ)
-
-## 🙏 Agradecimentos
-
-- Senior Sistemas pela plataforma G5
-- Comunidade de desenvolvedores LSPT
 
 ---
 
-**Nota**: Esta extensão é compatível com Open VSX Registry e pode ser usada em VS Code, VSCodium, Eclipse Theia, Gitpod e outros editores compatíveis.
+## ✨ Funcionalidades
+
+### 🔍 1. Autocomplete de Funções Built-in
+
+Digite `Dev.` e veja **todas as 369 funções** disponíveis:
+
+```lspt
+Dev.
+```
+
+**O que acontece:**
+- Lista de autocomplete aparece automaticamente
+- Busque a função digitando o nome (ex: `InserirStr`)
+- Selecione com ↑↓ e pressione Enter
+- A assinatura completa é inserida: `InserirStr(Alfa Valor, Alfa End Origem, Numero Pos);`
+
+**Exemplo prático:**
+```lspt
+Funcao ProcessarTexto();
+   Inicio
+      Definir Alfa aTexto;
+      Definir Alfa aResultado;
+      Definir Numero nPosicao;
+      
+      aTexto = "Exemplo";
+      nPosicao = 5;
+      
+      Dev.  → Aparece lista de funções
+      InserirStr(Alfa Valor, Alfa End Origem, Numero Pos);  → Assinatura inserida
+   Fim;
+```
+
+---
+
+### 📝 2. Signature Help (Ajuda de Parâmetros)
+
+Ao digitar `(` após uma função, veja os **parâmetros em tempo real**:
+
+```lspt
+InserirStr(
+```
+
+**O que aparece:**
+```
+InserirStr(Alfa Valor, Alfa End Origem, Numero Pos)
+           ─────────────
+           ↑ Parâmetro atual destacado
+```
+
+**Navegação:**
+- Digite o primeiro parâmetro: `"texto", `
+- Vírgula move para o próximo parâmetro
+- O parâmetro atual é sempre destacado
+
+**Exemplo completo:**
+```lspt
+Definir Alfa aOrigem;
+Definir Numero nPos;
+
+aOrigem = "Olá Mundo";
+nPos = 5;
+
+InserirStr("NOVO", aOrigem, nPos);
+          ↑       ↑        ↑
+        param1  param2   param3
+```
+
+---
+
+### 💡 3. Hover Documentation (Documentação ao Passar Mouse)
+
+Passe o mouse sobre qualquer função para ver:
+- ✅ Assinatura completa
+- ✅ Código da função
+- ✅ Descrição
+- ✅ Lista de parâmetros com tipos
+
+**Exemplo:**
+```lspt
+InserirStr(...)  ← Passe o mouse aqui
+```
+
+**O que aparece:**
+```markdown
+InserirStr
+──────────
+Funcao InserirStr(Alfa Valor, Alfa End Origem, Numero Pos);
+
+Código: 11
+
+Função built-in: InserirStr
+
+Parâmetros:
+• Valor (Alfa) - Entrada
+• Origem (Alfa End) - Saída  
+• Pos (Numero) - Entrada
+```
+
+---
+
+### 🔗 4. Go to Definition (Ir para Documentação)
+
+**Command+Click** (Mac) ou **Ctrl+Click** (Windows/Linux) em qualquer função abre a documentação completa:
+
+```lspt
+InserirStr(...)  ← Command+Click aqui
+```
+
+**Abre:** `docs/functions/InserirStr.md` com:
+- Assinatura
+- Descrição detalhada
+- Exemplos de uso
+- Notas importantes
+- Funções relacionadas
+
+---
+
+## 📚 Lista de Funções Disponíveis
+
+### Manipulação de Strings
+- `InserirStr` - Insere string em posição específica
+- `DeletarStr` - Remove caracteres de uma string
+- `CopiarStr` - Copia parte de uma string
+- `TamanhoStr` - Retorna tamanho da string
+- `PosicaoStr` - Encontra posição de substring
+- `Concatena` - Concatena múltiplas strings
+- `LimpaEspacos` - Remove espaços em branco
+
+### Conversão de Dados
+- `IntParaStr` - Converte número para string
+- `StrParaInt` - Converte string para número
+- `AlfaParaData` - Converte string para data
+- `DecimalParaAlfa` - Converte decimal para string
+- `ConverteDataToDB` - Converte data para formato banco
+
+### Manipulação de Datas
+- `MontaData` - Cria data a partir de dia/mês/ano
+- `DesMontaData` - Extrai dia/mês/ano de data
+- `ExtensoMes` - Nome do mês por extenso
+- `ExtensoSemana` - Nome do dia da semana
+- `DataExtenso` - Data completa por extenso
+- `UltimoDia` - Último dia do mês
+
+### Valores Numéricos
+- `ArredondarValor` - Arredonda com precisão
+- `TruncarValor` - Trunca valor
+- `Potencia` - Calcula potência
+- `Raiz` - Calcula raiz
+- `Multiplo` - Verifica se é múltiplo
+
+### SQL e Cursores
+- `SQL_Criar` - Cria cursor SQL
+- `SQL_AbrirCursor` - Abre cursor
+- `SQL_Proximo` - Move para próximo registro
+- `SQL_EOF` - Verifica fim do cursor
+- `SQL_FecharCursor` - Fecha cursor
+- `SQL_RetornarAlfa` - Retorna valor alfa
+- `SQL_RetornarNumero` - Retorna valor numérico
+
+### Arquivos e I/O
+- `Abrir` - Abre arquivo
+- `Fechar` - Fecha arquivo
+- `LerNL` - Lê linha de arquivo
+- `Gravar` - Grava em arquivo
+- `CarregarTextoArq` - Carrega texto completo
+
+### Sistema e Utilitários
+- `Mensagem` - Exibe mensagem ao usuário
+- `ExecutaRelatorio` - Executa relatório
+- `AbrirTelaSistema` - Abre tela do sistema
+- `Sleep` - Pausa execução
+- `GeraLog` - Gera log de debug
+
+**🔍 Veja a lista completa:** Digite `Dev.` no VS Code!
+
+---
+
+## 🎯 Exemplos Práticos
+
+### Exemplo 1: Manipular String
+```lspt
+Funcao ExemploString();
+   Inicio
+      Definir Alfa aTexto;
+      Definir Alfa aResultado;
+      Definir Numero nTamanho;
+      
+      aTexto = "Hello World";
+      
+      @-- Obter tamanho
+      TamanhoStr(aTexto, nTamanho);
+      
+      @-- Inserir texto
+      InserirStr(" Beautiful", aTexto, 6);
+      @-- Resultado: "Hello Beautiful World"
+      
+      @-- Copiar parte
+      CopiarStr(aResultado, 1, 5);
+      @-- Resultado: "Hello"
+   Fim;
+```
+
+### Exemplo 2: Trabalhar com Datas
+```lspt
+Funcao ExemploData();
+   Inicio
+      Definir Numero nData;
+      Definir Numero nDia;
+      Definir Numero nMes;
+      Definir Numero nAno;
+      Definir Alfa aDataExtenso;
+      
+      @-- Montar data
+      MontaData(19, 12, 2025, nData);
+      
+      @-- Desmontar data
+      DesMontaData(nData, nDia, nMes, nAno);
+      
+      @-- Extenso
+      DataExtenso(nData, aDataExtenso);
+      @-- Resultado: "19 de Dezembro de 2025"
+   Fim;
+```
+
+### Exemplo 3: Cursor SQL
+```lspt
+Funcao ExemploCursor();
+   Inicio
+      Definir Alfa aSqlInt;
+      Definir Alfa aSqlCom;
+      Definir Alfa aNomeCli;
+      Definir Numero nCodCli;
+      
+      aSqlCom = "SELECT CODCLI, NOMCLI FROM E070CLI WHERE CODCLI > 100";
+      
+      SQL_Criar(aSqlInt);
+      SQL_UsarSqlSenior2(aSqlInt, 0);
+      SQL_DefinirComando(aSqlInt, aSqlCom);
+      SQL_AbrirCursor(aSqlInt);
+      
+      Enquanto(SQL_EOF(aSqlInt) = 0)
+         {
+            SQL_RetornarAlfa(aSqlInt, "NOMCLI", aNomeCli);
+            SQL_RetornarNumero(aSqlInt, "CODCLI", nCodCli);
+            
+            Mensagem(Retorna, "Cliente: " + aNomeCli);
+            
+            SQL_Proximo(aSqlInt);
+         }
+      
+      SQL_FecharCursor(aSqlInt);
+      SQL_Destruir(aSqlInt);
+   Fim;
+```
+
+---
+
+## 📖 Documentação das Funções
+
+Todas as 369 funções têm documentação em `docs/functions/`:
+
+- **Assinatura completa** com tipos de parâmetros
+- **Código identificador** da função
+- **Descrição** (template para preencher)
+- **Parâmetros** detalhados (entrada/saída)
+- **Exemplos de uso** (template)
+- **Notas importantes**
+
+**Como contribuir:**
+1. Abra `docs/functions/NomeFuncao.md`
+2. Preencha a descrição e exemplos
+3. Envie um Pull Request!
+
+---
+
+## ⚙️ Configurações
+
+A extensão funciona automaticamente ao abrir arquivos `.lspt` ou `.lsp`. Não requer configuração adicional!
+
+### Desativar Autocomplete (opcional)
+```json
+// settings.json
+{
+  "lspt.enableIntelliSense": false
+}
+```
+
+---
+
+## 🐛 Solução de Problemas
+
+### Autocomplete não aparece?
+1. Verifique se o arquivo tem extensão `.lspt` ou `.lsp`
+2. Recarregue o VS Code: `Cmd+Shift+P` → "Reload Window"
+3. Verifique se a extensão está ativada: `Cmd+Shift+X` → pesquise "LSPT"
+
+### Função não encontrada na lista?
+- 369 de 530 funções do CSV foram processadas
+- Algumas funções têm formatação inconsistente no arquivo original
+- Você pode adicionar manualmente em `functions.json`
+
+### Documentação incompleta?
+- Templates foram gerados automaticamente
+- Você pode editar `docs/functions/NomeFuncao.md` para adicionar mais informações
+- Contribuições são bem-vindas!
+
+---
+
+## 🤝 Contribuindo
+
+### Adicionar Documentação de Função
+1. Abra `docs/functions/NomeFuncao.md`
+2. Preencha descrição e exemplos
+3. Commit e Pull Request
+
+### Reportar Bugs
+- [GitHub Issues](https://github.com/eliezer-organ/LSPSenior/issues)
+
+### Sugerir Funcionalidades
+- [GitHub Discussions](https://github.com/eliezer-organ/LSPSenior/discussions)
+
+---
+
+## 📝 Changelog
+
+Veja [CHANGELOG.md](CHANGELOG.md) para histórico completo de versões.
+
+### Versão 1.4.0 (Atual)
+- ✨ IntelliSense para 369+ funções built-in
+- 🔍 Autocomplete com `Dev.`
+- 📝 Signature Help
+- 💡 Hover Documentation
+- 🔗 Go to Definition
+
+---
+
+## 📄 Licença
+
+MIT © Eliezer Organ
+
+---
+
+## 🌟 Apoie o Projeto
+
+Se esta extensão te ajudou, considere:
+- ⭐ Dar uma estrela no [GitHub](https://github.com/eliezer-organ/LSPSenior)
+- 🐛 Reportar bugs e sugerir melhorias
+- 📖 Contribuir com documentação das funções
+- 📢 Compartilhar com outros desenvolvedores LSPT
+
+---
+
+**Desenvolvido com ❤️ para a comunidade Senior Sistemas**

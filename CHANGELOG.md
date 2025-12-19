@@ -5,6 +5,46 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.4.1] - 2025-12-19
+
+### 📖 Melhorado
+- **README.md completamente reescrito** com documentação amigável e exemplos práticos
+- **QUICKSTART.md adicionado** - Guia de início rápido em 30 segundos
+- Exemplos práticos de uso para todas as funcionalidades
+- Seção de troubleshooting expandida
+- Lista de funções categorizada por tipo (Strings, Datas, SQL, etc.)
+- 3 exemplos completos de código (Manipulação de Strings, Datas, Cursores SQL)
+
+### 🎯 Foco
+- Melhor experiência de onboarding para novos usuários
+- Documentação mais clara e objetiva
+- Exemplos visuais e práticos
+
+## [1.4.0] - 2025-12-19
+
+### ✨ Adicionado
+- **IntelliSense para Funções Built-in**: Sistema completo de autocomplete para 369+ funções nativas da linguagem LSPT
+- **Autocomplete ao digitar `Dev.`**: Lista todas as funções built-in disponíveis
+- **Signature Help**: Mostra parâmetros da função em tempo real ao digitar `(`
+- **Hover Documentation**: Exibe documentação ao passar o mouse sobre funções
+- **Go to Definition**: Command+Click abre documentação detalhada da função
+- **Sistema de Documentação**: Geração automática de templates de documentação em Markdown para todas as funções
+- **Script parser CSV**: Ferramenta para extrair e estruturar dados das funções do CSV
+
+### 📁 Arquivos Adicionados
+- `functions.json` - Dados estruturados das 369 funções built-in
+- `scripts/generate-functions.js` - Parser CSV para gerar dados das funções
+- `docs/functions/` - 369 arquivos Markdown com templates de documentação
+
+### 🔧 Alterado
+- `extension.js` completamente reescrito para implementar providers LSP
+- `package.json` atualizado para versão 1.4.0 com nova descrição
+
+### 📝 Notas
+- Algumas funções (161 de 530) do CSV original não foram processadas devido a formatação inconsistente
+- Documentação das funções está em formato template - pode ser preenchida gradualmente conforme necessidade
+- Sistema funciona mesmo sem documentação completa, mostrando pelo menos a assinatura da função
+
 ## [1.3.2] - 2025-12-09
 
 ### Adicionado
