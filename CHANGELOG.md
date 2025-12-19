@@ -5,6 +5,71 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+
+
+## [1.5.1] - 2025-12-19
+
+### ✨ Adicionado
+- **27 novos snippets** com prefixos curtos e intuitivos:
+  - `func`, `deffunc` - Declaração de funções
+  - `defalfa`, `defint`, `defdata` - Variáveis com prefixos curtos
+  - `if`, `ifelse` - Condicionais
+  - `while`, `for` - Loops
+  - `sql` - Template completo de consulta SQL
+  - `sqlalfa`, `sqlint`, `sqldate`, `sqlfloat` - Retorno de campos SQL
+  - `insert`, `update` - Comandos SQL DML
+  - `msg` - Mensagem com opções (dropdown)
+  - `defws`, `wsexec` - WebService Senior
+  - `inttoalfa`, `alfatodec`, `convmask` - Conversões
+  - `comment` - Comentário rápido
+  - `log` - Função de log padrão
+
+### 📖 Documentação
+- **README atualizado** com documentação completa dos 51 snippets
+- Novas seções organizadas:
+  - 🗄️ SQL Avançado (8 snippets)
+  - 🌐 WebService (2 snippets)
+  - 🔄 Conversões (3 snippets)
+  - 📊 Logging e Debug (1 snippet)
+- Prefixos alternativos claramente documentados
+- Dica de produtividade sobre prefixos curtos
+
+### 🎯 Melhorias de UX
+- **Prefixos mais curtos** para maior produtividade (`func` vs `funcao`)
+- **Dropdown de opções** no snippet `msg` (Retorna, Erro, Aviso)
+- **Template SQL completo** com todas as etapas (criar, configurar, usar, destruir)
+- **Total de 51 snippets** categorizados
+
+## [1.5.0] - 2025-12-19
+
+### ✨ Adicionado
+- **Novo snippet `header`**: Cabeçalho completo de arquivo com estrutura organizada
+  - Inclui metadados (Author, Email, Date, Last Modified, Description)
+  - Seções pré-definidas: Declaração WS, Declarar Funções, Declarar Variáveis, Início da Execução
+  - Data e hora preenchidas automaticamente com variáveis do VS Code
+  - Navegação por Tab entre campos editáveis
+
+### 📖 Documentação
+- **Documentação completa de snippets** adicionada ao README.md
+- Seção "Snippets Disponíveis" com todos os 24 snippets organizados por categoria:
+  - 📄 Estruturas de Arquivo (2 snippets)
+  - 🔧 Declarações e Funções (3 snippets)
+  - 📦 Declaração de Variáveis (4 snippets)
+  - 🔀 Estruturas Condicionais (4 snippets)
+  - 🔁 Estruturas de Repetição (3 snippets)
+  - 🗄️ SQL e Cursores (4 snippets)
+  - 📁 Arquivos (2 snippets)
+  - 💬 Mensagens e Comentários (4 snippets)
+  - 🌐 HTTP e Integrações (1 snippet)
+  - ⚙️ Utilidades (3 snippets)
+- Cada snippet documentado com prefixo e exemplo de código
+- Melhora significativa na experiência de onboarding para novos usuários
+
+### 🎯 Objetivos
+- Facilitar o desenvolvimento com templates prontos
+- Padronizar estrutura de arquivos LSPT
+- Melhorar produtividade dos desenvolvedores
+
 ## [1.4.3] - 2025-12-19
 
 ### ✨ Melhorado

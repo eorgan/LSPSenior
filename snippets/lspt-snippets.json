@@ -17,6 +17,34 @@
       ],
       "description": "Cabeçalho padrão para arquivos LSPT"
    },
+   "File Header": {
+      "prefix": "header",
+      "body": [
+         "@-- ${1:Título do Script} --@",
+         "",
+         "/*",
+         " * @Author: ${2:Seu Nome}",
+         " * @Email: ${3:seu.email@empresa.com.br}",
+         " * @Date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}",
+         " * @Last Modified by: ${2:Seu Nome}",
+         " * @Last Modified time: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}",
+         " * @Description: ${4:Descrição}",
+         " */",
+         "",
+         "@-- Declaração WS --@",
+         "   ${5:// Declarar Web Services}",
+         "",
+         "@-- Declarar Funções --@",
+         "   ${6:// Declarar funções}",
+         "",
+         "@-- Declarar Variaveis --@",
+         "   ${7:// Declarar variáveis}",
+         "",
+         "@-- Inicio da Execução --@",
+         "   $0"
+      ],
+      "description": "Cabeçalho completo de arquivo LSPT"
+   },
    "Definir Função": {
       "prefix": "def-funcao",
       "body": [
@@ -310,5 +338,232 @@
       "prefix": "atualizar-campos",
       "body": "AtualizarCampos();$0",
       "description": "Atualizar todos os campos da tela (AtualizarCampos/RefreshFields)"
+   },
+   "Function Declaration": {
+      "prefix": "func",
+      "body": [
+         "Funcao ${1:NomeDaFuncao}();",
+         "   Inicio",
+         "      $0",
+         "   Fim;"
+      ],
+      "description": "Declaração de função LSPT"
+   },
+   "Define Function": {
+      "prefix": "deffunc",
+      "body": [
+         "Definir Funcao ${1:NomeDaFuncao}();"
+      ],
+      "description": "Definir função"
+   },
+   "Variable Declaration - Alfa": {
+      "prefix": "defalfa",
+      "body": [
+         "Definir Alfa ${1:aNomeVariavel};"
+      ],
+      "description": "Declarar variável Alfa (string)"
+   },
+   "Variable Declaration - Inteiro": {
+      "prefix": "defint",
+      "body": [
+         "Definir Numero ${1:nNomeVariavel};"
+      ],
+      "description": "Declarar variável Numerica"
+   },
+   "Variable Declaration - Data": {
+      "prefix": "defdata",
+      "body": [
+         "Definir Data ${1:dNomeVariavel};"
+      ],
+      "description": "Declarar variável Data"
+   },
+   "If Statement": {
+      "prefix": "if",
+      "body": [
+         "Se(${1:condicao}) {",
+         "   $0",
+         "}"
+      ],
+      "description": "Estrutura condicional Se"
+   },
+   "If-Else Statement": {
+      "prefix": "ifelse",
+      "body": [
+         "Se(${1:condicao}) {",
+         "   ${2:// código se verdadeiro}",
+         "} Senao {",
+         "   ${3:// código se falso}",
+         "}"
+      ],
+      "description": "Estrutura condicional Se-Senao"
+   },
+   "While Loop": {
+      "prefix": "while",
+      "body": [
+         "Enquanto(${1:condicao})",
+         "   Inicio",
+         "      $0",
+         "   Fim;"
+      ],
+      "description": "Loop Enquanto"
+   },
+   "For Loop": {
+      "prefix": "for",
+      "body": [
+         "Para(${1:i}=${2:0};${1:i}<${3:10};${1:i}++)",
+         "   Inicio",
+         "      $0",
+         "   Fim;"
+      ],
+      "description": "Loop Para"
+   },
+   "SQL Query": {
+      "prefix": "sql",
+      "body": [
+         "${1:aSqlCom} = \"SELECT ${2:campos} FROM ${3:tabela} WHERE ${4:condicao}\";",
+         "",
+         "SQL_Criar(${5:aSql});",
+         "SQL_UsarSqlSenior2(${5:aSql}, 0);",
+         "SQL_UsarAbrangencia(${5:aSql}, 0);",
+         "SQL_DefinirComando(${5:aSql}, ${1:aSqlCom});",
+         "SQL_AbrirCursor(${5:aSql});",
+         "",
+         "Enquanto(SQL_EOF(${5:aSql}) = 0)",
+         "   Inicio",
+         "      $0",
+         "      SQL_Proximo(${5:aSql});",
+         "   Fim;",
+         "",
+         "SQL_FecharCursor(${5:aSql});",
+         "SQL_Destruir(${5:aSql});"
+      ],
+      "description": "Template completo de consulta SQL"
+   },
+   "SQL Return Alfa": {
+      "prefix": "sqlalfa",
+      "body": [
+         "SQL_RetornarAlfa(${1:aSql}, \"${2:campo}\", ${3:aVariavel});"
+      ],
+      "description": "Retornar campo Alfa de SQL"
+   },
+   "SQL Return Integer": {
+      "prefix": "sqlint",
+      "body": [
+         "SQL_RetornarInteiro(${1:aSql}, \"${2:campo}\", ${3:nVariavel});"
+      ],
+      "description": "Retornar campo Inteiro de SQL"
+   },
+   "SQL Return Date": {
+      "prefix": "sqldate",
+      "body": [
+         "SQL_RetornarData(${1:aSql}, \"${2:campo}\", ${3:dVariavel});"
+      ],
+      "description": "Retornar campo Data de SQL"
+   },
+   "SQL Return Float": {
+      "prefix": "sqlfloat",
+      "body": [
+         "SQL_RetornarFlutuante(${1:aSql}, \"${2:campo}\", ${3:fVariavel});"
+      ],
+      "description": "Retornar campo Flutuante de SQL"
+   },
+   "Execute SQL": {
+      "prefix": "execsql",
+      "body": [
+         "ExecSQLEx(${1:xCommand}, ${2:xErro}, ${3:xMensagem});",
+         "",
+         "Se(${2:xErro} = 0) {",
+         "   ${4:// Sucesso}",
+         "} Senao {",
+         "   ${5:// Erro}",
+         "}"
+      ],
+      "description": "Executar comando SQL com tratamento de erro"
+   },
+   "Insert SQL": {
+      "prefix": "insert",
+      "body": [
+         "${1:xCommand} = \"INSERT INTO ${2:tabela} (${3:campos}) VALUES (${4:valores})\";",
+         "ExecSQLEx(${1:xCommand}, xErro, xMensagem);"
+      ],
+      "description": "Comando INSERT SQL"
+   },
+   "Update SQL": {
+      "prefix": "update",
+      "body": [
+         "${1:xCommand} = \"UPDATE ${2:tabela} SET ${3:campo} = ${4:valor} WHERE ${5:condicao}\";",
+         "ExecSQLEx(${1:xCommand}, xErro, xMensagem);"
+      ],
+      "description": "Comando UPDATE SQL"
+   },
+   "Message": {
+      "prefix": "msg",
+      "body": [
+         "mensagem(${1|Retorna,Erro,Aviso|}, \"${2:mensagem}\");"
+      ],
+      "description": "Exibir mensagem"
+   },
+   "Web Service Declaration": {
+      "prefix": "defws",
+      "body": [
+         "Definir interno.com.senior.${1:modulo}.${2:NomeWS} ${3:WSNome};"
+      ],
+      "description": "Declarar Web Service"
+   },
+   "Web Service Execute": {
+      "prefix": "wsexec",
+      "body": [
+         "${1:WSPedido}.ModoExecucao = 1;",
+         "${1:WSPedido}.Executar();",
+         "",
+         "aTipRet = ${1:WSPedido}.tipoRetorno;",
+         "aMsgRet = ${1:WSPedido}.mensagemRetorno;"
+      ],
+      "description": "Executar Web Service"
+   },
+   "Convert Int to Alfa": {
+      "prefix": "inttoalfa",
+      "body": [
+         "IntParaAlfa(${1:nVariavel}, ${2:aVariavel});"
+      ],
+      "description": "Converter Inteiro para Alfa"
+   },
+   "Convert Alfa to Decimal": {
+      "prefix": "alfatodec",
+      "body": [
+         "AlfaParaDecimal(${1:aVariavel}, ${2:nVariavel});"
+      ],
+      "description": "Converter Alfa para Decimal"
+   },
+   "Convert Mask": {
+      "prefix": "convmask",
+      "body": [
+         "ConverteMascara(${1|1,2,3|}, ${2:valor}, ${3:resultado}, \"${4:mascara}\");"
+      ],
+      "description": "Converter com máscara"
+   },
+   "Comment Block": {
+      "prefix": "comment",
+      "body": [
+         "@-- ${1:Comentário} --@"
+      ],
+      "description": "Bloco de comentário LSPT"
+   },
+   "Log Function": {
+      "prefix": "log",
+      "body": [
+         "Funcao GravaLog();",
+         "   Inicio",
+         "      xCommandLog = \"INSERT INTO ${1:tabela_log} (${2:campos}) VALUES (${3:valores})\";",
+         "      ExecSQLEx(xCommandLog, xErro, xMensagem);",
+         "      ",
+         "      Se(xErro = 0) {",
+         "         // Log gravado",
+         "      } Senao {",
+         "         mensagem(erro, \"Erro ao gravar log: \" + xMensagem);",
+         "      }",
+         "   Fim;"
+      ],
+      "description": "Função de log padrão"
    }
 }

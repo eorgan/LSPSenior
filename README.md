@@ -6,7 +6,7 @@
 
 ### Método 1: Via VSIX (Recomendado)
 ```bash
-code --install-extension lspt-language-support-1.4.0.vsix
+code --install-extension lspt-language-support-1.5.1.vsix
 ```
 
 ### Método 2: Compilar do Código Fonte
@@ -14,7 +14,7 @@ code --install-extension lspt-language-support-1.4.0.vsix
 git clone https://github.com/eliezer-organ/LSPSenior.git
 cd LSPSenior
 npm run package
-code --install-extension lspt-language-support-1.4.0.vsix
+code --install-extension lspt-language-support-1.5.1.vsix
 ```
 
 ---
@@ -133,6 +133,501 @@ InserirStr(...)  ← Command+Click aqui
 - Exemplos de uso
 - Notas importantes
 - Funções relacionadas
+
+---
+
+## 📋 Snippets Disponíveis
+
+A extensão oferece **51 snippets** para acelerar seu desenvolvimento em LSPT. Digite o prefixo e pressione `Tab` ou `Enter` para expandir.
+
+> 💡 **Dica**: Muitos snippets têm prefixos alternativos! Por exemplo, `func`, `if`, `for`, `while` para maior produtividade.
+
+### 📄 Estruturas de Arquivo
+
+#### `header` - Cabeçalho Completo de Arquivo
+Cria estrutura completa com metadados e seções organizadas:
+```lspt
+@-- Título do Script --@
+
+/*
+ * @Author: Seu Nome
+ * @Email: seu.email@empresa.com.br
+ * @Date: 2025-12-19 19:21:28
+ * @Last Modified by: Seu Nome
+ * @Last Modified time: 2025-12-19 19:21:28
+ * @Description: Descrição
+ */
+
+@-- Declaração WS --@
+   // Declarar Web Services
+
+@-- Declarar Funções --@
+   // Declarar funções
+
+@-- Declarar Variaveis --@
+   // Declarar variáveis
+
+@-- Inicio da Execução --@
+   
+```
+
+#### `lspt-header` - Cabeçalho Simples
+Cabeçalho padrão com metadados básicos:
+```lspt
+@-- Título do arquivo --@
+
+/*
+ * @Author: Nome do Autor
+ * @Email: email@example.com
+ * @Date: 2025-12-19 19:21:28
+ * @Last Modified by: Nome do Autor
+ * @Last Modified time: 2025-12-19 19:21:28
+ * @Description: Descrição
+ */
+```
+
+---
+
+### 🔧 Declarações e Funções
+
+#### `func` - Declaração de Função (Prefixo Curto)
+```lspt
+Funcao NomeDaFuncao();
+   Inicio
+      
+   Fim;
+```
+
+#### `deffunc` - Definir Função (Prefixo Curto)
+```lspt
+Definir Funcao NomeDaFuncao();
+```
+
+#### `def-funcao` - Declarar Função
+```lspt
+Definir Funcao NomeFuncao();
+```
+
+#### `funcao` - Função Completa
+```lspt
+Funcao NomeFuncao();
+   Inicio
+      
+   Fim;
+```
+
+#### `funcao-params` - Função com Parâmetros
+```lspt
+Definir Funcao NomeFuncao(Numero pParam1, Numero end pResultado);
+
+Funcao NomeFuncao(Numero pParam1, Numero end pResultado);
+   Inicio
+      pResultado = pParam1 * 2;
+      
+   Fim;
+```
+
+---
+
+### 📦 Declaração de Variáveis
+
+#### `defalfa` ou `def-alfa` - Variável Alfa
+```lspt
+Definir Alfa aNomeVar;
+```
+
+#### `defint` ou `def-numero` - Variável Numero
+```lspt
+Definir Numero nNomeVar;
+```
+
+#### `defdata` ou `def-data` - Variável Data
+```lspt
+Definir Data dNomeVar;
+```
+
+#### `defws` ou `def-ws` - WebService
+```lspt
+Definir interno.com.senior.g5.modulo.servico wNome;
+```
+
+---
+
+### 🔀 Estruturas Condicionais
+
+#### `if` ou `se` - If Simples
+```lspt
+Se(condicao) {
+   
+}
+```
+
+#### `ifelse` ou `se-senao` - If/Else
+```lspt
+Se(condicao) {
+   // código se verdadeiro
+} Senao {
+   // código se falso
+}
+```
+
+#### `se-inicio` - If com Inicio/Fim
+```lspt
+Se(condicao)
+   Inicio
+      
+   Fim;
+```
+
+#### `se-senao` - If/Else
+```lspt
+Se(condicao)
+   {
+      
+   }
+Senao
+   {
+      
+   }
+```
+
+#### `se-senao-se` - If/Else If/Else
+```lspt
+Se(condicao1)
+   {
+      
+   }
+Senao Se (condicao2)
+   {
+      
+   }
+Senao
+   {
+      
+   }
+```
+
+---
+
+### 🔁 Estruturas de Repetição
+
+#### `while` ou `enquanto` - Loop While
+```lspt
+Enquanto(condicao)
+   Inicio
+      
+   Fim;
+```
+
+#### `for` ou `para` - Loop For
+```lspt
+Para(i=0;i<10;i++)
+   Inicio
+      
+   Fim;
+```
+
+#### `enquanto-inicio` - While com Inicio/Fim
+```lspt
+Enquanto(condicao)
+   Inicio
+      
+   Fim;
+```
+
+#### `para` - Loop For
+```lspt
+Para(nLin=0;nLin<nQtd;nLin++)
+   {
+      
+   }
+```
+
+---
+
+### 🗄️ SQL Avançado
+
+#### `sql` - Template Completo de Consulta SQL
+```lspt
+aSqlCom = "SELECT campos FROM tabela WHERE condicao";
+
+SQL_Criar(aSql);
+SQL_UsarSqlSenior2(aSql, 0);
+SQL_UsarAbrangencia(aSql, 0);
+SQL_DefinirComando(aSql, aSqlCom);
+SQL_AbrirCursor(aSql);
+
+Enquanto(SQL_EOF(aSql) = 0)
+   Inicio
+      
+      SQL_Proximo(aSql);
+   Fim;
+
+SQL_FecharCursor(aSql);
+SQL_Destruir(aSql);
+```
+
+#### `sqlalfa` - Retornar Campo Alfa
+```lspt
+SQL_RetornarAlfa(aSql, "campo", aVariavel);
+```
+
+#### `sqlint` - Retornar Campo Inteiro
+```lspt
+SQL_RetornarInteiro(aSql, "campo", nVariavel);
+```
+
+#### `sqldate` - Retornar Campo Data
+```lspt
+SQL_RetornarData(aSql, "campo", dVariavel);
+```
+
+#### `sqlfloat` - Retornar Campo Flutuante
+```lspt
+SQL_RetornarFlutuante(aSql, "campo", fVariavel);
+```
+
+#### `insert` - Comando INSERT
+```lspt
+xCommand = "INSERT INTO tabela (campos) VALUES (valores)";
+ExecSQLEx(xCommand, xErro, xMensagem);
+```
+
+#### `update` - Comando UPDATE
+```lspt
+xCommand = "UPDATE tabela SET campo = valor WHERE condicao";
+ExecSQLEx(xCommand, xErro, xMensagem);
+```
+
+---
+
+### 🗄️ SQL e Cursores (Legado)
+
+#### `cursor1` - Cursor Tipo 1 (Antigo)
+```lspt
+Definir Cursor Cur_Tabela;
+
+Cur_Tabela.Sql "SELECT campos FROM tabela WHERE condicao";
+
+Cur_Tabela.AbrirCursor();
+
+Se (Cur_Tabela.Achou)
+   Inicio
+      @-- Encontrou o Registro. --@
+      
+   Fim;
+
+Cur_Tabela.fecharCursor();
+```
+
+#### `cursor2` - Cursor Tipo 2 (Recomendado)
+```lspt
+Definir Alfa aSqlCom;
+Definir Alfa aSqlInt;
+
+aSqlCom = "SELECT campos FROM tabela WHERE condicao";
+
+SQL_Criar(aSqlInt);
+SQL_UsarSqlSenior2(aSqlInt, 0);
+SQL_UsarAbrangencia(aSqlInt, 0);
+SQL_DefinirComando(aSqlInt, aSqlCom);
+SQL_AbrirCursor(aSqlInt);
+Se(SQL_EOF(aSqlInt) = 0) @-- Se encontrou registro --@
+   {
+      SQL_RetornarAlfa(aSqlInt, "campo", aVariavel);
+      
+   }
+
+SQL_FecharCursor(aSqlInt);
+SQL_Destruir(aSqlInt);
+```
+
+#### `cursor2-enquanto` - Cursor Tipo 2 com Loop
+```lspt
+Definir Alfa aSqlCom;
+Definir Alfa aSqlInt;
+
+aSqlCom = "SELECT campos FROM tabela WHERE condicao";
+
+SQL_Criar(aSqlInt);
+SQL_UsarSqlSenior2(aSqlInt, 0);
+SQL_UsarAbrangencia(aSqlInt, 0);
+SQL_DefinirComando(aSqlInt, aSqlCom);
+SQL_AbrirCursor(aSqlInt);
+Enquanto(SQL_EOF(aSqlInt) = 0) @-- Se encontrou registro --@
+   {
+      SQL_RetornarAlfa(aSqlInt, "campo", aVariavel);
+      
+      SQL_Proximo(aSqlInt);
+   }
+
+SQL_FecharCursor(aSqlInt);
+SQL_Destruir(aSqlInt);
+```
+
+#### `execsql` - Executar SQL
+```lspt
+ExecSQLEx(aComando, xErro, xMensagem);
+Se (xErro = 0) {
+   @-- Sucesso --@
+   
+} Senao {
+   @-- Erro --@
+   Mensagem(Erro, xMensagem);
+}
+```
+
+---
+
+### 📁 Arquivos
+
+#### `abrir-arquivo` - Abrir Arquivo
+```lspt
+Definir Numero nArq;
+
+nArq = Abrir(\"arquivo.txt\", Ler); @-- Ler ou Gravar --@
+Se(nArq > 0)
+   Inicio
+      
+      Fechar(nArq);
+   Fim;
+```
+
+#### `ler-linha` - Ler Linha de Arquivo
+```lspt
+Definir Alfa aLinha;
+
+Enquanto(LerNL(nArq, aLinha) = 1)
+   Inicio
+      @-- Processar linha --@
+      
+   Fim;
+```
+
+---
+
+### 🌐 WebService
+
+#### `defws` - Declarar Web Service
+```lspt
+Definir interno.com.senior.modulo.NomeWS WSNome;
+```
+
+#### `wsexec` - Executar Web Service
+```lspt
+WSPedido.ModoExecucao = 1;
+WSPedido.Executar();
+
+aTipRet = WSPedido.tipoRetorno;
+aMsgRet = WSPedido.mensagemRetorno;
+```
+
+---
+
+### 🔄 Conversões
+
+#### `inttoalfa` - Converter Inteiro para Alfa
+```lspt
+IntParaAlfa(nVariavel, aVariavel);
+```
+
+#### `alfatodec` - Converter Alfa para Decimal
+```lspt
+AlfaParaDecimal(aVariavel, nVariavel);
+```
+
+#### `convmask` - Converter com Máscara
+```lspt
+ConverteMascara(1, valor, resultado, "mascara");
+```
+
+---
+
+### 💬 Mensagens e Comentários
+
+#### `msg` - Mensagem (com Opções)
+```lspt
+mensagem(Retorna, "mensagem");
+```
+
+#### `comment` - Comentário LSPT
+```lspt
+@-- Comentário --@
+```
+
+#### `msg-ret` - Mensagem de Retorno
+```lspt
+Mensagem(Retorna, aMensagem);
+```
+
+#### `msg-erro` - Mensagem de Erro
+```lspt
+Mensagem(Erro, aMensagem);
+```
+
+#### `com-linha` - Comentário de Linha
+```lspt
+@-- comentário --@
+```
+
+#### `com-bloco` - Comentário de Bloco
+```lspt
+/*
+ * comentário
+ */
+```
+
+---
+
+### 🌐 HTTP e Integrações
+
+#### `http-post` - Requisição HTTP POST
+```lspt
+HttpObjeto(vHTTP);
+HttpDesabilitaErroResposta(vHTTP);
+HttpAlteraCodifCaracPadrao(vHTTP, "utf-8");
+HttpAlteraCabecalhoRequisicao(vHTTP, "Content-Type", "application/json");
+HttpPost(vHTTP, aUrl, aJson, aJsonRet);
+HttpLeCodigoResposta(vHTTP, nCodRet);
+```
+
+---
+
+### 📊 Logging e Debug
+
+#### `log` - Função de Log Padrão
+```lspt
+Funcao GravaLog();
+   Inicio
+      xCommandLog = "INSERT INTO tabela_log (campos) VALUES (valores)";
+      ExecSQLEx(xCommandLog, xErro, xMensagem);
+      
+      Se(xErro = 0) {
+         // Log gravado
+      } Senao {
+         mensagem(erro, "Erro ao gravar log: " + xMensagem);
+      }
+   Fim;
+```
+
+---
+
+### ⚙️ Utilidades
+
+#### `cancel` - Cancelar Execução
+```lspt
+Cancel(1); @-- Cancel(1): Cancela execução / Cancel(2): Imprime ValStr / Cancel(3): Exclui registro --@
+```
+
+#### `continue` - Continuar Loop
+```lspt
+Continue;
+```
+
+#### `atualizar-campos` - Atualizar Campos da Tela
+```lspt
+AtualizarCampos();
+```
 
 ---
 
@@ -346,12 +841,11 @@ A extensão funciona automaticamente ao abrir arquivos `.lspt` ou `.lsp`. Não r
 
 Veja [CHANGELOG.md](CHANGELOG.md) para histórico completo de versões.
 
-### Versão 1.4.0 (Atual)
-- ✨ IntelliSense para 369+ funções built-in
-- 🔍 Autocomplete com `Dev.`
-- 📝 Signature Help
-- 💡 Hover Documentation
-- 🔗 Go to Definition
+### Versão 1.5.1 (Atual)
+- 📋 51 snippets com prefixos curtos e intuitivos
+- ✨ Novos snippets: SQL avançado, WebService, Conversões, Logging
+- 🚀 Prefixos alternativos para maior produtividade (`func`, `if`, `for`, `while`)
+- 📖 Documentação completa e organizada
 
 ---
 
