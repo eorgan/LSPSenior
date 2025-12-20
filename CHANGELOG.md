@@ -8,6 +8,42 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.5.5] - 2025-12-19
+
+### 🔧 Corrigido
+- **Autocomplete `dev.` funcionando novamente**
+- Revertido extension.js para versão 1.5.1 (que funcionava perfeitamente)
+- Removidas mudanças de 1.5.2-1.5.4 que quebraram o autocomplete
+- Mantido apenas `onLanguage:lspt` nos activationEvents
+
+### ✅ Testado e Aprovado
+- Autocomplete com `dev.` funciona
+- 530 funções disponíveis
+- Performance estável
+
+## [1.5.4] - 2025-12-19
+
+### 🔧 Corrigido - URGENTE
+- **Removido `"*"` dos activationEvents** que causava travamento
+- Extensão agora ativa apenas ao abrir arquivos `.lspt`
+- Performance melhorada significativamente
+- Solução para travamento do Antigravity
+
+### ⚠️ Como Usar
+Para ativar o autocomplete:
+1. Abra um arquivo `.lspt`
+2. Linguagem deve mudar para "LSPT" automaticamente
+3. Digite `dev.` e o autocomplete aparecerá
+
+## [1.5.3] - 2025-12-19
+
+### 🔧 Corrigido
+- **Ativação da extensão no Antigravity**
+  - Adicionado `"*"` aos `activationEvents` para garantir ativação
+  - Extensão agora ativa automaticamente no Antigravity
+  - Autocomplete com `dev.` funcionando corretamente
+  - Reconhecimento de arquivos `.lspt` e `.lsp` corrigido
+
 ## [1.5.2] - 2025-12-19
 
 ### 🛡️ Segurança e Qualidade de Código

@@ -313,6 +313,8 @@
    nIntervalo = 10000;   @-- Intervalo 10000 é igual a 10 segundos entre verificações --@
    @-- aIdRemessa = "10000000001041024"; --@
 
+ dev.
+
 @-- Inicio do Processamento --@
    BuscarParamWS();
    SolicitarGeracaoRemessa();
