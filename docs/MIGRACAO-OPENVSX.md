@@ -60,12 +60,9 @@ reverter com `git checkout package.json`.
 
 ## Pendências
 
-- [ ] **Claim do namespace `eorgan`** (Opção 3) em
-  https://github.com/EclipseFdn/open-vsx.org/issues/new/choose → "Claim namespace
-  ownership". Marcar "Not a VS Code Marketplace Publisher"; a sub-escolha
-  ("namespace matches the GitHub ID") vai no campo *Claim evidence* (texto livre — os
-  sub-itens do form são markdown estático, não clicáveis). Abrir pela conta `eorgan`.
-- [ ] **Rotacionar/revogar** o token Open VSX antigo (foi exposto em texto puro durante a
-  configuração).
+- [x] **Claim do namespace `eorgan`** (Opção 3) aberta em
+  https://github.com/EclipseFdn/open-vsx.org/issues — aguardando aprovação dos
+  mantenedores (a verificação fica `verified: false` até aprovarem).
+- [x] **Rotacionado/revogado** o token Open VSX antigo; `.env` atualizado com o novo.
 - [ ] (Opcional) Pedir remoção da `eliezer-organ.lspt-language-support` aos admins do
   Open VSX no futuro (o `ovsx` não tem `unpublish`).
