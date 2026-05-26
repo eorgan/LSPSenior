@@ -13,7 +13,13 @@
          "include": "#keywords"
       },
       {
+         "include": "#system-variables"
+      },
+      {
          "include": "#functions"
+      },
+      {
+         "include": "#builtin-functions"
       },
       {
          "include": "#types"
@@ -108,19 +114,27 @@
          "patterns": [
             {
                "name": "keyword.control.conditional.lspt",
-               "match": "\\b(Se|Senao)\\b"
+               "match": "(?i)\\b(Se|Senao)\\b"
             },
             {
                "name": "keyword.control.loop.lspt",
-               "match": "\\b(Enquanto|Para|Continue)\\b"
+               "match": "(?i)\\b(Enquanto|Para|Continue|Pare)\\b"
             },
             {
                "name": "keyword.control.flow.lspt",
-               "match": "\\b(Cancel|Inicio|Fim)\\b"
+               "match": "(?i)\\b(Cancel|Inicio|Fim|VaPara|Vapara|Regra)\\b"
             },
             {
                "name": "keyword.declaration.lspt",
-               "match": "\\b(Funcao)\\b"
+               "match": "(?i)\\b(Definir|Funcao)\\b"
+            },
+            {
+               "name": "keyword.control.import.lspt",
+               "match": "(?i)\\b(Inserir)\\b"
+            },
+            {
+               "name": "keyword.other.io.lspt",
+               "match": "(?i)\\b(Abrir|Fechar|Ler|Lernl|Gravar|Gravarnl)\\b"
             },
             {
                "name": "keyword.other.lspt",
@@ -128,11 +142,11 @@
             },
             {
                "name": "keyword.operator.word.lspt",
-               "match": "\\b(E|OU|NAO)\\b"
+               "match": "(?i)\\b(E|OU|NAO)\\b"
             },
             {
                "name": "constant.language.lspt",
-               "match": "\\b(Retorna|Erro)\\b"
+               "match": "(?i)\\b(ValRet|ValStr|Retorna|Erro)\\b"
             }
          ]
       },
@@ -140,7 +154,24 @@
          "patterns": [
             {
                "name": "entity.name.type.lspt",
-               "match": "\\b(Alfa|Numero|Data|Decimal|Flutuante)\\b"
+               "match": "(?i)\\b(Alfa|Numero|Data|Decimal|Flutuante|Lista|Tabela|Grid)\\b"
+            }
+         ]
+      },
+      "system-variables": {
+         "patterns": [
+            {
+               "name": "variable.language.lspt",
+               "match": "(?i)\\b(AnoSis|CodEmp|CodFil|CodUsu|DatSis|DBNomeUsuario|DBTipo|DesRodape|DiaSis|Empresa|ExtSis|Filial|GerTabAlf|GerTabNum|HorSis|MesSis|NomUsu|NumPag|QtdDupPag)\\b"
+            }
+         ]
+      },
+      "builtin-functions": {
+         "comment": "Gerado por scripts/build-grammar-functions.js a partir de functions.json. Não editar à mão.",
+         "patterns": [
+            {
+               "name": "support.function.builtin.lspt",
+               "match": "(?i)\\b(AbrirLog|AbrirTelaSistema|AdicionaDerivacaoModelo|AdicionaEstagioRoteiro|AdicionaItemGrid|AdicionaOperacaoManualRoteiro|AdicionaOperacaoRoteiro|AgendarExecucaoWebservice|AgendarExecucaoWebserviceEx|AgluCtbCarregar|AgluCtbContaPertence|AgluCtbContas|AgluCtbCriar|AgluCtbLibera|AlfaParaData|AlfaParaDecimal|AlteraCampoEncontroPag|AlteraCampoEncontroRec|AlteraCampoRetorno|AlteraCampoRetornoCC|AlteraCampoRetornoPE|AlteraCampoRetornoRA|AlteraCampoRetornoTF|AlteraCampoSubst|AlteraSitMccTesouraria|AlteraSitObsPed|AlterarStatusPlanoExecucao|AlterarVidaUtilBem|AnoBissexto|ApontarOPs|Arredonda|ArredondaABNT|ArredondaValorTipoAcerto|ArredondarValor|ArredondarValorEx|AssinarArquivoDigital|AtualizaConsultaPermissoes|AtualizaSaldoContabil|AtualizaSaldoContabilAbr|AtualizarPesosPFA|BaixarComponentes|BuscaAbrangenciaUsuario|BuscaCamposChaveTabela|BuscaClienteBCD|BuscaFiltroRateioFin|BuscaFiltroRateioFinSit|BuscaLinhaTexto|BuscaMascModPlano|BuscaMenorMaiorVctBaiBcd|BuscaNotasAquisicaoRural_R2055|BuscaSaldoAntCCusto|BuscaSaldoAnterior|BuscaSaldoAnteriorAbr|BuscaSaldoAnteriorAbrAux|BuscaSaldoAnteriorAbrInt|BuscaSaldoAnteriorHis|BuscaSaldoPrjFis|BuscaSaldoProjeto|BuscaTabPreco|BuscaVlrCccProduto|BuscarAbrEntUsuario|BuscarDataVencImpostoEmpresa|BuscarFilialMaiorRelevancia|BuscarSaldoContabil|CNPJValido|CPFValido|CadastrarInfAdicionaisICMS|CalculaPrecoProRata|CalcularDvNit|CaminhoMenu|CancelaSaldoOrdemCompra|CancelaSaldoRequisicoes|CancelarOP|CarregaRazaoPF|CarregaRazaoPFCCu|CarregaRazaoPFCCuSit|CarregaRazaoPFSit|CarregaSaldoAnteriorProjeto|CarregaSaldoContabil|CarregaSaldoContabilAbr|CarregaSaldoContabilAbrInt|CarregaSaldoContabilAux|CarregaSaldoContabilHis|CarregaSaldoContabilICP|CarregaSaldoContabilZer|CarregaSaldoFisPrj|CarregaSaldoProjeto|CarregarCSVparaPlataforma|CarregarImagemFundoSistema|CarregarSaldoContabil|CarregarTextoArq|ComposicaoProduto_2|ComposicaoProduto_3|Concatena|ConciliarSaldoCcu|ConsisteRelacionamentoEntreTitulos|ConvDataInt|ConverteDataBanco|ConverteDataSqlSenior2|ConverteDataToDB|ConverteParaMaiusculo|ConverteParaMinusculo|ConverteStringParaNumeroNoBanco|CopiarStr|CorrigeSaldoporDeposito|CorrigeSaldoporFilial|CriaNovaDerivacao|CriaNovoProduto|CriaNovoServico|CriarAquisicaoRural_R2055|CriarEstoque|CriarEstruturaSaldoCcu|DataExtenso|DecimalParaAlfa|DefinirCategoriaPedidoWms|DeixaNumeros|DeletarStr|DesItemLista|DesMontaData|DesmontaProduto|DiasEntreDatas|DisponibilizarPF_Faturar|DuplicarFilial|DuplicarProdutoServicoEmpresa|EntradaValor|EnviarArquivoGED|EscondeCampoTelaEntrada|EstaNulo|EstornaComponentes|ExcluiBaixaCR|ExcluiSeqModelo|ExcluirCalculoPISCOFINS|ExcluirComponenteOP|ExcluirLctoDuplicado|ExcluirLoteDuplicado|ExecutaFormularioSGI|ExecutaRegraRecursiva|ExecutaRelatorio|ExecutaRelatorioArquivo|ExecutarComandoSQL|ExecutarRotinaSapiens|ExecutarRotinaSistema|ExisteCPA501BAIFE01|ExisteVen160ProRat01|Extenso|ExtensoMes|ExtensoSemana|ForcarFimEstagioOperacao|FormataPrecisaoP|GeraItemEmbarquePedido|GeraLog|GeraMovimento|GeraMovimentoNFSaida|GeraRatOrcCtb|GerarCargaInicialOEE|GerarContaAuxiliarCliFor|GerarEntregaVarejo|GerarItensEmbalagemPFA|GerarMDFeSaidaAutomatico|GerarNumeroTicketPesagem|GerarOP|GerarOrdemRecebimentoWmsSenior|GerarOrdemSeparacaoPfNf|GerarOrdemSeparacaoWmsSenior|GerarPendenciaExportacao|GerarPendenciaExportacaoRet|GerarSubprodutosOPModelo|GerarTagCamposExtraGNRE20|GerarTagDocumentoOrigemGNRE20|GerarTagProdutoGNRE20|GerarVencimento|Gerar_Log_Analise|Gerar_Log_Generico|Gerar_Log_NotaSaida|Gerar_Log_Pedido|GravaMemListCcc|GravaNumFcc|GravaRatOrcCtb|GravaTabela|GravaUltimoNum|GravarLog|GravarNomeArquivoRelatorio|GravarObservacaoCP|GravarObservacaoCR|ImportacaoNFEletronica|IncluirComponenteOP|IncluirServicoOP|IncrementarCodigoAlfa|InsereCep|InsereParcelaPedido|InsereRateioCrp|InsereRegInt|InserirAlfa|InserirPassoPlanoExecucao|InserirStr|InsertMovimento|IntParaStr|LayoutImpGeraE615RPP|LeFaturamento|LeFaturamento2|LeGridBaixasBcd|LeMemListCcc|LeMemListCompPro|LeMemListCompPro_2|LeMemListCompPro_3|LeMemListPosEst|LeMemListProOP|LerBalanca|LerBalancaTipoPeso|LerPedidosCanSub|LerPosicaoStr|LiberaPF|LiberaPFCCu|LiberaSaldoContabil|LiberaSaldoContabilInt|LiberaSaldoProjeto|LiberarSaldoContabil|LimpaEspacos|LimpaEspacosDireita|LimpaEspacosEsquerda|LimpaGerTabAlf|LimpaGerTabNum|LimpaListSerEst|LimpaListaLotesSugeridos|LimpaListaNFCRetornoComponentes|LimpaRatOrcCtb|LimparAquisicaoRural_R2055|LimparEstruturaSaldoCcu|ListaRegraCriarLista|ListaRegraLiberarLista|LoteLctoCria|LoteLctoGeraLote|LoteLctoGeraLoteRet|LoteLctoImportacaoSapiens|LoteLctoLibera|MMCria|MMLibera|MontaAbrangencia|MontaData|MontaEstruturaProdutoOP|MontaFaturamento|MontaHistoricoPadrao|MontaListPosEst|MontaListPosEstFil|MontaListSerEst|MontaListaLotesSugeridos|MontaListaNFCRetornoComponentes|MontaSaldoAntCliTipoTitulo|MontaSaldoAntConta|MontaSaldoAntData|MontaSaldoAntForTipoTitulo|MontaSaldoAntFornecedorGrupo|MontarAutenticacaoSeniorXd|MultiplicaValor|Multiplo|NomeCompletoUsuario|ObterGuid|ObterProximoId|ObterSequenciaPendenciaCarga|ObterValorAlfaPadraoCNAB|ObterValorDataPadraoCNAB|ObterValorDecimalPadraoCNAB|ObterValorNumericoPadraoCNAB|OrcamentoCtaCtbAtualizarCtaPai|OrcamentoCtaCtbIniciarMemoria|OrcamentoCtaCtbLiberarMemoria|OrcamentoCtaCtbPreencherMemoria|OtimizarAbrangencia|PegaUltimoNum|PegarTipoVar|PegarValorVarAlf|PegarValorVarNum|PosicaoStr|Potencia|ProcuraEnter|QuebraTexto|Raiz|RecalcularOCServico|ReexecutarAcaoEletronica|RemeterRetornarServico|RetDiaSemana|RetiraAcentuacao|RetiraCaracteresEspeciais|RetornaAscII|RetornaConsiderarItemCtr|RetornaItem|RetornaItemPelaDescLista|RetornaLancamentoLista|RetornaLigacao|RetornaMensagemCadastroCliente|RetornaPrecoProRata|RetornaProximoProjeto|RetornaRegistrosLinhaADRCST|RetornarAquisicaoRural_R2055|RetornarDiasUteisMes|RetornarDiasUteisPeriodo|RetornarDigitoVerificadorVolume|RetornarParametroGlobal|RetornarParametroGlobalGoUp|RetornarQtdDiasAno|RetornarQuantidadeLoteUtilizada|RetornarSaldoCcu|RetornarSequencialBaseadoChave|RetornarSerieNotaFiscal|RetornarServicoOP|RowNum|SQLComando|SQLFechar|SQLFim|SQLNomeCampo|SQLProximo|SQLQtdCampos|SQLRetornaValor|SQLValorUnico|Saldo|SaldoAnteriorCliente|SaldoAnteriorFornecedor|SaldoContabilCompleto|SaldoInt|SaldoPF|SaldoProjeto|SalvarLog|SapiensSID|SelecaoLctCP|SelecaoTabelas|SetaAlfaTelaEntrada|SetaNumeroTelaEntrada|SetaParamBuscaTabPreco|SetarFiltroSql|SetarValorVarAlf|SetarValorVarNum|SimulacaoIMP_CR_Finalizar|SimulacaoIMP_CR_Iniciar|SimulacaoIMP_Finalizar|SimulacaoIMP_Iniciar|SinalizarCapturaPeso|SinalizarFaturamentoWmsSenior|SldCtbDefParametro|SldCtbFuncoes|SldCtbRetItemAtual|Sleep|SomarMesesDataRef|StrParaInt|SubstAlfa|SubstAlfaUmaVez|SugerirLoteCriterio|SugerirLoteUnico|TamanhoStr|TemRegistrosGrid|TotalContasCentroCusto|TotalRateado|Tracking_Cancelar|Tracking_CancelarFase|Tracking_CancelarTransferido|Tracking_RegistrarDocumento|Tracking_RegistrarFase|Tracking_Transferir|TrocaEmpresaFilial|TrocarOpcaoOperacaoOP|TruncarDecimal|TruncarValor|UltimoDia|VerificaDiaUtil|VerificaItemGrid|VerificaMovimentoConta|VerificaNumero|VerificaValor|atualizarRegIntPlataforma|integrarPlataforma)\\b"
             }
          ]
       },

@@ -112,8 +112,16 @@ Critério de pronto:
 - Cmd+Click numa função documentada abre `.md` com conteúdo real.
 - `grep -L "Adicione" docs/functions/*.md | wc -l` ≈ tamanho do overlay.
 
-### Fase 3 — Gramática (syntax highlighting)
+### Fase 3 — Gramática (syntax highlighting) ✅ CONCLUÍDA
 **Tier:** baixo (mecânico, verificável)
+
+> **Resultado:** em `syntaxes/lspt.tmLanguage.json`: novo bloco `system-variables`
+> (19 variáveis), palavras reservadas completadas (Definir, Pare, VaPara, Regra,
+> Inserir, Abrir/Fechar/Ler/Lernl/Gravar/Gravarnl, ValRet/ValStr) com matching
+> case-insensitive `(?i)` (LSP ignora maiúsculas), tipos ampliados (Lista/Tabela/Grid),
+> e nova regra `builtin-functions` populada por `scripts/build-grammar-functions.js`
+> com as **369** funções do `functions.json` (idempotente; scopes SQL preservados por
+> precedência de ordem). **Validado visualmente** no Antigravity IDE via `.vsix` 1.5.6.
 
 Entregáveis (em `syntaxes/lspt.tmLanguage.json`):
 1. Bloco de **palavras reservadas** (51): `Definir, Se, Senao, Enquanto, Para, Funcao,
