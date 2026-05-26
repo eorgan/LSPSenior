@@ -36,6 +36,14 @@ Thumbs.db
 *.swp
 *.swo
 
+## Ignore development sources (não necessários em runtime)
+.claude/**
+scripts/**
+data/**
+Exemplos de Arquivos/**
+Formata*/**
+docs/*.md
+
 ## Keep only necessary files for extension
 !package.json
 !language-configuration.json

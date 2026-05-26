@@ -467,19 +467,6 @@
       ],
       "description": "Retornar campo Flutuante de SQL"
    },
-   "Execute SQL": {
-      "prefix": "execsql",
-      "body": [
-         "ExecSQLEx(${1:xCommand}, ${2:xErro}, ${3:xMensagem});",
-         "",
-         "Se(${2:xErro} = 0) {",
-         "   ${4:// Sucesso}",
-         "} Senao {",
-         "   ${5:// Erro}",
-         "}"
-      ],
-      "description": "Executar comando SQL com tratamento de erro"
-   },
    "Insert SQL": {
       "prefix": "insert",
       "body": [

@@ -8,6 +8,37 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.5.7] - 2026-05-26
+
+Enriquecimento da extensão a partir do manual oficial da LSP (LSPSeniorDoc).
+Consolida também a versão intermediária 1.5.6.
+
+### ✨ Adicionado
+- **Descrições reais de funções** — 57 funções built-in agora exibem descrição,
+  parâmetros e exemplos extraídos do manual no hover e no autocomplete (antes
+  todas tinham texto genérico).
+- **Documentação por função** — 57 arquivos em `docs/functions/*.md` preenchidos
+  com descrição, parâmetros, valores de retorno e exemplo real (usados pelo
+  "Go to Definition").
+- **Syntax highlighting ampliado** — variáveis de sistema (`DatSis`, `CodEmp`,
+  `NumPag`, etc.), palavras reservadas completas (`Definir`, `Pare`, `VaPara`,
+  `Regra`, `Inserir`, I/O de arquivos, `ValRet`/`ValStr`), tipos `Lista`/`Tabela`/
+  `Grid` e as 369 funções built-in destacadas. Matching case-insensitive.
+- **Novos snippets** — `http-get`, `json-valor` (ValorElementoJson), `lista-json`
+  (ListaRegra a partir de array JSON) e `valida-nulo` (EstaNulo).
+
+### 🔧 Infraestrutura
+- `scripts/extract-from-docs.js` — gera o overlay `data/functions-doc.json` do manual.
+- `scripts/build-grammar-functions.js` — sincroniza a gramática com `functions.json`.
+- `generate-functions.js` mescla o overlay de forma idempotente (regeneração preserva
+  as descrições reais).
+
+### 🧹 Empacotamento
+- `.vscodeignore` enxugado: arquivos de desenvolvimento (`scripts/`, `data/`,
+  `Exemplos de Arquivos/`, `Formatação/`, `.claude/`, `docs/*.md`) não vão mais no
+  pacote publicado; `docs/functions/` é preservado (necessário em runtime).
+- Removido prefixo de snippet duplicado (`execsql`).
+
 ## [1.5.5] - 2025-12-19
 
 ### 🔧 Corrigido
