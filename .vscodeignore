@@ -13,11 +13,15 @@ dist/**
 .gitignore
 tsconfig.json
 webpack.config.js
+.env
+.env.example
 
-## Ignore documentation sources (keep compiled README)
+## Ignore documentation sources (mantém README, CHANGELOG e docs/functions usados em runtime)
 *.md
 !README.md
 !CHANGELOG.md
+docs/*.md
+!docs/functions/**
 
 ## Ignore test files
 test/**
@@ -42,7 +46,6 @@ scripts/**
 data/**
 Exemplos de Arquivos/**
 Formata*/**
-docs/*.md
 
 ## Keep only necessary files for extension
 !package.json
