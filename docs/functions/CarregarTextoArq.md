@@ -11,25 +11,19 @@ Funcao CarregarTextoArq(Alfa aArquivo, Alfa End aTexto);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função carrega para uma variável alfanumérica o conteúdo de um arquivo texto.
 
 ## Parâmetros
 
-- **aArquivo** (`Alfa`) - Entrada: [Adicione descrição]
-- **aTexto** (`Alfa End`) - Saída: [Adicione descrição]
+- **aArquivo** (`Alfa`) - Entrada: Variável com o caminho do arquivo a ser lido
+- **aTexto** (`Alfa End`) - Saída: Variável que retorna o texto lido do arquivo
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-CarregarTextoArq();
+Definir Alfa vaTexto;
+CarregarTextoArq("C:\\Senior\\Sapiens\\Arquivo.txt", vaTexto);
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

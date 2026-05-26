@@ -11,25 +11,26 @@ Funcao PegarValorVarNum(Alfa aVar, Numero End aNumVal);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retorna o valor de uma variável numérica ou de data identificada por nome.
 
 ## Parâmetros
 
-- **aVar** (`Alfa`) - Entrada: [Adicione descrição]
-- **aNumVal** (`Numero End`) - Saída: [Adicione descrição]
+- **aVar** (`Alfa`) - Entrada: String contendo o nome da variável
+- **aNumVal** (`Numero End`) - Saída: Variável numérica que receberá o valor
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-PegarValorVarNum();
+Definir Numero vNumero;
+Definir Data vData;
+Definir Numero vValor;
+
+vNumero = 15;
+vData = 39647;
+
+PegarValorVarNum("vNumero", vValor); @ vValor = 15 @
+PegarValorVarNum("vData", vValor);   @ vValor = 39647 @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

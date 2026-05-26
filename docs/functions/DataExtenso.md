@@ -11,25 +11,23 @@ Funcao DataExtenso(Numero pData,Alfa end pDatExt);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função gera o extenso de determinada data.
 
 ## Parâmetros
 
-- **pData** (`Numero`) - Entrada: [Adicione descrição]
-- **pDatExt** (``) - Saída: [Adicione descrição]
+- **pData** (`Numero`) - Entrada: Campo/Variável a partir do qual se deseja gerar o extenso
+- **pDatExt** (``) - Saída: Variável que retornará o extenso da data
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-DataExtenso();
+Definir Data vdData;
+Definir Alfa vaExtenso;
+
+vdData = E210MVP.DatMov;
+DataExtenso(vdData, vaExtenso);
+@ vaExtenso vai conter a data por extenso @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

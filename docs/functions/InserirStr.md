@@ -11,26 +11,22 @@ Funcao InserirStr(Alfa Valor ,Alfa End Origem, Numero Pos);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função insere um ou mais caracteres em uma Variável/Campo, a partir da posição indicada.
 
 ## Parâmetros
 
-- **Valor** (`Alfa`) - Entrada: [Adicione descrição]
-- **Origem** (`Alfa End`) - Saída: [Adicione descrição]
-- **Pos** (`Numero`) - Entrada: [Adicione descrição]
+- **Valor** (`Alfa`) - Entrada: Variável que contém a string que deseja-se inserir
+- **Origem** (`Alfa End`) - Saída: Variável que contém a string de origem e que receberá o conteúdo da inserção
+- **Pos** (`Numero`) - Entrada: Variável que indica a posição em Origem a partir de onde Valor será inserido
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-InserirStr();
+Definir Alfa vaOrigem;
+vaOrigem = "Senior Sistemas";
+InserirStr("empresa de ", vaOrigem, 8);
+@ vaOrigem será "Senior empresa de Sistemas" @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

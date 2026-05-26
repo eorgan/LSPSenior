@@ -11,26 +11,26 @@ Funcao MultiplicaValor(Alfa Multiplicando, Numero Fator, Alfa End Retorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função multiplica um número no formato alfanumérico por um fator de multiplicação numérico e retorna o resultado desta multiplicação em uma variável alfanumérica.
 
 ## Parâmetros
 
-- **Multiplicando** (`Alfa`) - Entrada: [Adicione descrição]
-- **Fator** (`Numero`) - Entrada: [Adicione descrição]
-- **Retorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **Multiplicando** (`Alfa`) - Entrada: Campo/Variável que contém o valor a ser multiplicado
+- **Fator** (`Numero`) - Entrada: Campo/Variável que contém o fator de multiplicação
+- **Retorno** (`Alfa End`) - Saída: Campo/Variável que retorna o resultado da multiplicação
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-MultiplicaValor();
+Definir Alfa vaNumOriginal;
+Definir Alfa vaNumMultiplicado;
+Definir Numero vnFator;
+
+vaNumOriginal = "0000237259400000216555";
+vnFator = 5;
+MultiplicaValor(vaNumOriginal, vnFator, vaNumMultiplicado);
+@ vaNumMultiplicado será "1186297000001082775" @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

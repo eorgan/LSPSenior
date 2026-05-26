@@ -11,25 +11,24 @@ funcao ArredondaABNT(numero end Valor, numero Decimais);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função aplica a regra de arredondamento da ABNT, conforme a precisão informada.
 
 ## Parâmetros
 
-- **Valor** (``) - Saída: [Adicione descrição]
-- **Decimais** (`numero`) - Entrada: [Adicione descrição]
+- **Valor** (``) - Saída: Variável que será arredondada
+- **Decimais** (`numero`) - Entrada: Variável numérica que indica a quantidade de casas decimais do arredondamento
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ArredondaABNT();
+Definir Numero vnValor;
+vnValor = 1577.87;
+ArredondaABNT(vnValor, 1);
+@ vnValor será 1577.90 @
+
+ArredondaABNT(vnValor, 0);
+@ vnValor será 1578.00 @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

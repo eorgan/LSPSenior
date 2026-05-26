@@ -121,18 +121,76 @@ function extractParameters(signature) {
    return params;
 }
 
-/**
- * Cria arquivo de documentação markdown para uma função
- */
-function createDocFile(funcData) {
-   const docPath = path.join(DOCS_DIR, `${funcData.name}.md`);
+// Marcadores que identificam um arquivo de doc como stub (não editado à mão).
+const STUB_MARKERS = ['Adicione aqui a descrição', '[Adicione descrição]'];
 
-   // Verifica se já existe
-   if (fs.existsSync(docPath)) {
-      return; // Não sobrescreve documentação existente
+function isStub(content) {
+   return STUB_MARKERS.some((m) => content.includes(m));
+}
+
+/** Casa um parâmetro da assinatura (CSV) com a descrição do manual (overlay). */
+function paramDescription(funcParam, index, docParams) {
+   if (!docParams) return '';
+   const entries = Object.entries(docParams);
+   const byName = entries.find(([k]) => k.toLowerCase() === funcParam.name.toLowerCase());
+   if (byName) return byName[1];
+   // Fallback por posição quando a contagem bate (manual lista na ordem da assinatura).
+   if (entries.length === Object.keys(docParams).length && entries[index]) {
+      return entries[index][1];
    }
+   return '';
+}
 
-   const content = `# ${funcData.name}
+/** Conteúdo markdown rico, quando há overlay do manual. */
+function buildRichDoc(funcData, doc) {
+   const params =
+      funcData.params
+         .map((p, i) => {
+            const dir = p.direction === 'out' ? 'Saída' : 'Entrada';
+            const desc = paramDescription(p, i, doc.params);
+            return `- **${p.name}** (\`${p.type}\`) - ${dir}${desc ? `: ${desc}` : ''}`;
+         })
+         .join('\n') || '_Sem parâmetros_';
+
+   const returns = doc.returns && doc.returns.length
+      ? `\n## Valores de Retorno\n\n${doc.returns.map((r) => `- ${r}`).join('\n')}\n`
+      : '';
+
+   const example = doc.example
+      ? `\`\`\`lspt\n${doc.example}\n\`\`\``
+      : `\`\`\`lspt\n@-- Adicione exemplo de uso aqui --@\n${funcData.name}();\n\`\`\``;
+
+   return `# ${funcData.name}
+
+## Assinatura
+
+\`\`\`lspt
+${funcData.signature}
+\`\`\`
+
+## Código
+${funcData.code}
+
+## Descrição
+
+${doc.description}
+
+## Parâmetros
+
+${params}
+${returns}
+## Exemplo de Uso
+
+${example}
+
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de \`generate-functions.js\` só sobrescrevem arquivos que ainda são stubs.
+`;
+}
+
+/** Conteúdo markdown stub (sem overlay): comportamento original. */
+function buildStubDoc(funcData) {
+   return `# ${funcData.name}
 
 ## Assinatura
 
@@ -167,8 +225,31 @@ ${funcData.name}();
 
 - Lista de funções relacionadas
 `;
+}
 
-   fs.writeFileSync(docPath, content, 'utf8');
+/**
+ * Cria/atualiza o arquivo de documentação markdown de uma função.
+ * - Arquivo ausente: cria (rico se houver overlay, senão stub).
+ * - Arquivo existente que ainda é stub + overlay disponível: sobrescreve com rico.
+ * - Arquivo editado à mão (sem marcador de stub): nunca sobrescreve.
+ * Retorna true se gravou conteúdo rico.
+ */
+function createDocFile(funcData, doc) {
+   const docPath = path.join(DOCS_DIR, `${funcData.name}.md`);
+   const hasDoc = doc && doc.description;
+   const exists = fs.existsSync(docPath);
+
+   if (exists) {
+      const current = fs.readFileSync(docPath, 'utf8');
+      // Só sobrescreve stub e somente se temos conteúdo melhor (overlay).
+      if (!isStub(current) || !hasDoc) return false;
+   }
+
+   const content = hasDoc ? buildRichDoc(funcData, doc) : buildStubDoc(funcData);
+   if (!exists || hasDoc) {
+      fs.writeFileSync(docPath, content, 'utf8');
+   }
+   return hasDoc && exists;
 }
 
 /**
@@ -193,6 +274,7 @@ function main() {
    const functions = {};
    let count = 0;
    let enriched = 0;
+   let docsRich = 0;
 
    for (const line of lines) {
       const funcData = parseCSVLine(line);
@@ -207,8 +289,8 @@ function main() {
 
          functions[funcData.name] = funcData;
 
-         // Cria arquivo de documentação
-         createDocFile(funcData);
+         // Cria/atualiza arquivo de documentação (rico se houver overlay).
+         if (createDocFile(funcData, doc)) docsRich++;
 
          count++;
 
@@ -225,6 +307,7 @@ function main() {
    console.log(`\n✅ Processamento completo!`);
    console.log(`   Total de funções: ${count}`);
    console.log(`   Enriquecidas pelo manual: ${enriched}`);
+   console.log(`   Docs .md preenchidos com conteúdo real: ${docsRich}`);
    console.log(`   Arquivo gerado: ${OUTPUT_JSON}`);
    console.log(`   Documentação: ${DOCS_DIR}`);
    console.log(`\n💡 Você pode agora preencher a documentação em docs/functions/`);

@@ -11,24 +11,20 @@ Funcao LimpaEspacosEsquerda(Alfa end pString);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Limpa os espaços em branco à esquerda de uma variável alfanumérica.
 
 ## Parâmetros
 
-- **pString** (``) - Saída: [Adicione descrição]
+- **pString** (``) - Saída
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-LimpaEspacosEsquerda();
+Definir Alfa vaTexto;
+vaTexto = "  texto com espaços  ";
+LimpaEspacosEsquerda(vaTexto);
+@ vaTexto será "texto com espaços  " @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

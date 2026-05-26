@@ -11,26 +11,32 @@ Funcao QuebraTexto(Alfa End Texto, Numero TamLin, Numero End NroLin);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função pega o texto indicado e faz assinalamentos de quebra de linha conforme o Tamanho_Linha especificado, retornando a quantidade de linhas que será usada para imprimir o texto.
 
 ## Parâmetros
 
-- **Texto** (`Alfa End`) - Saída: [Adicione descrição]
-- **TamLin** (`Numero`) - Entrada: [Adicione descrição]
-- **NroLin** (`Numero End`) - Saída: [Adicione descrição]
+- **Texto** (`Alfa End`) - Saída: Campo/Variável que se deseja imprimir em mais de uma linha
+- **TamLin** (`Numero`) - Entrada: Variável que indica a quantidade máxima de caracteres por linha
+- **NroLin** (`Numero End`) - Saída: Variável que indica qual é a quantidade de linhas que serão necessárias para imprimir o texto
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-QuebraTexto();
+Definir Alfa vaTexto;
+Definir Alfa vaFrase;
+Definir Numero vnNumLin;
+Definir Numero vnLinAtu;
+
+vaTexto = "Vamos ver o que acontece quando usamos estas funções para controle de impressão de linhas de um texto mais extenso";
+QuebraTexto(vaTexto, 30, vnNumLin);
+
+vnLinAtu = 1;
+Enquanto (vnLinAtu <= vnNumLin) {
+  BuscaLinhaTexto(vaTexto, vnLinAtu, vaFrase);
+  @ Processa cada linha @
+  vnLinAtu++;
+}
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

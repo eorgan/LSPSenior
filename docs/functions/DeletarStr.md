@@ -11,26 +11,22 @@ Funcao DeletarStr(Alfa End Origem, Numero Pos, Numero Qtd);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Elimina parte de um texto.
 
 ## Parâmetros
 
-- **Origem** (`Alfa End`) - Saída: [Adicione descrição]
-- **Pos** (`Numero`) - Entrada: [Adicione descrição]
-- **Qtd** (`Numero`) - Entrada: [Adicione descrição]
+- **Origem** (`Alfa End`) - Saída: Variável que passará o texto cuja parte será deletada
+- **Pos** (`Numero`) - Entrada: Variável que indica a posição de início da eliminação
+- **Qtd** (`Numero`) - Entrada: Variável que indica a quantidade de caracteres a serem eliminados
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-DeletarStr();
+Definir Alfa vaOrigem;
+vaOrigem = "Senior empresa de Sistemas";
+DeletarStr(vaOrigem, 8, 11);
+@ vaOrigem será "Senior Sistemas" @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

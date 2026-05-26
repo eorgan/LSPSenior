@@ -11,8 +11,7 @@ Funcao LimpaGerTabNum();
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Limpa o conteúdo do Registro GerTabNum.
 
 ## Parâmetros
 
@@ -21,14 +20,10 @@ _Sem parâmetros_
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
+GerTabNum[1] = 1;
 LimpaGerTabNum();
+@ Todos os elementos do GerTabNum serão limpos @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

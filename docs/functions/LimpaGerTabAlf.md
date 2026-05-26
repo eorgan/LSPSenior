@@ -11,8 +11,7 @@ Funcao LimpaGerTabAlf();
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Limpa o conteúdo do Registro GerTabAlf.
 
 ## Parâmetros
 
@@ -21,14 +20,10 @@ _Sem parâmetros_
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
+GerTabAlf[1] = "xxx";
 LimpaGerTabAlf();
+@ Todos os elementos do GerTabAlf serão limpos @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

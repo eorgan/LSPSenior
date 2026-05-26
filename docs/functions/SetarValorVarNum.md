@@ -11,25 +11,22 @@ Funcao SetarValorVarNum(Alfa aVar, Numero aNumVal);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Define o valor de uma variável numérica ou de data identificada por nome.
 
 ## Parâmetros
 
-- **aVar** (`Alfa`) - Entrada: [Adicione descrição]
-- **aNumVal** (`Numero`) - Entrada: [Adicione descrição]
+- **aVar** (`Alfa`) - Entrada: String contendo o nome da variável
+- **aNumVal** (`Numero`) - Entrada: Valor numérico a ser atribuído à variável
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-SetarValorVarNum();
+Definir Numero vNumero;
+Definir Data vData;
+
+SetarValorVarNum("vNumero", 100);   @ vNumero = 100 @
+SetarValorVarNum("vData", 39685);   @ vData = 39685 @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

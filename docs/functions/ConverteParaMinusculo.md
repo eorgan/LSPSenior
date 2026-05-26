@@ -11,24 +11,28 @@ Funcao ConverteParaMinusculo(Alfa End aCadCar);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Convertem o conteúdo de uma variável para maiúsculo ou minúsculo.
 
 ## Parâmetros
 
-- **aCadCar** (`Alfa End`) - Saída: [Adicione descrição]
+- **aCadCar** (`Alfa End`) - Saída
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ConverteParaMinusculo();
+Definir Alfa vaNome;
+Definir Alfa vaEmail;
+
+vaNome = "joão SILVA santos";
+vaEmail = "USUARIO@EMPRESA.COM.BR";
+
+@ Padroniza email (tudo minúsculo) @
+ConverteParaMinusculo(vaEmail);
+@ vaEmail será "usuario@empresa.com.br" @
+
+@ Para nome próprio @
+ConverteParaMaiusculo(vaNome); @ Vira "JOÃO SILVA SANTOS" @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

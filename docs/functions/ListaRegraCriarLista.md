@@ -11,24 +11,20 @@ Funcao ListaRegraCriarLista(Numero End aLista);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Cria uma nova lista de regras para armazenar dados estruturados.
 
 ## Parâmetros
 
-- **aLista** (`Numero End`) - Saída: [Adicione descrição]
+- **aLista** (`Numero End`) - Saída: Variável numérica que receberá o identificador da lista criada
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ListaRegraCriarLista();
+Definir Numero nLista;
+
+ListaRegraCriarLista(nLista);
+@ nLista agora contém o identificador da lista criada @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

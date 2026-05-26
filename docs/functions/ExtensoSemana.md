@@ -11,25 +11,23 @@ Funcao ExtensoSemana(Numero DatMon,Alfa end ExtSem);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função monta o extenso do dia da semana de uma determinada data.
 
 ## Parâmetros
 
-- **DatMon** (`Numero`) - Entrada: [Adicione descrição]
-- **ExtSem** (``) - Saída: [Adicione descrição]
+- **DatMon** (`Numero`) - Entrada: Campo/Variável do qual se deseja obter o extenso da semana
+- **ExtSem** (``) - Saída: Variável que receberá o extenso da Semana
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ExtensoSemana();
+Definir Alfa vaSemExt;
+Definir Data vdData;
+
+DataHoje(vdData);
+ExtensoSemana(vdData, vaSemExt);
+@ Se a data fosse 31/12/1900, vaSemExt seria "Sexta-Feira" @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

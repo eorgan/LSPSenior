@@ -11,26 +11,32 @@ Funcao SubstAlfaUmaVez(Alfa aOld, Alfa aNew, Alfa End aDes);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Substituem trechos específicos dentro de um texto por outro texto.
 
 ## Parâmetros
 
-- **aOld** (`Alfa`) - Entrada: [Adicione descrição]
-- **aNew** (`Alfa`) - Entrada: [Adicione descrição]
-- **aDes** (`Alfa End`) - Saída: [Adicione descrição]
+- **aOld** (`Alfa`) - Entrada: Texto a ser localizado e substituído
+- **aNew** (`Alfa`) - Entrada: Texto que irá substituir
+- **aDes** (`Alfa End`) - Saída: Variável que contém o texto original e receberá o resultado
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-SubstAlfaUmaVez();
+Definir Alfa vaTexto;
+Definir Alfa vaTextoLimpo;
+
+vaTexto = "João--Silva--Santos";
+vaTextoLimpo = vaTexto;
+
+@ Substitui todos os traços duplos por espaço simples @
+SubstAlfa("--", " ", vaTextoLimpo);
+@ vaTextoLimpo será "João Silva Santos" @
+
+@ Exemplo com SubstAlfaUmaVez @
+vaTexto = "teste teste teste";
+SubstAlfaUmaVez("teste", "TESTE", vaTexto);
+@ vaTexto será "TESTE teste teste" (apenas o primeiro) @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

@@ -11,25 +11,23 @@ Funcao ConverteDataToDB(Numero DatNum,Alfa End DatAlf);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Converter uma data qualquer, para o formato de data do banco de dados.
 
 ## Parâmetros
 
-- **DatNum** (`Numero`) - Entrada: [Adicione descrição]
-- **DatAlf** (`Alfa End`) - Saída: [Adicione descrição]
+- **DatNum** (`Numero`) - Entrada: É o campo de tabela ou variável que se deseja converter
+- **DatAlf** (`Alfa End`) - Saída: É uma variável tipo Alfa, que conterá o retorno da conversão
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ConverteDataToDB();
+Definir Alfa vaDataStr;
+Definir Data vdData;
+
+vdData = 31/12/1900;
+ConverteDataToDB(vdData, vaDataStr);
+@ vaDataStr = "to_date('31/12/1900','DD/MM/YYYY')" ou formato do banco usado @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

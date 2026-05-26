@@ -11,25 +11,28 @@ Funcao PegarTipoVar(Alfa aVar, Numero End aTipo);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retorna o tipo de uma variável qualquer, passada como string.
 
 ## Parâmetros
 
-- **aVar** (`Alfa`) - Entrada: [Adicione descrição]
-- **aTipo** (`Numero End`) - Saída: [Adicione descrição]
+- **aVar** (`Alfa`) - Entrada: String contendo o nome da variável a ser verificada
+- **aTipo** (`Numero End`) - Saída: Variável numérica que receberá o código do tipo (retorno)
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-PegarTipoVar();
+Definir Numero vNum;
+Definir Data vDat;
+Definir Alfa vAlf;
+Definir Cursor vCur;
+Definir Numero vTipo;
+
+PegarTipoVar("vNum", vTipo); @ vTipo = 0 @
+PegarTipoVar("vDat", vTipo); @ vTipo = 1 @
+PegarTipoVar("vAlf", vTipo); @ vTipo = 2 @
+PegarTipoVar("vCur", vTipo); @ vTipo = 9 @
+PegarTipoVar("vXXX", vTipo); @ vTipo = -1 @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

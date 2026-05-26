@@ -11,25 +11,22 @@ Funcao StrParaInt(Alfa Origem, Numero End Retorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Converte um valor alfanumérico (string) para o tipo Inteiro. Esta função é equivalente a `AlfaParaInt` e é mantida para compatibilidade.
 
 ## Parâmetros
 
-- **Origem** (`Alfa`) - Entrada: [Adicione descrição]
-- **Retorno** (`Numero End`) - Saída: [Adicione descrição]
+- **Origem** (`Alfa`) - Entrada: Valor alfanumérico a ser convertido
+- **Retorno** (`Numero End`) - Saída: Variável que receberá o valor convertido
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-StrParaInt();
+Definir Alfa vaTexto;
+Definir Numero vnInteiro;
+
+vaTexto = "456";
+StrParaInt(vaTexto, vnInteiro); @ vnInteiro será 456 @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

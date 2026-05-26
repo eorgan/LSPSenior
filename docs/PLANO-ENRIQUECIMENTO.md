@@ -91,8 +91,14 @@ Critério de pronto:
   documentadas têm descrição real e re-rodar **preserva** (não regride ao genérico).
 - Abrir um `.lsp`, passar o mouse sobre `RetDiaSemana` → hover mostra descrição real.
 
-### Fase 2 — Popular `docs/functions/*.md` reais
+### Fase 2 — Popular `docs/functions/*.md` reais ✅ CONCLUÍDA
 **Tier:** médio
+
+> **Resultado:** `generate-functions.js` (funções `buildRichDoc`/`isStub`/`createDocFile`)
+> gera `.md` com descrição, parâmetros casados (nome/posição), valores de retorno e
+> exemplo real. Sobrescreve **apenas stubs** (marcadores `Adicione aqui a descrição` /
+> `[Adicione descrição]`); docs editados à mão nunca são tocados. **57 docs preenchidos**,
+> 312 seguem stub. Idempotente: 2ª execução não re-sobrescreve docs já ricos.
 
 Entregáveis:
 1. Estender `generate-functions.js` (ou script dedicado) para, quando houver overlay,

@@ -11,24 +11,26 @@ funcao DeixaNumeros(Alfa End pNumAlf);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Remove todos os caracteres não numéricos de uma string, mantendo apenas os dígitos.
 
 ## Parâmetros
 
-- **pNumAlf** (`Alfa End`) - Saída: [Adicione descrição]
+- **pNumAlf** (`Alfa End`) - Saída: Variável alfa que será modificada, mantendo apenas números
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-DeixaNumeros();
+Definir Alfa vaCEP;
+Definir Alfa vaTelefone;
+
+vaCEP = "86710-180";
+DeixaNumeros(vaCEP);
+@ vaCEP será "86710180" @
+
+vaTelefone = "(43) 3234-5678";
+DeixaNumeros(vaTelefone);
+@ vaTelefone será "4332345678" @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

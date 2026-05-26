@@ -11,25 +11,21 @@ Funcao ConverteDataSqlSenior2(Numero aDatNum, Alfa End aDatSql);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Converter datas para o formato SQL Senior 2.
 
 ## Parâmetros
 
-- **aDatNum** (`Numero`) - Entrada: [Adicione descrição]
-- **aDatSql** (`Alfa End`) - Saída: [Adicione descrição]
+- **aDatNum** (`Numero`) - Entrada: Data a ser convertida
+- **aDatSql** (`Alfa End`) - Saída: Data em formato SQL Senior 2 (retorno)
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ConverteDataSqlSenior2();
+Definir Alfa vaSqlAux;
+ConverteDataSqlSenior2(DatSis, vaSqlAux);
+vaSqlAux = "E000LPA.DATINI = " + vaSqlAux;
+InsClauSQLWhere("Detalhe_000LPA", vaSqlAux);
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

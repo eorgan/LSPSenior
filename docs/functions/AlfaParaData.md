@@ -11,25 +11,22 @@ Funcao AlfaParaData(Alfa pDataAlfa, Numero End pDataNum);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Converte um valor alfanumérico para o tipo Data.
 
 ## Parâmetros
 
-- **pDataAlfa** (`Alfa`) - Entrada: [Adicione descrição]
-- **pDataNum** (`Numero End`) - Saída: [Adicione descrição]
+- **pDataAlfa** (`Alfa`) - Entrada
+- **pDataNum** (`Numero End`) - Saída
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-AlfaParaData();
+Definir Alfa vaTexto;
+Definir Data vdData;
+
+vaTexto = "01/01/2020";
+AlfaParaData(vaTexto, vdData); @ vdData será 01/01/2020 @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

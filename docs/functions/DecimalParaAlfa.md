@@ -11,25 +11,22 @@ funcao DecimalParaAlfa(numero Origem, Alfa End Retorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Converte um valor numérico (`Numero`) para alfanumérico **preservando a parte decimal** na string resultante (formato exibido conforme o ambiente).
 
 ## Parâmetros
 
-- **Origem** (`numero`) - Entrada: [Adicione descrição]
-- **Retorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **Origem** (`numero`) - Entrada: Valor do tipo `Numero` (inteiro ou com decimais)
+- **Retorno** (`Alfa End`) - Saída: Variável `Alfa` que receberá a representação textual
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-DecimalParaAlfa();
+Definir Numero vnValor;
+Definir Alfa vaTexto;
+
+vnValor = 123.45;
+DecimalParaAlfa(vnValor, vaTexto); @ vaTexto adequado para exibir o decimal @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.

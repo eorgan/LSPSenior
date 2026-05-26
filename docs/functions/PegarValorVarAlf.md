@@ -11,25 +11,29 @@ Funcao PegarValorVarAlf(Alfa aVar, Alfa End aAlfVal);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retorna o valor de uma variável alfanumérica identificada por nome.
 
 ## Parâmetros
 
-- **aVar** (`Alfa`) - Entrada: [Adicione descrição]
-- **aAlfVal** (`Alfa End`) - Saída: [Adicione descrição]
+- **aVar** (`Alfa`) - Entrada: String contendo o nome da variável
+- **aAlfVal** (`Alfa End`) - Saída: Variável alfa que receberá o valor
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-PegarValorVarAlf();
+Definir Alfa vTexto;
+Definir Alfa vValor;
+Definir Alfa vNomeVar;
+
+vTexto = "Conteúdo da variável";
+vNomeVar = "vTexto";
+
+PegarValorVarAlf(vNomeVar, vValor);
+@ vValor será "Conteúdo da variável" @
+
+@ Erro se tentar acessar variável de tipo diferente @
+@ PegarValorVarAlf("vnNumero", vValor); @ Gerará erro @
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
+> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
