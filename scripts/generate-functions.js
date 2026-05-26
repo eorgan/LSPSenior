@@ -12,6 +12,20 @@ const path = require('path');
 const CSV_PATH = path.join(__dirname, '..', 'Exemplos de Arquivos', 'funcoes.csv');
 const OUTPUT_JSON = path.join(__dirname, '..', 'functions.json');
 const DOCS_DIR = path.join(__dirname, '..', 'docs', 'functions');
+const OVERLAY_PATH = path.join(__dirname, '..', 'data', 'functions-doc.json');
+
+/**
+ * Carrega a camada de overlay com descrições reais extraídas do manual.
+ * Gerada por scripts/extract-from-docs.js. Ausente = nenhum enriquecimento.
+ */
+function loadOverlay() {
+   try {
+      return JSON.parse(fs.readFileSync(OVERLAY_PATH, 'utf8'));
+   } catch (error) {
+      console.warn(`⚠️  Overlay não encontrado (${OVERLAY_PATH}). Usando descrições genéricas.`);
+      return {};
+   }
+}
 
 /**
  * Parseia uma linha do CSV
@@ -173,13 +187,24 @@ function main() {
    const csvContent = fs.readFileSync(CSV_PATH, 'utf8');
    const lines = csvContent.split('\n');
 
+   // Overlay com descrições reais do manual (mescladas por nome de função).
+   const overlay = loadOverlay();
+
    const functions = {};
    let count = 0;
+   let enriched = 0;
 
    for (const line of lines) {
       const funcData = parseCSVLine(line);
 
       if (funcData) {
+         // Enriquecimento: substitui a descrição genérica pela do manual, se houver.
+         const doc = overlay[funcData.name];
+         if (doc && doc.description) {
+            funcData.description = doc.description;
+            enriched++;
+         }
+
          functions[funcData.name] = funcData;
 
          // Cria arquivo de documentação
@@ -199,6 +224,7 @@ function main() {
 
    console.log(`\n✅ Processamento completo!`);
    console.log(`   Total de funções: ${count}`);
+   console.log(`   Enriquecidas pelo manual: ${enriched}`);
    console.log(`   Arquivo gerado: ${OUTPUT_JSON}`);
    console.log(`   Documentação: ${DOCS_DIR}`);
    console.log(`\n💡 Você pode agora preencher a documentação em docs/functions/`);

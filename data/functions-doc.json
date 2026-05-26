@@ -1,0 +1,512 @@
+{
+  "AlfaParaData": {
+    "description": "Converte um valor alfanumérico para o tipo Data.",
+    "syntax": "AlfaParaData(<texto>, <data>);",
+    "example": "Definir Alfa vaTexto;\nDefinir Data vdData;\n\nvaTexto = \"01/01/2020\";\nAlfaParaData(vaTexto, vdData); @ vdData será 01/01/2020 @"
+  },
+  "AlfaParaDecimal": {
+    "description": "Converte um valor alfanumérico para o tipo Decimal.",
+    "syntax": "AlfaParaDecimal(<texto>, <decimal>);",
+    "params": {
+      "texto": "Valor alfanumérico a ser convertido (formato brasileiro com vírgula)",
+      "decimal": "Variável que receberá o valor convertido"
+    },
+    "example": "Definir Alfa vaTexto;\nDefinir Numero vnDecimal;\n\nvaTexto = \"123,45\";  @ Formato brasileiro com vírgula @\nAlfaParaDecimal(vaTexto, vnDecimal); @ vnDecimal será 123.45 @"
+  },
+  "AnoBissexto": {
+    "description": "Esta função tem por objetivo retornar a informação se um ano é ou não bissexto tomando como base o ano da data passada.",
+    "syntax": "AnoBissexto(<data>, <bissexto>);",
+    "params": {
+      "data": "Recebe a data base a ser verificada",
+      "bissexto": "Retorna a indicação se o ano é bissexto:"
+    },
+    "example": "Definir Data vdData;\nDefinir Numero vnBissexto;\n\nvdData = 02/07/2018;\nAnoBissexto(vdData, vnBissexto);\n@ vnBissexto será 0 (não bissexto) @"
+  },
+  "Arredonda": {
+    "description": "Esta função arredonda um valor tipo acerto, conforme a precisão informada.",
+    "syntax": "Arredonda Valor Tipo Acerto(<valor>, <tipoAcerto>);",
+    "params": {
+      "valor": "Qualquer valor que se deseja arredondar"
+    },
+    "example": "Definir Numero vnValor;\nvnValor = 1475.12845;\nArredonda Valor Tipo Acerto(vnValor, 1); @ Retorna 1475.13 @\nArredonda Valor Tipo Acerto(vnValor, 2); @ Retorna 1475.12 @"
+  },
+  "ArredondaABNT": {
+    "description": "Esta função aplica a regra de arredondamento da ABNT, conforme a precisão informada.",
+    "syntax": "ArredondaABNT(<valor>, <decimais>);",
+    "params": {
+      "valor": "Variável que será arredondada",
+      "decimais": "Variável numérica que indica a quantidade de casas decimais do arredondamento"
+    },
+    "example": "Definir Numero vnValor;\nvnValor = 1577.87;\nArredondaABNT(vnValor, 1);\n@ vnValor será 1577.90 @\n\nArredondaABNT(vnValor, 0);\n@ vnValor será 1578.00 @"
+  },
+  "ArredondarValor": {
+    "description": "Esta função arredonda determinado valor, conforme a precisão informada.",
+    "syntax": "ArredondarValor(<valorVariavel>, <precisao>);",
+    "params": {
+      "valorVariavel": "Campo ou variável que deseja-se arredondar",
+      "precisao": "Quantidade de casas decimais para precisão do arredondamento. Se for informado 0 (zero), faz o arredondamento na parte inteira do resultado"
+    },
+    "example": "Definir Numero vnVlrNum;\nvnVlrNum = 1577.87;\nArredondarValor(vnVlrNum, 1); @ Retorno será 1577.90 @\nArredondarValor(vnVlrNum, 0); @ Retorno será 1578.00 @"
+  },
+  "CarregarTextoArq": {
+    "description": "Esta função carrega para uma variável alfanumérica o conteúdo de um arquivo texto.",
+    "syntax": "CarregarTextoArq(<arquivo>, <texto>);",
+    "params": {
+      "arquivo": "Variável com o caminho do arquivo a ser lido",
+      "texto": "Variável que retorna o texto lido do arquivo"
+    },
+    "example": "Definir Alfa vaTexto;\nCarregarTextoArq(\"C:\\\\Senior\\\\Sapiens\\\\Arquivo.txt\", vaTexto);"
+  },
+  "Concatena": {
+    "description": "Esta função concatena até 3 campo/variáveis tipo alfa, formando uma só variável.",
+    "syntax": "Concatena(<str1>, <str2>, <str3>, <destino>);",
+    "params": {
+      "str1": "Campo/Variável que será concatenado",
+      "str2": "Campo/Variável que será concatenado",
+      "str3": "Campo/Variável que será concatenado",
+      "destino": "Variável que receberá o resultado da concatenação (retorno)"
+    },
+    "example": "Definir Alfa vaResultado;\nDefinir Alfa vaNome;\nDefinir Alfa vaApelido;\n\nvaNome = \"Pedro Luiz Souza\";\nvaApelido = \"Pedrão\";\n\nConcatena(vaNome, \" - \", vaApelido, vaResultado);\n@ vaResultado será \"Pedro Luiz Souza - Pedrão\" @"
+  },
+  "ConverteDataBanco": {
+    "description": "Converter uma data qualquer, para o formato de data do banco de dados.",
+    "syntax": "ConverteDataBanco(<datNum>, <datAlf>);",
+    "params": {
+      "datNum": "É o campo de tabela ou variável que se deseja converter",
+      "datAlf": "É uma variável que conterá o retorno da conversão"
+    },
+    "example": "Definir Alfa vaDataStr;\nDefinir Data vdData;\n\nvdData = 31/12/1900;\nConverteDataBanco(vdData, vaDataStr);\n@ vaDataStr = \"to_date('31/12/1900','DD/MM/YYYY')\" ou formato do banco usado @"
+  },
+  "ConverteDataSqlSenior2": {
+    "description": "Converter datas para o formato SQL Senior 2.",
+    "syntax": "ConverteDataSqlSenior2(<datNum>, <datSql>);",
+    "params": {
+      "datNum": "Data a ser convertida",
+      "datSql": "Data em formato SQL Senior 2 (retorno)"
+    },
+    "example": "Definir Alfa vaSqlAux;\nConverteDataSqlSenior2(DatSis, vaSqlAux);\nvaSqlAux = \"E000LPA.DATINI = \" + vaSqlAux;\nInsClauSQLWhere(\"Detalhe_000LPA\", vaSqlAux);"
+  },
+  "ConverteDataToDB": {
+    "description": "Converter uma data qualquer, para o formato de data do banco de dados.",
+    "syntax": "ConverteDataToDB(<datNum>, <datAlf>);",
+    "params": {
+      "datNum": "É o campo de tabela ou variável que se deseja converter",
+      "datAlf": "É uma variável tipo Alfa, que conterá o retorno da conversão"
+    },
+    "example": "Definir Alfa vaDataStr;\nDefinir Data vdData;\n\nvdData = 31/12/1900;\nConverteDataToDB(vdData, vaDataStr);\n@ vaDataStr = \"to_date('31/12/1900','DD/MM/YYYY')\" ou formato do banco usado @"
+  },
+  "ConverteParaMaiusculo": {
+    "description": "Convertem o conteúdo de uma variável para maiúsculo ou minúsculo.",
+    "syntax": "ConverteParaMaiusculo(<texto>);",
+    "example": "Definir Alfa vaNome;\nDefinir Alfa vaEmail;\n\nvaNome = \"joão SILVA santos\";\nvaEmail = \"USUARIO@EMPRESA.COM.BR\";\n\n@ Padroniza email (tudo minúsculo) @\nConverteParaMinusculo(vaEmail);\n@ vaEmail será \"usuario@empresa.com.br\" @\n\n@ Para nome próprio @\nConverteParaMaiusculo(vaNome); @ Vira \"JOÃO SILVA SANTOS\" @"
+  },
+  "ConverteParaMinusculo": {
+    "description": "Convertem o conteúdo de uma variável para maiúsculo ou minúsculo.",
+    "syntax": "ConverteParaMaiusculo(<texto>);",
+    "example": "Definir Alfa vaNome;\nDefinir Alfa vaEmail;\n\nvaNome = \"joão SILVA santos\";\nvaEmail = \"USUARIO@EMPRESA.COM.BR\";\n\n@ Padroniza email (tudo minúsculo) @\nConverteParaMinusculo(vaEmail);\n@ vaEmail será \"usuario@empresa.com.br\" @\n\n@ Para nome próprio @\nConverteParaMaiusculo(vaNome); @ Vira \"JOÃO SILVA SANTOS\" @"
+  },
+  "CopiarStr": {
+    "description": "Copiam parte do conteúdo de uma variável/campo alfanumérico modificando a própria variável de origem.",
+    "syntax": "CopiarAlfa(<variavel>, <posicao>, <tamanho>);",
+    "params": {
+      "variavel": "Variável que contém o texto e que será modificada para conter apenas a parte copiada",
+      "posicao": "Posição inicial (baseada em 1)",
+      "tamanho": "Quantidade de caracteres a copiar"
+    },
+    "example": "Definir Alfa vaTexto;\nDefinir Alfa vaNome;\nDefinir Alfa vaSobrenome;\n\n@ Para extrair \"João\" @\nvaTexto = \"João Silva Santos\";\nvaNome = vaTexto;  @ Faz uma cópia primeiro @\nCopiarAlfa(vaNome, 1, 4); @ vaNome será \"João\" @\n\n@ Para extrair \"Silva\" @\nvaSobrenome = vaTexto;  @ Faz uma cópia primeiro @\nCopiarAlfa(vaSobrenome, 6, 5); @ vaSobrenome será \"Silva\" @"
+  },
+  "DataExtenso": {
+    "description": "Esta função gera o extenso de determinada data.",
+    "syntax": "DataExtenso(<data>, <extenso>);",
+    "params": {
+      "data": "Campo/Variável a partir do qual se deseja gerar o extenso",
+      "extenso": "Variável que retornará o extenso da data"
+    },
+    "example": "Definir Data vdData;\nDefinir Alfa vaExtenso;\n\nvdData = E210MVP.DatMov;\nDataExtenso(vdData, vaExtenso);\n@ vaExtenso vai conter a data por extenso @"
+  },
+  "DecimalParaAlfa": {
+    "description": "Converte um valor numérico (`Numero`) para alfanumérico **preservando a parte decimal** na string resultante (formato exibido conforme o ambiente).",
+    "syntax": "DecimalParaAlfa(<numero>, <texto>);",
+    "params": {
+      "numero": "Valor do tipo `Numero` (inteiro ou com decimais)",
+      "texto": "Variável `Alfa` que receberá a representação textual"
+    },
+    "example": "Definir Numero vnValor;\nDefinir Alfa vaTexto;\n\nvnValor = 123.45;\nDecimalParaAlfa(vnValor, vaTexto); @ vaTexto adequado para exibir o decimal @"
+  },
+  "DeixaNumeros": {
+    "description": "Remove todos os caracteres não numéricos de uma string, mantendo apenas os dígitos.",
+    "syntax": "DeixaNumeros(<texto>);",
+    "params": {
+      "texto": "Variável alfa que será modificada, mantendo apenas números"
+    },
+    "example": "Definir Alfa vaCEP;\nDefinir Alfa vaTelefone;\n\nvaCEP = \"86710-180\";\nDeixaNumeros(vaCEP);\n@ vaCEP será \"86710180\" @\n\nvaTelefone = \"(43) 3234-5678\";\nDeixaNumeros(vaTelefone);\n@ vaTelefone será \"4332345678\" @"
+  },
+  "DeletarStr": {
+    "description": "Elimina parte de um texto.",
+    "syntax": "DeletarStr(<origem>, <posicao>, <quantidade>);",
+    "params": {
+      "origem": "Variável que passará o texto cuja parte será deletada",
+      "posicao": "Variável que indica a posição de início da eliminação",
+      "quantidade": "Variável que indica a quantidade de caracteres a serem eliminados"
+    },
+    "example": "Definir Alfa vaOrigem;\nvaOrigem = \"Senior empresa de Sistemas\";\nDeletarStr(vaOrigem, 8, 11);\n@ vaOrigem será \"Senior Sistemas\" @"
+  },
+  "DesMontaData": {
+    "description": "Esta função desmonta uma data, separando em três variáveis, as informações Dia/Mês/Ano da data.",
+    "syntax": "DesMontaData(<data>, <dia>, <mes>, <ano>);",
+    "params": {
+      "data": "Campo/Variável a ser desmontada",
+      "dia": "Variável tipo Numero que receberá o dia da data a ser desmontada",
+      "mes": "Variável tipo Numero que receberá o mês da data a ser desmontada",
+      "ano": "Variável tipo Numero que receberá o ano da data a ser desmontada"
+    },
+    "example": "Definir Data vdDataEmissao;\nDefinir Numero vnDia;\nDefinir Numero vnMes;\nDefinir Numero vnAno;\n\nvdDataEmissao = E140NFV.DatEmi;\nDesMontaData(vdDataEmissao, vnDia, vnMes, vnAno);\n@ Se a data fosse 24/04/1995: vnDia=24, vnMes=04, vnAno=1995 @"
+  },
+  "EstaNulo": {
+    "description": "Verifica se uma variável está nula (vazia ou não inicializada).",
+    "syntax": "EstaNulo(<variavel>, <resultado>);",
+    "params": {
+      "variavel": "Variável a ser verificada",
+      "resultado": "Variável numérica que receberá 1 se nula, 0 se não nula"
+    },
+    "example": "Definir Alfa vaTexto;\nDefinir Numero vnEhNulo;\n\nEstaNulo(vaTexto, vnEhNulo);\nSe (vnEhNulo = 1) {\n  Mensagem(Retorna, \"Variável está nula\");\n} Senao {\n  Mensagem(Retorna, \"Variável contém dados\");\n}"
+  },
+  "Extenso": {
+    "description": "Esta função gera o extenso de um valor.\n\n**⚠️ Importante:** Esta função contempla no máximo duas casas decimais após a vírgula. Caso o valor tenha três ou mais casas decimais após a vírgula, ele será arredondado para o valor real de duas.",
+    "syntax": "Extenso(<valor>, <tamanhoLinha1>, <tamanhoLinha2>, <tamanhoLinha3>, <linha1>, <linha2>, <linha3>);",
+    "params": {
+      "valor": "Campo/Variável do qual se deseja obter o extenso",
+      "tamanhoLinha1": "Quantidade de caracteres que será usado na primeira linha para geração do extenso",
+      "tamanhoLinha2": "Quantidade de caracteres que será usado na segunda linha para geração do extenso",
+      "tamanhoLinha3": "Quantidade de caracteres que será usado na terceira linha para geração do extenso",
+      "linha1": "Variável que receberá a primeira linha do extenso do valor (retorno)",
+      "linha2": "Variável que receberá a segunda linha do extenso do valor (retorno)",
+      "linha3": "Variável que receberá a terceira linha do extenso do valor (retorno)"
+    },
+    "example": "Definir Alfa vaExtLin1;\nDefinir Alfa vaExtLin2;\nDefinir Alfa vaExtLin3;\nDefinir Numero vnQuantidade;\n\nvnQuantidade = 1577350;\nExtenso(vnQuantidade, 30, 30, 30, vaExtLin1, vaExtLin2, vaExtLin3);\n@ vaExtLin1 = \"Um milhao, quinhentos e ******\" @\n@ vaExtLin2 = \"setenta e sete mil e *********\" @\n@ vaExtLin3 = \"trezentos e cinquenta reais **\" @"
+  },
+  "ExtensoMes": {
+    "description": "Esta função monta o extenso do mês de uma determinada data.",
+    "syntax": "ExtensoMes(<datMon>, <extMes>);",
+    "params": {
+      "datMon": "Campo/Variável do qual se deseja obter o extenso do mês",
+      "extMes": "Variável tipo Alfa que receberá o extenso do mês"
+    },
+    "example": "Definir Alfa vaMesExt;\nDefinir Data vdData;\n\nDataHoje(vdData);\nExtensoMes(vdData, vaMesExt);\n@ Se a data fosse 31/12/1900, vaMesExt seria \"Dezembro\" @"
+  },
+  "ExtensoSemana": {
+    "description": "Esta função monta o extenso do dia da semana de uma determinada data.",
+    "syntax": "ExtensoSemana(<datMon>, <extSem>);",
+    "params": {
+      "datMon": "Campo/Variável do qual se deseja obter o extenso da semana",
+      "extSem": "Variável que receberá o extenso da Semana"
+    },
+    "example": "Definir Alfa vaSemExt;\nDefinir Data vdData;\n\nDataHoje(vdData);\nExtensoSemana(vdData, vaSemExt);\n@ Se a data fosse 31/12/1900, vaSemExt seria \"Sexta-Feira\" @"
+  },
+  "InserirAlfa": {
+    "description": "Insere um ou mais caracteres em uma variável/campo, a partir da posição indicada.",
+    "syntax": "InserirAlfa(<valor>, <origem>, <posicao>);",
+    "params": {
+      "valor": "Variável que contém a string que deseja-se inserir",
+      "origem": "Variável que contém a string de origem e que receberá o conteúdo da inserção",
+      "posicao": "Variável que indica a posição em Origem a partir de onde Valor será inserido"
+    },
+    "example": "Definir Alfa vaOrigem;\nvaOrigem = \"Senior Sistemas\";\nInserirAlfa(\"empresa de \", vaOrigem, 8);\n@ vaOrigem será \"Senior empresa de Sistemas\" @"
+  },
+  "InserirStr": {
+    "description": "Esta função insere um ou mais caracteres em uma Variável/Campo, a partir da posição indicada.",
+    "syntax": "InserirStr(<valor>, <origem>, <posicao>);",
+    "params": {
+      "valor": "Variável que contém a string que deseja-se inserir",
+      "origem": "Variável que contém a string de origem e que receberá o conteúdo da inserção",
+      "posicao": "Variável que indica a posição em Origem a partir de onde Valor será inserido"
+    },
+    "example": "Definir Alfa vaOrigem;\nvaOrigem = \"Senior Sistemas\";\nInserirStr(\"empresa de \", vaOrigem, 8);\n@ vaOrigem será \"Senior empresa de Sistemas\" @"
+  },
+  "IntParaStr": {
+    "description": "Converte um valor inteiro para o tipo String (Alfanumérico). Esta função é equivalente a `IntParaAlfa` e é mantida para compatibilidade.",
+    "syntax": "IntParaStr(<inteiro>, <texto>);",
+    "params": {
+      "inteiro": "Valor inteiro a ser convertido",
+      "texto": "Variável alfanumérica que receberá o resultado da conversão"
+    },
+    "example": "Definir Numero vnInteiro;\nDefinir Alfa vaTexto;\n\nvnInteiro = 789;\nIntParaStr(vnInteiro, vaTexto); @ vaTexto será \"789\" @"
+  },
+  "LimpaEspacos": {
+    "description": "Limpa os espaços em branco à direita e à esquerda de uma variável alfanumérica.",
+    "syntax": "LimpaEspacos(<texto>);",
+    "example": "Definir Alfa vaTexto;\nvaTexto = \"  texto com espaços  \";\nLimpaEspacos(vaTexto);\n@ vaTexto será \"texto com espaços\" @"
+  },
+  "LimpaEspacosDireita": {
+    "description": "Limpa os espaços em branco à direita de uma variável alfanumérica.",
+    "syntax": "LimpaEspacosDireita(<texto>);",
+    "example": "Definir Alfa vaTexto;\nvaTexto = \"  texto com espaços  \";\nLimpaEspacosDireita(vaTexto);\n@ vaTexto será \"  texto com espaços\" @"
+  },
+  "LimpaEspacosEsquerda": {
+    "description": "Limpa os espaços em branco à esquerda de uma variável alfanumérica.",
+    "syntax": "LimpaEspacosEsquerda(<texto>);",
+    "example": "Definir Alfa vaTexto;\nvaTexto = \"  texto com espaços  \";\nLimpaEspacosEsquerda(vaTexto);\n@ vaTexto será \"texto com espaços  \" @"
+  },
+  "LimpaGerTabAlf": {
+    "description": "Limpa o conteúdo do Registro GerTabAlf.",
+    "syntax": "LimpaGerTabAlf();",
+    "example": "GerTabAlf[1] = \"xxx\";\nLimpaGerTabAlf();\n@ Todos os elementos do GerTabAlf serão limpos @"
+  },
+  "LimpaGerTabNum": {
+    "description": "Limpa o conteúdo do Registro GerTabNum.",
+    "syntax": "LimpaGerTabNum();",
+    "example": "GerTabNum[1] = 1;\nLimpaGerTabNum();\n@ Todos os elementos do GerTabNum serão limpos @"
+  },
+  "ListaRegraCriarLista": {
+    "description": "Cria uma nova lista de regras para armazenar dados estruturados.",
+    "syntax": "ListaRegraCriarLista(<numeroLista>);",
+    "params": {
+      "numeroLista": "Variável numérica que receberá o identificador da lista criada"
+    },
+    "example": "Definir Numero nLista;\n\nListaRegraCriarLista(nLista);\n@ nLista agora contém o identificador da lista criada @"
+  },
+  "MontaAbrangencia": {
+    "description": "Função utilizada para retornar uma cláusula SQL de acordo com um campo e uma abrangência de valores.\n\nPara montar abrangências de local quando existem valores especiais (\"1.1.111==\", por exemplo), deve ser utilizado o campo NumLoc nesta função. O campo CodLoc não é tratado pela função nesta situação.",
+    "syntax": "MontaAbrangencia(<tabela>, <valores>, <sqlAbr>);",
+    "params": {
+      "tabela": "Variável que recebe o campo da tabela que vai ser montada a abrangência",
+      "valores": "Variável que contém a faixa de valores na forma de abrangência",
+      "sqlAbr": "Variável alfa que retorna a cláusula SQL correspondente à abrangência informada"
+    },
+    "example": "Definir Funcao validarCodigos();\n\n  @ Variáveis globais @\n  Definir Alfa vaCodigo;\n  Definir Numero vnNumero;\n  Definir Alfa vaAbrangenciaAlfa;\n  Definir Alfa vaAbrangenciaNum;\n  Definir Numero vnResultadoAlfa;\n  Definir Numero vnResultadoNum;\n  Definir Alfa vaMensagem;\n\nvaCodigo = \"B\";\nvnNumero = 150;\nvaAbrangenciaAlfa = \"A..Z\";\nvaAbrangenciaNum = \"100..200\";\n\nvalidarCodigos();\n\nFuncao validarCodigos(); {\n  @ Verifica abrangência alfanumérica @\n  VrfAbrA(vaCodigo, vaAbrangenciaAlfa, vnResultadoAlfa);\n  Se (vnResultadoAlfa = 1) {\n    Definir Alfa vaMensagemCodigo;\n    vaMensagemCodigo = \"Código '\" + vaCodigo + \"' válido na abrangência \" + vaAbrangenciaAlfa;\n    Mensagem(Retorna, vaMensagemCodigo);\n  } Senao {\n    vaMensagemCodigo = \"Código '\" + vaCodigo + \"' fora da abrangência \" + vaAbrangenciaAlfa;\n    Mensagem(Erro, vaMensagemCodigo);\n  }\n  \n  @ Verifica abrangência numérica @\n  VrfAbrN(vnNumero, vaAbrangenciaNum, vnResultadoNum);\n  Se (vnResultadoNum = 1) {\n    Definir Alfa vaNumeroStr;\n    IntParaAlfa(vnNumero, vaNumeroStr);\n    Definir Alfa vaMensagemNumero;\n    vaMensagemNumero = \" Número \" + vaNumeroStr + \" válido na abrangência \" + vaAbrangenciaNum;\n    Mensagem(Retorna, vaMensagemNumero);\n  } Senao {\n    IntParaAlfa(vnNumero, vaNumeroStr);\n    vaMensagemNumero = \"Número \" + vaNumeroStr + \" fora da abrangência \" + vaAbrangenciaNum;\n    Mensagem(Erro, vaMensagemNumero);\n  }\n}"
+  },
+  "MontaData": {
+    "description": "Esta função concatena três variáveis, formando uma data. É uma alternativa ao CodData com sintaxe diferente.",
+    "syntax": "MontaData(<dia>, <mes>, <ano>, <data>);",
+    "params": {
+      "dia": "Dia da data a ser gerada",
+      "mes": "Mês da data a ser gerada",
+      "ano": "Ano da data a ser gerada (deve ter 4 dígitos, ex: 1998)",
+      "data": "Variável do tipo Número ou Data que receberá o resultado"
+    },
+    "example": "Definir Numero vnDia;\nDefinir Numero vnMes;\nDefinir Numero vnAno;\nDefinir Data vdData;\n\nvnDia = 1;\nvnMes = 9;\nvnAno = 1998;\n\nMontaData(vnDia, vnMes, vnAno, vdData);\n@ vdData conterá \"01/09/1998\" @"
+  },
+  "MultiplicaValor": {
+    "description": "Esta função multiplica um número no formato alfanumérico por um fator de multiplicação numérico e retorna o resultado desta multiplicação em uma variável alfanumérica.",
+    "syntax": "MultiplicaValor(<multiplicando>, <fator>, <retorno>);",
+    "params": {
+      "multiplicando": "Campo/Variável que contém o valor a ser multiplicado",
+      "fator": "Campo/Variável que contém o fator de multiplicação",
+      "retorno": "Campo/Variável que retorna o resultado da multiplicação"
+    },
+    "example": "Definir Alfa vaNumOriginal;\nDefinir Alfa vaNumMultiplicado;\nDefinir Numero vnFator;\n\nvaNumOriginal = \"0000237259400000216555\";\nvnFator = 5;\nMultiplicaValor(vaNumOriginal, vnFator, vaNumMultiplicado);\n@ vaNumMultiplicado será \"1186297000001082775\" @"
+  },
+  "PegarTipoVar": {
+    "description": "Retorna o tipo de uma variável qualquer, passada como string.",
+    "syntax": "PegarTipoVar(<nomeVariavel>, <tipo>);",
+    "params": {
+      "nomeVariavel": "String contendo o nome da variável a ser verificada",
+      "tipo": "Variável numérica que receberá o código do tipo (retorno)"
+    },
+    "example": "Definir Numero vNum;\nDefinir Data vDat;\nDefinir Alfa vAlf;\nDefinir Cursor vCur;\nDefinir Numero vTipo;\n\nPegarTipoVar(\"vNum\", vTipo); @ vTipo = 0 @\nPegarTipoVar(\"vDat\", vTipo); @ vTipo = 1 @\nPegarTipoVar(\"vAlf\", vTipo); @ vTipo = 2 @\nPegarTipoVar(\"vCur\", vTipo); @ vTipo = 9 @\nPegarTipoVar(\"vXXX\", vTipo); @ vTipo = -1 @"
+  },
+  "PegarValorVarAlf": {
+    "description": "Retorna o valor de uma variável alfanumérica identificada por nome.",
+    "syntax": "PegarValorVarAlf(<nomeVariavel>, <valorRetorno>);",
+    "params": {
+      "nomeVariavel": "String contendo o nome da variável",
+      "valorRetorno": "Variável alfa que receberá o valor"
+    },
+    "example": "Definir Alfa vTexto;\nDefinir Alfa vValor;\nDefinir Alfa vNomeVar;\n\nvTexto = \"Conteúdo da variável\";\nvNomeVar = \"vTexto\";\n\nPegarValorVarAlf(vNomeVar, vValor);\n@ vValor será \"Conteúdo da variável\" @\n\n@ Erro se tentar acessar variável de tipo diferente @\n@ PegarValorVarAlf(\"vnNumero\", vValor); @ Gerará erro @"
+  },
+  "PegarValorVarNum": {
+    "description": "Retorna o valor de uma variável numérica ou de data identificada por nome.",
+    "syntax": "PegarValorVarNum(<nomeVariavel>, <valorRetorno>);",
+    "params": {
+      "nomeVariavel": "String contendo o nome da variável",
+      "valorRetorno": "Variável numérica que receberá o valor"
+    },
+    "example": "Definir Numero vNumero;\nDefinir Data vData;\nDefinir Numero vValor;\n\nvNumero = 15;\nvData = 39647;\n\nPegarValorVarNum(\"vNumero\", vValor); @ vValor = 15 @\nPegarValorVarNum(\"vData\", vValor);   @ vValor = 39647 @"
+  },
+  "PosicaoStr": {
+    "description": "Procuram por uma parte de texto dentro de um campo/variável, retornando a posição inicial através de parâmetro.",
+    "syntax": "PosicaoAlfa(<subtexto>, <texto>, <posicao>);",
+    "params": {
+      "subtexto": "Texto que se está procurando",
+      "texto": "Campo/variável onde fazer a busca",
+      "posicao": "Variável que receberá a posição inicial (0 se não encontrar)"
+    },
+    "example": "Definir Alfa vaEmail;\nDefinir Numero vnPosArroba;\nDefinir Numero vnPosPonto;\n\nvaEmail = \"usuario@empresa.com.br\";\nPosicaoAlfa(\"@\", vaEmail, vnPosArroba);\nPosicaoAlfa(\".\", vaEmail, vnPosPonto);\n\nSe (vnPosArroba = 0) {\n  Mensagem(Erro, \"Email inválido: falta @\");\n} Senao Se (vnPosPonto = 0) {\n  Mensagem(Erro, \"Email inválido: falta domínio\");\n} Senao {\n  Mensagem(Retorna, \"Email válido!\");\n}"
+  },
+  "ProcuraEnter": {
+    "description": "Esta função procura um caractere que indica \"enter\" ou nova linha (#13 ou #10) em uma string e retorna a string antes do primeiro enter, e o restante da string original, em variáveis separadas.",
+    "syntax": "ProcuraEnter(<strProcura>, <strImp>, <strResto>);",
+    "params": {
+      "strProcura": "String na qual será procurada o enter ou nova linha (#13 ou #10)",
+      "strImp": "A primeira parte da string procurada, até o primeiro caracter que indica nova linha (retorno)",
+      "strResto": "O restante da string, depois do primeiro caracter que indica nova linha (retorno)"
+    },
+    "example": "Definir Alfa vaStrProcura;\nDefinir Alfa vaStrImp;\nDefinir Alfa vaStrResto;\n\nvaStrProcura = \"Primeira linha\" + vaEnter + \"Segunda linha\";\nProcuraEnter(vaStrProcura, vaStrImp, vaStrResto);\n@ vaStrImp será \"Primeira linha\" @\n@ vaStrResto será \"Segunda linha\" @"
+  },
+  "QuebraTexto": {
+    "description": "Esta função pega o texto indicado e faz assinalamentos de quebra de linha conforme o Tamanho_Linha especificado, retornando a quantidade de linhas que será usada para imprimir o texto.",
+    "syntax": "QuebraTexto(<texto>, <tamanhoLinha>, <quantidadeLinhas>);",
+    "params": {
+      "texto": "Campo/Variável que se deseja imprimir em mais de uma linha",
+      "tamanhoLinha": "Variável que indica a quantidade máxima de caracteres por linha",
+      "quantidadeLinhas": "Variável que indica qual é a quantidade de linhas que serão necessárias para imprimir o texto"
+    },
+    "example": "Definir Alfa vaTexto;\nDefinir Alfa vaFrase;\nDefinir Numero vnNumLin;\nDefinir Numero vnLinAtu;\n\nvaTexto = \"Vamos ver o que acontece quando usamos estas funções para controle de impressão de linhas de um texto mais extenso\";\nQuebraTexto(vaTexto, 30, vnNumLin);\n\nvnLinAtu = 1;\nEnquanto (vnLinAtu <= vnNumLin) {\n  BuscaLinhaTexto(vaTexto, vnLinAtu, vaFrase);\n  @ Processa cada linha @\n  vnLinAtu++;\n}"
+  },
+  "RetDiaSemana": {
+    "description": "Retorna o dia da semana em forma de número da data de entrada.",
+    "syntax": "RetDiaSemana(<pData>, <pDia>);",
+    "params": {
+      "pData": "Variável numérica que recebe a data atual",
+      "pDia": "Variável numérica que retorna o dia da semana da data atual"
+    },
+    "returns": [
+      "0 = Domingo",
+      "1 = Segunda-feira",
+      "2 = Terça-feira",
+      "3 = Quarta-feira",
+      "4 = Quinta-feira",
+      "5 = Sexta-feira",
+      "6 = Sábado"
+    ],
+    "example": "Definir Funcao exemploRetDiaSemana();\n\n@ Variáveis globais @\nDefinir Numero vnDataSis;\nDefinir Numero vnDiaSemana;\nDefinir Alfa vaNomeDia;\n\nexemploRetDiaSemana();\n\nFuncao exemploRetDiaSemana(); {\n  @ Obtém a data atual do sistema @\n  vnDataSis = DatSis;\n  \n  @ Retorna o dia da semana @\n  RetDiaSemana(vnDataSis, vnDiaSemana);\n  \n  @ Converte o número para nome do dia @\n  Se (vnDiaSemana = 0) {\n    vaNomeDia = \"Domingo\";\n  } Senao Se (vnDiaSemana = 1) {\n    vaNomeDia = \"Segunda-feira\";\n  } Senao Se (vnDiaSemana = 2) {\n    vaNomeDia = \"Terça-feira\";\n  } Senao Se (vnDiaSemana = 3) {\n    vaNomeDia = \"Quarta-feira\";\n  } Senao Se (vnDiaSemana = 4) {\n    vaNomeDia = \"Quinta-feira\";\n  } Senao Se (vnDiaSemana = 5) {\n    vaNomeDia = \"Sexta-feira\";\n  } Senao {\n    vaNomeDia = \"Sábado\";\n  }\n  \n  Definir Alfa vaMensagem;\n  vaMensagem = \"Hoje é \" + vaNomeDia;\n  Mensagem(Retorna, vaMensagem);\n}"
+  },
+  "RetiraAcentuacao": {
+    "description": "Recebe uma string com acentuação e retorna a mesma string sem acentuação e em maiúsculo.",
+    "syntax": "RetiraAcentuacao(<pString>);",
+    "params": {
+      "pString": "Variável Alfa que recebe uma string e retorna a variável em maiúsculo e sem acentuação"
+    },
+    "example": "Definir Funcao exemploRetiraAcentuacao();\n\n@ Variáveis globais @\nDefinir Alfa vaTextoOriginal;\nDefinir Alfa vaTextoSemAcento;\nDefinir Alfa vaMensagem;\n\nexemploRetiraAcentuacao();\n\nFuncao exemploRetiraAcentuacao(); {\n  @ === EXEMPLO 1: NOME COM ACENTOS === @\n  vaTextoOriginal = \"José António da Silva\";\n  vaTextoSemAcento = vaTextoOriginal;\n  RetiraAcentuacao(vaTextoSemAcento);\n  vaMensagem = \"Original: \" + vaTextoOriginal + \" | Sem acento: \" + vaTextoSemAcento;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"JOSE ANTONIO DA SILVA\" @\n  \n  @ === EXEMPLO 2: CARACTERES ESPECIAIS === @\n  vaTextoOriginal = \"ÇçÁáàÉéÚúÍí\";\n  vaTextoSemAcento = vaTextoOriginal;\n  RetiraAcentuacao(vaTextoSemAcento);\n  vaMensagem = \"Acentos: \" + vaTextoOriginal + \" | Convertido: \" + vaTextoSemAcento;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"CcAaaEeUuIi\" @\n  \n  @ === EXEMPLO 3: ENDEREÇO === @\n  vaTextoOriginal = \"Rua das Açucenas, 123 - São José\";\n  vaTextoSemAcento = vaTextoOriginal;\n  RetiraAcentuacao(vaTextoSemAcento);\n  vaMensagem = \"Endereço: \" + vaTextoOriginal + \" | Normalizado: \" + vaTextoSemAcento;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"RUA DAS ACUCENAS, 123 - SAO JOSE\" @\n  \n  @ === EXEMPLO PRÁTICO: PADRONIZAÇÃO PARA BUSCA === @\n  padronizarParaBusca();\n}\n\n/* ========================================================================\n   FUNCAO: padronizarParaBusca\n   DESCRICAO: Padroniza strings para pesquisa sem acentos\n   PARAMETROS: Nenhum (usa variáveis globais)\n   RETORNO: Void\n   OBSERVACOES: Exemplo prático de normalização para busca\n   ======================================================================== */\nFuncao padronizarParaBusca(); {\n  @ Simular lista de nomes para padronização @\n  Definir Numero vnContador;\n  Definir Alfa vaNomes;\n  Definir Alfa vaNomeAtual;\n  Definir Alfa vaNomePadronizado;\n  \n  @ Lista simulada separada por ponto-e-vírgula @\n  vaNomes = \"João da Silva;Maria José;Antônio Pereira;Françoise Dubois\";\n  \n  Mensagem(Retorna, \"=== PADRONIZAÇÃO DE NOMES PARA BUSCA ===\");\n  \n  @ Processar cada nome da lista @\n  Para (vnContador = 1; vnContador <= 4; vnContador++) {\n    @ Obter nome atual (simulado) @\n    Se (vnContador = 1) {\n      vaNomeAtual = \"João da Silva\";\n    } Senao Se (vnContador = 2) {\n      vaNomeAtual = \"Maria José\";\n    } Senao Se (vnContador = 3) {\n      vaNomeAtual = \"Antônio Pereira\";\n    } Senao {\n      vaNomeAtual = \"Françoise Dubois\";\n    }\n    \n    @ Padronizar para busca @\n    vaNomePadronizado = vaNomeAtual;\n    RetiraAcentuacao(vaNomePadronizado);\n    \n    @ Exibir resultado @\n    Definir Alfa vaIndice;\n    IntParaAlfa(vnContador, vaIndice);\n    vaMensagem = vaIndice + \". \" + vaNomeAtual + \" -> \" + vaNomePadronizado;\n    Mensagem(Retorna, vaMensagem);\n  }\n  \n  Mensagem(Retorna, \"Nomes padronizados para indexação/busca\");\n}"
+  },
+  "RetiraCaracteresEspeciais": {
+    "description": "Remove caracteres especiais deixando somente letras e números, removendo todos os outros caracteres.",
+    "syntax": "RetiraCaracteresEspeciais(<Retorno>);",
+    "params": {
+      "Retorno": "Variável Alfa que recebe o campo a ser limpo e retorna o campo sem caracteres especiais"
+    },
+    "example": "Definir Funcao exemploRetiraCaracteresEspeciais();\n\n@ Variáveis globais @\nDefinir Alfa vaTextoOriginal;\nDefinir Alfa vaTextoLimpo;\nDefinir Alfa vaMensagem;\n\nexemploRetiraCaracteresEspeciais();\n\nFuncao exemploRetiraCaracteresEspeciais(); {\n  @ === EXEMPLO 1: RAZÃO SOCIAL === @\n  vaTextoOriginal = \"João & Pessoa Ltda.\";\n  vaTextoLimpo = vaTextoOriginal;\n  RetiraCaracteresEspeciais(vaTextoLimpo);\n  vaMensagem = \"Original: \" + vaTextoOriginal + \" | Limpo: \" + vaTextoLimpo;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"JoaoPessoaLtda\" @\n  \n  @ === EXEMPLO 2: TELEFONE === @\n  vaTextoOriginal = \"(47) 99999-8888\";\n  vaTextoLimpo = vaTextoOriginal;\n  RetiraCaracteresEspeciais(vaTextoLimpo);\n  vaMensagem = \"Telefone original: \" + vaTextoOriginal + \" | Apenas números: \" + vaTextoLimpo;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"4799998888\" @\n  \n  @ === EXEMPLO 3: EMAIL PARA ID === @\n  vaTextoOriginal = \"usuario@empresa.com.br\";\n  vaTextoLimpo = vaTextoOriginal;\n  RetiraCaracteresEspeciais(vaTextoLimpo);\n  vaMensagem = \"Email: \" + vaTextoOriginal + \" | ID limpo: \" + vaTextoLimpo;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"usuarioempresacombr\" @\n  \n  @ === EXEMPLO PRÁTICO: VALIDAÇÃO DE DOCUMENTO === @\n  validarDocumentoLimpo();\n}\n\n/* ========================================================================\n   FUNCAO: validarDocumentoLimpo\n   DESCRICAO: Valida documento removendo caracteres especiais\n   PARAMETROS: Nenhum (usa variáveis globais)\n   RETORNO: Void\n   OBSERVACOES: Exemplo prático de uso da função\n   ======================================================================== */\nFuncao validarDocumentoLimpo(); {\n  @ Simular entrada de CPF com formatação @\n  Definir Alfa vaCPF;\n  Definir Numero vnTamanho;\n  \n  vaCPF = \"123.456.789-10\";\n  vaMensagem = \"CPF formatado: \" + vaCPF;\n  Mensagem(Retorna, vaMensagem);\n  \n  @ Remover formatação @\n  RetiraCaracteresEspeciais(vaCPF);\n  vaMensagem = \"CPF apenas números: \" + vaCPF;\n  Mensagem(Retorna, vaMensagem);\n  \n  @ Validar tamanho @\n  TamanhoAlfa(vaCPF, vnTamanho);\n  Se (vnTamanho = 11) {\n    Mensagem(Retorna, \"CPF válido para processamento\");\n  } Senao {\n    Mensagem(Erro, \"CPF inválido após limpeza\");\n  }\n}"
+  },
+  "RetornaAscII": {
+    "description": "Retorna o caracter ASCII correspondente a um número.",
+    "syntax": "RetornaAscII(<xNumero>, <xCarAscII>);",
+    "params": {
+      "xNumero": "Variável tipo Numero da qual se quer o retorno em ASCII",
+      "xCarAscII": "Variável Alfa que retorna o caracter ASCII correspondente ao número"
+    },
+    "example": "Definir Funcao exemploRetornaAscII();\n\n@ Variáveis globais @\nDefinir Numero vnCodigo;\nDefinir Alfa vaCaracter;\nDefinir Alfa vaMensagem;\n\nexemploRetornaAscII();\n\nFuncao exemploRetornaAscII(); {\n  @ === EXEMPLO 1: LETRAS MAIÚSCULAS === @\n  vnCodigo = 65;  @ Código ASCII da letra 'A' @\n  RetornaAscII(vnCodigo, vaCaracter);\n  vaMensagem = \"Código 65 = \" + vaCaracter;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"Código 65 = A\" @\n  \n  @ === EXEMPLO 2: NÚMEROS === @\n  vnCodigo = 48;  @ Código ASCII do número '0' @\n  RetornaAscII(vnCodigo, vaCaracter);\n  vaMensagem = \"Código 48 = \" + vaCaracter;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"Código 48 = 0\" @\n  \n  @ === EXEMPLO 3: CARACTERES ESPECIAIS === @\n  vnCodigo = 64;  @ Código ASCII do símbolo '@' @\n  RetornaAscII(vnCodigo, vaCaracter);\n  vaMensagem = \"Código 64 = \" + vaCaracter;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"Código 64 = @\" @\n  \n  @ === EXEMPLO PRÁTICO: GERAR SENHA SIMPLES === @\n  Definir Alfa vaSenha;\n  Definir Numero vnContador;\n  \n  vaSenha = \"\";\n  Para (vnContador = 1; vnContador <= 4; vnContador++) {\n    vnCodigo = 65 + vnContador - 1;  @ A, B, C, D @\n    RetornaAscII(vnCodigo, vaCaracter);\n    vaSenha = vaSenha + vaCaracter;\n  }\n  vaMensagem = \"Senha gerada: \" + vaSenha;\n  Mensagem(Retorna, vaMensagem);  @ Resultado: \"Senha gerada: ABCD\" @\n}"
+  },
+  "RetornarDiasUteisMes": {
+    "description": "Retorna a quantidade de dias úteis de um mês tomando como base uma determinada data.",
+    "syntax": "RetornarDiasUteisMes(<aDatabase>, <aTipoRetorno>, <aQtdDiasUteis>);",
+    "params": {
+      "aDatabase": "Variável do tipo Data que recebe a data base a ser verificada",
+      "aTipoRetorno": "Variável numérica que indica o tipo de retorno:",
+      "aQtdDiasUteis": "Variável numérica que retorna a quantidade de dias úteis encontrada"
+    },
+    "example": "Definir Funcao exemploRetornarDiasUteisMes();\n\n@ Variáveis globais @\nDefinir Data vdDataBase;\nDefinir Numero vnQtdDiasUteisTotal;\nDefinir Numero vnQtdDiasUteisAteData;\nDefinir Alfa vaQtdTotalStr;\nDefinir Alfa vaQtdAteDataStr;\n\nexemploRetornarDiasUteisMes();\n\nFuncao exemploRetornarDiasUteisMes(); {\n  @ Define uma data de exemplo (21/07/2024) @\n  vdDataBase = CodData(21, 7, 2024);\n  \n  @ Obtém quantidade de dias úteis do mês inteiro @\n  RetornarDiasUteisMes(vdDataBase, 0, vnQtdDiasUteisTotal);\n  \n  @ Obtém quantidade de dias úteis até a data base @\n  RetornarDiasUteisMes(vdDataBase, 1, vnQtdDiasUteisAteData);\n  \n  @ Converte para string para exibição @\n  IntParaAlfa(vnQtdDiasUteisTotal, vaQtdTotalStr);\n  IntParaAlfa(vnQtdDiasUteisAteData, vaQtdAteDataStr);\n  \n  Definir Alfa vaMensagem;\n  vaMensagem = \"Dias úteis no mês todo: \" + vaQtdTotalStr;\n  Mensagem(Retorna, vaMensagem);\n  vaMensagem = \"Dias úteis até 21/07: \" + vaQtdAteDataStr;\n  Mensagem(Retorna, vaMensagem);\n}"
+  },
+  "RetornarDiasUteisPeriodo": {
+    "description": "Retorna a quantidade de dias úteis entre duas datas informadas.",
+    "syntax": "RetornarDiasUteisPeriodo(<aDataIni>, <aDataFim>, <aQtdDiasUteis>);",
+    "params": {
+      "aDataIni": "Variável do tipo Data que recebe a data inicial do período",
+      "aDataFim": "Variável do tipo Data que recebe a data final do período",
+      "aQtdDiasUteis": "Variável numérica que retorna a quantidade de dias úteis entre as datas"
+    },
+    "example": "Definir Funcao exemploRetornarDiasUteisPeriodo();\n\n@ Variáveis globais @\nDefinir Data vdDataInicial;\nDefinir Data vdDataFinal;\nDefinir Numero vnQtdDiasUteis;\nDefinir Alfa vaQtdStr;\n\nexemploRetornarDiasUteisPeriodo();\n\nFuncao exemploRetornarDiasUteisPeriodo(); {\n  @ Define período de exemplo (21/06/2024 a 18/08/2024) @\n  vdDataInicial = CodData(21, 6, 2024);\n  vdDataFinal = CodData(18, 8, 2024);\n  \n  @ Calcula quantidade de dias úteis no período @\n  RetornarDiasUteisPeriodo(vdDataInicial, vdDataFinal, vnQtdDiasUteis);\n  \n  @ Converte para string para exibição @\n  IntParaAlfa(vnQtdDiasUteis, vaQtdStr);\n  \n  Definir Alfa vaMensagem;\n  vaMensagem = \"Dias úteis no período: \" + vaQtdStr;\n  Mensagem(Retorna, vaMensagem);\n}"
+  },
+  "RetornarQtdDiasAno": {
+    "description": "Retorna a quantidade de dias do ano tomando como base o ano da data passada, considerando diferentes tipos de ano.",
+    "syntax": "RetornarQtdDiasAno(<aData>, <aTipoAno>, <aQtdDiasAno>);",
+    "params": {
+      "aData": "Variável do tipo Data que recebe a data base",
+      "aTipoAno": "Variável numérica que indica o tipo de ano:",
+      "aQtdDiasAno": "Variável numérica que retorna a quantidade de dias do ano"
+    },
+    "example": "Definir Funcao exemploRetornarQtdDiasAno();\n\n@ Variáveis globais @\nDefinir Data vdData;\nDefinir Numero vnDiasUtil;\nDefinir Numero vnDiasComercial;\nDefinir Numero vnDiasCivil;\nDefinir Alfa vaDiasUtilStr;\nDefinir Alfa vaDiasComercialStr;\nDefinir Alfa vaDiasCivilStr;\n\nexemploRetornarQtdDiasAno();\n\nFuncao exemploRetornarQtdDiasAno(); {\n  @ Define uma data de exemplo (02/07/2024) @\n  vdData = CodData(2, 7, 2024);\n  \n  @ Obtém quantidade de dias para cada tipo de ano @\n  RetornarQtdDiasAno(vdData, 0, vnDiasUtil);       @ Ano útil @\n  RetornarQtdDiasAno(vdData, 1, vnDiasComercial);  @ Ano comercial @\n  RetornarQtdDiasAno(vdData, 2, vnDiasCivil);      @ Ano civil @\n  \n  @ Converte para string para exibição @\n  IntParaAlfa(vnDiasUtil, vaDiasUtilStr);\n  IntParaAlfa(vnDiasComercial, vaDiasComercialStr);\n  IntParaAlfa(vnDiasCivil, vaDiasCivilStr);\n  \n  Definir Alfa vaMensagem;\n  vaMensagem = \"Dias úteis no ano: \" + vaDiasUtilStr;\n  Mensagem(Retorna, vaMensagem);\n  vaMensagem = \"Dias comerciais no ano: \" + vaDiasComercialStr;\n  Mensagem(Retorna, vaMensagem);\n  vaMensagem = \"Dias civis no ano: \" + vaDiasCivilStr;\n  Mensagem(Retorna, vaMensagem);\n}"
+  },
+  "SelecaoTabelas": {
+    "description": "Traz os dados de um comando SELECT(SQL) mais elaborado, incluindo funções de agregação como COUNT(), SUM(), etc. Aceita também comandos como GROUP BY, UNION entre outros.",
+    "syntax": "SelecaoTabelas(<pSqlSel>, <pCpoRet>, <pTemMas>);",
+    "params": {
+      "pSqlSel": "Variável que recebe uma instrução SELECT(SQL) ou \"+\" para buscar próximo registro",
+      "pCpoRet": "Variável que retorna os dados resultantes do comando (separados por ';' se múltiplos campos)",
+      "pTemMas": "Variável que retorna '+' caso o comando retorne mais de uma linha"
+    },
+    "example": "Definir Funcao exemploSelecaoTabelas();\n\n@ Variáveis globais @\nDefinir Alfa vaSQL;\nDefinir Alfa vaRetorno;\nDefinir Alfa vaMais;\nDefinir Numero vnContador;\n\nexemploSelecaoTabelas();\n\nFuncao exemploSelecaoTabelas(); {\n  @ === EXEMPLO 1: CONTAGEM POR ESTADO === @\n  vaSQL = \"SIGUFS, COUNT(*) FROM E085CLI GROUP BY SIGUFS\";\n  SelecaoTabelas(vaSQL, vaRetorno, vaMais);\n  \n  vnContador = 1;\n  Enquanto (vaMais = \"+\") {\n    @ Processar o registro atual @\n    Definir Alfa vaMensagem;\n    Definir Alfa vaContadorStr;\n    IntParaAlfa(vnContador, vaContadorStr);\n    vaMensagem = \"Registro \" + vaContadorStr + \": \" + vaRetorno;\n    Mensagem(Retorna, vaMensagem);\n    \n    @ Buscar próximo registro @\n    SelecaoTabelas(\"+\", vaRetorno, vaMais);\n    vnContador++;\n  }\n  \n  @ === EXEMPLO 2: SOMA DE VALORES === @\n  vaSQL = \"SUM(TOTPED), COUNT(*) FROM E120PED WHERE SITPED = 'A'\";\n  SelecaoTabelas(vaSQL, vaRetorno, vaMais);\n  \n  @ vaRetorno conterá algo como \"1500.50;25\" (soma;quantidade) @\n  Definir Alfa vaResultado;\n  vaResultado = \"Total de pedidos ativos: \" + vaRetorno;\n  Mensagem(Retorna, vaResultado);\n  \n  @ === EXEMPLO 3: DADOS CONSOLIDADOS POR FILIAL === @\n  vaSQL = \"CODFIL, SUM(TOTPED), COUNT(*) FROM E120PED GROUP BY CODFIL ORDER BY CODFIL\";\n  SelecaoTabelas(vaSQL, vaRetorno, vaMais);\n  \n  Mensagem(Retorna, \"=== RELATÓRIO POR FILIAL ===\");\n  vnContador = 1;\n  \n  @ Processar primeiro registro @\n  Se (vaRetorno <> \"\") {\n    processarRegistroFilial(vaRetorno, vnContador);\n    vnContador++;\n  }\n  \n  @ Processar demais registros @\n  Enquanto (vaMais = \"+\") {\n    SelecaoTabelas(\"+\", vaRetorno, vaMais);\n    Se (vaRetorno <> \"\") {\n      processarRegistroFilial(vaRetorno, vnContador);\n      vnContador++;\n    }\n  }\n}\n\n/* ========================================================================\n   FUNCAO: processarRegistroFilial\n   DESCRICAO: Processa um registro com dados de filial\n   PARAMETROS: pDados - String com dados separados por ';'\n               pContador - Numero sequencial do registro\n   RETORNO: Void\n   OBSERVACOES: Auxiliar para exemplo de SelecaoTabelas\n   ======================================================================== */\nFuncao processarRegistroFilial(Alfa pDados, Numero pContador); {\n  @ Extrair componentes do registro: CODFIL;TOTAL;QUANTIDADE @\n  Definir Alfa vaCodFilial;\n  Definir Alfa vaTotal;\n  Definir Alfa vaQuantidade;\n  Definir Numero vnPos1;\n  Definir Numero vnPos2;\n  Definir Numero vnTamanho;\n  \n  @ Localizar separadores @\n  PosicaoAlfa(\";\", pDados, vnPos1);\n  Se (vnPos1 > 0) {\n    @ Extrair código da filial @\n    vaCodFilial = pDados;\n    CopiarAlfa(vaCodFilial, 1, vnPos1 - 1);\n    \n    @ Buscar segundo separador @\n    Definir Alfa vaRestante;\n    TamanhoAlfa(pDados, vnTamanho);\n    vaRestante = pDados;\n    CopiarAlfa(vaRestante, vnPos1 + 1, vnTamanho - vnPos1);\n    \n    PosicaoAlfa(\";\", vaRestante, vnPos2);\n    Se (vnPos2 > 0) {\n      @ Extrair total @\n      vaTotal = vaRestante;\n      CopiarAlfa(vaTotal, 1, vnPos2 - 1);\n      \n      @ Extrair quantidade @\n      TamanhoAlfa(vaRestante, vnTamanho);\n      vaQuantidade = vaRestante;\n      CopiarAlfa(vaQuantidade, vnPos2 + 1, vnTamanho - vnPos2);\n      \n      @ Montar relatório @\n      Definir Alfa vaMensagem;\n      Definir Alfa vaContadorStr;\n      IntParaAlfa(pContador, vaContadorStr);\n      vaMensagem = vaContadorStr + \". Filial \" + vaCodFilial + \n                   \" - Total: R$ \" + vaTotal + \" - Pedidos: \" + vaQuantidade;\n      Mensagem(Retorna, vaMensagem);\n    }\n  }\n}"
+  },
+  "SetaNumeroTelaEntrada": {
+    "description": "Permite alterar os valores numéricos da tela de entrada do modelo de relatório.",
+    "syntax": "SetaNumeroTelaEntrada(<NomeCampo>, <Valor>);",
+    "params": {
+      "NomeCampo": "Nome do campo da tela de entrada (tipo Alfa)",
+      "Valor": "Valor para o campo (tipo Numero)"
+    },
+    "example": "Definir Funcao exemploSetaParametrosRelatorio();\n\n@ Variáveis globais @\nDefinir Numero vnCodEmpresa;\nDefinir Numero vnCodFilial;\nDefinir Alfa vaAbrangenciaEmpresa;\n\nexemploSetaParametrosRelatorio();\n\nFuncao exemploSetaParametrosRelatorio(); {\n  @ Definir parâmetros de entrada @\n  vnCodEmpresa = 1;\n  vnCodFilial = 5;\n  vaAbrangenciaEmpresa = \"1..3\";\n  \n  @ Configurar campos numéricos da tela de entrada @\n  SetaNumeroTelaEntrada(\"ECodEmp\", vnCodEmpresa);\n  SetaNumeroTelaEntrada(\"ECodFil\", vnCodFilial);\n  \n  @ Configurar campos alfa da tela de entrada @\n  SetaAlfaTelaEntrada(\"EAbrEmp\", vaAbrangenciaEmpresa);\n  \n  @ Executar relatório com parâmetros pré-definidos @\n  ExecutaRelatorio(\"REL001.GER\", \"S\");\n  \n  Mensagem(Retorna, \"Relatório executado com parâmetros automatizados\");\n}"
+  },
+  "SetarValorVarAlf": {
+    "description": "Define o valor de uma variável alfanumérica identificada por nome.",
+    "syntax": "SetarValorVarAlf(<nomeVariavel>, <valor>);",
+    "params": {
+      "nomeVariavel": "String contendo o nome da variável",
+      "valor": "Valor alfa a ser atribuído à variável"
+    },
+    "example": "Definir Alfa vTexto;\nDefinir Alfa vNovoValor;\n\nvNovoValor = \"Novo conteúdo\";\nSetarValorVarAlf(\"vTexto\", vNovoValor);\n@ vTexto agora contém \"Novo conteúdo\" @"
+  },
+  "SetarValorVarNum": {
+    "description": "Define o valor de uma variável numérica ou de data identificada por nome.",
+    "syntax": "SetarValorVarNum(<nomeVariavel>, <valor>);",
+    "params": {
+      "nomeVariavel": "String contendo o nome da variável",
+      "valor": "Valor numérico a ser atribuído à variável"
+    },
+    "example": "Definir Numero vNumero;\nDefinir Data vData;\n\nSetarValorVarNum(\"vNumero\", 100);   @ vNumero = 100 @\nSetarValorVarNum(\"vData\", 39685);   @ vData = 39685 @"
+  },
+  "StrParaInt": {
+    "description": "Converte um valor alfanumérico (string) para o tipo Inteiro. Esta função é equivalente a `AlfaParaInt` e é mantida para compatibilidade.",
+    "syntax": "StrParaInt(<texto>, <inteiro>);",
+    "params": {
+      "texto": "Valor alfanumérico a ser convertido",
+      "inteiro": "Variável que receberá o valor convertido"
+    },
+    "example": "Definir Alfa vaTexto;\nDefinir Numero vnInteiro;\n\nvaTexto = \"456\";\nStrParaInt(vaTexto, vnInteiro); @ vnInteiro será 456 @"
+  },
+  "SubstAlfa": {
+    "description": "Substituem trechos específicos dentro de um texto por outro texto.",
+    "syntax": "SubstAlfa(<subtexto>, <novoTexto>, <texto>);      @ Substitui todas as ocorrências @",
+    "params": {
+      "subtexto": "Texto a ser localizado e substituído",
+      "novoTexto": "Texto que irá substituir",
+      "texto": "Variável que contém o texto original e receberá o resultado"
+    },
+    "example": "Definir Alfa vaTexto;\nDefinir Alfa vaTextoLimpo;\n\nvaTexto = \"João--Silva--Santos\";\nvaTextoLimpo = vaTexto;\n\n@ Substitui todos os traços duplos por espaço simples @\nSubstAlfa(\"--\", \" \", vaTextoLimpo);\n@ vaTextoLimpo será \"João Silva Santos\" @\n\n@ Exemplo com SubstAlfaUmaVez @\nvaTexto = \"teste teste teste\";\nSubstAlfaUmaVez(\"teste\", \"TESTE\", vaTexto);\n@ vaTexto será \"TESTE teste teste\" (apenas o primeiro) @"
+  },
+  "SubstAlfaUmaVez": {
+    "description": "Substituem trechos específicos dentro de um texto por outro texto.",
+    "syntax": "SubstAlfa(<subtexto>, <novoTexto>, <texto>);      @ Substitui todas as ocorrências @",
+    "params": {
+      "subtexto": "Texto a ser localizado e substituído",
+      "novoTexto": "Texto que irá substituir",
+      "texto": "Variável que contém o texto original e receberá o resultado"
+    },
+    "example": "Definir Alfa vaTexto;\nDefinir Alfa vaTextoLimpo;\n\nvaTexto = \"João--Silva--Santos\";\nvaTextoLimpo = vaTexto;\n\n@ Substitui todos os traços duplos por espaço simples @\nSubstAlfa(\"--\", \" \", vaTextoLimpo);\n@ vaTextoLimpo será \"João Silva Santos\" @\n\n@ Exemplo com SubstAlfaUmaVez @\nvaTexto = \"teste teste teste\";\nSubstAlfaUmaVez(\"teste\", \"TESTE\", vaTexto);\n@ vaTexto será \"TESTE teste teste\" (apenas o primeiro) @"
+  },
+  "TamanhoStr": {
+    "description": "Retornam o tamanho de uma variável/campo alfanumérico através de parâmetro de retorno.",
+    "syntax": "TamanhoAlfa(<origem>, <tamanho>);",
+    "params": {
+      "origem": "Campo/Variável que se deseja saber o tamanho",
+      "tamanho": "Variável Numero que receberá o tamanho"
+    },
+    "example": "Definir Alfa vaSenha;\nDefinir Numero vnTamanho;\nDefinir Alfa vaMensagem;\nDefinir Alfa vaNumeroStr;\n\nvaSenha = \"minhasenha123\";\nTamanhoAlfa(vaSenha, vnTamanho);\n\nSe (vnTamanho < 8) {\n  vaMensagem = \"Senha deve ter pelo menos 8 caracteres\";\n  Mensagem(Erro, vaMensagem);\n} Senao {\n  IntParaAlfa(vnTamanho, vaNumeroStr);\n  vaMensagem = \"Senha válida com \" + vaNumeroStr + \" caracteres\";\n  Mensagem(Retorna, vaMensagem);\n}"
+  },
+  "UltimoDia": {
+    "description": "Verifica qual é o último dia do mês/ano da data informada.",
+    "syntax": "UltimoDia(<DatAtu>);",
+    "params": {
+      "DatAtu": "Campo/Variável numérica da qual se deseja saber o último dia do mês"
+    },
+    "example": "Definir Funcao sistemaControlePrazos();\n\n@ Variáveis globais @\nDefinir Data vdDataBase;\nDefinir Numero vnDiaSemana;\nDefinir Numero vnDataUtilAnt;\nDefinir Numero vnDataUtilPos;\nDefinir Numero vnDiasUteisRestantes;\nDefinir Numero vnCEP;\nDefinir Alfa vaMensagemStatus;\n\nsistemaControlePrazos();\n\nFuncao sistemaControlePrazos(); {\n  @ Obtém a data atual @\n  DataHoje(vdDataBase);\n  vnCEP = 89107000;  @ CEP de exemplo @\n  \n  @ Verifica se hoje é dia útil @\n  Definir Numero vnDataAtual;\n  vnDataAtual = vdDataBase;\n  RetDiaUtilAntPos(vnDataAtual, vnCEP, vnDataUtilAnt, vnDataUtilPos);\n  \n  @ Verifica o dia da semana @\n  RetDiaSemana(vnDataAtual, vnDiaSemana);\n  \n  @ Calcula dias úteis restantes no mês @\n  Definir Numero vnDiasUteisTotal;\n  Definir Numero vnDiasUteisAteHoje;\n  RetornarDiasUteisMes(vdDataBase, 0, vnDiasUteisTotal);\n  RetornarDiasUteisMes(vdDataBase, 1, vnDiasUteisAteHoje);\n  vnDiasUteisRestantes = vnDiasUteisTotal - vnDiasUteisAteHoje;\n  \n  @ Monta relatório @\n  Se (vnDataAtual = vnDataUtilAnt) {\n    vaMensagemStatus = \"Hoje é dia útil!\";\n  } Senao {\n    vaMensagemStatus = \"Hoje NÃO é dia útil.\";\n  }\n  \n  Mensagem(Retorna, vaMensagemStatus);\n  \n  Definir Alfa vaTemp;\n  IntParaAlfa(vnDiasUteisRestantes, vaTemp);\n  vaMensagemStatus = \"Dias úteis restantes no mês: \" + vaTemp;\n  Mensagem(Retorna, vaMensagemStatus);\n}"
+  }
+}

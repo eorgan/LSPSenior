@@ -38,7 +38,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: ConverteDataToDB"
+    "description": "Converter uma data qualquer, para o formato de data do banco de dados."
   },
   "ConverteDataBanco": {
     "code": "4",
@@ -56,7 +56,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: ConverteDataBanco"
+    "description": "Converter uma data qualquer, para o formato de data do banco de dados."
   },
   "MontaSaldoAntConta": {
     "code": "5",
@@ -155,7 +155,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: InserirStr"
+    "description": "Esta função insere um ou mais caracteres em uma Variável/Campo, a partir da posição indicada."
   },
   "LerPosicaoStr": {
     "code": "12",
@@ -201,7 +201,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: DeletarStr"
+    "description": "Elimina parte de um texto."
   },
   "CopiarStr": {
     "code": "14",
@@ -224,7 +224,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: CopiarStr"
+    "description": "Copiam parte do conteúdo de uma variável/campo alfanumérico modificando a própria variável de origem."
   },
   "TamanhoStr": {
     "code": "15",
@@ -242,7 +242,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: TamanhoStr"
+    "description": "Retornam o tamanho de uma variável/campo alfanumérico através de parâmetro de retorno."
   },
   "IntParaStr": {
     "code": "16",
@@ -260,7 +260,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: IntParaStr"
+    "description": "Converte um valor inteiro para o tipo String (Alfanumérico). Esta função é equivalente a `IntParaAlfa` e é mantida para compatibilidade."
   },
   "StrParaInt": {
     "code": "17",
@@ -278,7 +278,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: StrParaInt"
+    "description": "Converte um valor alfanumérico (string) para o tipo Inteiro. Esta função é equivalente a `AlfaParaInt` e é mantida para compatibilidade."
   },
   "MontaData": {
     "code": "18",
@@ -306,7 +306,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: MontaData"
+    "description": "Esta função concatena três variáveis, formando uma data. É uma alternativa ao CodData com sintaxe diferente."
   },
   "EstaNulo": {
     "code": "23",
@@ -324,7 +324,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: EstaNulo"
+    "description": "Verifica se uma variável está nula (vazia ou não inicializada)."
   },
   "PosicaoStr": {
     "code": "24",
@@ -347,7 +347,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: PosicaoStr"
+    "description": "Procuram por uma parte de texto dentro de um campo/variável, retornando a posição inicial através de parâmetro."
   },
   "UltimoDia": {
     "code": "25",
@@ -360,7 +360,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: UltimoDia"
+    "description": "Verifica qual é o último dia do mês/ano da data informada."
   },
   "Extenso": {
     "code": "27",
@@ -403,7 +403,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: Extenso"
+    "description": "Esta função gera o extenso de um valor.\n\n**⚠️ Importante:** Esta função contempla no máximo duas casas decimais após a vírgula. Caso o valor tenha três ou mais casas decimais após a vírgula, ele será arredondado para o valor real de duas."
   },
   "AlteraSitObsPed": {
     "code": "28",
@@ -464,7 +464,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: QuebraTexto"
+    "description": "Esta função pega o texto indicado e faz assinalamentos de quebra de linha conforme o Tamanho_Linha especificado, retornando a quantidade de linhas que será usada para imprimir o texto."
   },
   "BuscaLinhaTexto": {
     "code": "32",
@@ -515,7 +515,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: Concatena"
+    "description": "Esta função concatena até 3 campo/variáveis tipo alfa, formando uma só variável."
   },
   "DesMontaData": {
     "code": "36",
@@ -543,7 +543,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: DesMontaData"
+    "description": "Esta função desmonta uma data, separando em três variáveis, as informações Dia/Mês/Ano da data."
   },
   "ExtensoMes": {
     "code": "37",
@@ -561,7 +561,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: ExtensoMes"
+    "description": "Esta função monta o extenso do mês de uma determinada data."
   },
   "ExtensoSemana": {
     "code": "38",
@@ -579,7 +579,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: ExtensoSemana"
+    "description": "Esta função monta o extenso do dia da semana de uma determinada data."
   },
   "BuscaMascModPlano": {
     "code": "39",
@@ -673,7 +673,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: DataExtenso"
+    "description": "Esta função gera o extenso de determinada data."
   },
   "InserirAlfa": {
     "code": "43",
@@ -696,7 +696,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: InserirAlfa"
+    "description": "Insere um ou mais caracteres em uma variável/campo, a partir da posição indicada."
   },
   "TruncarValor": {
     "code": "54",
@@ -727,7 +727,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: ArredondarValor"
+    "description": "Esta função arredonda determinado valor, conforme a precisão informada."
   },
   "EntradaValor": {
     "code": "56",
@@ -793,7 +793,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: ConverteParaMaiusculo"
+    "description": "Convertem o conteúdo de uma variável para maiúsculo ou minúsculo."
   },
   "LeMemListPosEst": {
     "code": "62",
@@ -1102,7 +1102,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: RetornaAscII"
+    "description": "Retorna o caracter ASCII correspondente a um número."
   },
   "VerificaDiaUtil": {
     "code": "93",
@@ -1252,7 +1252,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: DeixaNumeros"
+    "description": "Remove todos os caracteres não numéricos de uma string, mantendo apenas os dígitos."
   },
   "MontaSaldoAntFornecedorGrupo": {
     "code": "129",
@@ -1303,7 +1303,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: ProcuraEnter"
+    "description": "Esta função procura um caractere que indica \"enter\" ou nova linha (#13 ou #10) em uma string e retorna a string antes do primeiro enter, e o restante da string original, em variáveis separadas."
   },
   "MontaSaldoAntCliTipoTitulo": {
     "code": "145",
@@ -1382,7 +1382,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: MontaAbrangencia"
+    "description": "Função utilizada para retornar uma cláusula SQL de acordo com um campo e uma abrangência de valores.\n\nPara montar abrangências de local quando existem valores especiais (\"1.1.111==\", por exemplo), deve ser utilizado o campo NumLoc nesta função. O campo CodLoc não é tratado pela função nesta situação."
   },
   "CarregaSaldoContabilAbr": {
     "code": "148",
@@ -1487,7 +1487,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: Arredonda"
+    "description": "Esta função arredonda um valor tipo acerto, conforme a precisão informada."
   },
   "InsertMovimento": {
     "code": "504",
@@ -2039,14 +2039,14 @@
     "name": "LimpaGerTabNum",
     "signature": "Funcao LimpaGerTabNum();",
     "params": [],
-    "description": "Função built-in: LimpaGerTabNum"
+    "description": "Limpa o conteúdo do Registro GerTabNum."
   },
   "LimpaGerTabAlf": {
     "code": "537",
     "name": "LimpaGerTabAlf",
     "signature": "Funcao LimpaGerTabAlf();",
     "params": [],
-    "description": "Função built-in: LimpaGerTabAlf"
+    "description": "Limpa o conteúdo do Registro GerTabAlf."
   },
   "LimpaEspacos": {
     "code": "538",
@@ -2059,7 +2059,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: LimpaEspacos"
+    "description": "Limpa os espaços em branco à direita e à esquerda de uma variável alfanumérica."
   },
   "LimpaEspacosDireita": {
     "code": "539",
@@ -2072,7 +2072,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: LimpaEspacosDireita"
+    "description": "Limpa os espaços em branco à direita de uma variável alfanumérica."
   },
   "LimpaEspacosEsquerda": {
     "code": "540",
@@ -2085,7 +2085,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: LimpaEspacosEsquerda"
+    "description": "Limpa os espaços em branco à esquerda de uma variável alfanumérica."
   },
   "BuscaAbrangenciaUsuario": {
     "code": "541",
@@ -2651,7 +2651,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: RetiraAcentuacao"
+    "description": "Recebe uma string com acentuação e retorna a mesma string sem acentuação e em maiúsculo."
   },
   "GeraMovimentoNFSaida": {
     "code": "563",
@@ -2712,7 +2712,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: MultiplicaValor"
+    "description": "Esta função multiplica um número no formato alfanumérico por um fator de multiplicação numérico e retorna o resultado desta multiplicação em uma variável alfanumérica."
   },
   "TotalRateado": {
     "code": "565",
@@ -3209,7 +3209,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: SelecaoTabelas"
+    "description": "Traz os dados de um comando SELECT(SQL) mais elaborado, incluindo funções de agregação como COUNT(), SUM(), etc. Aceita também comandos como GROUP BY, UNION entre outros."
   },
   "AlteraSitMccTesouraria": {
     "code": "596",
@@ -3302,7 +3302,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: SetaNumeroTelaEntrada"
+    "description": "Permite alterar os valores numéricos da tela de entrada do modelo de relatório."
   },
   "SetaAlfaTelaEntrada": {
     "code": "603",
@@ -3665,7 +3665,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: AlfaParaData"
+    "description": "Converte um valor alfanumérico para o tipo Data."
   },
   "LeGridBaixasBcd": {
     "code": "614",
@@ -3744,7 +3744,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: CarregarTextoArq"
+    "description": "Esta função carrega para uma variável alfanumérica o conteúdo de um arquivo texto."
   },
   "SubstAlfa": {
     "code": "617",
@@ -3767,7 +3767,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: SubstAlfa"
+    "description": "Substituem trechos específicos dentro de um texto por outro texto."
   },
   "SubstAlfaUmaVez": {
     "code": "618",
@@ -3790,7 +3790,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: SubstAlfaUmaVez"
+    "description": "Substituem trechos específicos dentro de um texto por outro texto."
   },
   "PegarTipoVar": {
     "code": "619",
@@ -3808,7 +3808,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: PegarTipoVar"
+    "description": "Retorna o tipo de uma variável qualquer, passada como string."
   },
   "PegarValorVarAlf": {
     "code": "620",
@@ -3826,7 +3826,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: PegarValorVarAlf"
+    "description": "Retorna o valor de uma variável alfanumérica identificada por nome."
   },
   "PegarValorVarNum": {
     "code": "621",
@@ -3844,7 +3844,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: PegarValorVarNum"
+    "description": "Retorna o valor de uma variável numérica ou de data identificada por nome."
   },
   "SetarValorVarAlf": {
     "code": "622",
@@ -3862,7 +3862,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: SetarValorVarAlf"
+    "description": "Define o valor de uma variável alfanumérica identificada por nome."
   },
   "SetarValorVarNum": {
     "code": "623",
@@ -3880,7 +3880,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: SetarValorVarNum"
+    "description": "Define o valor de uma variável numérica ou de data identificada por nome."
   },
   "RetornaLancamentoLista": {
     "code": "625",
@@ -4074,7 +4074,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: RetDiaSemana"
+    "description": "Retorna o dia da semana em forma de número da data de entrada."
   },
   "ApontarOPs": {
     "code": "646",
@@ -4105,7 +4105,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: ConverteParaMinusculo"
+    "description": "Convertem o conteúdo de uma variável para maiúsculo ou minúsculo."
   },
   "BuscaCamposChaveTabela": {
     "code": "651",
@@ -4557,7 +4557,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: ConverteDataSqlSenior2"
+    "description": "Converter datas para o formato SQL Senior 2."
   },
   "AdicionaDerivacaoModelo": {
     "code": "675",
@@ -5542,7 +5542,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: DecimalParaAlfa"
+    "description": "Converte um valor numérico (`Numero`) para alfanumérico **preservando a parte decimal** na string resultante (formato exibido conforme o ambiente)."
   },
   "ExcluirLctoDuplicado": {
     "code": "726",
@@ -6098,7 +6098,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: RetiraCaracteresEspeciais"
+    "description": "Remove caracteres especiais deixando somente letras e números, removendo todos os outros caracteres."
   },
   "ImportacaoNFEletronica": {
     "code": "752",
@@ -6395,7 +6395,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: AlfaParaDecimal"
+    "description": "Converte um valor alfanumérico para o tipo Decimal."
   },
   "AlterarVidaUtilBem": {
     "code": "781",
@@ -8502,7 +8502,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: RetornarDiasUteisMes"
+    "description": "Retorna a quantidade de dias úteis de um mês tomando como base uma determinada data."
   },
   "RetornarDiasUteisPeriodo": {
     "code": "899",
@@ -8525,7 +8525,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: RetornarDiasUteisPeriodo"
+    "description": "Retorna a quantidade de dias úteis entre duas datas informadas."
   },
   "AnoBissexto": {
     "code": "900",
@@ -8543,7 +8543,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: AnoBissexto"
+    "description": "Esta função tem por objetivo retornar a informação se um ano é ou não bissexto tomando como base o ano da data passada."
   },
   "RetornarQtdDiasAno": {
     "code": "901",
@@ -8566,7 +8566,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: RetornarQtdDiasAno"
+    "description": "Retorna a quantidade de dias do ano tomando como base o ano da data passada, considerando diferentes tipos de ano."
   },
   "ArredondaABNT": {
     "code": "904",
@@ -8584,7 +8584,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: ArredondaABNT"
+    "description": "Esta função aplica a regra de arredondamento da ABNT, conforme a precisão informada."
   },
   "GerarEntregaVarejo": {
     "code": "905",
@@ -8692,7 +8692,7 @@
         "direction": "out"
       }
     ],
-    "description": "Função built-in: ListaRegraCriarLista"
+    "description": "Cria uma nova lista de regras para armazenar dados estruturados."
   },
   "ListaRegraLiberarLista": {
     "code": "914",
