@@ -565,5 +565,58 @@
          "   Fim;"
       ],
       "description": "Função de log padrão"
+   },
+   "HTTP Get": {
+      "prefix": "http-get",
+      "body": [
+         "HttpObjeto(${1:vaHTTP});",
+         "HttpDesabilitaErroResposta(${1:vaHTTP});",
+         "HttpAlteraCabecalhoRequisicao(${1:vaHTTP}, \"Accept\", \"application/json\");",
+         "HttpGet(${1:vaHTTP}, ${2:aUrl}, ${3:aJsonRet});",
+         "HttpLeCodigoResposta(${1:vaHTTP}, ${4:vnCodRes});",
+         "Se(${4:vnCodRes} = 200)",
+         "   {",
+         "      $0",
+         "   }"
+      ],
+      "description": "Requisição HTTP GET com leitura do código de resposta"
+   },
+   "JSON Valor Elemento": {
+      "prefix": "json-valor",
+      "body": "ValorElementoJson(${1:aJson}, \"${2:objeto}\", \"${3:campo}\", ${4:aVariavel});$0",
+      "description": "Ler um campo simples de um JSON (ValorElementoJson)"
+   },
+   "Lista Dinâmica a partir de JSON": {
+      "prefix": "lista-json",
+      "body": [
+         "Definir Numero ${1:nLista};",
+         "Definir Alfa ${2:vaAchou};",
+         "",
+         "ListaRegraCriarLista(${1:nLista});",
+         "ListaRegraCarregarJson(${1:nLista}, ${3:aJson}, \"${4:arrayPai}\", \"${5:campo1;campo2}\");",
+         "",
+         "ListaRegraPrimeiro(${1:nLista}, ${2:vaAchou});",
+         "Enquanto(${2:vaAchou} = \"S\")",
+         "   {",
+         "      ListaRegraObterValorAlfa(${1:nLista}, \"${6:campo}\", ${7:aValor}, ${2:vaAchou});",
+         "      $0",
+         "      ListaRegraProximo(${1:nLista}, ${2:vaAchou});",
+         "   }"
+      ],
+      "description": "Carregar e iterar uma lista dinâmica a partir de um array JSON (ListaRegra)"
+   },
+   "Validação Está Nulo": {
+      "prefix": "valida-nulo",
+      "body": [
+         "Definir Numero ${1:vnNulo};",
+         "",
+         "EstaNulo(${2:aVariavel}, ${1:vnNulo});",
+         "Se(${1:vnNulo} = 1)",
+         "   {",
+         "      @-- Variável nula ou vazia --@",
+         "      $0",
+         "   }"
+      ],
+      "description": "Verificar se uma variável está nula/vazia (EstaNulo)"
    }
 }

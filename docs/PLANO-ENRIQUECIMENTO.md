@@ -138,8 +138,14 @@ Entregáveis (em `syntaxes/lspt.tmLanguage.json`):
 Critério de pronto:
 - Abrir `.lsp` e ver palavras reservadas e variáveis de sistema coloridas distintamente.
 
-### Fase 4 — Snippets a partir dos exemplos
+### Fase 4 — Snippets a partir dos exemplos ✅ CONCLUÍDA
 **Tier:** baixo
+
+> **Resultado:** o arquivo já cobria condicionais/loops/cursores/SQL/HTTP POST/WS/arquivos.
+> Adicionados os padrões reais que faltavam, extraídos de `exemplos/`: `http-get`,
+> `json-valor` (ValorElementoJson), `lista-json` (ListaRegra a partir de array JSON com
+> loop) e `valida-nulo` (EstaNulo). 59 snippets no total, sem novas duplicações.
+> Obs.: prefixo `execsql` está duplicado **desde antes** (cleanup opcional).
 
 Entregáveis (em `snippets/lspt-snippets.json`), extraídos de `LSPSeniorDoc/.../exemplos/`:
 - `se / senao se / senao`, loop `Para`, loop `Enquanto`, cursor SQL completo
