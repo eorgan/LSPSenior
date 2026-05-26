@@ -21,10 +21,55 @@ function loadFunctionsData() {
 }
 
 /**
+ * Aviso de migração: a versão publicada sob o publisher antigo "eliezer-organ"
+ * orienta o usuário a instalar a nova "eorgan.lspt-language-support". Exibido uma
+ * única vez (globalState). No build do publisher "eorgan" é no-op.
+ */
+function maybeShowMigrationNotice(context) {
+   const OLD_ID = 'eliezer-organ.lspt-language-support';
+   const NEW_ID = 'eorgan.lspt-language-support';
+   const NEW_URL = 'https://open-vsx.org/extension/eorgan/lspt-language-support';
+   const STATE_KEY = 'migracaoEorganAvisada';
+
+   const id = (context.extension && context.extension.id ? context.extension.id : '').toLowerCase();
+   if (id !== OLD_ID) return;
+   if (context.globalState.get(STATE_KEY)) return;
+
+   const instalar = 'Instalar nova versão';
+   const abrir = 'Abrir página';
+   vscode.window
+      .showInformationMessage(
+         'A extensão "LSPT Language Support" mudou para o publisher "eorgan". Instale a nova versão (eorgan.lspt-language-support) para continuar recebendo atualizações.',
+         instalar,
+         abrir
+      )
+      .then((escolha) => {
+         if (escolha === instalar) {
+            vscode.commands.executeCommand('workbench.extensions.installExtension', NEW_ID).then(
+               () =>
+                  vscode.window.showInformationMessage(
+                     'Nova versão instalada. Recarregue a janela e desinstale a versão antiga (eliezer-organ).'
+                  ),
+               () => vscode.env.openExternal(vscode.Uri.parse(NEW_URL))
+            );
+         } else if (escolha === abrir) {
+            vscode.env.openExternal(vscode.Uri.parse(NEW_URL));
+         }
+         context.globalState.update(STATE_KEY, true);
+      });
+}
+
+/**
  * Ativa a extensão
  */
 function activate(context) {
    console.log('LSPT Language Support extension is now active!');
+
+   try {
+      maybeShowMigrationNotice(context);
+   } catch (error) {
+      console.error('Falha ao exibir aviso de migração:', error);
+   }
 
    // 1. COMPLETION PROVIDER (Autocomplete ao digitar Dev.)
    const completionProvider = vscode.languages.registerCompletionItemProvider(
