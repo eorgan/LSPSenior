@@ -64,3 +64,66 @@ Abordagem técnica (padrão das extensões de file-header):
 - [ ] Inserir cabeçalho preenche Author/Email (do Git) e Date (criação) automaticamente.
 - [ ] Salvar um `.lsp`/`.lspt` com cabeçalho atualiza "Last Modified by/time".
 - [ ] Funciona sem Git (degrada graciosamente) e é configurável/desativável.
+
+---
+
+## 2. Formatter de arquivos LSP (`Format Document`)
+
+**Objetivo:** habilitar "Format Document" para `.lsp`/`.lspt` (hoje aparece
+"There is no formatter for 'lspt' files installed").
+
+### Viabilidade — ✅ possível
+
+Registrar `DocumentFormattingEditProvider` (e opcionalmente
+`DocumentRangeFormattingEditProvider`) para a linguagem `lspt`.
+
+### Abordagem (MVP conservador)
+
+- **Apenas reindentação** (ajusta os espaços à esquerda); nunca reordena, remove ou
+  altera o conteúdo da linha, nem mexe dentro de strings/comentários. Baixo risco.
+- Profundidade de bloco: `{` e `Inicio` aumentam um nível; `}` e `Fim` diminuem.
+  Cabeçalhos de controle (`Se`/`Senao`/`Para`/`Enquanto`/`Funcao`) que precedem um bloco
+  adicionam o nível do próximo bloco.
+- Recuo configurável: `lspt.format.indentSize` (padrão **3**, conforme
+  `Formatação/Exemplo de formatação e codigos.md`).
+
+### Estilo de referência (do exemplo do projeto)
+
+```lsp
+Se(Condição)
+   {
+      
+   }
+Senao
+   {
+      
+   }
+
+Funcao BuscarParamWS();
+   Inicio
+
+   Fim;
+```
+Observação: o `{`/`Inicio` fica **um nível abaixo** do cabeçalho de controle, e o corpo um
+nível abaixo do `{` — estilo peculiar, reprodutível mas opinativo.
+
+### Pontos a decidir
+
+- Reproduzir o estilo "brace indentado abaixo do controle" ou o estilo mais comum
+  (brace alinhado ao controle)? Tornar configurável?
+- Comentários de seção `@-- ... --@` na coluna 0 (como no exemplo) vs. seguir a indentação
+  do bloco — definir regra.
+- Tabs vs espaços; preservar linhas em branco.
+
+### Ressalvas
+
+- Formatter é o recurso mais delicado: regra de indentação imperfeita pode recuar linhas
+  de forma estranha. Exige **teste em arquivos reais** antes de confiar.
+- Possível evolução: formatação completa (espaçamento de operadores, alinhamento),
+  fora do MVP.
+
+### Critério de pronto
+
+- [ ] "Format Document" passa a funcionar em `.lsp`/`.lspt`.
+- [ ] Só altera indentação; conteúdo/strings/comentários preservados.
+- [ ] Recuo configurável; validado em arquivos reais de produção.
