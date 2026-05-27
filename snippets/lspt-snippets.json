@@ -605,5 +605,51 @@
          "   }"
       ],
       "description": "Verificar se uma variável está nula/vazia (EstaNulo)"
+   },
+   "Data do Sistema": {
+      "prefix": "data-sistema",
+      "body": [
+         "Definir Numero ${1:vnData};",
+         "Definir Alfa ${2:vaData};",
+         "",
+         "${1:vnData} = DatSis;            @-- data do sistema --@",
+         "IntParaAlfa(${1:vnData}, ${2:vaData}); @-- converte para texto --@"
+      ],
+      "description": "Obter a data do sistema (DatSis) e converter para Alfa"
+   },
+   "Montar Data": {
+      "prefix": "data-monta",
+      "body": [
+         "Definir Numero ${1:vnData};",
+         "MontaData(${2:nDia}, ${3:nMes}, ${4:nAno}, ${1:vnData});"
+      ],
+      "description": "Montar uma data numérica a partir de dia/mês/ano (MontaData)"
+   },
+   "Web Service interno.com.senior (completo)": {
+      "prefix": "ws-interno",
+      "body": [
+         "Definir interno.com.senior.${1:modulo}.${2:servico} ${3:wsPedido};",
+         "",
+         "${3:wsPedido}.${4:campo} = ${5:valor};",
+         "${3:wsPedido}.Executar();",
+         "",
+         "Definir Alfa vaTipoRetorno;",
+         "Definir Alfa vaMsgRetorno;",
+         "vaTipoRetorno = ${3:wsPedido}.tipoRetorno;",
+         "vaMsgRetorno = ${3:wsPedido}.mensagemRetorno;",
+         "Se (vaTipoRetorno <> \"OK\")",
+         "   {",
+         "      Mensagem(Erro, vaMsgRetorno);",
+         "   }"
+      ],
+      "description": "Chamada completa de web service interno.com.senior com tratamento de retorno"
+   },
+   "Ler Parâmetro de Configuração": {
+      "prefix": "cfg-valor",
+      "body": [
+         "Definir Alfa ${1:vaValor};",
+         "RetornaValorCFG(\"${2:chave}\", ${1:vaValor});"
+      ],
+      "description": "Ler um valor de configuração (RetornaValorCFG)"
    }
 }

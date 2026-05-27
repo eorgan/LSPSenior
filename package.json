@@ -2,7 +2,7 @@
    "name": "lspt-language-support",
    "displayName": "LSPT Language Support",
    "description": "Suporte completo para a linguagem LSP (Linguagem Senior de Programação) com syntax highlighting, snippets, IntelliSense e autocomplete para 600+ funções built-in",
-   "version": "1.6.1",
+   "version": "1.7.0",
    "publisher": "eorgan",
    "author": {
       "name": "Eliezer Organ",
@@ -30,7 +30,8 @@
    "icon": "images/icon.png",
    "main": "./extension.js",
    "activationEvents": [
-      "onLanguage:lspt"
+      "onLanguage:lspt",
+      "onCommand:lspt.buscarFuncao"
    ],
    "contributes": {
       "languages": [
@@ -60,7 +61,29 @@
             "language": "lspt",
             "path": "./snippets/lspt-snippets.json"
          }
-      ]
+      ],
+      "commands": [
+         {
+            "command": "lspt.buscarFuncao",
+            "title": "LSPT: Buscar função no catálogo",
+            "category": "LSPT"
+         }
+      ],
+      "configuration": {
+         "title": "LSPT Language Support",
+         "properties": {
+            "lspt.diagnostics.enabled": {
+               "type": "boolean",
+               "default": true,
+               "description": "Ativa avisos em tempo real das armadilhas da LSP (operação em parâmetro, Pare/Continue fora de loop)."
+            },
+            "lspt.diagnostics.unknownFunctions": {
+               "type": "boolean",
+               "default": false,
+               "description": "Sinaliza chamadas a funções não encontradas no catálogo (pode gerar falso-positivo com funções do usuário/externas)."
+            }
+         }
+      }
    },
    "scripts": {
       "package": "vsce package",

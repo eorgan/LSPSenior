@@ -8,6 +8,28 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.7.0] - 2026-05-26
+
+### ✨ Adicionado
+- **Autocomplete geral** — sugere funções, palavras reservadas e variáveis de sistema
+  conforme você digita (não só após `Dev.`).
+- **Diagnostics (linter)** — avisa em tempo real sobre as armadilhas da LSP:
+  - operação/concatenação/chamada de função **dentro de parâmetro** (ex: `Mensagem(..., "x" + y)`);
+  - `Pare;`/`Continue;` fora de loop `Para`/`Enquanto`;
+  - (opcional) função não encontrada no catálogo.
+  Configurável em `lspt.diagnostics.*`.
+- **Outline / símbolos** — funções (`Funcao`) aparecem no painel Outline e breadcrumbs.
+- **Hover para variáveis de sistema** (`DatSis`, `CodEmp`, `NumPag`, ...).
+- **Ir para definição de funções do usuário** (Cmd+Click salta para o `Funcao X()` no arquivo).
+- **Folding de blocos `Inicio`/`Fim`**.
+- **Comando "LSPT: Buscar função no catálogo"** — quick-pick sobre as ~600 funções que
+  insere a chamada com parâmetros.
+- **Novos snippets:** `data-sistema`, `data-monta`, `ws-interno`, `cfg-valor`.
+
+### 🔧 Melhorado
+- Hover, signature help e go-to-definition agora reconhecem nomes de função
+  **ignorando maiúsculas/minúsculas** (a LSP é case-insensitive).
+
 ## [1.6.1] - 2026-05-26
 
 ### ✨ Melhorado
