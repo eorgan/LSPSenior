@@ -16,8 +16,8 @@ Esta função procura um caractere que indica "enter" ou nova linha (#13 ou #10)
 ## Parâmetros
 
 - **StrProcura** (`Alfa`) - Entrada: String na qual será procurada o enter ou nova linha (#13 ou #10)
-- **StrImp** (``) - Saída: A primeira parte da string procurada, até o primeiro caracter que indica nova linha (retorno)
-- **StrResto** (``) - Saída: O restante da string, depois do primeiro caracter que indica nova linha (retorno)
+- **StrImp** (`Alfa end`) - Saída: A primeira parte da string procurada, até o primeiro caracter que indica nova linha (retorno)
+- **StrResto** (`Alfa end`) - Saída: O restante da string, depois do primeiro caracter que indica nova linha (retorno)
 
 ## Exemplo de Uso
 
@@ -32,5 +32,6 @@ ProcuraEnter(vaStrProcura, vaStrImp, vaStrResto);
 @ vaStrResto será "Segunda linha" @
 ```
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

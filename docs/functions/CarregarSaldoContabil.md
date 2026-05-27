@@ -11,24 +11,23 @@ Funcao CarregarSaldoContabil(Numero aTipSal, Numero aCodEmp, Alfa aAbrFil, Alfa 
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Carregar em memória o saldo contábil conforme dados passados via parâmetro.
 
 ## Parâmetros
 
-- **aTipSal** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **aAbrFil** (`Alfa`) - Entrada: [Adicione descrição]
-- **aAbrPca** (`Alfa`) - Entrada: [Adicione descrição]
-- **aDatIni** (`Numero`) - Entrada: [Adicione descrição]
-- **aDatFin** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodMpc** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodMpa** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodMpu** (`Numero`) - Entrada: [Adicione descrição]
-- **aSalAnt** (`Numero`) - Entrada: [Adicione descrição]
-- **aDesZer** (`Numero`) - Entrada: [Adicione descrição]
-- **aComMem** (`Numero`) - Entrada: [Adicione descrição]
-- **aDzeTco** (`Numero`) - Entrada: [Adicione descrição]
+- **aTipSal** (`Numero`) - Entrada: Tipo do saldo a ser carregado em memória, podendo ser:  1 = Contábil,  2 = Multi Moeda,  3 = Relacionamento, 4 = Histórico,  5 = Auxiliar por Conta contábil,  6 = Auxiliar por Conta auxiliar,  7 = Histórico Auxiliar e  8 = Centro de Custo.
+- **aCodEmp** (`Numero`) - Entrada: Código da Empresa para carregar o saldo em memória.
+- **aAbrFil** (`Alfa`) - Entrada: Abrangência de Filiais para carregar o saldo em memória.
+- **aAbrPca** (`Alfa`) - Entrada: Abrangência de contas auxiliares (Para os tipos de saldo 5, 6 e 7).
+- **aDatIni** (`Numero`) - Entrada: Data inicial para carregar o saldo em memória.
+- **aDatFin** (`Numero`) - Entrada: Data final para carregar o saldo em memória.
+- **aCodMpc** (`Numero`) - Entrada: Código do Modelo de Plano (Para o tipo de saldo 4 e 7).
+- **aCodMpa** (`Numero`) - Entrada: Código do Modelo de Plano atual (Para o tipo de saldo 3).
+- **aCodMpu** (`Numero`) - Entrada: Código do Modelo de Plano de centro de custo (Para o tipo de saldo 3).
+- **aSalAnt** (`Numero`) - Entrada: Indica se a estrutura deverá ser carregada com saldo anterior.
+- **aDesZer** (`Numero`) - Entrada: Indica se deverá desconsiderar zeramento (0 = Não / 1 = Sim).
+- **aComMem** (`Numero`) - Entrada: Indica se irá armazenar o registro de todas as competências em memória (0 = Não / 1 = Sim).
+- **aDzeTco** (`Numero`) - Entrada: Indica se deverá desconsiderar zeramento para todas as competências (0 = Não / 1 = Sim).
 
 ## Exemplo de Uso
 
@@ -37,10 +36,6 @@ Funcao CarregarSaldoContabil(Numero aTipSal, Numero aCodEmp, Alfa aAbrFil, Alfa 
 CarregarSaldoContabil();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

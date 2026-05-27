@@ -11,15 +11,14 @@ Funcao GerarOrdemSeparacaoWmsSenior(Numero CodEmp, Numero CodFil, Alfa End Chave
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Tem o objetivo dar início à geração de uma ordem de separação para exportação ao Gestão de Armazenagem | WMS Senior.
 
 ## Parâmetros
 
-- **CodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **CodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **ChaveGerada** (`Alfa End`) - Saída: [Adicione descrição]
-- **Resultado** (`Alfa End`) - Saída: [Adicione descrição]
+- **CodEmp** (`Numero`) - Entrada: Código da empresa da ordem de separação
+- **CodFil** (`Numero`) - Entrada: Código da filial da ordem de separação (que representa o depositante no Gestão de Armazenagem
+- **ChaveGerada** (`Alfa End`) - Saída: Chave da ordem de separação gerada pelo Gestão Empresarial
+- **Resultado** (`Alfa End`) - Saída: Resultado OK ou ERRO. Em caso de erro, a mensagem de erro será retornada no parâmetro `ChaveGerada`
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ Funcao GerarOrdemSeparacaoWmsSenior(Numero CodEmp, Numero CodFil, Alfa End Chave
 GerarOrdemSeparacaoWmsSenior();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

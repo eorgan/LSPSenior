@@ -11,14 +11,17 @@ Funcao LerPosicaoStr(Alfa Origem, Numero End Retorno, Numero Pos);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função identifica qual o caractere que está em determinada posição do texto de origem.
 
 ## Parâmetros
 
-- **Origem** (`Alfa`) - Entrada: [Adicione descrição]
-- **Retorno** (`Numero End`) - Saída: [Adicione descrição]
-- **Pos** (`Numero`) - Entrada: [Adicione descrição]
+- **Origem** (`Alfa`) - Entrada: Variável com o texto que se deseja verificar.
+- **Retorno** (`Numero End`) - Saída: Variável que receberá o caracter lido (retorno)
+- **Pos** (`Numero`) - Entrada: Variável que indica a posição do texto que se deseja identificar o caractere.
+
+## Valores de Retorno
+
+- Tipo de retorno: Variável numérica que receberá o caracter lido.
 
 ## Exemplo de Uso
 
@@ -27,10 +30,6 @@ Funcao LerPosicaoStr(Alfa Origem, Numero End Retorno, Numero Pos);
 LerPosicaoStr();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

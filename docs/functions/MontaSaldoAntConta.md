@@ -11,17 +11,20 @@ funcao MontaSaldoAntConta(Numero EmpCta,Alfa NumCta,Alfa TnsMov,Numero DatIni, N
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Passando-se a Empresa, Conta, Transação(Opcional),Data Inicial, e informando se é Data Movimento ou Data Liberação, retorna o Valor do Saldo Anterior da conta.
 
 ## Parâmetros
 
-- **EmpCta** (`Numero`) - Entrada: [Adicione descrição]
-- **NumCta** (`Alfa`) - Entrada: [Adicione descrição]
-- **TnsMov** (`Alfa`) - Entrada: [Adicione descrição]
-- **DatIni** (`Numero`) - Entrada: [Adicione descrição]
-- **Libera** (`Numero`) - Entrada: [Adicione descrição]
-- **VlrSal** (`Numero End`) - Saída: [Adicione descrição]
+- **EmpCta** (`Numero`) - Entrada: Variável que recebe o Código da Empresa.
+- **NumCta** (`Alfa`) - Entrada: Variável que recebe o Número da Conta.
+- **TnsMov** (`Alfa`) - Entrada: Variável que recebe o Código da Transação, esta variável é opcional.
+- **DatIni** (`Numero`) - Entrada: Variável que recebe a data inicial que deseja-se buscar o saldo.
+- **Libera** (`Numero`) - Entrada: Informar valor 0 para Data Movimento ou 1 para Data Liberação.
+- **VlrSal** (`Numero End`) - Saída: Variável Numérica que retorna o Valor do Saldo Anterior.
+
+## Valores de Retorno
+
+- VlrSal: Variável Numérica que retorna o Valor do Saldo Anterior;
 
 ## Exemplo de Uso
 
@@ -30,10 +33,6 @@ funcao MontaSaldoAntConta(Numero EmpCta,Alfa NumCta,Alfa TnsMov,Numero DatIni, N
 MontaSaldoAntConta();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

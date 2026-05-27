@@ -11,13 +11,17 @@ Funcao IncluirServicoOP(Alfa pParam,Alfa End Retorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Permitir inserir uma operação externa na OP sem ao menos esta operação constar no roteiro.
 
 ## Parâmetros
 
-- **pParam** (`Alfa`) - Entrada: [Adicione descrição]
-- **Retorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **pParam** (`Alfa`) - Entrada: Código da origem da OP.
+- **Retorno** (`Alfa End`) - Saída: Número da OP.
+
+## Valores de Retorno
+
+- parâmetro Retorno do tipo alfa que recebe "OK" caso tenha processado
+- com sucesso.
 
 ## Exemplo de Uso
 
@@ -26,10 +30,6 @@ Funcao IncluirServicoOP(Alfa pParam,Alfa End Retorno);
 IncluirServicoOP();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -15,7 +15,7 @@ Convertem o conteúdo de uma variável para maiúsculo ou minúsculo.
 
 ## Parâmetros
 
-- **pOrigem** (``) - Saída
+- **pOrigem** (`Alfa end`) - Saída
 
 ## Exemplo de Uso
 
@@ -34,5 +34,6 @@ ConverteParaMinusculo(vaEmail);
 ConverteParaMaiusculo(vaNome); @ Vira "JOÃO SILVA SANTOS" @
 ```
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

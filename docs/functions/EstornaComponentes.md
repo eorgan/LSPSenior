@@ -11,34 +11,50 @@ Funcao EstornaComponentes(Alfa aCodOri, Numero aNumOrp, Numero aCodEtg, Alfa aCo
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Estorna os componentes já baixados da O.P. Nota - Se o sistema estiver [parametrizado](../menu_controladoria/processo-bloco-k.htm#ParametrizacoesIniciais) para a geração do Bloco K, algumas consistências e bloqueios podem ser realizadas nessa função, garantindo a correta geração de informações do arquivo, conforme guia prático. Confira estas consistências na tela Parâmetros e consistências da empresa [(F070ECN)](../menu_cadastros/f070ecn.htm) - Esta função utiliza o identificador de regra CHA-900RETRC01, no qual pode ser definido se irá ou não retornar a quantidade estornada para a reserva do componente
 
 ## Parâmetros
 
-- **aCodOri** (`Alfa`) - Entrada: [Adicione descrição]
-- **aNumOrp** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodEtg** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodPro** (`Alfa`) - Entrada: [Adicione descrição]
-- **aCodDer** (`Alfa`) - Entrada: [Adicione descrição]
-- **aCodCmp** (`Alfa`) - Entrada: [Adicione descrição]
-- **aDerCmp** (`Alfa`) - Entrada: [Adicione descrição]
-- **aQtdEst** (`Numero`) - Entrada: [Adicione descrição]
-- **aDatFim** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodTns** (`Alfa`) - Entrada: [Adicione descrição]
-- **Retorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **aCodOri** (`Alfa`) - Entrada: Código da origem da O.P.
+- **aNumOrp** (`Numero`) - Entrada: Número da O.P.
+- **aCodEtg** (`Numero`) - Entrada: Estágio da O.P.
+- **aCodPro** (`Alfa`) - Entrada: Código do produto da O.P..
+- **aCodDer** (`Alfa`) - Entrada: Código da derivação do produto.
+- **aCodCmp** (`Alfa`) - Entrada: Código do componente que deseja estornar. Informando aCodCmp, o estorno será apenas daquele componente, com a quantidade informada (aQtdEst) sendo a estornada.
+- **aDerCmp** (`Alfa`) - Entrada: Derivação do componente a ser estornado.
+- **aQtdEst** (`Numero`) - Entrada: Quantidade que deseja estornar.
+- **aDatFim** (`Numero`) - Entrada: Data do movimento. Quando não informada data, será utilizada a data atual. Esta variável deve ser passada em formato Numero (como no banco), caso não saiba, pode usar a função [ConvDataInt](convdataint.md) para transformar uma data alfa no formato aceito.
+- **aCodTns** (`Alfa`) - Entrada: Código da transação. Quando não informada transação, será utilizada a transação padrão de estorno definida na filial.
+- **Retorno** (`Alfa End`) - Saída
+
+## Valores de Retorno
+
+- status da execução da função. Retorna "OK" caso tenha sido processado
+- com sucesso.
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-EstornaComponentes();
+Definir Alfa Retorno;
+EstornaComponentes(
+"PEC"
+, 8, 110,
+"GABINETE"
+,
+"MS"
+,
+""
+,
+""
+, 5, 0,
+"90203"
+,
+Retorno);
+Se (Retorno <>
+"OK")
+  GeraLog(Retorno);
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

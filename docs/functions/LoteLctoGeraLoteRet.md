@@ -11,12 +11,18 @@ Funcao LoteLctoGeraLoteRet(Alfa end pResult);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função gera o lote contábil, bem como os lançamentos e rateios adicionados através das funções LoteLctoAdicionaLctoRet, LoteLctoAdicionaRateioRet e LoteLctoAdicionaAuxiliarRet.
 
 ## Parâmetros
 
-- **pResult** (``) - Saída: [Adicione descrição]
+- **pResult** (`Alfa end`) - Saída: Variável que retorna se a função foi executada sem problemas: Se retornar 'OK' foi feita sem problemas, caso contrário retornará a palavra "Erro: " concatenada com a descrição da exceção ocorrida.
+
+## Valores de Retorno
+
+- pResult: Variável alfa que retorna se a função foi
+- executada sem problemas: Se retornar 'OK' foi feita sem problemas, caso contrário
+- retornará a palavra "Erro: " concatenada com a descrição da exceção
+- ocorrida.
 
 ## Exemplo de Uso
 
@@ -25,10 +31,6 @@ Funcao LoteLctoGeraLoteRet(Alfa end pResult);
 LoteLctoGeraLoteRet();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

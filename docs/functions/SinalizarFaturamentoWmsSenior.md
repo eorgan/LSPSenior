@@ -11,18 +11,17 @@ Funcao SinalizarFaturamentoWmsSenior(Numero pCodEmp, Numero pCodFil, Numero pNum
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Gera o sinal de integração de uma nota fiscal autorizada para o WMS (Alcis e Silt/Senior).
 
 ## Parâmetros
 
-- **pCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **pNumNfv** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodSnf** (`Alfa`) - Entrada: [Adicione descrição]
-- **pTipoDocumento** (`Alfa`) - Entrada: [Adicione descrição]
-- **pChaveGerada** (``) - Saída: [Adicione descrição]
-- **pStatus** (``) - Saída: [Adicione descrição]
+- **pCodEmp** (`Numero`) - Entrada: Empresa do documento.
+- **pCodFil** (`Numero`) - Entrada: Filial do documento.
+- **pNumNfv** (`Numero`) - Entrada: Número da nota fiscal.
+- **pCodSnf** (`Alfa`) - Entrada: Código da série da nota fiscal.
+- **pTipoDocumento** (`Alfa`) - Entrada: Caso a mesma tenha sido originária de uma pré-fatura/nota enviar F, para nota fiscal avulsa fiscal enviar = N.
+- **pChaveGerada** (`Alfa end`) - Saída: Chave da ordem de separação gerada - Retorno.
+- **pStatus** (`Alfa end`) - Saída
 
 ## Exemplo de Uso
 
@@ -31,10 +30,6 @@ Funcao SinalizarFaturamentoWmsSenior(Numero pCodEmp, Numero pCodFil, Numero pNum
 SinalizarFaturamentoWmsSenior();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

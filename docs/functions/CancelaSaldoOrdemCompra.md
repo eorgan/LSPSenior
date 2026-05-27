@@ -11,17 +11,16 @@ Funcao CancelaSaldoOrdemCompra(Numero pCodEmp, Numero pCodFil, Numero pNumOcp, N
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Cancelar uma quantidade de um item de produto ou serviço de uma ordem de compra.
 
 ## Parâmetros
 
-- **pCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **pNumOcp** (`Numero`) - Entrada: [Adicione descrição]
-- **pSeqIte** (`Numero`) - Entrada: [Adicione descrição]
-- **pProSer** (`Alfa`) - Entrada: [Adicione descrição]
-- **pQtdCan** (`Numero`) - Entrada: [Adicione descrição]
+- **pCodEmp** (`Numero`) - Entrada: Empresa da ordem de compra.
+- **pCodFil** (`Numero`) - Entrada: Filial da ordem de compra.
+- **pNumOcp** (`Numero`) - Entrada: Número da ordem de compra.
+- **pSeqIte** (`Numero`) - Entrada: Sequência do item que pode ser produto ou serviço.
+- **pProSer** (`Alfa`) - Entrada: Indicatido do item se é produto (P) ou serviço (S).
+- **pQtdCan** (`Numero`) - Entrada: Qtde a ser cancelada do item.
 
 ## Exemplo de Uso
 
@@ -30,10 +29,6 @@ Funcao CancelaSaldoOrdemCompra(Numero pCodEmp, Numero pCodFil, Numero pNumOcp, N
 CancelaSaldoOrdemCompra();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

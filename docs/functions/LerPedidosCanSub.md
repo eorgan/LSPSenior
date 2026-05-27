@@ -11,26 +11,25 @@ Funcao LerPedidosCanSub(Numero NPos,Numero End FLis,Numero End Emp,Numero End Fi
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Ler uma lista de memória criada e carregada no processamento no cancelamento e substituição dos itens (F120SIP).
 
 ## Parâmetros
 
-- **NPos** (`Numero`) - Entrada: [Adicione descrição]
-- **FLis** (`Numero End`) - Saída: [Adicione descrição]
-- **Emp** (`Numero End`) - Saída: [Adicione descrição]
-- **Fil** (`Numero End`) - Saída: [Adicione descrição]
-- **Ped** (`Numero End`) - Saída: [Adicione descrição]
-- **Seq** (`Numero End`) - Saída: [Adicione descrição]
-- **Pro** (`Alfa End`) - Saída: [Adicione descrição]
-- **Der** (`Alfa End`) - Saída: [Adicione descrição]
-- **ProS** (`Alfa End`) - Saída: [Adicione descrição]
-- **DerS** (`Alfa End`) - Saída: [Adicione descrição]
-- **Dep** (`Alfa End`) - Saída: [Adicione descrição]
-- **Qtd** (`Numero End`) - Saída: [Adicione descrição]
-- **Pre** (`Numero End`) - Saída: [Adicione descrição]
-- **Vlr** (`Numero End`) - Saída: [Adicione descrição]
-- **Cse** (`Alfa End`) - Saída: [Adicione descrição]
+- **NPos** (`Numero`) - Entrada: Variável que possui a posição atual em que se encontra a lista em memória.
+- **FLis** (`Numero End`) - Saída: Variável que indica o fim da lista.
+- **Emp** (`Numero End`) - Saída: Código da empresa.
+- **Fil** (`Numero End`) - Saída: Código da filial.
+- **Ped** (`Numero End`) - Saída: Número do pedido.
+- **Seq** (`Numero End`) - Saída: Sequência do pedido.
+- **Pro** (`Alfa End`) - Saída: Código do produto substituído.
+- **Der** (`Alfa End`) - Saída: Código da derivação substituída.
+- **ProS** (`Alfa End`) - Saída: Código do produto substituto.
+- **DerS** (`Alfa End`) - Saída: Código da derivação substituta.
+- **Dep** (`Alfa End`) - Saída: Código do depósito.
+- **Qtd** (`Numero End`) - Saída: Quantidade do item do pedido.
+- **Pre** (`Numero End`) - Saída: Preço do item do pedido.
+- **Vlr** (`Numero End`) - Saída: Valor do item do pedido.
+- **Cse** (`Alfa End`) - Saída: Indicativo de cancelamento, substituição ou exclusão do item (valores: “CAN”, “SUB” e “EXC”).
 
 ## Exemplo de Uso
 
@@ -39,10 +38,6 @@ Funcao LerPedidosCanSub(Numero NPos,Numero End FLis,Numero End Emp,Numero End Fi
 LerPedidosCanSub();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

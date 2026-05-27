@@ -11,13 +11,12 @@ Funcao AgluCtbContas(Numero pCodAgl, Alfa End Retorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Buscar as contas que pertencem a aglutinação, separadas por vírgula.
 
 ## Parâmetros
 
-- **pCodAgl** (`Numero`) - Entrada: [Adicione descrição]
-- **Retorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **pCodAgl** (`Numero`) - Entrada: Variável que recebe o código do aglutinador.
+- **Retorno** (`Alfa End`) - Saída: Variável que indica o valor do registro posicionado.
 
 ## Exemplo de Uso
 
@@ -26,10 +25,6 @@ Funcao AgluCtbContas(Numero pCodAgl, Alfa End Retorno);
 AgluCtbContas();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

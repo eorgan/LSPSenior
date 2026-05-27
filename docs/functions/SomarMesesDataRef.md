@@ -11,15 +11,14 @@ Funcao SomarMesesDataRef(Numero aDataRef, Numero aQtdMeses, Numero aDiaRetorno, 
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Permite somar a quantidade passada no segundo parâmetro (aQtdMeses) ao mês indicado.
 
 ## Parâmetros
 
-- **aDataRef** (`Numero`) - Entrada: [Adicione descrição]
-- **aQtdMeses** (`Numero`) - Entrada: [Adicione descrição]
-- **aDiaRetorno** (`Numero`) - Entrada: [Adicione descrição]
-- **aDataRefFin** (`Numero End`) - Saída: [Adicione descrição]
+- **aDataRef** (`Numero`) - Entrada
+- **aQtdMeses** (`Numero`) - Entrada
+- **aDiaRetorno** (`Numero`) - Entrada
+- **aDataRefFin** (`Numero End`) - Saída
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ Funcao SomarMesesDataRef(Numero aDataRef, Numero aQtdMeses, Numero aDiaRetorno, 
 SomarMesesDataRef();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

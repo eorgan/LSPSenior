@@ -11,15 +11,14 @@ Funcao GerarOrdemRecebimentoWmsSenior(Numero CodEmp, Numero CodFil, Alfa End Cha
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Tem o objetivo de dar início à geração de uma ordem de recebimento para exportação ao Gestão de Armazenagem | WMS.
 
 ## Parâmetros
 
-- **CodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **CodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **ChaveGerada** (`Alfa End`) - Saída: [Adicione descrição]
-- **Resultado** (`Alfa End`) - Saída: [Adicione descrição]
+- **CodEmp** (`Numero`) - Entrada: Código da empresa da ordem de recebimento
+- **CodFil** (`Numero`) - Entrada: Código da filial da ordem de recebimento (que representa o depositante no Gestão de Armazenagem
+- **ChaveGerada** (`Alfa End`) - Saída: Chave da ordem de recebimento gerada pelo Gestão Empresarial
+- **Resultado** (`Alfa End`) - Saída: Resultado OK ou ERRO. Em caso de erro, a mensagem de erro será retornada no parâmetro `ChaveGerada`
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ Funcao GerarOrdemRecebimentoWmsSenior(Numero CodEmp, Numero CodFil, Alfa End Cha
 GerarOrdemRecebimentoWmsSenior();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

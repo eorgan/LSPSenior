@@ -11,16 +11,15 @@ Funcao DefinirCategoriaPedidoWms(Numero CodEmp, Numero CodFil, Numero NumPed, Nu
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função pode ser usada em regra do processo automático que busca priorizar pedidos. Ela altera o valor do campo E120PED.CatCli.
 
 ## Parâmetros
 
-- **CodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **CodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **NumPed** (`Numero`) - Entrada: [Adicione descrição]
-- **CatCli** (`Numero`) - Entrada: [Adicione descrição]
-- **MsgErro** (`Alfa End`) - Saída: [Adicione descrição]
+- **CodEmp** (`Numero`) - Entrada: Código da empresa
+- **CodFil** (`Numero`) - Entrada: Código da filial
+- **NumPed** (`Numero`) - Entrada: Número pedido
+- **CatCli** (`Numero`) - Entrada
+- **MsgErro** (`Alfa End`) - Saída: Mensagem de erro
 
 ## Exemplo de Uso
 
@@ -29,10 +28,6 @@ Funcao DefinirCategoriaPedidoWms(Numero CodEmp, Numero CodFil, Numero NumPed, Nu
 DefinirCategoriaPedidoWms();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,21 +11,20 @@ funcao InsereRateioCrp(alfa pRecPag, numero pCodEmp,numero pCodFil, alfa pNumTit
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função insere o rateio de títulos no contas a receber ou no contas a pagar, de acordo com os parâmetros informados.
 
 ## Parâmetros
 
-- **pRecPag** (`alfa`) - Entrada: [Adicione descrição]
-- **pCodEmp** (`numero`) - Entrada: [Adicione descrição]
-- **pCodFil** (`numero`) - Entrada: [Adicione descrição]
-- **pNumTit** (`alfa`) - Entrada: [Adicione descrição]
-- **pCodTpt** (`alfa`) - Entrada: [Adicione descrição]
-- **pCodFor** (`numero`) - Entrada: [Adicione descrição]
-- **pSeqMov** (`numero`) - Entrada: [Adicione descrição]
-- **pCodCcu** (`alfa`) - Entrada: [Adicione descrição]
-- **pPerRat** (`numero`) - Entrada: [Adicione descrição]
-- **pVlrRat** (`numero`) - Entrada: [Adicione descrição]
+- **pRecPag** (`alfa`) - Entrada: Variável que indica se é contas a receber("R") ou contas a pagar("P").
+- **pCodEmp** (`numero`) - Entrada: Variável/Campo que recebe o código da empresa do Contas a Receber/Pagar.
+- **pCodFil** (`numero`) - Entrada: Variável/Campo que recebe o código da filial do Contas a Receber/Pagar.
+- **pNumTit** (`alfa`) - Entrada: Variável/Campo que recebe o número do título do Contas a Receber/Pagar.
+- **pCodTpt** (`alfa`) - Entrada: Variável/Campo que recebe o código da tipo do título do Contas a Receber/Pagar.
+- **pCodFor** (`numero`) - Entrada: Variável/Campo que recebe o código do fornecedor do Contas a Receber/Pagar.
+- **pSeqMov** (`numero`) - Entrada: Variável que recebe a sequência da movimentação do Contas a Receber/Pagar.
+- **pCodCcu** (`alfa`) - Entrada: Variável/Campo que recebe o código do centro de custo do Contas a Receber/Pagar.
+- **pPerRat** (`numero`) - Entrada: Variável/Campo que recebe o percentual de rateio do Contas a Receber/Pagar.
+- **pVlrRat** (`numero`) - Entrada: Variável/Campo que recebe o valor do rateio do Contas a Receber/Pagar.
 
 ## Exemplo de Uso
 
@@ -34,10 +33,6 @@ funcao InsereRateioCrp(alfa pRecPag, numero pCodEmp,numero pCodFil, alfa pNumTit
 InsereRateioCrp();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

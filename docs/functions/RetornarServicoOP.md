@@ -11,13 +11,12 @@ Funcao RetornarServicoOP(Alfa pParametros,Alfa End pRetorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retornar serviço de terceiros.
 
 ## Parâmetros
 
-- **pParametros** (`Alfa`) - Entrada: [Adicione descrição]
-- **pRetorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **pParametros** (`Alfa`) - Entrada: Origem do produto da O.P.
+- **pRetorno** (`Alfa End`) - Saída: Número da O.P.
 
 ## Exemplo de Uso
 
@@ -26,10 +25,6 @@ Funcao RetornarServicoOP(Alfa pParametros,Alfa End pRetorno);
 RetornarServicoOP();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

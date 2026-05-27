@@ -11,14 +11,13 @@ funcao AlteraCampoRetornoPE(alfa pNomeCampo, alfa pVlrAlf, numero pVlrNum);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta tem como o objetivo no pagamento eletrônico alterar valores que possam vir incorretos, ou que se deseje alterar nos arquivos de retorno, passando-se o campo a ser alterado e o valor que o mesmo irá conter.
 
 ## Parâmetros
 
-- **pNomeCampo** (`alfa`) - Entrada: [Adicione descrição]
-- **pVlrAlf** (`alfa`) - Entrada: [Adicione descrição]
-- **pVlrNum** (`numero`) - Entrada: [Adicione descrição]
+- **pNomeCampo** (`alfa`) - Entrada: Variável que contem o nome do campo a ser alterado.
+- **pVlrAlf** (`alfa`) - Entrada: Variável que contem o valor a ser atribuído ao campo se o mesmo for alfa.
+- **pVlrNum** (`numero`) - Entrada: Variável que contem o valor a ser atribuído ao campo se o mesmo for numérico.
 
 ## Exemplo de Uso
 
@@ -27,10 +26,6 @@ funcao AlteraCampoRetornoPE(alfa pNomeCampo, alfa pVlrAlf, numero pVlrNum);
 AlteraCampoRetornoPE();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

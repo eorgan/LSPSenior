@@ -11,15 +11,14 @@ Funcao DuplicarFilial(Numero pCodEmpOri,Numero pCodFilOri, Numero pCodEmpDes,Num
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função permite a duplicação dos parâmetros de uma filial para outra.
 
 ## Parâmetros
 
-- **pCodEmpOri** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodFilOri** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodEmpDes** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodFilDes** (`Numero`) - Entrada: [Adicione descrição]
+- **pCodEmpOri** (`Numero`) - Entrada: Empresa origem
+- **pCodFilOri** (`Numero`) - Entrada: Filial origem
+- **pCodEmpDes** (`Numero`) - Entrada: Empresa destino
+- **pCodFilDes** (`Numero`) - Entrada: Filial destino
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ Funcao DuplicarFilial(Numero pCodEmpOri,Numero pCodFilOri, Numero pCodEmpDes,Num
 DuplicarFilial();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,13 +11,16 @@ Funcao VerificaMovimentoConta(Numero pCtaRed, Alfa End pTemMov);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função verifica na estrutura carregada pela CarregaSaldoContabilAbr se a conta possui alguma conta subordinada com movimento.
 
 ## Parâmetros
 
-- **pCtaRed** (`Numero`) - Entrada: [Adicione descrição]
-- **pTemMov** (`Alfa End`) - Saída: [Adicione descrição]
+- **pCtaRed** (`Numero`) - Entrada: Variável que recebe o número da conta contábil que deseja-se verificar a existência de movimento.
+- **pTemMov** (`Alfa End`) - Saída: Variável alfa que receberá "S"(sim) ou "N"(não).
+
+## Valores de Retorno
+
+- pTemMov: Variável alfa que receberá "S"(sim) ou "N"(não).
 
 ## Exemplo de Uso
 
@@ -26,10 +29,6 @@ Funcao VerificaMovimentoConta(Numero pCtaRed, Alfa End pTemMov);
 VerificaMovimentoConta();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

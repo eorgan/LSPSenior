@@ -11,13 +11,12 @@ Funcao TruncarDecimal(Numero End Valor, Numero pDecimais);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função serve para truncar valores decimais.
 
 ## Parâmetros
 
-- **Valor** (`Numero End`) - Saída: [Adicione descrição]
-- **pDecimais** (`Numero`) - Entrada: [Adicione descrição]
+- **Valor** (`Numero End`) - Saída: Valor que deve ser truncado
+- **pDecimais** (`Numero`) - Entrada: Quantidade de casas decimais
 
 ## Exemplo de Uso
 
@@ -26,10 +25,6 @@ Funcao TruncarDecimal(Numero End Valor, Numero pDecimais);
 TruncarDecimal();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

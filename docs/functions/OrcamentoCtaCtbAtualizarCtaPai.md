@@ -11,8 +11,7 @@ Funcao OrcamentoCtaCtbAtualizarCtaPai();
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Percorre a lista de orçamentos previamente preenchida pela função de programador "OrcamentoCtaCtbPreencherMemoria();", e atualiza as contas superiores com a diferença do saldo informado no valor do orçamento por conta contábil.
 
 ## Parâmetros
 
@@ -25,10 +24,6 @@ _Sem parâmetros_
 OrcamentoCtaCtbAtualizarCtaPai();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,15 +11,14 @@ Funcao ObterProximoId(Alfa Identificador, Numero Incremento, Alfa Filtro, Numero
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Gerar um ID único para controlar os sequenciais das tabelas. **Sintaxe**: função Alfa Identificador, Numero Incremento, Alfa Filtro, Numero End ProximoId
 
 ## Parâmetros
 
-- **Identificador** (`Alfa`) - Entrada: [Adicione descrição]
-- **Incremento** (`Numero`) - Entrada: [Adicione descrição]
-- **Filtro** (`Alfa`) - Entrada: [Adicione descrição]
-- **ProximoId** (`Numero End`) - Saída: [Adicione descrição]
+- **Identificador** (`Alfa`) - Entrada: Variável com um identificador único, usado para a geração do sequencial.
+- **Incremento** (`Numero`) - Entrada: Variável com a quantidade que será incrementada no sequencial.
+- **Filtro** (`Alfa`) - Entrada: Variável com o comando SQL para verificar o maior sequencial existente na base.
+- **ProximoId** (`Numero End`) - Saída
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ Funcao ObterProximoId(Alfa Identificador, Numero Incremento, Alfa Filtro, Numero
 ObterProximoId();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

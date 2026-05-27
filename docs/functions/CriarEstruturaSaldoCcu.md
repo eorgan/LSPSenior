@@ -11,16 +11,15 @@ Funcao CriarEstruturaSaldoCcu(Numero aCodEmp, Alfa aAbrFil, Numero aDatIni, Nume
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Criar em memória a estrutura de saldo por centro de custo.
 
 ## Parâmetros
 
-- **aCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **aAbrFil** (`Alfa`) - Entrada: [Adicione descrição]
-- **aDatIni** (`Numero`) - Entrada: [Adicione descrição]
-- **aDatFim** (`Numero`) - Entrada: [Adicione descrição]
-- **aSalAnt** (`Numero`) - Entrada: [Adicione descrição]
+- **aCodEmp** (`Numero`) - Entrada: Código da empresa para criação da estrutura de saldo por centro de custo.
+- **aAbrFil** (`Alfa`) - Entrada: Abrangência de filiais para criação da estrutura de saldo por centro de custo.
+- **aDatIni** (`Numero`) - Entrada: Data inicial para criação da estrutura de saldo por centro de custo.
+- **aDatFim** (`Numero`) - Entrada: Data final para criação da estrutura de saldo por centro de custo.
+- **aSalAnt** (`Numero`) - Entrada: Indica se a estrutura deverá ser carregada com saldo anterior.
 
 ## Exemplo de Uso
 
@@ -29,10 +28,6 @@ Funcao CriarEstruturaSaldoCcu(Numero aCodEmp, Alfa aAbrFil, Numero aDatIni, Nume
 CriarEstruturaSaldoCcu();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

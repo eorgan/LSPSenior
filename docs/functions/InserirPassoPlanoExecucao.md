@@ -11,13 +11,12 @@ Funcao InserirPassoPlanoExecucao(Numero pIdePle, Alfa pMensagem);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Essa função insere um novo passo de execução para a requisição
 
 ## Parâmetros
 
-- **pIdePle** (`Numero`) - Entrada: [Adicione descrição]
-- **pMensagem** (`Alfa`) - Entrada: [Adicione descrição]
+- **pIdePle** (`Numero`) - Entrada: Código do identificador do plano de execução (E000PLE.IDEUNI)
+- **pMensagem** (`Alfa`) - Entrada: Mensagem a ser exibida no detalhamento do processo
 
 ## Exemplo de Uso
 
@@ -26,10 +25,6 @@ Funcao InserirPassoPlanoExecucao(Numero pIdePle, Alfa pMensagem);
 InserirPassoPlanoExecucao();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,17 +11,20 @@ Funcao AlteraSitObsPed(Numero EmpObs,Numero FilObs,Numero PedObs,Numero SeqObs, 
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Alterar a situação da Observação de um pedido
 
 ## Parâmetros
 
-- **EmpObs** (`Numero`) - Entrada: [Adicione descrição]
-- **FilObs** (`Numero`) - Entrada: [Adicione descrição]
-- **PedObs** (`Numero`) - Entrada: [Adicione descrição]
-- **SeqObs** (`Numero`) - Entrada: [Adicione descrição]
-- **SitObs** (`Numero`) - Entrada: [Adicione descrição]
-- **RetGra** (`Numero End`) - Saída: [Adicione descrição]
+- **EmpObs** (`Numero`) - Entrada: Variável que recebe o Código da Empresa.
+- **FilObs** (`Numero`) - Entrada: Variável que recebe o Código da Filial.
+- **PedObs** (`Numero`) - Entrada: Variável que recebe o Número do Pedido.
+- **SeqObs** (`Numero`) - Entrada: Variável que recebe a sequência.
+- **SitObs** (`Numero`) - Entrada: Variável que recebe a Situação .
+- **RetGra** (`Numero End`) - Saída: Variável que retorna se foi alterado com sucesso ou não.
+
+## Valores de Retorno
+
+- RetGra: Variável numérica que retorna se foi alterado com sucesso ou não.
 
 ## Exemplo de Uso
 
@@ -30,10 +33,6 @@ Funcao AlteraSitObsPed(Numero EmpObs,Numero FilObs,Numero PedObs,Numero SeqObs, 
 AlteraSitObsPed();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

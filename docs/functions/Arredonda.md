@@ -15,7 +15,7 @@ Esta função arredonda um valor tipo acerto, conforme a precisão informada.
 
 ## Parâmetros
 
-- **Valor** (``) - Saída: Qualquer valor que se deseja arredondar
+- **Valor** (`numero end`) - Saída: Qualquer valor que se deseja arredondar
 - **Decimais** (`numero`) - Entrada
 
 ## Exemplo de Uso
@@ -27,5 +27,6 @@ Arredonda Valor Tipo Acerto(vnValor, 1); @ Retorna 1475.13 @
 Arredonda Valor Tipo Acerto(vnValor, 2); @ Retorna 1475.12 @
 ```
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -8,6 +8,26 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.6.0] - 2026-05-26
+
+Catálogo expandido com os manuais consolidados do ERP e da Tecnologia (WebScraping).
+
+### ✨ Adicionado
+- **~231 funções novas** no catálogo (`functions.json`: 369 → **600**), com assinatura,
+  parâmetros, descrição, exemplo e syntax highlighting. Inclui funções muito usadas que
+  faltavam (`Base64Encode/Decode`, `AlfaParaInt`, `ArqExiste`, `DataHoraUTC`, controles
+  de relatório, etc.) e funções específicas de módulos do ERP.
+- **255 funções** com descrição/parâmetros/exemplo reais no hover, autocomplete e docs
+  (antes: 57).
+- `scripts/extract-from-erp-docs.js` — extrai dos manuais consolidados (suporta os dois
+  formatos: `Sintaxe:`+tabela e `**Sintaxe:**` inline) para `data/functions-doc-erp.json`.
+
+### 🔧 Corrigido
+- `extractParameters`: parâmetros de saída com `end` minúsculo agora têm o tipo correto.
+- Dedup case-insensitive de funções (a LSP não distingue maiúsculas/minúsculas).
+- Docs gerados passam a ser regeneráveis (marcador de rodapé), propagando melhorias de
+  template; docs editados à mão continuam preservados.
+
 ## [1.5.7] - 2026-05-26
 
 Enriquecimento da extensão a partir do manual oficial da LSP (LSPSeniorDoc).

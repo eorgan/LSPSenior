@@ -11,16 +11,15 @@ Funcao ExcluiBaixaCR(Numero pCodEmp, Numero pCodFil, Alfa pNumTit, Alfa pCodTpt,
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Excluir um movimento de baixa no contas a receber.
 
 ## Parâmetros
 
-- **pCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **pNumTit** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodTpt** (`Alfa`) - Entrada: [Adicione descrição]
-- **pSeqMov** (`Numero`) - Entrada: [Adicione descrição]
+- **pCodEmp** (`Numero`) - Entrada: Valor ou variável que indica qual é o código da empresa do movimento do título para excluir.
+- **pCodFil** (`Numero`) - Entrada: Valor ou variável que indica qual é o código da filial do movimento do título para excluir.
+- **pNumTit** (`Alfa`) - Entrada: Valor ou variável que indica qual é o número do título do movimento do título para excluir.
+- **pCodTpt** (`Alfa`) - Entrada: Valor ou variável que indica qual é o tipo do título do movimento do título para excluir.
+- **pSeqMov** (`Numero`) - Entrada: Valor ou variável que indica qual é a sequência movimento do título para excluir.
 
 ## Exemplo de Uso
 
@@ -29,10 +28,6 @@ Funcao ExcluiBaixaCR(Numero pCodEmp, Numero pCodFil, Alfa pNumTit, Alfa pCodTpt,
 ExcluiBaixaCR();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

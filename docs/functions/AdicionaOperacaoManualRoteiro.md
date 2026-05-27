@@ -11,13 +11,12 @@ Funcao AdicionaOperacaoManualRoteiro (Alfa pParam,Alfa End Retorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Essa função cria uma nova sequência de operação no estágio do roteiro. Nota Se o sistema estiver [parametrizado](../menu_controladoria/processo-bloco-k.htm#ParametrizacoesIniciais) para a geração do bloco K, algumas consistências e bloqueios podem ser realizadas nessa função, garantindo a correta geração de informações do arquivo, conforme guia prático. Confira estas consistências na tela Parâmetros e consistências da empresa [(F070ECN)](../menu_cadastros/f070ecn.htm).
 
 ## Parâmetros
 
-- **pParam** (`Alfa`) - Entrada: [Adicione descrição]
-- **Retorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **pParam** (`Alfa`) - Entrada
+- **Retorno** (`Alfa End`) - Saída
 
 ## Exemplo de Uso
 
@@ -26,10 +25,6 @@ Funcao AdicionaOperacaoManualRoteiro (Alfa pParam,Alfa End Retorno);
 AdicionaOperacaoManualRoteiro();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

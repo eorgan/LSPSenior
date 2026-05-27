@@ -1,0 +1,32 @@
+# IntParaAlfa
+
+## Assinatura
+
+```lspt
+Funcao IntParaAlfa (Num_Origem,Alfa_Destino);
+```
+
+## Código
+N/A
+
+## Descrição
+
+Converte um número para formato alfanumérico. Este valor numérico está limitado a até 15 caracteres.
+
+## Parâmetros
+
+- **Num_Origem** - Entrada: Campo/Variável que será convertido
+- **Alfa_Destino** - Entrada: Campo/Variável que receberá o resultado da conversão
+
+## Exemplo de Uso
+
+```lspt
+Definir Alfa ValfAux;
+IntParaAlfa (VVlrAux,VAlfAux);
+@ Se a variável VVlrAux tivesse o valor 150,50, após o uso
+ da função IntParaAlfa a variável VAlfAux teria 150. @
+```
+
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

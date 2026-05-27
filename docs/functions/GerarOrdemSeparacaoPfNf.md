@@ -11,19 +11,18 @@ Funcao GerarOrdemSeparacaoPfNf(Numero pCodEmp, Numero pCodFil, Numero pNumDoc, n
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Gera o sinal de geração de ordem de separação de uma pré-fatura fechada ou nota fiscal para o WMS Senior/ALCIS.
 
 ## Parâmetros
 
-- **pCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **pNumDoc** (`Numero`) - Entrada: [Adicione descrição]
-- **pSeqDoc** (`numero`) - Entrada: [Adicione descrição]
-- **pSerieDoc** (`Alfa`) - Entrada: [Adicione descrição]
-- **pTipoDocumento** (`Alfa`) - Entrada: [Adicione descrição]
-- **pChaveGerada** (``) - Saída: [Adicione descrição]
-- **pStatus** (``) - Saída: [Adicione descrição]
+- **pCodEmp** (`Numero`) - Entrada: Empresa do documento
+- **pCodFil** (`Numero`) - Entrada: Filial do documento
+- **pNumDoc** (`Numero`) - Entrada: Número da nota fiscal ou número da análise de embarque
+- **pSeqDoc** (`numero`) - Entrada: Sequência da pré-fatura na carga
+- **pSerieDoc** (`Alfa`) - Entrada: Série da nota fiscal
+- **pTipoDocumento** (`Alfa`) - Entrada: Numerador indicando **F**: Pré-fatura ou **N**: Nota fiscal
+- **pChaveGerada** (`Alfa end`) - Saída: Chave da ordem de separação gerada - Retorno.
+- **pStatus** (`Alfa end`) - Saída: Resultado OK ou ERRO - Retorno
 
 ## Exemplo de Uso
 
@@ -32,10 +31,6 @@ Funcao GerarOrdemSeparacaoPfNf(Numero pCodEmp, Numero pCodFil, Numero pNumDoc, n
 GerarOrdemSeparacaoPfNf();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

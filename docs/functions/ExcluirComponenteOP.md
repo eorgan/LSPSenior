@@ -11,13 +11,12 @@ Funcao ExcluirComponenteOP(Alfa pParametros,Alfa End pRetorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Excluir componentes na O.P.
 
 ## Parâmetros
 
-- **pParametros** (`Alfa`) - Entrada: [Adicione descrição]
-- **pRetorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **pParametros** (`Alfa`) - Entrada: Código da Origem.
+- **pRetorno** (`Alfa End`) - Saída: Número da OP.
 
 ## Exemplo de Uso
 
@@ -26,10 +25,6 @@ Funcao ExcluirComponenteOP(Alfa pParametros,Alfa End pRetorno);
 ExcluirComponenteOP();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

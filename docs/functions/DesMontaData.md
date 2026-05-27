@@ -16,9 +16,9 @@ Esta função desmonta uma data, separando em três variáveis, as informações
 ## Parâmetros
 
 - **DatMon** (`Numero`) - Entrada: Campo/Variável a ser desmontada
-- **Dia** (``) - Saída: Variável tipo Numero que receberá o dia da data a ser desmontada
-- **Mes** (``) - Saída: Variável tipo Numero que receberá o mês da data a ser desmontada
-- **Ano** (``) - Saída: Variável tipo Numero que receberá o ano da data a ser desmontada
+- **Dia** (`Numero end`) - Saída: Variável tipo Numero que receberá o dia da data a ser desmontada
+- **Mes** (`Numero end`) - Saída: Variável tipo Numero que receberá o mês da data a ser desmontada
+- **Ano** (`Numero end`) - Saída: Variável tipo Numero que receberá o ano da data a ser desmontada
 
 ## Exemplo de Uso
 
@@ -33,5 +33,6 @@ DesMontaData(vdDataEmissao, vnDia, vnMes, vnAno);
 @ Se a data fosse 24/04/1995: vnDia=24, vnMes=04, vnAno=1995 @
 ```
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

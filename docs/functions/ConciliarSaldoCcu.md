@@ -11,15 +11,14 @@ Funcao ConciliarSaldoCcu(Numero aCodEmp, Alfa aAbrFil, Numero aDatIni, Numero aD
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Realizar a conciliação de saldo por centro de custo.
 
 ## Parâmetros
 
-- **aCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **aAbrFil** (`Alfa`) - Entrada: [Adicione descrição]
-- **aDatIni** (`Numero`) - Entrada: [Adicione descrição]
-- **aDatFim** (`Numero`) - Entrada: [Adicione descrição]
+- **aCodEmp** (`Numero`) - Entrada: Código da empresa que terá o saldo por centro de custo conciliado.
+- **aAbrFil** (`Alfa`) - Entrada: Abrangência de filiais que terão o saldo por centro de custo conciliado.
+- **aDatIni** (`Numero`) - Entrada: Data inicial para conciliação de saldo por centro de custo.
+- **aDatFim** (`Numero`) - Entrada: Data final para conciliação de saldo por centro de custo.
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ Funcao ConciliarSaldoCcu(Numero aCodEmp, Alfa aAbrFil, Numero aDatIni, Numero aD
 ConciliarSaldoCcu();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

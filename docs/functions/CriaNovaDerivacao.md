@@ -11,13 +11,12 @@ Funcao CriaNovaDerivacao (Alfa CodPro, Alfa CodDer);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Essa função cria uma nova derivação para o produto herdando todas as informações da família/produto. Caso a derivação for passada em branco, o sistema irá criar todas possíveis.
 
 ## Parâmetros
 
-- **CodPro** (`Alfa`) - Entrada: [Adicione descrição]
-- **CodDer** (`Alfa`) - Entrada: [Adicione descrição]
+- **CodPro** (`Alfa`) - Entrada: Código do produto para o qual será criada a nova derivação.
+- **CodDer** (`Alfa`) - Entrada: Código da derivação a ser criada.
 
 ## Exemplo de Uso
 
@@ -26,10 +25,6 @@ Funcao CriaNovaDerivacao (Alfa CodPro, Alfa CodDer);
 CriaNovaDerivacao();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

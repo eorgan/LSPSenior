@@ -11,13 +11,17 @@ Funcao CPFValido(Alfa pNumCpf, Alfa End PResult);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função verifica se um CPF informado é realmente válido. Esta validade é determinada pelo do cálculo do dígito verificador através do módulo 11. Deve ser informada as 11 posições do CPF, isto é, se ele iniciar com zero deve ser passado todos os zeros a esquerda para uma validação com sucesso.
 
 ## Parâmetros
 
-- **pNumCpf** (`Alfa`) - Entrada: [Adicione descrição]
-- **PResult** (`Alfa End`) - Saída: [Adicione descrição]
+- **pNumCpf** (`Alfa`) - Entrada: Variável que recebe o número do CPF.
+- **PResult** (`Alfa End`) - Saída: Variável que retorna se o CPF é válido ou não (S=Válido e N=Inválido).
+
+## Valores de Retorno
+
+- pResult: Variável alfanumérica que retorna se o CPF é válido
+- ou não (S=Válido e N=Inválido);
 
 ## Exemplo de Uso
 
@@ -26,10 +30,6 @@ Funcao CPFValido(Alfa pNumCpf, Alfa End PResult);
 CPFValido();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

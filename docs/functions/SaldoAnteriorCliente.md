@@ -11,24 +11,27 @@ Funcao SaldoAnteriorCliente(Numero pDatBas,Alfa pCodCli,Alfa pCodEmp,Alfa pCodFi
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retornar o saldo anterior do cliente de uma determinada data, sendo possível passar como parâmetros os códigos de clientes, empresas, filiais, portadores, carteiras, moedas, representantes, tipo de títulos, grupo de contas, números de títulos, com a possibilidade de abrangência nos campos citados e estes não são obrigatórios.
 
 ## Parâmetros
 
-- **pDatBas** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodCli** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodEmp** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodFil** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodPor** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodCrt** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodMoe** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodRep** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodTpt** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodTns** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodCrp** (`Alfa`) - Entrada: [Adicione descrição]
-- **pNumTit** (`Alfa`) - Entrada: [Adicione descrição]
-- **pSalCli** (`Numero End`) - Saída: [Adicione descrição]
+- **pDatBas** (`Numero`) - Entrada: Valor ou variável que indica qual será a data base para buscar o saldo do cliente (OBRIGATÓRIO).
+- **pCodCli** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais os clientes deseja-se buscar o saldo (opcional).
+- **pCodEmp** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais as empresas deseja-se buscar o saldo (opcional).
+- **pCodFil** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais as filiais deseja-se buscar o saldo (opcional).
+- **pCodPor** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais os portadores deseja-se buscar o saldo (opcional).
+- **pCodCrt** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais as carteiras deseja-se buscar o saldo (opcional).
+- **pCodMoe** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais as moedas deseja-se buscar o saldo (opcional).CodTpt:CodCrp:
+- **pCodRep** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais os representantes deseja-se buscar o saldo (opcional).
+- **pCodTpt** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais os tipos de títulos deseja-se buscar o saldo (opcional).
+- **pCodTns** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais as transações deseja-se buscar o saldo (opcional).
+- **pCodCrp** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais os grupos a receber/pagar deseja-se buscar o saldo (opcional).
+- **pNumTit** (`Alfa`) - Entrada: Valor ou variável com abrangência que indica quais os títulos deseja-se buscar o saldo (opcional).
+- **pSalCli** (`Numero End`) - Saída: Variável que recebe o valor do saldo anterior do cliente de acordo com os parâmetros passados.
+
+## Valores de Retorno
+
+- pSalCli: Variável numérica que recebe o valor do saldo anterior do cliente de acordo com os parâmetros passados.
 
 ## Exemplo de Uso
 
@@ -37,10 +40,6 @@ Funcao SaldoAnteriorCliente(Numero pDatBas,Alfa pCodCli,Alfa pCodEmp,Alfa pCodFi
 SaldoAnteriorCliente();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

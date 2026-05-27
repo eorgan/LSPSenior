@@ -11,14 +11,13 @@ Funcao CriarEstoque(Alfa End Produto, Alfa End Derivacao, Alfa End Deposito);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Ligar o produto a vários depositos. Nota Se o sistema estiver [parametrizado](../menu_controladoria/processo-bloco-k.htm#ParametrizacoesIniciais) para a geração do bloco K, algumas consistências e bloqueios podem ser realizadas nessa função, garantindo a correta geração de informações do arquivo, conforme guia prático. Confira estas consistências na tela Parâmetros e consistências da empresa [(F070ECN)](../menu_cadastros/f070ecn.htm).
 
 ## Parâmetros
 
-- **Produto** (`Alfa End`) - Saída: [Adicione descrição]
-- **Derivacao** (`Alfa End`) - Saída: [Adicione descrição]
-- **Deposito** (`Alfa End`) - Saída: [Adicione descrição]
+- **Produto** (`Alfa End`) - Saída
+- **Derivacao** (`Alfa End`) - Saída
+- **Deposito** (`Alfa End`) - Saída
 
 ## Exemplo de Uso
 
@@ -27,10 +26,6 @@ Funcao CriarEstoque(Alfa End Produto, Alfa End Derivacao, Alfa End Deposito);
 CriarEstoque();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

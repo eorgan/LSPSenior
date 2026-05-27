@@ -11,13 +11,17 @@ Funcao CaminhoMenu(Alfa NomeTela, Alfa End Caminho);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Montar o Caminho do menu onde determinada tela se encontra.
 
 ## Parâmetros
 
-- **NomeTela** (`Alfa`) - Entrada: [Adicione descrição]
-- **Caminho** (`Alfa End`) - Saída: [Adicione descrição]
+- **NomeTela** (`Alfa`) - Entrada: Variável que indica o nome da tela.
+- **Caminho** (`Alfa End`) - Saída
+
+## Valores de Retorno
+
+- Caminho: Variável alfanumérica que retorna o caminho da tela no menu
+- do Gestão Empresarial | ERP;
 
 ## Exemplo de Uso
 
@@ -26,10 +30,6 @@ Funcao CaminhoMenu(Alfa NomeTela, Alfa End Caminho);
 CaminhoMenu();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,24 +11,22 @@ Funcao ListaRegraLiberarLista();
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função libera a lista criada para manipular valores dentro da regra.
 
 ## Parâmetros
 
 _Sem parâmetros_
 
+## Valores de Retorno
+
+- nenhum.
+
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
 ListaRegraLiberarLista();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

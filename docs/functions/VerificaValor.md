@@ -11,14 +11,18 @@ Funcao VerificaValor(Alfa Grid, Alfa Campo, Alfa Valor);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função consiste valores nas linhas de grids das telas.
 
 ## Parâmetros
 
-- **Grid** (`Alfa`) - Entrada: [Adicione descrição]
-- **Campo** (`Alfa`) - Entrada: [Adicione descrição]
-- **Valor** (`Alfa`) - Entrada: [Adicione descrição]
+- **Grid** (`Alfa`) - Entrada: Variável que recebe o nome da grade a ser consistida.
+- **Campo** (`Alfa`) - Entrada: Variável que recebe o nome dos campos a serem consistidos os valores.
+- **Valor** (`Alfa`) - Entrada: Variável que recebe os valores a serem consistidos nos respectivos campos.
+
+## Valores de Retorno
+
+- - Retorna o valor igual a 1 se encontrar pelo menos **um** registro em todas as linhas existentes na grade.
+- - Retornar o valor igual a 0 se **não** encontrar algum registro em todas as linhas existentes na grade.
 
 ## Exemplo de Uso
 
@@ -27,10 +31,6 @@ Funcao VerificaValor(Alfa Grid, Alfa Campo, Alfa Valor);
 VerificaValor();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

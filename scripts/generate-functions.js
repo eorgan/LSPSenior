@@ -12,19 +12,27 @@ const path = require('path');
 const CSV_PATH = path.join(__dirname, '..', 'Exemplos de Arquivos', 'funcoes.csv');
 const OUTPUT_JSON = path.join(__dirname, '..', 'functions.json');
 const DOCS_DIR = path.join(__dirname, '..', 'docs', 'functions');
+// Overlays de documentação. O do manual (curado/validado) tem precedência sobre o ERP.
 const OVERLAY_PATH = path.join(__dirname, '..', 'data', 'functions-doc.json');
+const OVERLAY_ERP_PATH = path.join(__dirname, '..', 'data', 'functions-doc-erp.json');
 
-/**
- * Carrega a camada de overlay com descrições reais extraídas do manual.
- * Gerada por scripts/extract-from-docs.js. Ausente = nenhum enriquecimento.
- */
-function loadOverlay() {
+function loadJson(file, label) {
    try {
-      return JSON.parse(fs.readFileSync(OVERLAY_PATH, 'utf8'));
+      return JSON.parse(fs.readFileSync(file, 'utf8'));
    } catch (error) {
-      console.warn(`⚠️  Overlay não encontrado (${OVERLAY_PATH}). Usando descrições genéricas.`);
+      console.warn(`⚠️  Overlay ausente (${label}). Seguindo sem ele.`);
       return {};
    }
+}
+
+/**
+ * Carrega e combina os overlays (manual + ERP/Tecnologia). Entradas do manual
+ * sobrescrevem as do ERP para o mesmo nome (foram curadas e validadas primeiro).
+ */
+function loadOverlay() {
+   const erp = loadJson(OVERLAY_ERP_PATH, OVERLAY_ERP_PATH);
+   const manual = loadJson(OVERLAY_PATH, OVERLAY_PATH);
+   return { ...erp, ...manual };
 }
 
 /**
@@ -97,25 +105,21 @@ function extractParameters(signature) {
 
    for (const param of paramList) {
       const parts = param.trim().split(/\s+/);
+      const name = parts[parts.length - 1];
 
+      // "End"/"end" indica parâmetro de saída (case-insensitive).
+      const endIdx = parts.findIndex((p) => p.toLowerCase() === 'end');
+      const direction = endIdx !== -1 ? 'out' : 'in';
+
+      let type;
       if (parts.length >= 2) {
-         let type = parts[0];
-         let direction = 'in';
-         let name = parts[parts.length - 1];
-
-         // Verifica se tem "End" (parâmetro de saída)
-         if (parts.includes('End') || parts.includes('end')) {
-            direction = 'out';
-            type = parts.slice(0, parts.indexOf('End') + 1).join(' ');
-            name = parts[parts.length - 1];
-         }
-
-         params.push({
-            name: name,
-            type: type,
-            direction: direction
-         });
+         type = endIdx !== -1 ? parts.slice(0, endIdx + 1).join(' ') : parts[0];
+      } else {
+         // Assinatura sem tipo explícito (ex: "AlfaParaInt(Origem, Destino)").
+         type = '';
       }
+
+      params.push({ name, type, direction });
    }
 
    return params;
@@ -123,9 +127,19 @@ function extractParameters(signature) {
 
 // Marcadores que identificam um arquivo de doc como stub (não editado à mão).
 const STUB_MARKERS = ['Adicione aqui a descrição', '[Adicione descrição]'];
+// Notas inseridas em docs gerados — permitem regenerá-los sem tocar em edições manuais.
+// Inclui o rodapé legado (versões anteriores do gerador) para uniformizar.
+const GENERATED_MARKERS = [
+   'Gerado automaticamente a partir da documentação oficial da LSP',
+   'Documentação extraída do manual oficial da LSP',
+];
 
 function isStub(content) {
    return STUB_MARKERS.some((m) => content.includes(m));
+}
+
+function isGenerated(content) {
+   return GENERATED_MARKERS.some((m) => content.includes(m));
 }
 
 /** Casa um parâmetro da assinatura (CSV) com a descrição do manual (overlay). */
@@ -143,14 +157,24 @@ function paramDescription(funcParam, index, docParams) {
 
 /** Conteúdo markdown rico, quando há overlay do manual. */
 function buildRichDoc(funcData, doc) {
-   const params =
-      funcData.params
+   let params;
+   if (funcData.params.length) {
+      params = funcData.params
          .map((p, i) => {
             const dir = p.direction === 'out' ? 'Saída' : 'Entrada';
             const desc = paramDescription(p, i, doc.params);
-            return `- **${p.name}** (\`${p.type}\`) - ${dir}${desc ? `: ${desc}` : ''}`;
+            const tipo = p.type ? ` (\`${p.type}\`)` : '';
+            return `- **${p.name}**${tipo} - ${dir}${desc ? `: ${desc}` : ''}`;
          })
-         .join('\n') || '_Sem parâmetros_';
+         .join('\n');
+   } else if (doc.params && Object.keys(doc.params).length) {
+      // Assinatura sem parâmetros tipados: usa a tabela do overlay (nome + descrição).
+      params = Object.entries(doc.params)
+         .map(([n, d]) => `- **${n}**${d ? `: ${d}` : ''}`)
+         .join('\n');
+   } else {
+      params = '_Sem parâmetros_';
+   }
 
    const returns = doc.returns && doc.returns.length
       ? `\n## Valores de Retorno\n\n${doc.returns.map((r) => `- ${r}`).join('\n')}\n`
@@ -183,8 +207,9 @@ ${returns}
 
 ${example}
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de \`generate-functions.js\` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por \`generate-functions.js\`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.
 `;
 }
 
@@ -230,8 +255,8 @@ ${funcData.name}();
 /**
  * Cria/atualiza o arquivo de documentação markdown de uma função.
  * - Arquivo ausente: cria (rico se houver overlay, senão stub).
- * - Arquivo existente que ainda é stub + overlay disponível: sobrescreve com rico.
- * - Arquivo editado à mão (sem marcador de stub): nunca sobrescreve.
+ * - Arquivo stub OU gerado automaticamente + overlay disponível: regenera com rico.
+ * - Arquivo editado à mão (sem marcador de stub nem nota de gerado): nunca sobrescreve.
  * Retorna true se gravou conteúdo rico.
  */
 function createDocFile(funcData, doc) {
@@ -241,8 +266,8 @@ function createDocFile(funcData, doc) {
 
    if (exists) {
       const current = fs.readFileSync(docPath, 'utf8');
-      // Só sobrescreve stub e somente se temos conteúdo melhor (overlay).
-      if (!isStub(current) || !hasDoc) return false;
+      const regeneravel = isStub(current) || isGenerated(current);
+      if (!regeneravel || !hasDoc) return false;
    }
 
    const content = hasDoc ? buildRichDoc(funcData, doc) : buildStubDoc(funcData);
@@ -270,6 +295,9 @@ function main() {
 
    // Overlay com descrições reais do manual (mescladas por nome de função).
    const overlay = loadOverlay();
+   // Índice case-insensitive do overlay (a LSP ignora maiúsculas/minúsculas).
+   const overlayByLower = {};
+   for (const [k, v] of Object.entries(overlay)) overlayByLower[k.toLowerCase()] = v;
 
    const functions = {};
    let count = 0;
@@ -281,7 +309,7 @@ function main() {
 
       if (funcData) {
          // Enriquecimento: substitui a descrição genérica pela do manual, se houver.
-         const doc = overlay[funcData.name];
+         const doc = overlayByLower[funcData.name.toLowerCase()];
          if (doc && doc.description) {
             funcData.description = doc.description;
             enriched++;
@@ -301,11 +329,39 @@ function main() {
       }
    }
 
+   // Funções novas: entradas do overlay com assinatura que não estão no CSV.
+   // Comparação case-insensitive (a LSP não distingue caixa) — evita duplicatas
+   // tipo "AlterarStatus" vs "alterarStatus".
+   const existingLower = new Set(Object.keys(functions).map((n) => n.toLowerCase()));
+   let added = 0;
+   for (const [name, doc] of Object.entries(overlay)) {
+      const lower = name.toLowerCase();
+      if (existingLower.has(lower) || !doc.signature) continue;
+      existingLower.add(lower);
+
+      // Garante o prefixo "Funcao" e o terminador ";" para consistência com o CSV.
+      let signature = doc.signature.trim();
+      if (!/^Funcao\b/i.test(signature)) signature = `Funcao ${signature}`;
+      if (!signature.endsWith(';')) signature += ';';
+
+      const funcData = {
+         code: 'N/A',
+         name: name,
+         signature: signature,
+         params: extractParameters(signature),
+         description: doc.description || `Função built-in: ${name}`,
+      };
+
+      functions[name] = funcData;
+      if (createDocFile(funcData, doc)) docsRich++;
+      added++;
+   }
+
    // Salva JSON
    fs.writeFileSync(OUTPUT_JSON, JSON.stringify(functions, null, 2), 'utf8');
 
    console.log(`\n✅ Processamento completo!`);
-   console.log(`   Total de funções: ${count}`);
+   console.log(`   Total de funções: ${count + added} (CSV: ${count} + novas dos manuais: ${added})`);
    console.log(`   Enriquecidas pelo manual: ${enriched}`);
    console.log(`   Docs .md preenchidos com conteúdo real: ${docsRich}`);
    console.log(`   Arquivo gerado: ${OUTPUT_JSON}`);

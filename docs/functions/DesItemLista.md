@@ -11,14 +11,18 @@ Funcao DesItemLista(Alfa PNome, Alfa PItem, Alfa End PDesc);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função retorna a descrição de um item de uma lista;
 
 ## Parâmetros
 
-- **PNome** (`Alfa`) - Entrada: [Adicione descrição]
-- **PItem** (`Alfa`) - Entrada: [Adicione descrição]
-- **PDesc** (`Alfa End`) - Saída: [Adicione descrição]
+- **PNome** (`Alfa`) - Entrada: Variável que recebe o nome da Lista.
+- **PItem** (`Alfa`) - Entrada: Variável que item da Lista.
+- **PDesc** (`Alfa End`) - Saída: Variável que retorna a descrição do item da lista informada.
+
+## Valores de Retorno
+
+- pDesc: Variável alfanumérica que retorna a descrição do item
+- da lista informada.
 
 ## Exemplo de Uso
 
@@ -27,10 +31,6 @@ Funcao DesItemLista(Alfa PNome, Alfa PItem, Alfa End PDesc);
 DesItemLista();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

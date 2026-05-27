@@ -17,7 +17,7 @@ Retorna a quantidade de dias do ano tomando como base o ano da data passada, con
 
 - **aData** (`Data`) - Entrada: Variável do tipo Data que recebe a data base
 - **aTipoAno** (`Numero`) - Entrada: Variável numérica que indica o tipo de ano:
-- **aQtdDiasAno** (``) - Saída: Variável numérica que retorna a quantidade de dias do ano
+- **aQtdDiasAno** (`Numero end`) - Saída: Variável numérica que retorna a quantidade de dias do ano
 
 ## Exemplo de Uso
 
@@ -59,5 +59,6 @@ Funcao exemploRetornarQtdDiasAno(); {
 }
 ```
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

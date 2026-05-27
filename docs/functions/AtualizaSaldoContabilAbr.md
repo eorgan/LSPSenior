@@ -11,15 +11,14 @@ Funcao AtualizaSaldoContabilAbr(Numero pCodEmp,Alfa pFilAbr,Numero pMesAnoIni,Nu
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta deve ser chamada ao iniciar um relatório da contabilidade. A mesma executa a StoreProcedure que atualiza o saldo das contas, evitando assim que um relatório seja gerado com dados desatualizados. Há a possibilidade de informar qual a empresa e a abrangência de filial.
 
 ## Parâmetros
 
-- **pCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **pFilAbr** (`Alfa`) - Entrada: [Adicione descrição]
-- **pMesAnoIni** (`Numero`) - Entrada: [Adicione descrição]
-- **pMesAnoFim** (`Numero`) - Entrada: [Adicione descrição]
+- **pCodEmp** (`Numero`) - Entrada: Variável que recebe o código da empresa.
+- **pFilAbr** (`Alfa`) - Entrada: Variável que recebe a abrangência de filial.
+- **pMesAnoIni** (`Numero`) - Entrada: Variável com a data final.
+- **pMesAnoFim** (`Numero`) - Entrada
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ Funcao AtualizaSaldoContabilAbr(Numero pCodEmp,Alfa pFilAbr,Numero pMesAnoIni,Nu
 AtualizaSaldoContabilAbr();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

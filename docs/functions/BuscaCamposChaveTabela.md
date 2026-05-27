@@ -11,13 +11,17 @@ Funcao BuscaCamposChaveTabela(Alfa pTabela, Alfa End pChave);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função tem por objetivo trazer os campos chave de qualquer tabela existente no sistema informando-se apenas o nome da tabela.
 
 ## Parâmetros
 
-- **pTabela** (`Alfa`) - Entrada: [Adicione descrição]
-- **pChave** (`Alfa End`) - Saída: [Adicione descrição]
+- **pTabela** (`Alfa`) - Entrada: Variável que recebe o nome da tabela que deseja-se descobrir a chave.
+- **pChave** (`Alfa End`) - Saída: Variável que retorna todos os campos chave da tabela separados por ",".
+
+## Valores de Retorno
+
+- pChave: Variável alfanumérica que retorna todos os campos
+- chave da tabela separados por ",".
 
 ## Exemplo de Uso
 
@@ -26,10 +30,6 @@ Funcao BuscaCamposChaveTabela(Alfa pTabela, Alfa End pChave);
 BuscaCamposChaveTabela();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

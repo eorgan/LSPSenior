@@ -11,15 +11,14 @@ funcao InsereCep(numero pCepIni, numero pCepFim, Alfa pSigUfs, Alfa pNomCid);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Incluir/Atualizar a tabela E008Cep com os parâmetros informados.
 
 ## Parâmetros
 
-- **pCepIni** (`numero`) - Entrada: [Adicione descrição]
-- **pCepFim** (`numero`) - Entrada: [Adicione descrição]
-- **pSigUfs** (`Alfa`) - Entrada: [Adicione descrição]
-- **pNomCid** (`Alfa`) - Entrada: [Adicione descrição]
+- **pCepIni** (`numero`) - Entrada: Variável que recebe o Cep Inicial da faixa.
+- **pCepFim** (`numero`) - Entrada: Variável que recebe o Cep final da faixa.
+- **pSigUfs** (`Alfa`) - Entrada: Variável que recebe o estado da cidade do Cep.
+- **pNomCid** (`Alfa`) - Entrada: Variável que recebe o Nome da Cidade do Cep.
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ funcao InsereCep(numero pCepIni, numero pCepFim, Alfa pSigUfs, Alfa pNomCid);
 InsereCep();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,8 +11,7 @@ Funcao SimulacaoIMP_Finalizar();
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função finaliza a rotina de simulação de impostos.
 
 ## Parâmetros
 
@@ -25,10 +24,6 @@ _Sem parâmetros_
 SimulacaoIMP_Finalizar();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

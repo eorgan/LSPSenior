@@ -15,7 +15,7 @@ Limpa os espaços em branco à direita de uma variável alfanumérica.
 
 ## Parâmetros
 
-- **pString** (``) - Saída
+- **pString** (`Alfa end`) - Saída
 
 ## Exemplo de Uso
 
@@ -26,5 +26,6 @@ LimpaEspacosDireita(vaTexto);
 @ vaTexto será "  texto com espaços" @
 ```
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

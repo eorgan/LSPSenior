@@ -11,13 +11,12 @@ Funcao TrocaEmpresaFilial(Numero pCodEmp, Numero pCodFil);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função troca a Empresa e/ou a Filial ativa em tempo de execução do modelo.
 
 ## Parâmetros
 
-- **pCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodFil** (`Numero`) - Entrada: [Adicione descrição]
+- **pCodEmp** (`Numero`) - Entrada: Variável que recebe o código da Empresa que se deseja trocar.
+- **pCodFil** (`Numero`) - Entrada
 
 ## Exemplo de Uso
 
@@ -26,10 +25,6 @@ Funcao TrocaEmpresaFilial(Numero pCodEmp, Numero pCodFil);
 TrocaEmpresaFilial();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

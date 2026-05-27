@@ -11,17 +11,16 @@ Funcao ObterValorNumericoPadraoCNAB(Numero PosicaoInicial, Numero PosicaoFinal, 
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função tem por objetivo retornar um valor alfa-numérico formatado no padrão CNAB (Centro Nacional de Automação Bancária) com base em um valor numérico.
 
 ## Parâmetros
 
-- **PosicaoInicial** (`Numero`) - Entrada: [Adicione descrição]
-- **PosicaoFinal** (`Numero`) - Entrada: [Adicione descrição]
-- **Valor** (`Numero`) - Entrada: [Adicione descrição]
-- **CaracterPreenchimento** (`Alfa`) - Entrada: [Adicione descrição]
-- **ConcatenarRetorno** (`Alfa`) - Entrada: [Adicione descrição]
-- **RetornoPadraoCNAB** (`Alfa End`) - Saída: [Adicione descrição]
+- **PosicaoInicial** (`Numero`) - Entrada: Não
+- **PosicaoFinal** (`Numero`) - Entrada: Não
+- **Valor** (`Numero`) - Entrada: Não
+- **CaracterPreenchimento** (`Alfa`) - Entrada: Não
+- **ConcatenarRetorno** (`Alfa`) - Entrada: Não
+- **RetornoPadraoCNAB** (`Alfa End`) - Saída: Sim
 
 ## Exemplo de Uso
 
@@ -30,10 +29,6 @@ Funcao ObterValorNumericoPadraoCNAB(Numero PosicaoInicial, Numero PosicaoFinal, 
 ObterValorNumericoPadraoCNAB();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

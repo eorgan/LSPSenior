@@ -11,14 +11,18 @@ Funcao RetornarSaldoCcu(Numero aCtaRed, Alfa aCodCcu, Numero End aSalAnt);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retornar o saldo para combinação de conta contábil com o centro de custo que estão na estrutura de saldo por centro de custo em memória.
 
 ## Parâmetros
 
-- **aCtaRed** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodCcu** (`Alfa`) - Entrada: [Adicione descrição]
-- **aSalAnt** (`Numero End`) - Saída: [Adicione descrição]
+- **aCtaRed** (`Numero`) - Entrada: Conta contábil que deseja visualizar o saldo por centro de custo.
+- **aCodCcu** (`Alfa`) - Entrada: Centro de custo que deseja visualizar o saldo.
+- **aSalAnt** (`Numero End`) - Saída: Saldo derivado da combinação da conta contábil com o centro de custo previamente informados (retorno).
+
+## Valores de Retorno
+
+- aSalAnt: Saldo derivado da combinação da conta contábil com o centro de
+- custo previamente informados.
 
 ## Exemplo de Uso
 
@@ -27,10 +31,6 @@ Funcao RetornarSaldoCcu(Numero aCtaRed, Alfa aCodCcu, Numero End aSalAnt);
 RetornarSaldoCcu();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

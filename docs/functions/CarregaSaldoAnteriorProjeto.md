@@ -11,22 +11,21 @@ Funcao CarregaSaldoAnteriorProjeto(Alfa pCodEmp, Alfa pNumPrj, Alfa pCodFpj, Alf
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retornar o saldo anterior de um respectivo projeto.
 
 ## Parâmetros
 
-- **pCodEmp** (`Alfa`) - Entrada: [Adicione descrição]
-- **pNumPrj** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodFpj** (`Alfa`) - Entrada: [Adicione descrição]
-- **pRotPpj** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCtaFin** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodCcu** (`Alfa`) - Entrada: [Adicione descrição]
-- **pDatAtu** (`Numero`) - Entrada: [Adicione descrição]
-- **pCarPos** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCarOrc** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCarCts** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCarCcs** (`Alfa`) - Entrada: [Adicione descrição]
+- **pCodEmp** (`Alfa`) - Entrada: Código da Empresa - obrigatório
+- **pNumPrj** (`Alfa`) - Entrada: Número do Projeto - obrigatório
+- **pCodFpj** (`Alfa`) - Entrada: Código da Fase.
+- **pRotPpj** (`Alfa`) - Entrada: Código da Rotina. Se informado determinado valor, fará o filtro por determinada rotina.
+- **pCtaFin** (`Alfa`) - Entrada: Conta Financeira.
+- **pCodCcu** (`Alfa`) - Entrada: Centro de Custos.
+- **pDatAtu** (`Numero`) - Entrada: Data Atualização.
+- **pCarPos** (`Alfa`) - Entrada: Se está variável receber “Sim”, ela irá verificar se existe algo na tabela E615POS. Os valores podem ser "SIM" ou "NÃO".
+- **pCarOrc** (`Alfa`) - Entrada: Se está variável receber “Sim”, ela irá verificar se existe algo na tabela E615ORC. Os valores podem ser "SIM" ou "NÃO".
+- **pCarCts** (`Alfa`) - Entrada: Se está variável receber “Sim” irá trazer somente valores de Contas Financeiras “Sintéticas”. Se receber “Não” irá trazer somente valores de Contas Financeiras “Analíticas”. Se receber “Ambos”, irá trazer valores de Conta Financeira Sintéticas e Analíticas.Os valores podem ser "SIM" ou "NÃO".
+- **pCarCcs** (`Alfa`) - Entrada: Se está variável receber “Sim” irá trazer somente valores de Centro de Custos “Sintéticos”. Se receber “Não” irá trazer somente valores de Centro de Custos “Analíticos”. Se receber “Ambos”, irá trazer valores de Centro de Custos Sintéticos e Analíticos. Os valores podem ser "SIM" ou "NÃO".
 
 ## Exemplo de Uso
 
@@ -35,10 +34,6 @@ Funcao CarregaSaldoAnteriorProjeto(Alfa pCodEmp, Alfa pNumPrj, Alfa pCodFpj, Alf
 CarregaSaldoAnteriorProjeto();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

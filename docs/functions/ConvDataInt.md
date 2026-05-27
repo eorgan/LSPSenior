@@ -11,13 +11,16 @@ funcao ConvDataInt(alfa end DatAlf, numero end DatNum);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função tem como objetivo converter uma data qualquer alfanumérica independente de possuir 2 ou 4 casas para o ano, ter ou não barras para uma data numérica que será utilizado na regra.
 
 ## Parâmetros
 
-- **DatAlf** (``) - Saída: [Adicione descrição]
-- **DatNum** (``) - Saída: [Adicione descrição]
+- **DatAlf** (`alfa end`) - Saída: É uma variável que conterá o valor que se deseja converter.
+- **DatNum** (`numero end`) - Saída: É uma variável do tipo Número, que conterá o retorno da conversão.
+
+## Valores de Retorno
+
+- DatNum: é uma variável do tipo Número, que conterá o retorno da conversão.
 
 ## Exemplo de Uso
 
@@ -26,10 +29,6 @@ funcao ConvDataInt(alfa end DatAlf, numero end DatNum);
 ConvDataInt();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

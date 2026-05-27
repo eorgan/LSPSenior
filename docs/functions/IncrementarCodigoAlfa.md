@@ -11,12 +11,16 @@ Funcao IncrementarCodigoAlfa(alfa end aCodigo);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função recebe um código alfanumérico (contendo somente letras 'A' a 'Z' maiúsculas) e o retorna incrementado.
 
 ## Parâmetros
 
-- **aCodigo** (``) - Saída: [Adicione descrição]
+- **aCodigo** (`alfa end`) - Saída: Variável que recebe o valor a ser incrementado e o retorna incrementado.
+
+## Valores de Retorno
+
+- aCodigo: variável alfanumérica que recebe o valor a
+- ser incrementado e o retorna incrementado.
 
 ## Exemplo de Uso
 
@@ -25,10 +29,6 @@ Funcao IncrementarCodigoAlfa(alfa end aCodigo);
 IncrementarCodigoAlfa();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,12 +11,11 @@ funcao GeraMovimento(numero GerMov);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Não gerar movimento de entrada (E301MCR) para os títulos do contas a receber (E301TCR) importados com consistência padrão.
 
 ## Parâmetros
 
-- **GerMov** (`numero`) - Entrada: [Adicione descrição]
+- **GerMov** (`numero`) - Entrada: Variável que indica se é para gerar movimento ou não.
 
 ## Exemplo de Uso
 
@@ -25,10 +24,6 @@ funcao GeraMovimento(numero GerMov);
 GeraMovimento();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

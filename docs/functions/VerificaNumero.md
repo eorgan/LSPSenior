@@ -11,13 +11,17 @@ funcao VerificaNumero(alfa Origem, numero end Retorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função verifica se um valor alfanumérico informado é um número ou não.
 
 ## Parâmetros
 
-- **Origem** (`alfa`) - Entrada: [Adicione descrição]
-- **Retorno** (``) - Saída: [Adicione descrição]
+- **Origem** (`alfa`) - Entrada: Variável que recebe o valor alfanumérico a ser verificada.
+- **Retorno** (`numero end`) - Saída: Variável que retorna 1 caso o valor seja numérico e 0 se não for um número.
+
+## Valores de Retorno
+
+- Tipo de retorno: Variável numérica, que retorna 1 caso o
+- valor seja numérico e 0 se não for um número.
 
 ## Exemplo de Uso
 
@@ -26,10 +30,6 @@ funcao VerificaNumero(alfa Origem, numero end Retorno);
 VerificaNumero();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

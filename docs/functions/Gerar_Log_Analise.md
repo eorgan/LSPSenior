@@ -11,20 +11,19 @@ Funcao Gerar_Log_Analise(Numero pEmpAne, Numero pFilAne, Numero pNumAne, Alfa pA
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Essa função possibilita criar registros na tabela de análise de embarque/carga. O usuário pode usar a função da maneira que desejar em regras LSP. Para saber mais sobre log de análise, acesse a [documentação correspondente](../menu_mercado/log_analise.htm).
 
 ## Parâmetros
 
-- **pEmpAne** (`Numero`) - Entrada: [Adicione descrição]
-- **pFilAne** (`Numero`) - Entrada: [Adicione descrição]
-- **pNumAne** (`Numero`) - Entrada: [Adicione descrição]
-- **pAbrPfa** (`Alfa`) - Entrada: [Adicione descrição]
-- **aDescricao** (`Alfa`) - Entrada: [Adicione descrição]
-- **pOrigem** (`Alfa`) - Entrada: [Adicione descrição]
-- **pOrdemOpe** (`Alfa`) - Entrada: [Adicione descrição]
-- **pComplemento_Operacao** (`Alfa`) - Entrada: [Adicione descrição]
-- **pObservacao_Depuracao** (`Alfa`) - Entrada: [Adicione descrição]
+- **pEmpAne** (`Numero`) - Entrada: Código da empresa da análise
+- **pFilAne** (`Numero`) - Entrada: Código da filial da análise
+- **pNumAne** (`Numero`) - Entrada: Número sequencial da análise de embarque/carga
+- **pAbrPfa** (`Alfa`) - Entrada: Abrangência das pré-faturas (números separados por vírgula)
+- **aDescricao** (`Alfa`) - Entrada: Descrição detalhada sobre a operação registrada
+- **pOrigem** (`Alfa`) - Entrada: Sistema ou processo de origem da operação (ex: "F135ANE")
+- **pOrdemOpe** (`Alfa`) - Entrada: Ordem de operação: "A" = Antes do processamento, "D" = Depois do processamento
+- **pComplemento_Operacao** (`Alfa`) - Entrada: Complemento detalhado sobre a operação registrada. Valor padrão: “”
+- **pObservacao_Depuracao** (`Alfa`) - Entrada: Texto com detalhes sobre a depuração registrada. Valor padrão: “”
 
 ## Exemplo de Uso
 
@@ -33,10 +32,6 @@ Funcao Gerar_Log_Analise(Numero pEmpAne, Numero pFilAne, Numero pNumAne, Alfa pA
 Gerar_Log_Analise();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

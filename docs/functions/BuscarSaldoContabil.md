@@ -11,15 +11,19 @@ Funcao BuscarSaldoContabil(Numero aCtaRed, Alfa aCodCcu, Numero aMesAno, Numero 
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retornar o saldo contábil conforme dados passados via parâmetro.
 
 ## Parâmetros
 
-- **aCtaRed** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodCcu** (`Alfa`) - Entrada: [Adicione descrição]
-- **aMesAno** (`Numero`) - Entrada: [Adicione descrição]
-- **aSaldo** (`Numero End`) - Saída: [Adicione descrição]
+- **aCtaRed** (`Numero`) - Entrada: Código da conta contábil.
+- **aCodCcu** (`Alfa`) - Entrada: Código do centro de custo.
+- **aMesAno** (`Numero`) - Entrada: Competência a que se refere o saldo contábil.
+- **aSaldo** (`Numero End`) - Saída: Retorna o saldo para a combinação da conta contábil, centro de custo (caso tipo de saldo 8) e competência.
+
+## Valores de Retorno
+
+- aSaldo: Retorna o saldo para a combinação da conta contábil, centro de
+- custo (caso tipo de saldo 8) e competência.
 
 ## Exemplo de Uso
 
@@ -28,10 +32,6 @@ Funcao BuscarSaldoContabil(Numero aCtaRed, Alfa aCodCcu, Numero aMesAno, Numero 
 BuscarSaldoContabil();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

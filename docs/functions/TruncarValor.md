@@ -11,12 +11,15 @@ Funcao TruncarValor(Numero End ValorVariavel);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função elimina as casas decimais do valor passado, sem fazer nenhum tipo de arredondamento.
 
 ## Parâmetros
 
-- **ValorVariavel** (`Numero End`) - Saída: [Adicione descrição]
+- **ValorVariavel** (`Numero End`) - Saída: Campo/Variável do deseja-se ficar apenas com a parte inteira do valor.
+
+## Valores de Retorno
+
+- A própria variável;
 
 ## Exemplo de Uso
 
@@ -25,10 +28,6 @@ Funcao TruncarValor(Numero End ValorVariavel);
 TruncarValor();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

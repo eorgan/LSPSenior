@@ -11,15 +11,14 @@ Funcao GravaUltimoNum(Numero CodEmp, Numero CodFil, Alfa CamBas, Numero NumFcc);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Grava o último número do formulário impresso na E078Ult.
 
 ## Parâmetros
 
-- **CodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **CodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **CamBas** (`Alfa`) - Entrada: [Adicione descrição]
-- **NumFcc** (`Numero`) - Entrada: [Adicione descrição]
+- **CodEmp** (`Numero`) - Entrada: Código da empresa.
+- **CodFil** (`Numero`) - Entrada: Código da filial.
+- **CamBas** (`Alfa`) - Entrada
+- **NumFcc** (`Numero`) - Entrada: Número que se quer gravar no campo UltNum.
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ Funcao GravaUltimoNum(Numero CodEmp, Numero CodFil, Alfa CamBas, Numero NumFcc);
 GravaUltimoNum();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

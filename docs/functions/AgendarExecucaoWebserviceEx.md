@@ -11,17 +11,16 @@ Funcao AgendarExecucaoWebserviceEx(Numero pCodEmp, Alfa pAbrFil, Alfa pWebServic
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Essa função cria um novo plano de execução retornando o identificador único gerado
 
 ## Parâmetros
 
-- **pCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **pAbrFil** (`Alfa`) - Entrada: [Adicione descrição]
-- **pWebService** (`Alfa`) - Entrada: [Adicione descrição]
-- **pPorta** (`Alfa`) - Entrada: [Adicione descrição]
-- **pJSON** (`Alfa`) - Entrada: [Adicione descrição]
-- **pIdePle** (`Numero End`) - Saída: [Adicione descrição]
+- **pCodEmp** (`Numero`) - Entrada: Código da empresa que será gravado na E000PLE
+- **pAbrFil** (`Alfa`) - Entrada: Abrangência de filiais que será gravado na E000PLE
+- **pWebService** (`Alfa`) - Entrada: Caminho do web services que será executado. Ex: [com.senior.g5.co.mct.ctb.integracao](../webservices/com_senior_g5_co_mct_ctb_integracao.htm)
+- **pPorta** (`Alfa`) - Entrada: Porta do web services que será executado. Ex: [Integrar_8](../webservices/com_senior_g5_co_mct_ctb_integracao.htm#integrar-2)
+- **pJSON** (`Alfa`) - Entrada: JSON contendo o nome dos parâmetros e seus respectivos valores
+- **pIdePle** (`Numero End`) - Saída: Código identificador da requisição gerada (E000PLE.IDEUNI)
 
 ## Exemplo de Uso
 
@@ -30,10 +29,6 @@ Funcao AgendarExecucaoWebserviceEx(Numero pCodEmp, Alfa pAbrFil, Alfa pWebServic
 AgendarExecucaoWebserviceEx();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

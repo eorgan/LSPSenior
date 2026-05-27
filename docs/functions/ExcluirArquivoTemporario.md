@@ -1,0 +1,32 @@
+# ExcluirArquivoTemporario
+
+## Assinatura
+
+```lspt
+Funcao ExcluirArquivoTemporario(xArquivoTemporario);
+```
+
+## Código
+N/A
+
+## Descrição
+
+Exclui um arquivo criado pela função **CriarArquivoTemporario**. Deve ser passado o nome completo do arquivo conforme retornado da função anterior. Somente podem ser excluídos os arquivos da pasta temporária, se for passado um nome de arquivo que não esteja na pasta temporária, será gerado uma exceção.
+
+## Parâmetros
+
+- **xArquivoTemporario** - Entrada: Nome completo do arquivo temporário criado com a função **CriarArquivoTemporario**
+
+## Exemplo de Uso
+
+```lspt
+Definir Alfa xPrefixo;
+Definir Alfa xArquivoTemporario;
+xPrefixo = "xyz";
+CriarArquivoTemporario(xPrefixo, xArquivoTemporario);
+ExcluirArquivoTemporario(xArquivoTemporario);
+```
+
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

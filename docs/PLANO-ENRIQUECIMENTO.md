@@ -157,6 +157,25 @@ Critério de pronto:
 
 ---
 
+### Fase 5 — Enriquecer descrições com os manuais consolidados ✅ CONCLUÍDA
+**Tier:** médio · **Fonte:** `../WebScraping/output/_consolidado/` (senior_erp + senior_tecnologia)
+
+> **Resultado:** `scripts/extract-from-erp-docs.js` parseia os dois manuais (formatos
+> distintos: ERP usa `Sintaxe:`+tabela; Tecnologia usa `**Sintaxe:**` inline) e gera
+> `data/functions-doc-erp.json` (~505 funções, 484 com assinatura). `generate-functions.js`
+> agora combina os overlays (manual tem precedência) com **matching case-insensitive** e
+> enriquece **255** funções existentes. Docs regeneráveis via marcador de rodapé.
+
+### Fase 6 — Adicionar funções novas ao catálogo ✅ CONCLUÍDA
+**Tier:** médio
+
+> **Resultado:** entradas do overlay com assinatura ausentes do CSV viram funções novas
+> (parse de params da assinatura; `code: "N/A"`). Catálogo: **369 → 600** funções
+> (+231). Gramática regenerada (600), docs gerados/atualizados (482 com conteúdo real,
+> 118 stubs). Correções: bug do `end` minúsculo em `extractParameters`, fallback de
+> params via tabela do overlay quando a assinatura não tem tipos, dedup case-insensitive
+> (a LSP ignora caixa). Release **1.6.0**.
+
 ## Higiene de processo (do PromptDev — versão enxuta p/ projeto pequeno)
 
 - **ADR** para a estratégia de overlay/merge (a decisão estrutural da Fase 1) em

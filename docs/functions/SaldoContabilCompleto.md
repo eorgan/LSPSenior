@@ -11,18 +11,28 @@ Funcao SaldoContabilCompleto(Numero aCtaRed, Alfa aCodCcu, Numero aMesAno, Numer
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retorna os saldos de acordo com os dados passados via parâmetro.
 
 ## Parâmetros
 
-- **aCtaRed** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodCcu** (`Alfa`) - Entrada: [Adicione descrição]
-- **aMesAno** (`Numero`) - Entrada: [Adicione descrição]
-- **aDebCta** (``) - Saída: [Adicione descrição]
-- **aCreCta** (``) - Saída: [Adicione descrição]
-- **aSalCta** (``) - Saída: [Adicione descrição]
-- **aSalAntCta** (``) - Saída: [Adicione descrição]
+- **aCtaRed** (`Numero`) - Entrada: Código da conta contábil.
+- **aCodCcu** (`Alfa`) - Entrada: Código do centro de custo.
+- **aMesAno** (`Numero`) - Entrada: Competência a que se refere o saldo contábil.
+- **aDebCta** (`Numero end`) - Saída: Retorna o valor a débito a combinação da conta contábil, centro de custo (caso tipo de saldo 8) e competência.
+- **aCreCta** (`Numero end`) - Saída: Retorna o valor a crédito a combinação da conta contábil, centro de custo (caso tipo de saldo 8) e competência.
+- **aSalCta** (`Numero end`) - Saída: Retorna o saldo final para a combinação da conta contábil, centro de custos (caso tipo de saldo 8) e competência.
+- **aSalAntCta** (`Numero end`) - Saída: Retorna o saldo anterior para a combinação da conta contábil, centro de custos (caso tipo de saldo 8) e competência.
+
+## Valores de Retorno
+
+- - aDebCta: Retorna o valor a débito a combinação da conta contábil,
+- centro de custo (caso tipo de saldo 8) e competência.
+- - aCreCta: Retorna o valor a crédito a combinação da conta contábil,
+- centro de custo (caso tipo de saldo 8) e competência.
+- - aSalCta: Retorna o saldo final para a combinação da conta contábil,
+- centro de custos (caso tipo de saldo 8) e competência.
+- - aSalAntCta: Retorna o saldo anterior para a combinação da conta
+- contábil, centro de custos (caso tipo de saldo 8) e competência.
 
 ## Exemplo de Uso
 
@@ -31,10 +41,6 @@ Funcao SaldoContabilCompleto(Numero aCtaRed, Alfa aCodCcu, Numero aMesAno, Numer
 SaldoContabilCompleto();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

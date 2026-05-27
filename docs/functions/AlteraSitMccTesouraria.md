@@ -11,12 +11,14 @@ Funcao AlteraSitMccTesouraria()
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Inativar um movimento da tesouraria.
 
 ## Parâmetros
 
-_Sem parâmetros_
+- **pCodEmp**: Variável que recebe o Código da Empresa.
+- **pNumCco**: Variável que recebe o Código da Conta Interna.
+- **pDatMov**: Variável que recebe a data do movimento da tesouraria.
+- **pSeqMov**: Variável que recebe a sequência do movimento da tesouraria.
 
 ## Exemplo de Uso
 
@@ -25,10 +27,6 @@ _Sem parâmetros_
 AlteraSitMccTesouraria();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

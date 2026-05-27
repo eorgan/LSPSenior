@@ -11,13 +11,22 @@ Funcao BuscarAbrEntUsuario(Numero aCodUsu, Alfa End aAbrEnt);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retornar a abrangência de entidades ligadas ao usuário.
 
 ## Parâmetros
 
-- **aCodUsu** (`Numero`) - Entrada: [Adicione descrição]
-- **aAbrEnt** (`Alfa End`) - Saída: [Adicione descrição]
+- **aCodUsu** (`Numero`) - Entrada: Variável para informar o código do usuário a ser verificado.
+- **aAbrEnt** (`Alfa End`) - Saída: Variável que recebe a abrangência de entidades (usuários e grupos) que têm ligação com o usuário. Nesta abrangência são retornados os códigos: do usuário, do grupo "todos", dos grupos "pais", dos grupos "avós", etc.
+
+## Valores de Retorno
+
+- aAbrEnt: Variável alfanumérica que recebe a abrangência de
+- entidades (usuários e grupos) que têm ligação com o usuário. Nesta abrangência são
+- retornados os códigos: do usuário, do grupo "todos", dos grupos
+- "pais", dos grupos "avós", etc.
+- Importante: quando um usuário estiver atrelado a um
+- Grupo e este Grupo fizer parte de outro Grupo, ao listar a função
+- "todos" os grupos serão listados.
 
 ## Exemplo de Uso
 
@@ -26,10 +35,6 @@ Funcao BuscarAbrEntUsuario(Numero aCodUsu, Alfa End aAbrEnt);
 BuscarAbrEntUsuario();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

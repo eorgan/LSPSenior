@@ -11,24 +11,23 @@ Funcao AlterarVidaUtilBem(Numero aCodEmp, Alfa aCodBem, Data aDatIvd, Alfa aVidU
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Gerar a movimentação de alteração da vida útil do bem, com a possibilidade da geração dos acréscimos do valor justo.
 
 ## Parâmetros
 
-- **aCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodBem** (`Alfa`) - Entrada: [Adicione descrição]
-- **aDatIvd** (`Data`) - Entrada: [Adicione descrição]
-- **aVidUti** (`Alfa`) - Entrada: [Adicione descrição]
-- **aUniMed** (`Alfa`) - Entrada: [Adicione descrição]
-- **aVidTot** (`Numero`) - Entrada: [Adicione descrição]
-- **aVidIni** (`Numero`) - Entrada: [Adicione descrição]
-- **aVidMes** (`Numero`) - Entrada: [Adicione descrição]
-- **aVlrJus** (`Numero`) - Entrada: [Adicione descrição]
-- **aVlrEsp** (`Numero`) - Entrada: [Adicione descrição]
-- **aVlrRes** (`Numero`) - Entrada: [Adicione descrição]
-- **aVdpAcu** (`Numero`) - Entrada: [Adicione descrição]
-- **aGerarAcr** (`Numero`) - Entrada: [Adicione descrição]
+- **aCodEmp** (`Numero`) - Entrada: Empresa
+- **aCodBem** (`Alfa`) - Entrada: Bem
+- **aDatIvd** (`Data`) - Entrada: Data ini. cálculo vida útil.
+- **aVidUti** (`Alfa`) - Entrada: Vida útil inicial.
+- **aUniMed** (`Alfa`) - Entrada: Unidade medida.
+- **aVidTot** (`Numero`) - Entrada: Vida útil total.
+- **aVidIni** (`Numero`) - Entrada: Vida útil inicial.
+- **aVidMes** (`Numero`) - Entrada: Vida útil mês.
+- **aVlrJus** (`Numero`) - Entrada: Valor justo.
+- **aVlrEsp** (`Numero`) - Entrada: Valor Especifico entidade.
+- **aVlrRes** (`Numero`) - Entrada: Valor residual.
+- **aVdpAcu** (`Numero`) - Entrada: Depreciação acumulada inicial por vida útil em índice oficial.
+- **aGerarAcr** (`Numero`) - Entrada: Gerar acréscimo valor justo?   0. Não 1. Custo Atribuído 2. Impairment)
 
 ## Exemplo de Uso
 
@@ -37,10 +36,6 @@ Funcao AlterarVidaUtilBem(Numero aCodEmp, Alfa aCodBem, Data aDatIvd, Alfa aVidU
 AlterarVidaUtilBem();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

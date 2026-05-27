@@ -11,12 +11,11 @@ Funcao EscondeCampoTelaEntrada(Alfa NomeCampo);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Função que permite ao usuário esconder determinados campos da tela de entrada do modelo.
 
 ## Parâmetros
 
-- **NomeCampo** (`Alfa`) - Entrada: [Adicione descrição]
+- **NomeCampo** (`Alfa`) - Entrada: Nome do campo da tela de entrada.
 
 ## Exemplo de Uso
 
@@ -25,10 +24,6 @@ Funcao EscondeCampoTelaEntrada(Alfa NomeCampo);
 EscondeCampoTelaEntrada();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,30 +11,24 @@ Funcao Tracking_Transferir(Numero pCodEmp, Numero pCodFil, Alfa pTipDoc, Alfa pN
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Essa função criará um evento de registro de documento na tabela E000ETK, para que posteriormente possa ser consumido pelo processo automático [168 - Integração ERP x Tracking - Envio](../processos-automaticos/168-integracao-erp-tracking-envio.htm).
 
 ## Parâmetros
 
-- **pCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **pTipDoc** (`Alfa`) - Entrada: [Adicione descrição]
-- **pNumDoc** (`Alfa`) - Entrada: [Adicione descrição]
-- **pSerDoc** (`Alfa`) - Entrada: [Adicione descrição]
-- **pStatus** (``) - Saída: [Adicione descrição]
-- **pMensagemErro** (``) - Saída: [Adicione descrição]
+- **pCodEmp** (`Numero`) - Entrada: Código da empresa
+- **pCodFil** (`Numero`) - Entrada: Código da filial
+- **pTipDoc** (`Alfa`) - Entrada: Tipo de documento no tracking
+- **pNumDoc** (`Alfa`) - Entrada: Número do documento
+- **pSerDoc** (`Alfa`) - Entrada: Série do documento
+- **pStatus** (`Alfa end`) - Saída: Retorna o status da execução
+- **pMensagemErro** (`Alfa end`) - Saída: Retorna a mensagem de erro
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-Tracking_Transferir();
+ @ Variáveis passadas para a regra @ Definir Numero xEmpresa; Definir Numero xFilial; Definir Numero xNumeroAnaliseEmbarque; Definir Numero xNumeroPreFatura;  @ Variáveis auxiliares da regra @ Definir Alfa ATipoDocumento; Definir Alfa ASerieDocumento; Definir Alfa ANumeroDocumento;  Definir Alfa AStatus; Definir Alfa AMensagemErro;  inicio   ATipoDocumento = "Pre-fatura";   IntParaAlfa(xNumeroAnaliseEmbarque, ANumeroDocumento);     IntParaAlfa(xNumeroPreFatura, ASerieDocumento);      Tracking_Transferir(xEmpresa, xFilial, ATipoDocumento, ANumeroDocumento, ASerieDocumento, AStatus, AMensagemErro); fim
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

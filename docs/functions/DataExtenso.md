@@ -16,7 +16,7 @@ Esta função gera o extenso de determinada data.
 ## Parâmetros
 
 - **pData** (`Numero`) - Entrada: Campo/Variável a partir do qual se deseja gerar o extenso
-- **pDatExt** (``) - Saída: Variável que retornará o extenso da data
+- **pDatExt** (`Alfa end`) - Saída: Variável que retornará o extenso da data
 
 ## Exemplo de Uso
 
@@ -29,5 +29,6 @@ DataExtenso(vdData, vaExtenso);
 @ vaExtenso vai conter a data por extenso @
 ```
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

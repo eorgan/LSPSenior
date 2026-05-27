@@ -11,14 +11,13 @@ Funcao SetarFiltroSql(Alfa aTabela, Alfa aCampo, Alfa aFiltro);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Define um filtro sql, personalizado pelo cliente, em tabelas do sistema ou de usuário.
 
 ## Parâmetros
 
-- **aTabela** (`Alfa`) - Entrada: [Adicione descrição]
-- **aCampo** (`Alfa`) - Entrada: [Adicione descrição]
-- **aFiltro** (`Alfa`) - Entrada: [Adicione descrição]
+- **aTabela** (`Alfa`) - Entrada: Nome da tabela onde o filtro será definido.
+- **aCampo** (`Alfa`) - Entrada: Nome do campo da tabela onde o filtro será definido.
+- **aFiltro** (`Alfa`) - Entrada: Filtro sql que deverá ser definido no campo, ou vazio ("") para limpar o filtro do campo.
 
 ## Exemplo de Uso
 
@@ -27,10 +26,6 @@ Funcao SetarFiltroSql(Alfa aTabela, Alfa aCampo, Alfa aFiltro);
 SetarFiltroSql();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

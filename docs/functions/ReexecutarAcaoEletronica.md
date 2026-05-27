@@ -11,20 +11,19 @@ Funcao ReexecutarAcaoEletronica(Numero pIdentificadorUnico, Numero pCodEmp, Nume
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função recebe a chave de uma nota fiscal de venda e chama a emissão da ação eletrônica salva no banco de dados.
 
 ## Parâmetros
 
-- **pIdentificadorUnico** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodSnf** (`Alfa`) - Entrada: [Adicione descrição]
-- **pAbrangenciaNfe** (`Alfa`) - Entrada: [Adicione descrição]
-- **pAcaoNfe** (`Alfa`) - Entrada: [Adicione descrição]
-- **pSimularEmissao** (`Alfa`) - Entrada: [Adicione descrição]
-- **pRotinaOrigem** (`Alfa`) - Entrada: [Adicione descrição]
-- **pResultado** (`Alfa End`) - Saída: [Adicione descrição]
+- **pIdentificadorUnico** (`Numero`) - Entrada
+- **pCodEmp** (`Numero`) - Entrada
+- **pCodFil** (`Numero`) - Entrada
+- **pCodSnf** (`Alfa`) - Entrada
+- **pAbrangenciaNfe** (`Alfa`) - Entrada
+- **pAcaoNfe** (`Alfa`) - Entrada
+- **pSimularEmissao** (`Alfa`) - Entrada
+- **pRotinaOrigem** (`Alfa`) - Entrada
+- **pResultado** (`Alfa End`) - Saída
 
 ## Exemplo de Uso
 
@@ -33,10 +32,6 @@ Funcao ReexecutarAcaoEletronica(Numero pIdentificadorUnico, Numero pCodEmp, Nume
 ReexecutarAcaoEletronica();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

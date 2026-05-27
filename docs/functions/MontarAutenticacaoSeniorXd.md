@@ -11,12 +11,11 @@ Funcao MontarAutenticacaoSeniorXd(Alfa end Retorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Função para obtenção do token de acesso à Senior X. Para uso específico na integração entre sistema e BPM/Bot Factory.
 
 ## Parâmetros
 
-- **Retorno** (``) - Saída: [Adicione descrição]
+- **Retorno** (`Alfa end`) - Saída: Variável utilizada na regra pelo procedimento de obtenção do token para conexão com a plataforma.
 
 ## Exemplo de Uso
 
@@ -25,10 +24,6 @@ Funcao MontarAutenticacaoSeniorXd(Alfa end Retorno);
 MontarAutenticacaoSeniorXd();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

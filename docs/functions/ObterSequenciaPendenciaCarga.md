@@ -11,14 +11,13 @@ Funcao ObterSequenciaPendenciaCarga(Numero CodEmp, Data DatGer, Numero End SeqPe
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Tem como finalidade gerar uma sequência única para pendência de carga.
 
 ## Parâmetros
 
-- **CodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **DatGer** (`Data`) - Entrada: [Adicione descrição]
-- **SeqPen** (`Numero End`) - Saída: [Adicione descrição]
+- **CodEmp** (`Numero`) - Entrada: Código da empresa
+- **DatGer** (`Data`) - Entrada: Data de geração da pendência de carga
+- **SeqPen** (`Numero End`) - Saída: Sequência gerada pela função
 
 ## Exemplo de Uso
 
@@ -27,10 +26,6 @@ Funcao ObterSequenciaPendenciaCarga(Numero CodEmp, Data DatGer, Numero End SeqPe
 ObterSequenciaPendenciaCarga();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

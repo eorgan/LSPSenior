@@ -11,17 +11,16 @@ Funcao GravarObservacaoCP(Numero aCodEmp, Numero aCodFil, Numero aCodFor, Alfa a
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função grava a observação no título do contas a pagar.
 
 ## Parâmetros
 
-- **aCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodFor** (`Numero`) - Entrada: [Adicione descrição]
-- **aNumTit** (`Alfa`) - Entrada: [Adicione descrição]
-- **aCodTpt** (`Alfa`) - Entrada: [Adicione descrição]
-- **Obs** (`Alfa`) - Entrada: [Adicione descrição]
+- **aCodEmp** (`Numero`) - Entrada: Código da empresa.
+- **aCodFil** (`Numero`) - Entrada: Código da filial.
+- **aCodFor** (`Numero`) - Entrada: Código do fornecedor.
+- **aNumTit** (`Alfa`) - Entrada: Número do título.
+- **aCodTpt** (`Alfa`) - Entrada: Código do tipo do título.
+- **Obs** (`Alfa`) - Entrada: Observação para ser inserida no título.
 
 ## Exemplo de Uso
 
@@ -30,10 +29,6 @@ Funcao GravarObservacaoCP(Numero aCodEmp, Numero aCodFil, Numero aCodFor, Alfa a
 GravarObservacaoCP();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -16,7 +16,7 @@ Esta função tem por objetivo retornar a informação se um ano é ou não biss
 ## Parâmetros
 
 - **aDataIni** (`Data`) - Entrada: Recebe a data base a ser verificada
-- **aBissexto** (``) - Saída: Retorna a indicação se o ano é bissexto:
+- **aBissexto** (`Numero end`) - Saída: Retorna a indicação se o ano é bissexto:
 
 ## Exemplo de Uso
 
@@ -29,5 +29,6 @@ AnoBissexto(vdData, vnBissexto);
 @ vnBissexto será 0 (não bissexto) @
 ```
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

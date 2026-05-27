@@ -11,14 +11,13 @@ Funcao AlteraCampoSubst(alfa pNomeCampo, alfa pVlrAlf, numero pVlrNum);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função permite que o usuário informe valores padrão para os campos da grade de substitutos.
 
 ## Parâmetros
 
-- **pNomeCampo** (`alfa`) - Entrada: [Adicione descrição]
-- **pVlrAlf** (`alfa`) - Entrada: [Adicione descrição]
-- **pVlrNum** (`numero`) - Entrada: [Adicione descrição]
+- **pNomeCampo** (`alfa`) - Entrada: Nome do campo que quer atribuir valor.
+- **pVlrAlf** (`alfa`) - Entrada: Valor alfa caso a variável seja alfanumérica.
+- **pVlrNum** (`numero`) - Entrada: Valor numérico caso a variável seja alfanumérica.
 
 ## Exemplo de Uso
 
@@ -27,10 +26,6 @@ Funcao AlteraCampoSubst(alfa pNomeCampo, alfa pVlrAlf, numero pVlrNum);
 AlteraCampoSubst();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

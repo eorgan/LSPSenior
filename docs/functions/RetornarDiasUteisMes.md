@@ -17,7 +17,7 @@ Retorna a quantidade de dias úteis de um mês tomando como base uma determinada
 
 - **aDatabase** (`Data`) - Entrada: Variável do tipo Data que recebe a data base a ser verificada
 - **aTipoRetorno** (`Numero`) - Entrada: Variável numérica que indica o tipo de retorno:
-- **aQtdDiasUteis** (``) - Saída: Variável numérica que retorna a quantidade de dias úteis encontrada
+- **aQtdDiasUteis** (`Numero end`) - Saída: Variável numérica que retorna a quantidade de dias úteis encontrada
 
 ## Exemplo de Uso
 
@@ -55,5 +55,6 @@ Funcao exemploRetornarDiasUteisMes(); {
 }
 ```
 
-> Documentação extraída do manual oficial da LSP. Edite à vontade — execuções futuras
-> de `generate-functions.js` só sobrescrevem arquivos que ainda são stubs.
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

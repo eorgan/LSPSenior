@@ -11,15 +11,14 @@ Funcao ExcluirCalculoPISCOFINS(Numero Empresa, Numero Filial, Alfa Imposto, Alfa
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Possui como objetivo excluir a apuração do PIS/COFINS de tipo **41, 42, 43, 44, 47 e 48**.
 
 ## Parâmetros
 
-- **Empresa** (`Numero`) - Entrada: [Adicione descrição]
-- **Filial** (`Numero`) - Entrada: [Adicione descrição]
-- **Imposto** (`Alfa`) - Entrada: [Adicione descrição]
-- **Retorno** (``) - Saída: [Adicione descrição]
+- **Empresa** (`Numero`) - Entrada
+- **Filial** (`Numero`) - Entrada
+- **Imposto** (`Alfa`) - Entrada
+- **Retorno** (`Alfa end`) - Saída
 
 ## Exemplo de Uso
 
@@ -28,10 +27,6 @@ Funcao ExcluirCalculoPISCOFINS(Numero Empresa, Numero Filial, Alfa Imposto, Alfa
 ExcluirCalculoPISCOFINS();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,12 +11,11 @@ funcao GeraLog(Alfa pDscMem);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função tem como objetivo gerar uma mensagem no arquivo de log dos processos automáticos e abortar a operação. Caso seja utilizada em regras que não sejam executadas através de agendador de processos, a mensagem será exibida em tela.
 
 ## Parâmetros
 
-- **pDscMem** (`Alfa`) - Entrada: [Adicione descrição]
+- **pDscMem** (`Alfa`) - Entrada: Variável alfanumérica que recebe a descrição que deseja-se gravar no arquivo de log.
 
 ## Exemplo de Uso
 
@@ -25,10 +24,6 @@ funcao GeraLog(Alfa pDscMem);
 GeraLog();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

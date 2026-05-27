@@ -11,21 +11,20 @@ Funcao BuscaTabPreco(Alfa pCodMod, Alfa pCodAgm, Numero pCodRep, Alfa pCodMar, A
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Verifica se a transação soma ou diminui o ICMS no preço unitário (E001TNS.ComSip) e se a transação está configurada para a redução de ICMS ser considerada na formação do preço de venda (E001TVE.ConRic).
 
 ## Parâmetros
 
-- **pCodMod** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodAgm** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodRep** (`Numero`) - Entrada: [Adicione descrição]
-- **pCodMar** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodLip** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodFam** (`Alfa`) - Entrada: [Adicione descrição]
-- **pCodCdi** (`Numero`) - Entrada: [Adicione descrição]
-- **pPreUni** (``) - Saída: [Adicione descrição]
-- **pPerDsc** (``) - Saída: [Adicione descrição]
-- **pPerCom** (``) - Saída: [Adicione descrição]
+- **pCodMod** (`Alfa`) - Entrada: Código Modelo.
+- **pCodAgm** (`Alfa`) - Entrada: Código Agrupamento de preço para Geração da tabela de Preço.
+- **pCodRep** (`Numero`) - Entrada: Código representante.
+- **pCodMar** (`Alfa`) - Entrada: Marca do Produto.
+- **pCodLip** (`Alfa`) - Entrada: Código da lista de preço utilizada na venda.
+- **pCodFam** (`Alfa`) - Entrada: Família.
+- **pCodCdi** (`Numero`) - Entrada: Código do canal de distribuição do pedido.
+- **pPreUni** (`Numero end`) - Saída: Preço unitário do item da nota fiscal de saída.(retorno)
+- **pPerDsc** (`Numero end`) - Saída: Percentual de Desconto. (retorno)
+- **pPerCom** (`Numero end`) - Saída: Percentual definido pela Comissão.(retorno)
 
 ## Exemplo de Uso
 
@@ -34,10 +33,6 @@ Funcao BuscaTabPreco(Alfa pCodMod, Alfa pCodAgm, Numero pCodRep, Alfa pCodMar, A
 BuscaTabPreco();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

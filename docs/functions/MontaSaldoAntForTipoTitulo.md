@@ -11,15 +11,18 @@ Funcao MontaSaldoAntForTipoTitulo(Numero pCodFor,Numero pDatBas, Numero pTipTpt,
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função busca o saldo do fornecedor de acordo com o tipo do título: - 'D' - Duplicatas, - 'O' - Outros e - 'C' - Adiantamentos/Pgto.Indevidos.
 
 ## Parâmetros
 
-- **pCodFor** (`Numero`) - Entrada: [Adicione descrição]
-- **pDatBas** (`Numero`) - Entrada: [Adicione descrição]
-- **pTipTpt** (`Numero`) - Entrada: [Adicione descrição]
-- **pSalFor** (`Numero End`) - Saída: [Adicione descrição]
+- **pCodFor** (`Numero`) - Entrada: Variável que recebe o código do fornecedor que deseja-se buscar o saldo do fornecedor.
+- **pDatBas** (`Numero`) - Entrada: Variável que recebe a data base para montar o saldo do fornecedor.
+- **pTipTpt** (`Numero`) - Entrada: Variável caractere que receber o tipo do título para montar o saldo do fornecedor.
+- **pSalFor** (`Numero End`) - Saída: Variável numérica que retorna o saldo do fornecedor de acordo com os parâmetros passados.
+
+## Valores de Retorno
+
+- pSalFor- Variável numérica que retorna o saldo do fornecedor de acordo com os parâmetros passados
 
 ## Exemplo de Uso
 
@@ -28,10 +31,6 @@ Funcao MontaSaldoAntForTipoTitulo(Numero pCodFor,Numero pDatBas, Numero pTipTpt,
 MontaSaldoAntForTipoTitulo();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

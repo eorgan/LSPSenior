@@ -11,13 +11,17 @@ Funcao ForcarFimEstagioOperacao(Alfa pParametros, Alfa End pRetorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Tem por finalidade forçar o fim de um estágio ou operação de uma O.P./O.S.
 
 ## Parâmetros
 
-- **pParametros** (`Alfa`) - Entrada: [Adicione descrição]
-- **pRetorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **pParametros** (`Alfa`) - Entrada: Origem
+- **pRetorno** (`Alfa End`) - Saída: Número da O.P.
+
+## Valores de Retorno
+
+- A variável pRetorno receberá o valor OK se a função for
+- executada corretamente.
 
 ## Exemplo de Uso
 
@@ -26,10 +30,6 @@ Funcao ForcarFimEstagioOperacao(Alfa pParametros, Alfa End pRetorno);
 ForcarFimEstagioOperacao();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

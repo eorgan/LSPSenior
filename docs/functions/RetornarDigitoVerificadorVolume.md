@@ -11,13 +11,16 @@ Funcao RetornarDigitoVerificadorVolume(Numero aCodEmp, Alfa end aValorRetorno);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Gerar um código do digito verificador conforme a quantidade de casas, que será controlado através da empresa pelo campo Quantidade de caracteres para controlar a leitura única de volumes (F070EMP) no cadastro da empresa.
 
 ## Parâmetros
 
-- **aCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **aValorRetorno** (``) - Saída: [Adicione descrição]
+- **aCodEmp** (`Numero`) - Entrada: Este parâmetro é utilizado para retornar o dígito verificador de determinada empresa.
+- **aValorRetorno** (`Alfa end`) - Saída: A variável irá receber desta função um valor "string" que deverá ser concatenado com o código de barras do volume, gerando o dígito verificador.
+
+## Valores de Retorno
+
+- A variável aValorRetorno irá receber desta função um valor "string" que deverá ser concatenado com o código de barras do volume, gerando o dígito verificador.
 
 ## Exemplo de Uso
 
@@ -26,10 +29,6 @@ Funcao RetornarDigitoVerificadorVolume(Numero aCodEmp, Alfa end aValorRetorno);
 RetornarDigitoVerificadorVolume();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,15 +11,18 @@ Funcao TotalContasCentroCusto(Numero ContaFinanceira, Numero ContaContabil, Alfa
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Retorna o total da tela de rateio, de acordo com as contas e cento de custos passados como parâmetro.
 
 ## Parâmetros
 
-- **ContaFinanceira** (`Numero`) - Entrada: [Adicione descrição]
-- **ContaContabil** (`Numero`) - Entrada: [Adicione descrição]
-- **CentroCusto** (`Alfa`) - Entrada: [Adicione descrição]
-- **Total** (`Numero End`) - Saída: [Adicione descrição]
+- **ContaFinanceira** (`Numero`) - Entrada: Valor ou variável que contém a conta financeira que deseja-se saber o total da tela de rateio.
+- **ContaContabil** (`Numero`) - Entrada: Valor ou variável que contém a conta contábil que deseja-se saber o total da tela de rateio.
+- **CentroCusto** (`Alfa`) - Entrada: Valor ou variável que contém o centro de custos que deseja-se saber o total da tela de rateio.
+- **Total** (`Numero End`) - Saída: Variável que retorna o total do rateio.
+
+## Valores de Retorno
+
+- Total - Variável numérica que retorna o total do rateio.
 
 ## Exemplo de Uso
 
@@ -28,10 +31,6 @@ Funcao TotalContasCentroCusto(Numero ContaFinanceira, Numero ContaContabil, Alfa
 TotalContasCentroCusto();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

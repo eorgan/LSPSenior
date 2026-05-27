@@ -11,13 +11,17 @@ Funcao LerBalanca(numero pControle, numero end pPeso);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função é utilizada para fornecer o peso da balança ligada ao sistema. Para algumas balanças é possível estabelecer qual o peso que deseja buscar (Entrada ou Saída).
 
 ## Parâmetros
 
-- **pControle** (`numero`) - Entrada: [Adicione descrição]
-- **pPeso** (``) - Saída: [Adicione descrição]
+- **pControle** (`numero`) - Entrada: Variável que poderá assumir dois valores: 0 (quando deseja buscar o peso de entrada da balança) e 1 (quando deseja buscar o peso de saída da balança).
+- **pPeso** (`numero end`) - Saída: Variável que retorna o peso da balança (retorno).
+
+## Valores de Retorno
+
+- pPeso: Variável numérica que retorna
+- o peso da balança.
 
 ## Exemplo de Uso
 
@@ -26,10 +30,6 @@ Funcao LerBalanca(numero pControle, numero end pPeso);
 LerBalanca();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

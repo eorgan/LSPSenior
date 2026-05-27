@@ -11,12 +11,11 @@ Funcao CarregarImagemFundoSistema(Alfa pCaminhoImagem);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Carregar um papel de parede personalizado por empresa.
 
 ## Parâmetros
 
-- **pCaminhoImagem** (`Alfa`) - Entrada: [Adicione descrição]
+- **pCaminhoImagem** (`Alfa`) - Entrada: Caminho e o nome do arquivo.
 
 ## Exemplo de Uso
 
@@ -25,10 +24,6 @@ Funcao CarregarImagemFundoSistema(Alfa pCaminhoImagem);
 CarregarImagemFundoSistema();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

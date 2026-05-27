@@ -11,17 +11,21 @@ Funcao TotalRateado(Numero Projeto, Numero Fase, Numero ContaFinanceira, Numero 
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Esta função retorna o valor total rateado e pode ser utilizado independente da empresa possuir projeto e plano financeiro, basta nestes casos passar o valor 0 (zero) para o Projeto, Fase e Conta Financeria.
 
 ## Parâmetros
 
-- **Projeto** (`Numero`) - Entrada: [Adicione descrição]
-- **Fase** (`Numero`) - Entrada: [Adicione descrição]
-- **ContaFinanceira** (`Numero`) - Entrada: [Adicione descrição]
-- **ContaContabil** (`Numero`) - Entrada: [Adicione descrição]
-- **CentroCusto** (`Alfa`) - Entrada: [Adicione descrição]
-- **Total** (`Numero End`) - Saída: [Adicione descrição]
+- **Projeto** (`Numero`) - Entrada: Valor ou variável que indicará qual o projeto que deseja-se buscar o total rateado. Caso o valor for 0 (zero), será retornado o total de todos os projetos.
+- **Fase** (`Numero`) - Entrada: Valor ou variável que indicará qual a fase que deseja-se buscar o total rateado. Caso o valor for 0 (zero), será retornado o total de todas as fases.
+- **ContaFinanceira** (`Numero`) - Entrada: Conta Contábil.
+- **ContaContabil** (`Numero`) - Entrada: Conta Contábil.
+- **CentroCusto** (`Alfa`) - Entrada: String com o Centro de Custo
+- **Total** (`Numero End`) - Saída: Valor Total Rateado de acordo com os parâmetros passados para o Projeto, Fase, ContaFinanceira, ContaContabil e CentroCusto. (retorno)
+
+## Valores de Retorno
+
+- Total: Valor Total Rateado de acordo com os parâmetros passados
+- para o Projeto, Fase, ContaFinanceira, ContaContabil e CentroCusto.
 
 ## Exemplo de Uso
 
@@ -30,10 +34,6 @@ Funcao TotalRateado(Numero Projeto, Numero Fase, Numero ContaFinanceira, Numero 
 TotalRateado();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

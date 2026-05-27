@@ -11,13 +11,16 @@ Funcao MontaHistoricoPadrao(Numero CodHpd,Alfa end CplLct);
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Função Exclusiva para Contabilidade. Passando o código do Histórico Padrão, e o complemento do lançamento, retorna o complemento formatado.
 
 ## Parâmetros
 
-- **CodHpd** (`Numero`) - Entrada: [Adicione descrição]
-- **CplLct** (``) - Saída: [Adicione descrição]
+- **CodHpd** (`Numero`) - Entrada: Variável que recebe o código do histórico padrão.
+- **CplLct** (`Alfa end`) - Saída: Variável que recebe os conteúdos a serem inseridos no HP. Nesta própria variável o histórico completo é retornado.
+
+## Valores de Retorno
+
+- CplLct = Nesta própria variável o histórico completo é retornado.
 
 ## Exemplo de Uso
 
@@ -26,10 +29,6 @@ Funcao MontaHistoricoPadrao(Numero CodHpd,Alfa end CplLct);
 MontaHistoricoPadrao();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

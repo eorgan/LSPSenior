@@ -11,17 +11,16 @@ Funcao ExecutaRelatorioArquivo (Alfa pNomRel, Alfa pTelEnt, Alfa pNomOrd, Alfa p
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+**Importante** Esta função não deve ser utilizada. Sua finalidade é para uso restrito. <!-- source: https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/executar-rotina-sapiens.htm -->
 
 ## Parâmetros
 
-- **pNomRel** (`Alfa`) - Entrada: [Adicione descrição]
-- **pTelEnt** (`Alfa`) - Entrada: [Adicione descrição]
-- **pNomOrd** (`Alfa`) - Entrada: [Adicione descrição]
-- **pSaidaImpressa** (`Alfa`) - Entrada: [Adicione descrição]
-- **pNomeArquivo** (`Alfa`) - Entrada: [Adicione descrição]
-- **pFormatoArquivo** (`Alfa`) - Entrada: [Adicione descrição]
+- **pNomRel** (`Alfa`) - Entrada
+- **pTelEnt** (`Alfa`) - Entrada
+- **pNomOrd** (`Alfa`) - Entrada
+- **pSaidaImpressa** (`Alfa`) - Entrada
+- **pNomeArquivo** (`Alfa`) - Entrada
+- **pFormatoArquivo** (`Alfa`) - Entrada
 
 ## Exemplo de Uso
 
@@ -30,10 +29,6 @@ Funcao ExecutaRelatorioArquivo (Alfa pNomRel, Alfa pTelEnt, Alfa pNomOrd, Alfa p
 ExecutaRelatorioArquivo();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

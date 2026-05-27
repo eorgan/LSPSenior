@@ -11,15 +11,18 @@ Funcao GerarSubprodutosOPModelo(Numero aCodEmp, Alfa aCodOri, Numero aNumOrp, Al
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Gerar registros de subprodutos de OPs antigas, antes de existir a tabela E900SPR.
 
 ## Parâmetros
 
-- **aCodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **aCodOri** (`Alfa`) - Entrada: [Adicione descrição]
-- **aNumOrp** (`Numero`) - Entrada: [Adicione descrição]
-- **aRetorno** (`Alfa End`) - Saída: [Adicione descrição]
+- **aCodEmp** (`Numero`) - Entrada: Código da Origem.
+- **aCodOri** (`Alfa`) - Entrada: Número da OP.
+- **aNumOrp** (`Numero`) - Entrada
+- **aRetorno** (`Alfa End`) - Saída: Mensagem de Retorno.
+
+## Valores de Retorno
+
+- Retorna um texto em relação a execução do processo. “OK” significa que a rotina foi executada com sucesso e também retornará as mensagens de consistência incluídas na rotina.
 
 ## Exemplo de Uso
 
@@ -28,10 +31,6 @@ Funcao GerarSubprodutosOPModelo(Numero aCodEmp, Alfa aCodOri, Numero aNumOrp, Al
 GerarSubprodutosOPModelo();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

@@ -11,17 +11,16 @@ Funcao GravaNumFcc(Numero CodEmp, Numero CodFil, Alfa CodSnf, Numero NumNfv, Num
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Gravar no item da nota Fiscal o número do certificado de classificação impresso.
 
 ## Parâmetros
 
-- **CodEmp** (`Numero`) - Entrada: [Adicione descrição]
-- **CodFil** (`Numero`) - Entrada: [Adicione descrição]
-- **CodSnf** (`Alfa`) - Entrada: [Adicione descrição]
-- **NumNfv** (`Numero`) - Entrada: [Adicione descrição]
-- **SeqIpv** (`Numero`) - Entrada: [Adicione descrição]
-- **NumFcc** (`Numero`) - Entrada: [Adicione descrição]
+- **CodEmp** (`Numero`) - Entrada: Código da empresa.
+- **CodFil** (`Numero`) - Entrada: Código da filial.
+- **CodSnf** (`Alfa`) - Entrada
+- **NumNfv** (`Numero`) - Entrada
+- **SeqIpv** (`Numero`) - Entrada
+- **NumFcc** (`Numero`) - Entrada: Número que se quer gravarRetorno.
 
 ## Exemplo de Uso
 
@@ -30,10 +29,6 @@ Funcao GravaNumFcc(Numero CodEmp, Numero CodFil, Alfa CodSnf, Numero NumNfv, Num
 GravaNumFcc();
 ```
 
-## Notas
-
-- Adicione observações importantes sobre o uso da função
-
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.
