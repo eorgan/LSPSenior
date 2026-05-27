@@ -61,10 +61,11 @@ Prefixo por tipo + CamelCase, descritivo, sem acento, sem palavra reservada:
 Antes de usar uma função, confirme a assinatura real — **não invente**. A LSP é
 case-insensitive, então compare nomes ignorando a caixa.
 
-- **`functions.json`** (raiz): mapa `Nome → { signature, params[{name,type,direction,description}], returns[], description, code }`.
-  Para localizar: `grep -i '"nomeFuncao"' functions.json` ou leia a entrada.
-- **`docs/functions/<Nome>.md`**: documentação completa por função (descrição, parâmetros,
-  valores de retorno e **exemplo de uso real**). Use o nome canônico do `functions.json`.
+- **`functions.json`**: mapa `Nome → { signature, params[{name,type,direction,description}], returns[], description, code }`.
+  Procure-o **nesta pasta de skill** (bundle exportado) ou **na raiz do projeto**.
+  Para localizar uma função: `grep -i '"nomeFuncao"' functions.json` ou leia a entrada.
+- **`docs/functions/<Nome>.md`** (quando presente no projeto): documentação completa por
+  função, com **exemplo de uso real**. Use o nome canônico do `functions.json`.
 
 Sempre cheque a `direction` de cada parâmetro: `in` = você fornece; `out` (`end`) = recebe o resultado.
 
@@ -97,6 +98,36 @@ Sempre cheque a `direction` de cada parâmetro: `in` = você fornece; `out` (`en
 - **Validação:** `EstaNulo(vaVar, vnNulo)` e cheque `vnNulo = 1`.
 - **SQL com escrita:** `ExecSQLEx(aComando, xErro, xMensagem)` e trate `xErro`.
 - **Segurança SQL:** prefira placeholders; nunca concatene entrada do usuário cru no SQL.
+
+## 🔁 Exemplo completo (antes → depois)
+
+**Antes (com 3 erros típicos):**
+
+```lsp
+Funcao MostraTotal();
+   Inicio
+      @ ERROS: matemática, conversão e concatenação dentro do parâmetro @
+      Mensagem(Retorna, "Total: " + IntParaAlfa(vnQtdA + vnQtdB) + " itens");
+   Fim;
+```
+
+**Depois (correto — manipule primeiro, chame depois):**
+
+```lsp
+Definir Funcao MostraTotal();
+
+Funcao MostraTotal();
+   Inicio
+      Definir Numero vnTotal;
+      Definir Alfa vaTotal;
+      Definir Alfa vaMensagem;
+
+      vnTotal = vnQtdA + vnQtdB;       @ 1. matemática antes @
+      IntParaAlfa(vnTotal, vaTotal);   @ 2. conversão por parâmetro de saída @
+      vaMensagem = "Total: " + vaTotal + " itens";  @ 3. concatenação antes @
+      Mensagem(Retorna, vaMensagem);   @ 4. passa a variável pronta @
+   Fim;
+```
 
 ## ✅ Checklist antes de finalizar
 
