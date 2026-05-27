@@ -176,6 +176,27 @@ Critério de pronto:
 > params via tabela do overlay quando a assinatura não tem tipos, dedup case-insensitive
 > (a LSP ignora caixa). Release **1.6.0**.
 
+### Fase 7 — Doc rica no editor (hover + signature help) ✅ CONCLUÍDA
+**Tier:** médio
+
+> **Resultado:** `functions.json` passou a guardar `params[].description` e `returns`
+> (via `enrichFuncData` no gerador, a partir do overlay combinado com merge campo-a-campo).
+> `extension.js` exibe a descrição de cada parâmetro e os valores de retorno no **hover**
+> e no **signature help** — antes só apareciam no `.md`. **438** funções com descrição de
+> parâmetro, **195** com valores de retorno. Release **1.6.1**.
+>
+> Pendência conhecida: **114** funções do CSV seguem com descrição genérica (não constam
+> em nenhuma das fontes: manual, ERP, Tecnologia). Só enriquecem com nova fonte de doc.
+
+## Estado dos releases
+
+| Versão | Namespace | Conteúdo |
+|--------|-----------|----------|
+| 1.5.7 | eorgan | Enriquecimento inicial (Fases 1–4) |
+| 1.5.8 | eliezer-organ | Build de migração (aviso de publisher) — namespace antigo |
+| 1.6.0 | eorgan | Catálogo 369→600 (Fases 5–6) |
+| 1.6.1 | eorgan | Hover/signature com params descritos + retorno (Fase 7) |
+
 ## Higiene de processo (do PromptDev — versão enxuta p/ projeto pequeno)
 
 - **ADR** para a estratégia de overlay/merge (a decisão estrutural da Fase 1) em
