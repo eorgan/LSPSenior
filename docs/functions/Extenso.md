@@ -46,6 +46,10 @@ Extenso(vnQuantidade, 30, 30, 30, vaExtLin1, vaExtLin2, vaExtLin3);
 @ vaExtLin3 = "trezentos e cinquenta reais **" @
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/extenso.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

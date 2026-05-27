@@ -32,6 +32,10 @@ Base64Encode(xValor, xValorbase64);
 Mensagem(Retorna, xValorbase64);
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/regra-para-web-services/base64encode.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

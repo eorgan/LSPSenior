@@ -165,6 +165,15 @@ function main() {
          const body = lines.slice(start, end).join('\n');
          const parsed = parseSection(body);
 
+         // URL da doc oficial: o comentário "<!-- source: ... -->" fica IMEDIATAMENTE
+         // ACIMA do heading desta função (separador que precede a próxima seção).
+         let k = heads[h] - 1;
+         while (k >= 0 && lines[k].trim() === '') k--;
+         if (k >= 0) {
+            const sm = lines[k].match(/<!--\s*source:\s*(\S+?)\s*-->/i);
+            if (sm) parsed.source = sm[1];
+         }
+
          // Nome canônico: do Sintaxe; senão, 1º token do heading.
          let name = nameFromSignature(parsed.signature);
          if (!name) {

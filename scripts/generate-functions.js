@@ -71,6 +71,9 @@ function enrichFuncData(funcData, doc) {
    if (doc.returns && doc.returns.length) {
       funcData.returns = doc.returns;
    }
+   if (doc.source) {
+      funcData.source = doc.source;
+   }
 }
 
 /**
@@ -244,6 +247,10 @@ ${returns}
 ## Exemplo de Uso
 
 ${example}
+
+## Fonte
+
+${doc.source ? `[Documentação oficial Senior](${doc.source})` : 'Documentação oficial Senior — https://documentacao.senior.com.br'}
 
 > Gerado automaticamente a partir da documentação oficial da LSP por \`generate-functions.js\`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente

@@ -29,6 +29,10 @@ Essa função criará um evento de registro de cancelamento de transferência na
  @ Variáveis passadas para a regra @ Definir Numero xEmpresa; Definir Numero xFilial; Definir Numero xNumeroAnaliseEmbarque; Definir Numero xNumeroPreFatura;  @ Variáveis auxiliares da regra @ Definir Alfa ATipoDocumento; Definir Alfa ASerieDocumento; Definir Alfa ANumeroDocumento;  Definir Alfa AStatus; Definir Alfa AMensagemErro;  inicio   ATipoDocumento = "Pre-fatura";   IntParaAlfa(xNumeroAnaliseEmbarque, ANumeroDocumento);     IntParaAlfa(xNumeroPreFatura, ASerieDocumento);      Tracking_CancelarTransferido(xEmpresa, xFilial, ATipoDocumento, ANumeroDocumento, ASerieDocumento, AStatus, AMensagemErro); fim
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/tracking_cancelartransferido.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

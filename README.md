@@ -1,25 +1,40 @@
 # LSPT Language Support - Guia do Usuário
 
-> Extensão completa para desenvolvimento em **LSP** (Linguagem Senior de Programação) com IntelliSense, syntax highlighting e autocomplete para **369+ funções built-in**.
+> Extensão completa para desenvolvimento em **LSP** (Linguagem Senior de Programação) com IntelliSense, syntax highlighting, linter e autocomplete para **600+ funções built-in** documentadas (assinatura, parâmetros, valores de retorno e exemplos).
 
 ## 🚀 Instalação Rápida
 
-### Método 1: Via VSIX (Recomendado)
+### Método 1: Pela galeria (recomendado — recebe atualizações)
+Procure por **"LSPT Language Support"** (publisher `eorgan`) na aba *Extensions* do seu
+editor (VS Code, Antigravity e outros baseados em Open VSX) e clique em *Install*.
+
+### Método 2: Via VSIX
 ```bash
-code --install-extension lspt-language-support-1.5.1.vsix
+code --install-extension lspt-language-support-1.7.0.vsix
 ```
 
-### Método 2: Compilar do Código Fonte
+### Método 3: Compilar do Código Fonte
 ```bash
-git clone https://github.com/eliezer-organ/LSPSenior.git
+git clone https://github.com/eorgan/LSPSenior.git
 cd LSPSenior
 npm run package
-code --install-extension lspt-language-support-1.5.1.vsix
+code --install-extension lspt-language-support-1.7.0.vsix
 ```
 
 ---
 
 ## ✨ Funcionalidades
+
+Resumo dos recursos:
+
+- **Autocomplete** de 600+ funções, palavras reservadas e variáveis de sistema (com ou sem `Dev.`)
+- **Signature help** e **hover** com descrição de parâmetros, valores de retorno e link para a doc oficial
+- **Linter** que avisa sobre as armadilhas da LSP (operação dentro de parâmetro, `Pare`/`Continue` fora de loop)
+- **Outline** das funções do arquivo, **folding** de blocos `Inicio`/`Fim`
+- **Ir para definição** (funções do usuário no arquivo e doc oficial das built-in)
+- **Hover de variáveis de sistema** (`DatSis`, `CodEmp`, ...)
+- Comando **"LSPT: Buscar função no catálogo"** (paleta de comandos)
+- **Syntax highlighting** completo e **62 snippets**
 
 ### 🔍 1. Autocomplete de Funções Built-in
 
@@ -793,11 +808,15 @@ Todas as 369 funções têm documentação em `docs/functions/`:
 
 A extensão funciona automaticamente ao abrir arquivos `.lspt` ou `.lsp`. Não requer configuração adicional!
 
-### Desativar Autocomplete (opcional)
+### Linter (diagnostics)
 ```json
 // settings.json
 {
-  "lspt.enableIntelliSense": false
+  // Avisos em tempo real das armadilhas da LSP (padrão: ativado)
+  "lspt.diagnostics.enabled": true,
+  // Sinalizar funções não encontradas no catálogo (padrão: desativado — pode dar
+  // falso-positivo com funções do usuário/externas)
+  "lspt.diagnostics.unknownFunctions": false
 }
 ```
 
@@ -841,11 +860,27 @@ A extensão funciona automaticamente ao abrir arquivos `.lspt` ou `.lsp`. Não r
 
 Veja [CHANGELOG.md](CHANGELOG.md) para histórico completo de versões.
 
-### Versão 1.5.1 (Atual)
-- 📋 51 snippets com prefixos curtos e intuitivos
-- ✨ Novos snippets: SQL avançado, WebService, Conversões, Logging
-- 🚀 Prefixos alternativos para maior produtividade (`func`, `if`, `for`, `while`)
-- 📖 Documentação completa e organizada
+### Destaques recentes (1.6.x – 1.7.0)
+- 📚 Catálogo ampliado para **600+ funções** com descrição, parâmetros e exemplos
+- 🩺 **Linter** das armadilhas da LSP; autocomplete geral; Outline; folding
+- 🔗 Hover/signature com valores de retorno e link para a documentação oficial
+
+---
+
+## 📚 Fontes e Créditos
+
+A documentação das funções foi compilada das fontes oficiais e comunitárias da LSP:
+
+- **Documentação oficial Senior** — [documentacao.senior.com.br](https://documentacao.senior.com.br)
+  ([Gestão Empresarial | ERP](https://documentacao.senior.com.br/gestaoempresarialerp/) e
+  [Tecnologia](https://documentacao.senior.com.br/tecnologia/)). Cada função documentada
+  inclui o link para sua página oficial (visível no hover e no doc da função).
+- **Manual comunitário da LSP** — [brunoleocam/Documentacao-LSP-Linguagem-Senior-de-Programacao](https://github.com/brunoleocam/Documentacao-LSP-Linguagem-Senior-de-Programacao)
+  (base de descrições e exemplos).
+- **Senior Sistemas** — [senior.com.br](https://www.senior.com.br) (criadora da linguagem LSP e do ERP).
+
+> LSP e ERP Senior são marcas/produtos da Senior Sistemas. Esta extensão é um projeto
+> independente da comunidade e não é afiliada à Senior Sistemas.
 
 ---
 
@@ -858,7 +893,7 @@ MIT © Eliezer Organ
 ## 🌟 Apoie o Projeto
 
 Se esta extensão te ajudou, considere:
-- ⭐ Dar uma estrela no [GitHub](https://github.com/eliezer-organ/LSPSenior)
+- ⭐ Dar uma estrela no [GitHub](https://github.com/eorgan/LSPSenior)
 - 🐛 Reportar bugs e sugerir melhorias
 - 📖 Contribuir com documentação das funções
 - 📢 Compartilhar com outros desenvolvedores LSPT

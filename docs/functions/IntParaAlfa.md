@@ -27,6 +27,10 @@ IntParaAlfa (VVlrAux,VAlfAux);
  da função IntParaAlfa a variável VAlfAux teria 150. @
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/intparaalfa.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

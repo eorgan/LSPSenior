@@ -27,6 +27,10 @@ Esta função carrega uma imagem **DXF** a partir de um arquivo para o controle 
 CarregaImgVetorialControle();
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerador-de-relatorios/carregaimgvetorialcontrole.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

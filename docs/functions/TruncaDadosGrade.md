@@ -25,6 +25,10 @@ Esta função permite ao desenvolvedor do modelo, fazer com que o dado de uma de
 TruncaDadosGrade("Grade001", 2, 1);
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerador-de-relatorios/truncadadosgrade.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

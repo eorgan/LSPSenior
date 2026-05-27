@@ -31,6 +31,10 @@ ObterVersaoSistema(majorVersions, minorVersion, release, build);
 @ Após a chamada da função as variáveis informadas conterão a versão do sistema. @
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/obter-versao-sistema.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

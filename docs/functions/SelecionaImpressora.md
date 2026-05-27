@@ -25,6 +25,10 @@ SelecionaImpressora ("HP DEKJET 660C");
 // Este exemplo seta a impressora HP DEKJET 660C para o modelo.
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerador-de-relatorios/selecionaimpressora.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

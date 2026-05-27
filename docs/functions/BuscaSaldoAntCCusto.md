@@ -35,6 +35,10 @@ Esta função carrega o saldo anterior calculado até a data informada de uma co
 BuscaSaldoAntCCusto();
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/buscasaldoantccusto.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

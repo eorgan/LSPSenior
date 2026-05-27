@@ -32,6 +32,10 @@ Função responsável para adicionar colunas e valores a serem pesquisadas valor
 ListaRegraAddProcurarNumero();
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraaddprocurarnumero.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

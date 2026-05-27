@@ -24,6 +24,10 @@ Converte um número armazenado como **Alfa** e o retorna como um tipo **Numero**
 AlfaParaInt (R034Fun.CadFol,Vcadastro);
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/alfaparaint.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

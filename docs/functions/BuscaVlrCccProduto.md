@@ -33,6 +33,10 @@ Retornar o valor de um componente de cálculo, conforme a tabela, o código do c
 BuscaVlrCccProduto();
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/buscavlrcccproduto.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

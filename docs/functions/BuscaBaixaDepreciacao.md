@@ -38,6 +38,10 @@ Retorna os valores da baixa da depreciação em índice oficial e em moeda corre
 BuscaBaixaDepreciacao();
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/buscabaixadepreciacao.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

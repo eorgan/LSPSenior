@@ -33,6 +33,10 @@ ConverteDataToDB(vdData, vaDataStr);
 @ vaDataStr = "to_date('31/12/1900','DD/MM/YYYY')" ou formato do banco usado @
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/convertedatatodb.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

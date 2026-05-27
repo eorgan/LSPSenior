@@ -31,6 +31,10 @@ Essa função criará um evento de registro de documento na tabela E000ETK, para
  @ Variáveis passadas para a regra @ Definir Numero xEmpresa; Definir Numero xFilial; Definir Numero xNumeroPedido; Definir Alfa xPedidoCliente;  @ Variáveis auxiliares da regra @ Definir Numero NCodigoPlano; Definir Alfa ATipoDocumento; Definir Alfa ASerieDocumento; Definir Alfa ANumeroDocumento;  Definir Alfa AStatus; Definir Alfa AMensagemErro;  inicio   NCodigoPlano = 1;     ATipoDocumento = "Pedido";   IntParaAlfa(xNumeroPedido, ANumeroDocumento);      Tracking_RegistrarDocumento(xEmpresa, xFilial, ATipoDocumento, ANumeroDocumento, ASerieDocumento, xPedidoCliente, NCodigoPlano, AStatus, AMensagemErro); fim
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/tracking_registrardocumento.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

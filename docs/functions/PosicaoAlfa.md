@@ -27,6 +27,10 @@ PosicaoAlfa ("Luis",R034Fun.NomEmp,Vposicao);
 @ Porém se o nome do empregado fosse, por exemplo, "Pedro Silva" a variável Vposicao retornaria 0 (zero). @
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/posicaoalfa.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

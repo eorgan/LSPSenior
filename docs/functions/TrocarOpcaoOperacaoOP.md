@@ -30,6 +30,10 @@ Efetuar a troca da opção de uma operação da O.P. para outra que esteja cadas
 TrocarOpcaoOperacaoOP();
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/trocaropcaooperacaoop.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

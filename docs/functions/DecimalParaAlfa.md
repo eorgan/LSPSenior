@@ -28,6 +28,10 @@ vnValor = 123.45;
 DecimalParaAlfa(vnValor, vaTexto); @ vaTexto adequado para exibir o decimal @
 ```
 
+## Fonte
+
+Documentação oficial Senior — https://documentacao.senior.com.br
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

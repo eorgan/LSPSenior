@@ -28,6 +28,10 @@ DeletarAlfa (exemplo,1,6);
 @ Após o uso da função DeletarAlfa o conteúdo da variável "exemplo" seria "de exemplo". @
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/deletaralfa.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

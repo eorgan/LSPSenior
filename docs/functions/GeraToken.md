@@ -28,6 +28,10 @@ GeraToken("Usuário", "CBC", "ABC123", xToken);
 @ A variável xToken estará com os dados criptografado. @
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/geratoken.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

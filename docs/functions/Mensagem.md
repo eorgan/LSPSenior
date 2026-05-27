@@ -24,6 +24,10 @@ Apresenta a mensagem em tela de acordo com a parametrização do tipo de retorno
 Mensagem(Retorna, “Deseja Sair? [&Sim,&Não]”);
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/mensagem.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

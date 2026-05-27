@@ -23,6 +23,10 @@ Responsável por ocultar a barra de progresso padrão durante a execução de re
 OcultaBarraProgressoRelatorio("Sim");
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/ocultarbarraprogressorelatorio.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

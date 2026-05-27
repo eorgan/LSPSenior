@@ -28,6 +28,10 @@ vaTexto = "01/01/2020";
 AlfaParaData(vaTexto, vdData); @ vdData será 01/01/2020 @
 ```
 
+## Fonte
+
+Documentação oficial Senior — https://documentacao.senior.com.br
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

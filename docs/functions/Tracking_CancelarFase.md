@@ -29,6 +29,10 @@ Essa função criará um evento de cancelamento de fase na tabela E000ETK, para 
  @ Variáveis passadas para a regra @ Definir Numero xEmpresa; Definir Numero xFilial; Definir Numero xNumeroPedido;  @ Variáveis auxiliares da regra @ Definir Numero NCodigoFase; Definir Alfa ANumeroDocumento; Definir Alfa AMensagemNotificacao;  Definir Alfa AStatus; Definir Alfa AMensagemErro;  inicio   NCodigoFase = 1;     IntParaAlfa(xNumeroPedido, ANumeroDocumento);      Tracking_CancelarFase(xEmpresa, xFilial, ANumeroDocumento, NCodigoFase, AMensagemNotificacao, AStatus, AMensagemErro); fim
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/tracking_cancelarfase.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

@@ -8,6 +8,18 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.7.1] - 2026-05-26
+
+### ✨ Adicionado
+- **Atribuição de fontes:** cada função documentada agora traz o **link para a página
+  oficial** da Senior, exibido no hover e no doc (`docs/functions/*.md`). 491 funções com link.
+- README com seção **"Fontes e Créditos"** (documentação oficial Senior, manual comunitário
+  e nota de não-afiliação).
+
+### 🔧 Atualizado
+- README do usuário revisado: 600+ funções, novos recursos (linter, autocomplete geral,
+  Outline, folding), instalação pela galeria e configurações reais (`lspt.diagnostics.*`).
+
 ## [1.7.0] - 2026-05-26
 
 ### ✨ Adicionado

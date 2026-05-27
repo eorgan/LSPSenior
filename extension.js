@@ -394,6 +394,9 @@ function activate(context) {
                md.appendMarkdown('\n**Valores de retorno:**\n\n');
                funcData.returns.forEach((r) => md.appendMarkdown(`- ${r}\n`));
             }
+            if (funcData.source) {
+               md.appendMarkdown(`\n📖 [Documentação oficial](${funcData.source})`);
+            }
             return new vscode.Hover(md);
          }
 

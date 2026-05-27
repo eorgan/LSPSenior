@@ -39,6 +39,10 @@ DesMontaData(vdDataEmissao, vnDia, vnMes, vnAno);
 @ Se a data fosse 24/04/1995: vnDia=24, vnMes=04, vnAno=1995 @
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/desmontadata.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.

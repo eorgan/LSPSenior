@@ -35,6 +35,10 @@ Esta função tem como objetivo retornar os valores dos impostos calculados na b
 SimulacaoIMP_CR_CalcularParcial();
 ```
 
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/simulacaoimp-cr-calcularparcial.htm)
+
 > Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
 > Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
 > sem ser sobrescrito.
