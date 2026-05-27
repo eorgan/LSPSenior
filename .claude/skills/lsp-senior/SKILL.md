@@ -129,6 +129,95 @@ Funcao MostraTotal();
    Fim;
 ```
 
+## 📦 Exemplos de padrões prontos
+
+**Cursor SQL (forma recomendada) — sempre feche e destrua:**
+
+```lsp
+Definir Alfa vaComando;
+Definir Alfa vaSql;
+Definir Alfa vaNome;
+
+vaComando = "SELECT NomFun FROM R034FUN WHERE NumCpf = '12345678900'";
+
+SQL_Criar(vaSql);
+SQL_UsarSqlSenior2(vaSql, 0);
+SQL_UsarAbrangencia(vaSql, 0);
+SQL_DefinirComando(vaSql, vaComando);
+SQL_AbrirCursor(vaSql);
+Enquanto (SQL_EOF(vaSql) = 0)
+   {
+      SQL_RetornarAlfa(vaSql, "NomFun", vaNome);
+      @ ... usa vaNome ... @
+      SQL_Proximo(vaSql);
+   }
+SQL_FecharCursor(vaSql);
+SQL_Destruir(vaSql);
+```
+
+**HTTP GET + leitura de JSON:**
+
+```lsp
+Definir Alfa  vaHTTP;
+Definir Alfa  vaJson;
+Definir Alfa  vaCidade;
+Definir Numero vnCodResp;
+
+HttpObjeto(vaHTTP);
+HttpDesabilitaErroResposta(vaHTTP);
+HttpAlteraCabecalhoRequisicao(vaHTTP, "Accept", "application/json");
+HttpGet(vaHTTP, "https://viacep.com.br/ws/01001000/json/", vaJson);
+HttpLeCodigoResposta(vaHTTP, vnCodResp);
+Se (vnCodResp = 200)
+   {
+      ValorElementoJson(vaJson, "", "localidade", vaCidade);  @ campo simples @
+   }
+```
+
+**Lista dinâmica a partir de array JSON:**
+
+```lsp
+Definir Numero vnLista;
+Definir Alfa   vaAchou;
+Definir Alfa   vaId;
+Definir Alfa   vaNomeProd;
+
+ListaRegraCriarLista(vnLista);
+ListaRegraCarregarJson(vnLista, vaJsonProdutos, "produtos", "id;nome");
+ListaRegraPrimeiro(vnLista, vaAchou);
+Enquanto (vaAchou = "S")
+   {
+      ListaRegraObterValorAlfa(vnLista, "id", vaId, vaAchou);
+      ListaRegraObterValorAlfa(vnLista, "nome", vaNomeProd, vaAchou);
+      @ ... processa ... @
+      ListaRegraProximo(vnLista, vaAchou);
+   }
+```
+
+**Validação + INSERT com tratamento de erro:**
+
+```lsp
+Definir Numero vnNulo;
+Definir Alfa   vaComando;
+Definir Alfa   xErro;
+Definir Alfa   xMensagem;
+
+EstaNulo(vaEmail, vnNulo);
+Se (vnNulo = 1)
+   {
+      Mensagem(Erro, "E-mail obrigatório.");
+   }
+Senao
+   {
+      vaComando = "INSERT INTO MinhaTabela (Email) VALUES ('" + vaEmail + "')";
+      ExecSQLEx(vaComando, xErro, xMensagem);
+      Se (xErro <> 0)
+         {
+            Mensagem(Erro, xMensagem);
+         }
+   }
+```
+
 ## ✅ Checklist antes de finalizar
 
 - [ ] Nenhuma operação/concatenação/conversão dentro de parâmetros de função.

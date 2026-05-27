@@ -6,20 +6,21 @@
 # Copia para <projeto-destino>/.claude/skills/lsp-senior/:
 #   - SKILL.md        (regras + como usar o catálogo)
 #   - functions.json  (catálogo de ~600 funções: assinatura, params, retorno, descrição)
+#   - docs/functions/ (docs completas + exemplos por função — incluído por padrão)
 #   - AGENTS.md       (cópia na raiz do destino, para agentes que não leem .claude/skills)
-#   - docs/functions/ (opcional, com --with-docs: docs completas + exemplos por função)
 #
 # Uso:
-#   bash scripts/export-skill.sh /caminho/do/outro/projeto [--with-docs]
+#   bash scripts/export-skill.sh /caminho/do/outro/projeto          # bundle completo (com docs)
+#   bash scripts/export-skill.sh /caminho/do/outro/projeto --lean   # sem docs/functions
 
 set -euo pipefail
 
 SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TARGET="${1:-}"
-WITH_DOCS="${2:-}"
+MODE="${2:-}"
 
 if [ -z "$TARGET" ]; then
-   echo "Uso: bash scripts/export-skill.sh /caminho/do/projeto-destino [--with-docs]" >&2
+   echo "Uso: bash scripts/export-skill.sh /caminho/do/projeto-destino [--lean]" >&2
    exit 1
 fi
 if [ ! -d "$TARGET" ]; then
@@ -39,10 +40,12 @@ echo "   - SKILL.md"
 echo "   - functions.json ($(grep -c '"signature"' "$SKILL_DST/functions.json") funções)"
 echo "✅ AGENTS.md copiado para: $TARGET/AGENTS.md"
 
-if [ "$WITH_DOCS" = "--with-docs" ]; then
+if [ "$MODE" != "--lean" ]; then
    mkdir -p "$SKILL_DST/docs/functions"
    cp "$SRC_DIR"/docs/functions/*.md "$SKILL_DST/docs/functions/"
    echo "✅ docs/functions copiadas ($(ls "$SKILL_DST/docs/functions" | wc -l | tr -d ' ') arquivos)"
+else
+   echo "ℹ️  --lean: docs/functions não incluídas (functions.json já cobre assinatura/params/retorno)."
 fi
 
 echo ""

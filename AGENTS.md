@@ -21,7 +21,46 @@ Leia primeiro a skill **[.claude/skills/lsp-senior/SKILL.md](.claude/skills/lsp-
 
 - **`functions.json`** — ~600 funções: `Nome → { signature, params[{name,type,direction,description}], returns[], description }`.
   Busque com `grep -i '"nome"' functions.json`. Cheque `direction`: `in` (você fornece) vs `out`/`end` (recebe).
+  Procure-o na **raiz do projeto** ou em **`.claude/skills/lsp-senior/functions.json`** (bundle exportado).
 - **`docs/functions/<Nome>.md`** — doc completa por função, com exemplo de uso real.
+  Pode estar em **`docs/functions/`** (raiz) ou em **`.claude/skills/lsp-senior/docs/functions/`**
+  (quando o bundle foi exportado com `--with-docs`). Já o `functions.json` sozinho cobre
+  assinatura, parâmetros descritos e valores de retorno — consulte o `.md` para ver um exemplo.
+
+## Exemplos essenciais
+
+**Regra de ouro (antes → depois):**
+
+```lsp
+@ ERRADO @  Mensagem(Retorna, "Idade: " + IntParaAlfa(vnIdade));
+@ CORRETO @
+IntParaAlfa(vnIdade, vaIdade);
+vaMensagem = "Idade: " + vaIdade;
+Mensagem(Retorna, vaMensagem);
+```
+
+**Retorno por parâmetro de saída (não use `=`):**
+
+```lsp
+EstaNulo(vaEmail, vnNulo);     Se (vnNulo = 1) { Mensagem(Erro, "Vazio"); }
+RetDiaSemana(vnData, vnDia);   @ vnDia recebe o resultado @
+```
+
+**Cursor SQL (sempre feche/destrua):**
+
+```lsp
+SQL_Criar(vaSql);
+SQL_UsarSqlSenior2(vaSql, 0);
+SQL_DefinirComando(vaSql, vaComando);
+SQL_AbrirCursor(vaSql);
+Enquanto (SQL_EOF(vaSql) = 0)
+   { SQL_RetornarAlfa(vaSql, "Campo", vaValor); SQL_Proximo(vaSql); }
+SQL_FecharCursor(vaSql);
+SQL_Destruir(vaSql);
+```
+
+> Mais padrões (HTTP, JSON, lista dinâmica, validação+INSERT) e o checklist completo
+> estão em [.claude/skills/lsp-senior/SKILL.md](.claude/skills/lsp-senior/SKILL.md).
 
 ## Como regenerar a base (se a documentação-fonte mudar)
 

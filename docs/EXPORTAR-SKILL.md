@@ -9,11 +9,11 @@ de **dois artefatos**: o texto da skill e o **catálogo** (`functions.json`).
 No diretório deste projeto (`LSPSenior`):
 
 ```bash
-# bundle enxuto (SKILL.md + functions.json + AGENTS.md)
+# bundle COMPLETO (SKILL.md + functions.json + docs/functions + AGENTS.md)
 bash scripts/export-skill.sh /caminho/do/outro/projeto
 
-# incluindo a doc completa por função (com exemplos) — pacote maior
-bash scripts/export-skill.sh /caminho/do/outro/projeto --with-docs
+# bundle ENXUTO (sem docs/functions; functions.json já cobre assinatura/params/retorno)
+bash scripts/export-skill.sh /caminho/do/outro/projeto --lean
 ```
 
 Isso cria no destino:
@@ -24,7 +24,7 @@ Isso cria no destino:
 └── .claude/skills/lsp-senior/
     ├── SKILL.md                           # autodispara no Claude Code
     ├── functions.json                     # catálogo (assinatura, params, retorno, descrição)
-    └── docs/functions/*.md                # só com --with-docs
+    └── docs/functions/*.md                # exemplos por função (omitido com --lean)
 ```
 
 ## Opção 2 — Manual (3 passos)
@@ -33,7 +33,9 @@ Isso cria no destino:
 2. Copie o `functions.json` (raiz deste projeto) para **dentro** de
    `.claude/skills/lsp-senior/` no destino (a skill procura o catálogo na própria pasta
    ou na raiz do projeto).
-3. (Opcional) Copie o `AGENTS.md` para a raiz do destino, para agentes que não leem
+3. (Opcional, p/ exemplos) Copie `docs/functions/` para
+   `.claude/skills/lsp-senior/docs/functions/` no destino.
+4. (Opcional) Copie o `AGENTS.md` para a raiz do destino, para agentes que não leem
    `.claude/skills/`.
 
 ## Como cada agente usa
