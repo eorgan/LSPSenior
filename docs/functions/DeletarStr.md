@@ -19,6 +19,10 @@ Elimina parte de um texto.
 - **Pos** (`Numero`) - Entrada: Variável que indica a posição de início da eliminação
 - **Qtd** (`Numero`) - Entrada: Variável que indica a quantidade de caracteres a serem eliminados
 
+## Valores de Retorno
+
+- Origem: Variável alfa que receberá o texto após a eliminação dos caracteres.
+
 ## Exemplo de Uso
 
 ```lspt

@@ -18,6 +18,10 @@ Esta função arredonda determinado valor, conforme a precisão informada.
 - **ValorVariavel** (`Numero End`) - Saída: Campo ou variável que deseja-se arredondar
 - **Precisao** (`Numero`) - Entrada: Quantidade de casas decimais para precisão do arredondamento. Se for informado 0 (zero), faz o arredondamento na parte inteira do resultado
 
+## Valores de Retorno
+
+- ValorVariavel: Campo ou variável numérica que receberá o valor arredondado.
+
 ## Exemplo de Uso
 
 ```lspt

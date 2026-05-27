@@ -15,7 +15,7 @@ Convertem o conteúdo de uma variável para maiúsculo ou minúsculo.
 
 ## Parâmetros
 
-- **pOrigem** (`Alfa end`) - Saída
+- **pOrigem** (`Alfa end`) - Saída: Variável que será convertido para maiúsculo.
 
 ## Exemplo de Uso
 

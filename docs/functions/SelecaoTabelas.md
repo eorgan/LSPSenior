@@ -19,6 +19,11 @@ Traz os dados de um comando SELECT(SQL) mais elaborado, incluindo funções de a
 - **pCpoRet** (`Alfa End`) - Saída: Variável que retorna os dados resultantes do comando (separados por ';' se múltiplos campos)
 - **pTemMas** (`Alfa End`) - Saída: Variável que retorna '+' caso o comando retorne mais de uma linha
 
+## Valores de Retorno
+
+- pCpoRet  : Variável alfa que retorna os dados resultantes do comando.
+- pTemMas: Variável alfa que retorna '+' caso o comando retorne mais de uma linha.
+
 ## Exemplo de Uso
 
 ```lspt

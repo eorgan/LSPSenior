@@ -18,6 +18,10 @@ Verifica se uma variável está nula (vazia ou não inicializada).
 - **VarStr** (`Alfa`) - Entrada: Variável a ser verificada
 - **Retorno** (`Numero End`) - Saída: Variável numérica que receberá 1 se nula, 0 se não nula
 
+## Valores de Retorno
+
+- Ret: Variável tipo Numero que retornará UM caso a variável esteja nula e ZERO caso não esteja nula.
+
 ## Exemplo de Uso
 
 ```lspt

@@ -15,7 +15,7 @@ Convertem o conteúdo de uma variável para maiúsculo ou minúsculo.
 
 ## Parâmetros
 
-- **aCadCar** (`Alfa End`) - Saída
+- **aCadCar** (`Alfa End`) - Saída: Variável que será convertido para minúsculo.
 
 ## Exemplo de Uso
 

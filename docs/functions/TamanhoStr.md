@@ -18,6 +18,10 @@ Retornam o tamanho de uma variável/campo alfanumérico através de parâmetro d
 - **Origem** (`Alfa`) - Entrada: Campo/Variável que se deseja saber o tamanho
 - **Tam** (`Numero End`) - Saída: Variável Numero que receberá o tamanho
 
+## Valores de Retorno
+
+- Tam: Variável numérica que retornará o tamanho do texto especificado em Origem.
+
 ## Exemplo de Uso
 
 ```lspt

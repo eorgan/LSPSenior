@@ -15,14 +15,14 @@ Essa função recebe a identificação de um pedido e os dados para que sejam ge
 
 ## Parâmetros
 
-- **pCodEmp**: Código da empresa do pedido para o qual a observação deverá ser gerada.
-- **pCodFil**: Código da filial do pedido para o qual a observação deverá ser gerada.
-- **pNumPed**: Número do pedido para o qual a observação deverá ser gerada.
-- **pObs**: Texto da observação. Limitado a 250 caracteres.
-- **pCodMot**: Código do motivo da observação.
-- **pAreCon**: Código da área da empresa que gerou a observação de bloqueio. Os valores estão disponíveis somente para as chaves: PCP, FIN, IMP, CPR e VEN.
-- **pBloPed**: (Opcional) Indicativo se a observação deve bloquear ou não o pedido. Só é considerada caso se nos parâmetros do vendas na filial a empresa utilizar bloqueio por área.
-- **pSitObs**: Permite definir a situação da observação, conseguindo informar se a mesma está “G – Gravada”, “P – Processada”, “R – Resolvida” e “C – Cancelada.
+- **pCodEmp** - Entrada: Código da empresa do pedido para o qual a observação deverá ser gerada.
+- **pCodFil** - Entrada: Código da filial do pedido para o qual a observação deverá ser gerada.
+- **pNumPed** - Entrada: Número do pedido para o qual a observação deverá ser gerada.
+- **pObs** - Entrada: Texto da observação. Limitado a 250 caracteres.
+- **pCodMot** - Entrada: Código do motivo da observação.
+- **pAreCon** - Entrada: Código da área da empresa que gerou a observação de bloqueio. Os valores estão disponíveis somente para as chaves: PCP, FIN, IMP, CPR e VEN.
+- **pBloPed** - Entrada: (Opcional) Indicativo se a observação deve bloquear ou não o pedido. Só é considerada caso se nos parâmetros do vendas na filial a empresa utilizar bloqueio por área.
+- **pSitObs** - Entrada: Permite definir a situação da observação, conseguindo informar se a mesma está “G – Gravada”, “P – Processada”, “R – Resolvida” e “C – Cancelada.
 
 ## Exemplo de Uso
 

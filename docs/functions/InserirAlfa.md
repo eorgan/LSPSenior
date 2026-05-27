@@ -19,6 +19,10 @@ Insere um ou mais caracteres em uma variável/campo, a partir da posição indic
 - **Origem** (`Alfa End`) - Saída: Variável que contém a string de origem e que receberá o conteúdo da inserção
 - **Pos** (`Numero`) - Entrada: Variável que indica a posição em Origem a partir de onde Valor será inserido
 
+## Valores de Retorno
+
+- Origem: Variável alfa que receberá o conteúdo da inserção dos caracteres.
+
 ## Exemplo de Uso
 
 ```lspt

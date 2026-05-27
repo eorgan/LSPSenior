@@ -19,6 +19,11 @@ Procuram por uma parte de texto dentro de um campo/variável, retornando a posi�
 - **StrOri** (`Alfa`) - Entrada: Campo/variável onde fazer a busca
 - **PosStr** (`Numero End`) - Saída: Variável que receberá a posição inicial (0 se não encontrar)
 
+## Valores de Retorno
+
+- PosStr: Variável numérica que receberá a posição inicial do texto procurado, ou 0
+- (zero) se o texto não for achado.
+
 ## Exemplo de Uso
 
 ```lspt

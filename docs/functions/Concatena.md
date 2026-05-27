@@ -20,6 +20,10 @@ Esta função concatena até 3 campo/variáveis tipo alfa, formando uma só vari
 - **Str3** (`Alfa`) - Entrada: Campo/Variável que será concatenado
 - **Destino** (`Alfa End`) - Saída: Variável que receberá o resultado da concatenação (retorno)
 
+## Valores de Retorno
+
+- Destino: Variável tipo alfa que receberá o resultado da concatenação.
+
 ## Exemplo de Uso
 
 ```lspt

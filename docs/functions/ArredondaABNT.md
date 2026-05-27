@@ -18,6 +18,10 @@ Esta função aplica a regra de arredondamento da ABNT, conforme a precisão inf
 - **Valor** (`numero end`) - Saída: Variável que será arredondada
 - **Decimais** (`numero`) - Entrada: Variável numérica que indica a quantidade de casas decimais do arredondamento
 
+## Valores de Retorno
+
+- Valor: Variável numérica que receberá o valor arredondado.
+
 ## Exemplo de Uso
 
 ```lspt

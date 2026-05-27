@@ -20,6 +20,12 @@ Esta função desmonta uma data, separando em três variáveis, as informações
 - **Mes** (`Numero end`) - Saída: Variável tipo Numero que receberá o mês da data a ser desmontada
 - **Ano** (`Numero end`) - Saída: Variável tipo Numero que receberá o ano da data a ser desmontada
 
+## Valores de Retorno
+
+- - Dia: Variável tipo Numero que receberá o dia da data a ser desmontada.
+- - Mes: Variável tipo Numero que receberá o mês da data a ser desmontada.
+- - Ano: Variável tipo Numero que receberá o ano da data a ser desmontada.
+
 ## Exemplo de Uso
 
 ```lspt

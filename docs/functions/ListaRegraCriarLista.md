@@ -17,6 +17,10 @@ Cria uma nova lista de regras para armazenar dados estruturados.
 
 - **aLista** (`Numero End`) - Saída: Variável numérica que receberá o identificador da lista criada
 
+## Valores de Retorno
+
+- aLista: retorna o número do endereço de memória da lista criada.
+
 ## Exemplo de Uso
 
 ```lspt

@@ -8,6 +8,16 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.6.1] - 2026-05-26
+
+### ✨ Melhorado
+- **Hover e signature help mais ricos:** agora exibem a **descrição de cada parâmetro**
+  (438 funções) e os **valores de retorno** (195 funções) — antes esses dados só
+  apareciam no arquivo `.md` (Go to Definition).
+- `functions.json` passou a guardar `params[].description` e `returns`.
+- Merge **campo-a-campo** dos overlays: funções já documentadas pelo manual ganham
+  `valores de retorno`/`exemplo` que só existiam no manual do ERP.
+
 ## [1.6.0] - 2026-05-26
 
 Catálogo expandido com os manuais consolidados do ERP e da Tecnologia (WebScraping).

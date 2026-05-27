@@ -17,6 +17,11 @@ Remove caracteres especiais deixando somente letras e números, removendo todos 
 
 - **Retorno** (`Alfa End`) - Saída: Variável Alfa que recebe o campo a ser limpo e retorna o campo sem caracteres especiais
 
+## Valores de Retorno
+
+- Tipo de retorno: Variável Alfanumérica que retorna o campo sem os
+- caracteres especiais.
+
 ## Exemplo de Uso
 
 ```lspt

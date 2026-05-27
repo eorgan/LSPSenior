@@ -18,6 +18,10 @@ Retorna o valor de uma variável numérica ou de data identificada por nome.
 - **aVar** (`Alfa`) - Entrada: String contendo o nome da variável
 - **aNumVal** (`Numero End`) - Saída: Variável numérica que receberá o valor
 
+## Valores de Retorno
+
+- aNumVal: Variável numérica que receberá o valor da variável.
+
 ## Exemplo de Uso
 
 ```lspt

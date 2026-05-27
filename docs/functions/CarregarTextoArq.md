@@ -18,6 +18,10 @@ Esta função carrega para uma variável alfanumérica o conteúdo de um arquivo
 - **aArquivo** (`Alfa`) - Entrada: Variável com o caminho do arquivo a ser lido
 - **aTexto** (`Alfa End`) - Saída: Variável que retorna o texto lido do arquivo
 
+## Valores de Retorno
+
+- aTexto: Variável alfanumérica que retorna o texto lido do arquivo.
+
 ## Exemplo de Uso
 
 ```lspt

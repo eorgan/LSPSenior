@@ -18,6 +18,10 @@ Esta função monta o extenso do dia da semana de uma determinada data.
 - **DatMon** (`Numero`) - Entrada: Campo/Variável do qual se deseja obter o extenso da semana
 - **ExtSem** (`Alfa end`) - Saída: Variável que receberá o extenso da Semana
 
+## Valores de Retorno
+
+- ExtSem: Variável tipo Alfa que receberá o extenso da Semana.
+
 ## Exemplo de Uso
 
 ```lspt

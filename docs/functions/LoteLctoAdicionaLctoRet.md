@@ -15,15 +15,15 @@ Esta função adiciona os lançamentos em uma estrutura em memória para serem g
 
 ## Parâmetros
 
-- **pCodFil**: Variável que recebe o código da filial do lançamento.
-- **pDatLct**: Variável que recebe a data do lançamento
-- **pCtaDeb**: Variável que recebe a conta débito.
-- **pCtaCre**: Variável que recebe a conta crédito.
-- **pVlrLct**: Variável que recebe o valor do lançamento
-- **pCodHpd**: Variável que recebe a código do histórico padrão.
-- **pCplLct**: Variável que recebe os conteúdos a serem inseridos no HP.
-- **pDocLct**: Variável que recebe o documento de controle de lançamentos.
-- **pResult**: Variável que retorna se a função foi executada sem problemas: Se retornar 'OK' foi feita sem problemas, caso contrário retornará a palavra "Erro: " concatenada com a descrição da exceção ocorrida.
+- **pCodFil** - Entrada: Variável que recebe o código da filial do lançamento.
+- **pDatLct** - Entrada: Variável que recebe a data do lançamento
+- **pCtaDeb** - Entrada: Variável que recebe a conta débito.
+- **pCtaCre** - Entrada: Variável que recebe a conta crédito.
+- **pVlrLct** - Entrada: Variável que recebe o valor do lançamento
+- **pCodHpd** - Entrada: Variável que recebe a código do histórico padrão.
+- **pCplLct** - Entrada: Variável que recebe os conteúdos a serem inseridos no HP.
+- **pDocLct** - Entrada: Variável que recebe o documento de controle de lançamentos.
+- **pResult** - Entrada: Variável que retorna se a função foi executada sem problemas: Se retornar 'OK' foi feita sem problemas, caso contrário retornará a palavra "Erro: " concatenada com a descrição da exceção ocorrida.
 
 ## Valores de Retorno
 

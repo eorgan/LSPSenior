@@ -15,15 +15,15 @@ O saldo é retornado através das variáveis pSalM01, pSalM02, pSalM03, pSalM04,
 
 ## Parâmetros
 
-- **pCtaRed**: Variável que recebe o número da conta contábil que deseja-se buscar o saldo contábil.
-- **pMesSal**: Variável que recebe o mês inicial referente ao periodo no qual se deseja o saldo da conta contábil.
-- **pDebCre**: Variável que indica que valores retornarão nas variáveis de saldo. C = Créditos do mês.  D = Débitos do mês. A = Saldo Anterior ( valor retornará somente no parâmetro do primeiro mês). S = Saldo mês ( Débitos - Créditos).
-- **pSalM01**: Variável que retorna o saldo referente ao primeiro mês do período informado.
-- **pSalM02**: Variável que retorna o saldo referente ao segundo mês do período informado.
-- **pSalM03**: Variável que retorna o saldo referente ao terceiro mês do período informado.
-- **pSalM04**: Variável que retorna o saldo referente ao quarto mês do período informado.
-- **pSalM05**: Variável que retorna o saldo referente ao quinto mês do período informado.
-- **pSalM06**: Variável que retorna o saldo referente ao sexto mês do período informado.
+- **pCtaRed** - Entrada: Variável que recebe o número da conta contábil que deseja-se buscar o saldo contábil.
+- **pMesSal** - Entrada: Variável que recebe o mês inicial referente ao periodo no qual se deseja o saldo da conta contábil.
+- **pDebCre** - Entrada: Variável que indica que valores retornarão nas variáveis de saldo. C = Créditos do mês.  D = Débitos do mês. A = Saldo Anterior ( valor retornará somente no parâmetro do primeiro mês). S = Saldo mês ( Débitos - Créditos).
+- **pSalM01** - Entrada: Variável que retorna o saldo referente ao primeiro mês do período informado.
+- **pSalM02** - Entrada: Variável que retorna o saldo referente ao segundo mês do período informado.
+- **pSalM03** - Entrada: Variável que retorna o saldo referente ao terceiro mês do período informado.
+- **pSalM04** - Entrada: Variável que retorna o saldo referente ao quarto mês do período informado.
+- **pSalM05** - Entrada: Variável que retorna o saldo referente ao quinto mês do período informado.
+- **pSalM06** - Entrada: Variável que retorna o saldo referente ao sexto mês do período informado.
 
 ## Valores de Retorno
 

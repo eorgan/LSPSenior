@@ -18,6 +18,10 @@ Retorna o valor de uma variável alfanumérica identificada por nome.
 - **aVar** (`Alfa`) - Entrada: String contendo o nome da variável
 - **aAlfVal** (`Alfa End`) - Saída: Variável alfa que receberá o valor
 
+## Valores de Retorno
+
+- aAlfVal: Variável alfanumérica que receberá o valor da variável.
+
 ## Exemplo de Uso
 
 ```lspt

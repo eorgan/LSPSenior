@@ -19,6 +19,11 @@ Esta função multiplica um número no formato alfanumérico por um fator de mul
 - **Fator** (`Numero`) - Entrada: Campo/Variável que contém o fator de multiplicação
 - **Retorno** (`Alfa End`) - Saída: Campo/Variável que retorna o resultado da multiplicação
 
+## Valores de Retorno
+
+- Campo/Variável Alfanumérica que retorna o resultado da
+- multiplicação;
+
 ## Exemplo de Uso
 
 ```lspt

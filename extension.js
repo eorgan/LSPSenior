@@ -151,14 +151,12 @@ function activate(context) {
             const signatureHelp = new vscode.SignatureHelp();
             const signature = new vscode.SignatureInformation(funcData.signature);
 
-            // Adiciona informações dos parâmetros
+            // Adiciona informações dos parâmetros (com descrição, quando disponível)
             funcData.params.forEach(param => {
-               signature.parameters.push(
-                  new vscode.ParameterInformation(
-                     `${param.type} ${param.name}`,
-                     `${param.direction === 'out' ? 'Saída' : 'Entrada'}`
-                  )
-               );
+               const label = [param.type, param.name].filter(Boolean).join(' ');
+               const dir = param.direction === 'out' ? 'Saída' : 'Entrada';
+               const doc = param.description ? `${dir} — ${param.description}` : dir;
+               signature.parameters.push(new vscode.ParameterInformation(label, doc));
             });
 
             signatureHelp.signatures = [signature];
@@ -193,8 +191,16 @@ function activate(context) {
          if (funcData.params.length > 0) {
             markdown.appendMarkdown('**Parâmetros:**\n\n');
             funcData.params.forEach(param => {
-               markdown.appendMarkdown(`- \`${param.type} ${param.name}\` (${param.direction === 'out' ? 'Saída' : 'Entrada'})\n`);
+               const label = [param.type, param.name].filter(Boolean).join(' ');
+               const dir = param.direction === 'out' ? 'Saída' : 'Entrada';
+               const desc = param.description ? `: ${param.description}` : '';
+               markdown.appendMarkdown(`- \`${label}\` (${dir})${desc}\n`);
             });
+         }
+
+         if (Array.isArray(funcData.returns) && funcData.returns.length > 0) {
+            markdown.appendMarkdown('\n**Valores de retorno:**\n\n');
+            funcData.returns.forEach(r => markdown.appendMarkdown(`- ${r}\n`));
          }
 
          return new vscode.Hover(markdown);

@@ -18,6 +18,10 @@ Esta função monta o extenso do mês de uma determinada data.
 - **DatMon** (`Numero`) - Entrada: Campo/Variável do qual se deseja obter o extenso do mês
 - **ExtMes** (`Alfa end`) - Saída: Variável tipo Alfa que receberá o extenso do mês
 
+## Valores de Retorno
+
+- ExtMes: Variável tipo Alfa que receberá o extenso do mês.
+
 ## Exemplo de Uso
 
 ```lspt

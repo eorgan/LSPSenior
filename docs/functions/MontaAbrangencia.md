@@ -21,6 +21,10 @@ Para montar abrangências de local quando existem valores especiais ("1.1.111=="
 - **pAbgInf** (`Alfa`) - Entrada: Variável que contém a faixa de valores na forma de abrangência
 - **pAbgMnt** (`Alfa End`) - Saída: Variável alfa que retorna a cláusula SQL correspondente à abrangência informada
 
+## Valores de Retorno
+
+- pAbgMnt: variável Alfanumérica que retorna a abrangência montada.
+
 ## Exemplo de Uso
 
 ```lspt

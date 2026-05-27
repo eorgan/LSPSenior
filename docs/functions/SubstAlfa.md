@@ -19,6 +19,11 @@ Substituem trechos específicos dentro de um texto por outro texto.
 - **aNew** (`Alfa`) - Entrada: Texto que irá substituir
 - **aDes** (`Alfa End`) - Saída: Variável que contém o texto original e receberá o resultado
 
+## Valores de Retorno
+
+- aDes: Variável alfanumérica que contém o texto de onde os sub-textos
+- serão substituídos. Nela será retornada o texto depois das substituições.
+
 ## Exemplo de Uso
 
 ```lspt

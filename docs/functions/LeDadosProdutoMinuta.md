@@ -15,14 +15,14 @@ Ler os produtos contidos na grade da tela de minuta de embarque.
 
 ## Parâmetros
 
-- **NPos**: Variável que indica a posição que deve ser lida na lista.
-- **FLis**: Variável numérica que indica o fim da lista.
-- **pCodPro**: Variável alfa que possui o código do produto.
-- **pCodDer**: Variável alfa que possui o código da derivação.
-- **pCplIpv**: Variável alfa que possui a descrição do produto.
-- **pQtde**: Variável numérica que possui a quantidade do produto pPesBru: variável numérica que possui o peso do produto proporcional a quantidade.
-- **pPesBru**
-- **pMonEst**: Variável numérica que indica se este produto terá sua estrutura listada.
+- **NPos** - Entrada: Variável que indica a posição que deve ser lida na lista.
+- **FLis** - Entrada: Variável numérica que indica o fim da lista.
+- **pCodPro** - Entrada: Variável alfa que possui o código do produto.
+- **pCodDer** - Entrada: Variável alfa que possui o código da derivação.
+- **pCplIpv** - Entrada: Variável alfa que possui a descrição do produto.
+- **pQtde** - Entrada: Variável numérica que possui a quantidade do produto pPesBru: variável numérica que possui o peso do produto proporcional a quantidade.
+- **pPesBru** - Entrada
+- **pMonEst** - Entrada: Variável numérica que indica se este produto terá sua estrutura listada.
 
 ## Valores de Retorno
 

@@ -15,10 +15,10 @@ Inativar um movimento da tesouraria.
 
 ## Parâmetros
 
-- **pCodEmp**: Variável que recebe o Código da Empresa.
-- **pNumCco**: Variável que recebe o Código da Conta Interna.
-- **pDatMov**: Variável que recebe a data do movimento da tesouraria.
-- **pSeqMov**: Variável que recebe a sequência do movimento da tesouraria.
+- **pCodEmp** - Entrada: Variável que recebe o Código da Empresa.
+- **pNumCco** - Entrada: Variável que recebe o Código da Conta Interna.
+- **pDatMov** - Entrada: Variável que recebe a data do movimento da tesouraria.
+- **pSeqMov** - Entrada: Variável que recebe a sequência do movimento da tesouraria.
 
 ## Exemplo de Uso
 

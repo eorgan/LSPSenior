@@ -18,6 +18,10 @@ Esta função arredonda um valor tipo acerto, conforme a precisão informada.
 - **Valor** (`numero end`) - Saída: Qualquer valor que se deseja arredondar
 - **Decimais** (`numero`) - Entrada
 
+## Valores de Retorno
+
+- Valor: Variável numérica que receberá o valor arredondado.
+
 ## Exemplo de Uso
 
 ```lspt

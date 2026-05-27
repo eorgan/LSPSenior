@@ -18,6 +18,10 @@ Retorna o caracter ASCII correspondente a um número.
 - **xNumero** (`Numero`) - Entrada: Variável tipo Numero da qual se quer o retorno em ASCII
 - **xCarAscII** (`Alfa End`) - Saída: Variável Alfa que retorna o caracter ASCII correspondente ao número
 
+## Valores de Retorno
+
+- xCarAscII: Caracter ASCII correspondente ao Número do primeiro parâmetro.
+
 ## Exemplo de Uso
 
 ```lspt

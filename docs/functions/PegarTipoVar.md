@@ -18,6 +18,16 @@ Retorna o tipo de uma variável qualquer, passada como string.
 - **aVar** (`Alfa`) - Entrada: String contendo o nome da variável a ser verificada
 - **aTipo** (`Numero End`) - Saída: Variável numérica que receberá o código do tipo (retorno)
 
+## Valores de Retorno
+
+- aTipo: Variável numérica que contém a informação do tipo da
+- variável. Retornos:
+- - -1: Variável não encontrada;
+- - 0: Variável do tipo número;
+- - 1: Variável do tipo data;
+- - 2: Variável do tipo alfa;
+- - 9: variável de outros tipos;
+
 ## Exemplo de Uso
 
 ```lspt

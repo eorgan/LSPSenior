@@ -17,6 +17,11 @@ Recebe uma string com acentuação e retorna a mesma string sem acentuação e e
 
 - **pString** (`Alfa End`) - Saída: Variável Alfa que recebe uma string e retorna a variável em maiúsculo e sem acentuação
 
+## Valores de Retorno
+
+- pString: Variavel alfanumérica que retorna a variável recebida
+- em Maiúsculo e sem Acentuação.
+
 ## Exemplo de Uso
 
 ```lspt

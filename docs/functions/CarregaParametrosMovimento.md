@@ -15,9 +15,9 @@ Retornar os campos acima citados, gravados no primeiro movimento de inclusão de
 
 ## Parâmetros
 
-- **CodEmp**
-- **CodBem**
-- **DatCal**
+- **CodEmp** - Entrada
+- **CodBem** - Entrada
+- **DatCal** - Entrada
 
 ## Valores de Retorno
 

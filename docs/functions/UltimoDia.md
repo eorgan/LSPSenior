@@ -17,6 +17,10 @@ Verifica qual é o último dia do mês/ano da data informada.
 
 - **DatAtu** (`Numero End`) - Saída: Campo/Variável numérica da qual se deseja saber o último dia do mês
 
+## Valores de Retorno
+
+- A própria variável.
+
 ## Exemplo de Uso
 
 ```lspt

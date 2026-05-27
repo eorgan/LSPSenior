@@ -2,7 +2,7 @@
    "name": "lspt-language-support",
    "displayName": "LSPT Language Support",
    "description": "Suporte completo para a linguagem LSP (Linguagem Senior de Programação) com syntax highlighting, snippets, IntelliSense e autocomplete para 600+ funções built-in",
-   "version": "1.6.0",
+   "version": "1.6.1",
    "publisher": "eorgan",
    "author": {
       "name": "Eliezer Organ",

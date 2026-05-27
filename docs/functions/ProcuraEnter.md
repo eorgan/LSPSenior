@@ -19,6 +19,11 @@ Esta função procura um caractere que indica "enter" ou nova linha (#13 ou #10)
 - **StrImp** (`Alfa end`) - Saída: A primeira parte da string procurada, até o primeiro caracter que indica nova linha (retorno)
 - **StrResto** (`Alfa end`) - Saída: O restante da string, depois do primeiro caracter que indica nova linha (retorno)
 
+## Valores de Retorno
+
+- - StrImp: A Primeira parte da string procurada, até o primeiro caracter que indica nova linha.
+- - StrResto: O Restante da string, depois do primeiro caracter que indica nova linha.
+
 ## Exemplo de Uso
 
 ```lspt

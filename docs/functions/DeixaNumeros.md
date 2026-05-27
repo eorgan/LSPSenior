@@ -17,6 +17,10 @@ Remove todos os caracteres não numéricos de uma string, mantendo apenas os dí
 
 - **pNumAlf** (`Alfa End`) - Saída: Variável alfa que será modificada, mantendo apenas números
 
+## Valores de Retorno
+
+- Será na mesma variável;
+
 ## Exemplo de Uso
 
 ```lspt

@@ -19,6 +19,10 @@ Esta função pega o texto indicado e faz assinalamentos de quebra de linha conf
 - **TamLin** (`Numero`) - Entrada: Variável que indica a quantidade máxima de caracteres por linha
 - **NroLin** (`Numero End`) - Saída: Variável que indica qual é a quantidade de linhas que serão necessárias para imprimir o texto
 
+## Valores de Retorno
+
+- Qtde_Linhas: Variável Numérica que indica qual é a quantidade de linhas que serão necessárias para imprimir o texto.
+
 ## Exemplo de Uso
 
 ```lspt

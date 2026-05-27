@@ -15,13 +15,13 @@ Ler os componentes dos produtos assinalados para listar a estrutura na tela de m
 
 ## Parâmetros
 
-- **NPos**: Variável que indica a posição que deve ser lida na lista.
-- **FLis**: Variável que indica o fim da lista.
-- **pCodPro**: Variável que possui o código do produto
-- **pCodDer**: Variável que possui o código da derivação.
-- **pCplIpv**: Variável que possui a descrição do produto.
-- **pQtde**: Variável que possui a quantidade do produto.
-- **pPesBru**: Variável que possui o peso bruto unitário do produto.
+- **NPos** - Entrada: Variável que indica a posição que deve ser lida na lista.
+- **FLis** - Entrada: Variável que indica o fim da lista.
+- **pCodPro** - Entrada: Variável que possui o código do produto
+- **pCodDer** - Entrada: Variável que possui o código da derivação.
+- **pCplIpv** - Entrada: Variável que possui a descrição do produto.
+- **pQtde** - Entrada: Variável que possui a quantidade do produto.
+- **pPesBru** - Entrada: Variável que possui o peso bruto unitário do produto.
 
 ## Valores de Retorno
 

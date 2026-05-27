@@ -20,6 +20,10 @@ Esta função concatena três variáveis, formando uma data. É uma alternativa 
 - **Ano** (`Numero`) - Entrada: Ano da data a ser gerada (deve ter 4 dígitos, ex: 1998)
 - **DatMon** (`Numero End`) - Saída: Variável do tipo Número ou Data que receberá o resultado
 
+## Valores de Retorno
+
+- Data: Variável tipo Numero que receberá o resultado da conversão.
+
 ## Exemplo de Uso
 
 ```lspt

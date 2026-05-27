@@ -26,13 +26,51 @@ function loadJson(file, label) {
 }
 
 /**
- * Carrega e combina os overlays (manual + ERP/Tecnologia). Entradas do manual
- * sobrescrevem as do ERP para o mesmo nome (foram curadas e validadas primeiro).
+ * Carrega e combina os overlays (manual + ERP/Tecnologia) com merge CAMPO-A-CAMPO
+ * e chave case-insensitive. O manual (curado/validado) vence por campo; o ERP preenche
+ * os campos ausentes (ex: `returns`/`example` que o manual não tem). Cada entrada ganha
+ * `name` (o nome de exibição preferido).
  */
 function loadOverlay() {
    const erp = loadJson(OVERLAY_ERP_PATH, OVERLAY_ERP_PATH);
    const manual = loadJson(OVERLAY_PATH, OVERLAY_PATH);
-   return { ...erp, ...manual };
+   const merged = {}; // chave: nome em minúsculas
+
+   for (const [k, v] of Object.entries(erp)) {
+      merged[k.toLowerCase()] = { name: k, ...v };
+   }
+   for (const [k, v] of Object.entries(manual)) {
+      const lk = k.toLowerCase();
+      merged[lk] = { ...(merged[lk] || {}), ...v, name: k }; // manual sobrescreve campos
+   }
+   return merged;
+}
+
+/**
+ * Acopla a funcData os campos ricos do overlay: descrição de cada parâmetro e
+ * valores de retorno. Usado tanto pelas funções do CSV quanto pelas novas.
+ */
+function enrichFuncData(funcData, doc) {
+   if (!doc) return;
+   if (doc.params && Object.keys(doc.params).length) {
+      if (funcData.params.length) {
+         funcData.params = funcData.params.map((p, i) => {
+            const d = paramDescription(p, i, doc.params);
+            return d ? { ...p, description: d } : p;
+         });
+      } else {
+         // Assinatura sem parâmetros tipados: deriva da tabela do overlay.
+         funcData.params = Object.entries(doc.params).map(([name, description]) => ({
+            name,
+            type: '',
+            direction: 'in',
+            description,
+         }));
+      }
+   }
+   if (doc.returns && doc.returns.length) {
+      funcData.returns = doc.returns;
+   }
 }
 
 /**
@@ -293,11 +331,8 @@ function main() {
    const csvContent = fs.readFileSync(CSV_PATH, 'utf8');
    const lines = csvContent.split('\n');
 
-   // Overlay com descrições reais do manual (mescladas por nome de função).
+   // Overlay combinado (manual + ERP), com chave case-insensitive e merge por campo.
    const overlay = loadOverlay();
-   // Índice case-insensitive do overlay (a LSP ignora maiúsculas/minúsculas).
-   const overlayByLower = {};
-   for (const [k, v] of Object.entries(overlay)) overlayByLower[k.toLowerCase()] = v;
 
    const functions = {};
    let count = 0;
@@ -308,12 +343,13 @@ function main() {
       const funcData = parseCSVLine(line);
 
       if (funcData) {
-         // Enriquecimento: substitui a descrição genérica pela do manual, se houver.
-         const doc = overlayByLower[funcData.name.toLowerCase()];
+         // Enriquecimento: descrição + descrição de parâmetros + valores de retorno.
+         const doc = overlay[funcData.name.toLowerCase()];
          if (doc && doc.description) {
             funcData.description = doc.description;
             enriched++;
          }
+         enrichFuncData(funcData, doc);
 
          functions[funcData.name] = funcData;
 
@@ -334,8 +370,9 @@ function main() {
    // tipo "AlterarStatus" vs "alterarStatus".
    const existingLower = new Set(Object.keys(functions).map((n) => n.toLowerCase()));
    let added = 0;
-   for (const [name, doc] of Object.entries(overlay)) {
-      const lower = name.toLowerCase();
+   for (const lower of Object.keys(overlay)) {
+      const doc = overlay[lower];
+      const name = doc.name;
       if (existingLower.has(lower) || !doc.signature) continue;
       existingLower.add(lower);
 
@@ -351,6 +388,7 @@ function main() {
          params: extractParameters(signature),
          description: doc.description || `Função built-in: ${name}`,
       };
+      enrichFuncData(funcData, doc);
 
       functions[name] = funcData;
       if (createDocFile(funcData, doc)) docsRich++;

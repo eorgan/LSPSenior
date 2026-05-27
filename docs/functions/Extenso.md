@@ -25,6 +25,12 @@ Esta função gera o extenso de um valor.
 - **ExtLn2** (`alfa End`) - Saída: Variável que receberá a segunda linha do extenso do valor (retorno)
 - **ExtLn3** (`alfa End`) - Saída: Variável que receberá a terceira linha do extenso do valor (retorno)
 
+## Valores de Retorno
+
+- - Linha1: Variável tipo Alfa que receberá a primeira linha do extenso do valor.
+- - Linha2: Variável tipo Alfa que receberá a segunda linha do extenso do valor.
+- - Linha3: Variável tipo Alfa que receberá a terceira linha do extenso do valor.
+
 ## Exemplo de Uso
 
 ```lspt

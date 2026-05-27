@@ -18,6 +18,10 @@ Converter uma data qualquer, para o formato de data do banco de dados.
 - **DatNum** (`Numero`) - Entrada: É o campo de tabela ou variável que se deseja converter
 - **DatAlf** (`Alfa End`) - Saída: É uma variável tipo Alfa, que conterá o retorno da conversão
 
+## Valores de Retorno
+
+- DatAlf: é uma variável tipo Alfa, que conterá o retorno da conversão.
+
 ## Exemplo de Uso
 
 ```lspt

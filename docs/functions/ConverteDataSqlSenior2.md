@@ -18,6 +18,10 @@ Converter datas para o formato SQL Senior 2.
 - **aDatNum** (`Numero`) - Entrada: Data a ser convertida
 - **aDatSql** (`Alfa End`) - Saída: Data em formato SQL Senior 2 (retorno)
 
+## Valores de Retorno
+
+- aDatSql: Data em formato SQL Senior 2.
+
 ## Exemplo de Uso
 
 ```lspt

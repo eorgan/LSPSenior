@@ -15,7 +15,11 @@ Limpa os espaços em branco à direita de uma variável alfanumérica.
 
 ## Parâmetros
 
-- **pString** (`Alfa end`) - Saída
+- **pString** (`Alfa end`) - Saída: Variável que recebe o campo a ser limpo.
+
+## Valores de Retorno
+
+- pString: Variável Alfanumérica que retorna o campo sem os espaços da dieita;
 
 ## Exemplo de Uso
 

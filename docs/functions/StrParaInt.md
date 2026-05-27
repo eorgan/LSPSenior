@@ -18,6 +18,10 @@ Converte um valor alfanumérico (string) para o tipo Inteiro. Esta função é e
 - **Origem** (`Alfa`) - Entrada: Valor alfanumérico a ser convertido
 - **Retorno** (`Numero End`) - Saída: Variável que receberá o valor convertido
 
+## Valores de Retorno
+
+- Tipo de retorno: Variável numérica que receberá o resultado da conversão.
+
 ## Exemplo de Uso
 
 ```lspt
