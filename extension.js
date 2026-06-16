@@ -2,6 +2,7 @@
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 // Carrega dados das funções
 const FUNCTIONS_DATA = loadFunctionsData();
@@ -174,6 +175,159 @@ function findUserFunctions(document) {
 }
 
 // ---------------------------------------------------------------------------
+// Cabeçalho automático (Author/Email do Git, datas de criação/alteração)
+// ---------------------------------------------------------------------------
+
+/** Zero-pad para 2 dígitos. */
+function pad2(n) {
+   return n < 10 ? '0' + n : '' + n;
+}
+
+/** Formata uma data como "YYYY-MM-DD HH:mm:ss" na zona local. */
+function formatDate(d) {
+   return (
+      `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())} ` +
+      `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`
+   );
+}
+
+/** Escapa caracteres especiais de SnippetString ($, }, \). */
+function escapeSnippet(s) {
+   return String(s).replace(/[\\$}]/g, '\\$&');
+}
+
+/** Raiz do workspace de um documento (ou a pasta do arquivo, em arquivos avulsos). */
+function workspaceRootFor(document) {
+   const folder = vscode.workspace.getWorkspaceFolder(document.uri);
+   if (folder) return folder.uri.fsPath;
+   if (document.uri.scheme === 'file') return path.dirname(document.uri.fsPath);
+   return undefined;
+}
+
+// Cache de identidade do Git por raiz de workspace (evita chamar git a cada save).
+const gitIdentityCache = {};
+
+/** Lê user.name/user.email do `git config` (cacheado). Vazio se não houver Git. */
+function getGitIdentity(workspaceRoot) {
+   if (!workspaceRoot) return { author: '', email: '' };
+   if (gitIdentityCache[workspaceRoot]) return gitIdentityCache[workspaceRoot];
+   const read = (key) => {
+      try {
+         return execFileSync('git', ['-C', workspaceRoot, 'config', '--get', key], {
+            encoding: 'utf8',
+         }).trim();
+      } catch (e) {
+         return '';
+      }
+   };
+   const id = { author: read('user.name'), email: read('user.email') };
+   gitIdentityCache[workspaceRoot] = id;
+   return id;
+}
+
+/** Autor/e-mail para o cabeçalho: Git → fallback das settings → vazio. */
+function getHeaderIdentity(document) {
+   const cfg = vscode.workspace.getConfiguration('lspt');
+   const git = getGitIdentity(workspaceRootFor(document));
+   return {
+      author: git.author || cfg.get('header.fallback.author', ''),
+      email: git.email || cfg.get('header.fallback.email', ''),
+   };
+}
+
+/** Data de criação do arquivo (birthtime) com fallback para agora. */
+function getCreatedAt(document) {
+   if (document.uri.scheme === 'file') {
+      try {
+         const ms = fs.statSync(document.uri.fsPath).birthtimeMs;
+         if (ms && ms > 0) return new Date(ms);
+      } catch (e) {
+         // ignora — usa agora
+      }
+   }
+   return new Date();
+}
+
+/** Monta o SnippetString do cabeçalho preenchido, com cursor em "Description". */
+function buildHeaderSnippet(document) {
+   const { author, email } = getHeaderIdentity(document);
+   const created = formatDate(getCreatedAt(document));
+   const a = escapeSnippet(author);
+   const e = escapeSnippet(email);
+   const c = escapeSnippet(created);
+   return new vscode.SnippetString(
+      '/*\n' +
+         ` * @Author: ${a}\n` +
+         ` * @Email: ${e}\n` +
+         ` * @Date: ${c}\n` +
+         ` * @Last Modified by: ${a}\n` +
+         ` * @Last Modified time: ${c}\n` +
+         ' * @Description: ${1:Description}\n' +
+         ' */\n'
+   );
+}
+
+/**
+ * Calcula os TextEdits para atualizar "@Last Modified by/time" no save.
+ * Mexe SOMENTE nessas duas linhas do primeiro bloco de comentário que as
+ * contenha; não retorna edits se nada mudou (idempotente, evita loop de save).
+ */
+function computeHeaderEdits(document) {
+   if (document.languageId !== 'lspt') return [];
+   const cfg = vscode.workspace.getConfiguration('lspt');
+   if (!cfg.get('header.autoUpdate', true)) return [];
+
+   // Localiza o primeiro bloco /* ... */.
+   let start = -1;
+   let end = -1;
+   for (let i = 0; i < document.lineCount; i++) {
+      const t = document.lineAt(i).text;
+      if (start === -1) {
+         const open = t.indexOf('/*');
+         if (open !== -1) {
+            start = i;
+            if (t.indexOf('*/', open + 2) !== -1) {
+               end = i;
+               break;
+            }
+         }
+      } else if (t.indexOf('*/') !== -1) {
+         end = i;
+         break;
+      }
+   }
+   if (start === -1 || end === -1) return [];
+
+   const now = formatDate(new Date());
+   const { author } = getHeaderIdentity(document);
+   const edits = [];
+   let hasTime = false;
+   let hasBy = false;
+
+   for (let i = start; i <= end; i++) {
+      const line = document.lineAt(i);
+      const text = line.text;
+      let m;
+      if ((m = /^(\s*\*?\s*@Last Modified time:).*$/.exec(text))) {
+         hasTime = true;
+         const novo = `${m[1]} ${now}`;
+         if (novo !== text) edits.push(vscode.TextEdit.replace(line.range, novo));
+      } else if ((m = /^(\s*\*?\s*@Last Modified by:).*$/.exec(text))) {
+         hasBy = true;
+         // Só sobrescreve o autor se houver identidade (não apaga nome digitado à mão).
+         if (author) {
+            const novo = `${m[1]} ${author}`;
+            if (novo !== text) edits.push(vscode.TextEdit.replace(line.range, novo));
+         }
+      }
+   }
+
+   // O bloco precisa ter AS DUAS linhas para ser considerado um cabeçalho.
+   if (!hasTime || !hasBy) return [];
+   return edits;
+}
+
+// ---------------------------------------------------------------------------
 // Diagnostics (linter conservador das armadilhas da LSP)
 // ---------------------------------------------------------------------------
 
@@ -318,6 +472,20 @@ function activate(context) {
             }
 
             if (afterDev) return items; // após "Dev." sugerimos só funções
+
+            // Cabeçalho dinâmico — substitui os antigos snippets estáticos
+            // `header`/`lspt-header`, inserindo o bloco já preenchido com os
+            // dados do Git e a data de criação do arquivo.
+            for (const label of ['header', 'lspt-header']) {
+               const it = new vscode.CompletionItem(label, vscode.CompletionItemKind.Snippet);
+               it.detail = 'Cabeçalho LSPT (preenchido com dados do Git)';
+               it.documentation = new vscode.MarkdownString(
+                  'Insere o cabeçalho já preenchido com Autor/E-mail do Git e a data de criação do arquivo.'
+               );
+               it.insertText = buildHeaderSnippet(document);
+               it.sortText = '0000' + label; // prioriza no topo da lista
+               items.push(it);
+            }
 
             // Palavras reservadas
             for (const kw of RESERVED_WORDS) {
@@ -534,6 +702,31 @@ function activate(context) {
       }
    });
 
+   // 9. COMANDO — inserir cabeçalho preenchido com os dados do Git
+   const inserirCabecalho = vscode.commands.registerCommand('lspt.inserirCabecalho', () => {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) {
+         vscode.window.showInformationMessage('Abra um arquivo para inserir o cabeçalho.');
+         return;
+      }
+      editor.insertSnippet(buildHeaderSnippet(editor.document));
+   });
+
+   // 10. AUTO-ATUALIZAÇÃO do cabeçalho ao salvar (@Last Modified by/time)
+   const headerOnSave = vscode.workspace.onWillSaveTextDocument((event) => {
+      if (event.document.languageId !== 'lspt') return;
+      event.waitUntil(
+         Promise.resolve().then(() => {
+            try {
+               return computeHeaderEdits(event.document);
+            } catch (e) {
+               console.error('Erro ao atualizar cabeçalho LSPT:', e);
+               return [];
+            }
+         })
+      );
+   });
+
    context.subscriptions.push(
       completionProvider,
       signatureHelpProvider,
@@ -543,6 +736,8 @@ function activate(context) {
       foldingProvider,
       diagnostics,
       buscarFuncao,
+      inserirCabecalho,
+      headerOnSave,
       vscode.workspace.onDidOpenTextDocument(refresh),
       vscode.workspace.onDidChangeTextDocument((e) => refreshDebounced(e.document)),
       vscode.workspace.onDidCloseTextDocument((doc) => diagnostics.delete(doc.uri)),

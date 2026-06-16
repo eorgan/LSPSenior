@@ -2,7 +2,7 @@
    "name": "lspt-language-support",
    "displayName": "LSPT Language Support",
    "description": "Suporte completo para a linguagem LSP (Linguagem Senior de Programação) com syntax highlighting, snippets, IntelliSense e autocomplete para 600+ funções built-in",
-   "version": "1.7.1",
+   "version": "1.8.0",
    "publisher": "eorgan",
    "author": {
       "name": "Eliezer Organ",
@@ -31,7 +31,8 @@
    "main": "./extension.js",
    "activationEvents": [
       "onLanguage:lspt",
-      "onCommand:lspt.buscarFuncao"
+      "onCommand:lspt.buscarFuncao",
+      "onCommand:lspt.inserirCabecalho"
    ],
    "contributes": {
       "languages": [
@@ -67,6 +68,11 @@
             "command": "lspt.buscarFuncao",
             "title": "LSPT: Buscar função no catálogo",
             "category": "LSPT"
+         },
+         {
+            "command": "lspt.inserirCabecalho",
+            "title": "LSPT: Inserir cabeçalho",
+            "category": "LSPT"
          }
       ],
       "configuration": {
@@ -81,6 +87,21 @@
                "type": "boolean",
                "default": false,
                "description": "Sinaliza chamadas a funções não encontradas no catálogo (pode gerar falso-positivo com funções do usuário/externas)."
+            },
+            "lspt.header.autoUpdate": {
+               "type": "boolean",
+               "default": true,
+               "description": "Atualiza @Last Modified by/time ao salvar arquivos .lspt/.lsp."
+            },
+            "lspt.header.fallback.author": {
+               "type": "string",
+               "default": "",
+               "description": "Autor usado no cabeçalho quando não há Git configurado (git config user.name)."
+            },
+            "lspt.header.fallback.email": {
+               "type": "string",
+               "default": "",
+               "description": "E-mail usado no cabeçalho quando não há Git configurado (git config user.email)."
             }
          }
       }

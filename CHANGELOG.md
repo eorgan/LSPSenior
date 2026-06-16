@@ -8,6 +8,31 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.8.0] - 2026-06-16
+
+### ✨ Adicionado
+- **Cabeçalho automático com dados do Git** — comando **"LSPT: Inserir cabeçalho"**
+  (paleta) e completions `header`/`lspt-header` agora inserem o bloco **já preenchido**:
+  - `@Author`/`@Email` lidos de `git config user.name`/`user.email` (cacheados por
+    workspace);
+  - `@Date` da data de criação do arquivo (`birthtime`, com fallback para a data atual);
+  - cursor posicionado em `@Description` para edição imediata.
+- **Auto-atualização ao salvar** — `@Last Modified by`/`@Last Modified time` são
+  atualizados automaticamente ao salvar arquivos `.lspt`/`.lsp`. Mexe **somente** nessas
+  duas linhas do primeiro bloco de comentário, é idempotente (não entra em loop de save) e
+  não sobrescreve o autor quando não há identidade do Git.
+- **Novas configurações** `lspt.header.autoUpdate`, `lspt.header.fallback.author` e
+  `lspt.header.fallback.email`.
+
+### 🔧 Alterado
+- **Removidos os snippets estáticos** `header` e `lspt-header` do
+  `snippets/lspt-snippets.json` — o cabeçalho passou a ser gerado dinamicamente pela
+  extensão (snippets estáticos não conseguem ler o `git config`).
+
+### 🧩 Degradação graciosa
+- Sem Git no projeto, o cabeçalho ainda é inserido; `@Author`/`@Email` ficam com o
+  fallback das settings ou vazios, e o save não falha.
+
 ## [1.7.1] - 2026-05-26
 
 ### ✨ Adicionado

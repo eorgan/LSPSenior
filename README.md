@@ -159,47 +159,26 @@ A extensão oferece **51 snippets** para acelerar seu desenvolvimento em LSPT. D
 
 ### 📄 Estruturas de Arquivo
 
-#### `header` - Cabeçalho Completo de Arquivo
-Cria estrutura completa com metadados e seções organizadas:
+#### `header` ou `lspt-header` - Cabeçalho Automático (preenchido pelo Git)
+Insere o cabeçalho **já preenchido** com os seus dados do Git e a data de criação do
+arquivo. Use o comando **`Cmd+Shift+P` → "LSPT: Inserir cabeçalho"** ou digite `header`
+(ou `lspt-header`) e aceite a sugestão:
 ```lspt
-@-- Título do Script --@
-
 /*
- * @Author: Seu Nome
- * @Email: seu.email@empresa.com.br
- * @Date: 2025-12-19 19:21:28
- * @Last Modified by: Seu Nome
- * @Last Modified time: 2025-12-19 19:21:28
- * @Description: Descrição
- */
-
-@-- Declaração WS --@
-   // Declarar Web Services
-
-@-- Declarar Funções --@
-   // Declarar funções
-
-@-- Declarar Variaveis --@
-   // Declarar variáveis
-
-@-- Inicio da Execução --@
-   
-```
-
-#### `lspt-header` - Cabeçalho Simples
-Cabeçalho padrão com metadados básicos:
-```lspt
-@-- Título do arquivo --@
-
-/*
- * @Author: Nome do Autor
- * @Email: email@example.com
- * @Date: 2025-12-19 19:21:28
- * @Last Modified by: Nome do Autor
- * @Last Modified time: 2025-12-19 19:21:28
- * @Description: Descrição
+ * @Author: Eliezer Organ
+ * @Email: eorgan@organ.eti.br
+ * @Date: 2026-06-16 10:00:00
+ * @Last Modified by: Eliezer Organ
+ * @Last Modified time: 2026-06-16 10:00:00
+ * @Description: Description
  */
 ```
+- `@Author`/`@Email` vêm de `git config user.name`/`user.email`.
+- `@Date` é a data de criação do arquivo.
+- Ao **salvar**, `@Last Modified by`/`@Last Modified time` são atualizados
+  automaticamente (configurável em `lspt.header.*` — veja [Configurações](#️-configurações)).
+- Sem Git, os campos usam o fallback das settings ou ficam vazios — o cabeçalho ainda é
+  inserido.
 
 ---
 
@@ -817,6 +796,18 @@ A extensão funciona automaticamente ao abrir arquivos `.lspt` ou `.lsp`. Não r
   // Sinalizar funções não encontradas no catálogo (padrão: desativado — pode dar
   // falso-positivo com funções do usuário/externas)
   "lspt.diagnostics.unknownFunctions": false
+}
+```
+
+### Cabeçalho automático
+```json
+// settings.json
+{
+  // Atualiza @Last Modified by/time ao salvar .lspt/.lsp (padrão: ativado)
+  "lspt.header.autoUpdate": true,
+  // Autor/e-mail usados quando NÃO há Git configurado no projeto
+  "lspt.header.fallback.author": "",
+  "lspt.header.fallback.email": ""
 }
 ```
 
