@@ -4,8 +4,9 @@
 
 ### Passo 1: Instale
 ```bash
-code --install-extension lspt-language-support-1.4.0.vsix
+code --install-extension lspt-language-support-1.9.0.vsix
 ```
+> Ou instale pela galeria (Open VSX) — busque por **"LSPT Language Support"**.
 
 ### Passo 2: Abra um arquivo `.lspt`
 
@@ -14,7 +15,7 @@ Digite `Dev.` e veja a mágica acontecer! 🎉
 
 ---
 
-## 💡 4 Recursos Principais
+## 💡 5 Recursos Principais
 
 ### 1️⃣ Autocomplete (Dev.)
 ```lspt
@@ -36,6 +37,19 @@ Passe o mouse → veja assinatura, código e parâmetros
 
 ### 4️⃣ Command+Click = 📖 Docs Completa
 Command+Click na função → abre documentação detalhada
+
+### 5️⃣ Formatar Documento (Format Document)
+Tecle **`Shift+Alt+F`** (ou clique direito → *Formatar Documento*) → o recuo é
+ajustado automaticamente no estilo LSP:
+```lspt
+Se(Condição)
+   {
+      @-- corpo um nível abaixo do { --@
+   }
+```
+→ Ajusta **só o recuo à esquerda** — nunca muda o conteúdo, strings ou comentários
+→ *Format Selection*: selecione um trecho e use `Cmd+K Cmd+F`
+→ Recuo configurável em `lspt.format.indentSize` (padrão **3**)
 
 ---
 
