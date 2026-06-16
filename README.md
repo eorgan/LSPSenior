@@ -34,7 +34,7 @@ Resumo dos recursos:
 - **Ir para definição** (funções do usuário no arquivo e doc oficial das built-in)
 - **Hover de variáveis de sistema** (`DatSis`, `CodEmp`, ...)
 - Comando **"LSPT: Buscar função no catálogo"** (paleta de comandos)
-- **Syntax highlighting** completo e **62 snippets**
+- **Syntax highlighting** completo e **60 snippets**
 
 ### 🔍 1. Autocomplete de Funções Built-in
 
@@ -153,7 +153,7 @@ InserirStr(...)  ← Command+Click aqui
 
 ## 📋 Snippets Disponíveis
 
-A extensão oferece **51 snippets** para acelerar seu desenvolvimento em LSPT. Digite o prefixo e pressione `Tab` ou `Enter` para expandir.
+A extensão oferece **60 snippets** para acelerar seu desenvolvimento em LSPT. Digite o prefixo e pressione `Tab` ou `Enter` para expandir. Além deles, o **cabeçalho automático** (`header`/`lspt-header`) é gerado dinamicamente com os seus dados do Git — veja [Estruturas de Arquivo](#-estruturas-de-arquivo).
 
 > 💡 **Dica**: Muitos snippets têm prefixos alternativos! Por exemplo, `func`, `if`, `for`, `while` para maior produtividade.
 
