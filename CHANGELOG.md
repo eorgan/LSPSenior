@@ -8,6 +8,18 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.8.1] - 2026-06-16
+
+### 🐛 Corrigido
+- **`@Author`/`@Email` em branco ao inserir em arquivo sem título.** A identidade do Git
+  não era resolvida quando o cabeçalho era inserido num arquivo *untitled* (ainda não
+  salvo). Agora, sem raiz de workspace pelo documento, usa a **1ª pasta do workspace
+  aberto** para ler o `git config`.
+- **Preenchimento de `@Author`/`@Email` no save.** Ao salvar, se essas linhas do cabeçalho
+  estiverem **vazias** e houver identidade do Git, elas são preenchidas (nunca sobrescreve
+  um valor já digitado à mão). Assim, cabeçalhos inseridos antes da identidade resolver se
+  autocorrigem no primeiro save.
+
 ## [1.8.0] - 2026-06-16
 
 ### ✨ Adicionado

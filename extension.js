@@ -201,6 +201,10 @@ function workspaceRootFor(document) {
    const folder = vscode.workspace.getWorkspaceFolder(document.uri);
    if (folder) return folder.uri.fsPath;
    if (document.uri.scheme === 'file') return path.dirname(document.uri.fsPath);
+   // Arquivo sem título (untitled) ou avulso: usa a 1ª pasta do workspace aberto,
+   // para que o cabeçalho ainda leia o git config do projeto.
+   const folders = vscode.workspace.workspaceFolders;
+   if (folders && folders.length) return folders[0].uri.fsPath;
    return undefined;
 }
 
@@ -299,7 +303,7 @@ function computeHeaderEdits(document) {
    if (start === -1 || end === -1) return [];
 
    const now = formatDate(new Date());
-   const { author } = getHeaderIdentity(document);
+   const { author, email } = getHeaderIdentity(document);
    const edits = [];
    let hasTime = false;
    let hasBy = false;
@@ -319,6 +323,12 @@ function computeHeaderEdits(document) {
             const novo = `${m[1]} ${author}`;
             if (novo !== text) edits.push(vscode.TextEdit.replace(line.range, novo));
          }
+      } else if ((m = /^(\s*\*?\s*@Author:)\s*(.*?)\s*$/.exec(text))) {
+         // Preenche o autor SÓ se estiver vazio (ex.: cabeçalho inserido sem Git
+         // resolvido). Nunca sobrescreve um nome já digitado.
+         if (author && !m[2]) edits.push(vscode.TextEdit.replace(line.range, `${m[1]} ${author}`));
+      } else if ((m = /^(\s*\*?\s*@Email:)\s*(.*?)\s*$/.exec(text))) {
+         if (email && !m[2]) edits.push(vscode.TextEdit.replace(line.range, `${m[1]} ${email}`));
       }
    }
 
