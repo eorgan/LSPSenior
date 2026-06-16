@@ -31,6 +31,7 @@ Resumo dos recursos:
 - **Signature help** e **hover** com descrição de parâmetros, valores de retorno e link para a doc oficial
 - **Linter** que avisa sobre as armadilhas da LSP (operação dentro de parâmetro, `Pare`/`Continue` fora de loop)
 - **Outline** das funções do arquivo, **folding** de blocos `Inicio`/`Fim`
+- **Format Document** — reindentação conservadora (só o recuo à esquerda) no estilo do projeto, com `lspt.format.indentSize` configurável
 - **Ir para definição** (funções do usuário no arquivo e doc oficial das built-in)
 - **Hover de variáveis de sistema** (`DatSis`, `CodEmp`, ...)
 - Comando **"LSPT: Buscar função no catálogo"** (paleta de comandos)
@@ -813,6 +814,26 @@ A extensão funciona automaticamente ao abrir arquivos `.lspt` ou `.lsp`. Não r
   "lspt.header.fallback.email": ""
 }
 ```
+
+### Formatação (Format Document)
+```json
+// settings.json
+{
+  // Espaços por nível de indentação no Format Document (padrão: 3; 1–8)
+  "lspt.format.indentSize": 3
+}
+```
+
+> **Format Document** (`Shift+Alt+F` / `Cmd+K Cmd+F`, ou clique direito → *Formatar
+> Documento*) faz uma **reindentação conservadora**: ajusta **apenas o recuo à esquerda**,
+> sem alterar o conteúdo das linhas nem mexer em strings/comentários. *Format Selection*
+> formata só a seleção. Reproduz o estilo do projeto (`{`/`Inicio` um nível abaixo do
+> cabeçalho de controle).
+>
+> **Limitações conhecidas:** código no nível superior (fora de função/bloco) é recuado
+> para a **coluna 0** — declarações `Definir` agrupadas sob um `@-- ... --@` não mantêm o
+> recuo cosmético; comentários de seção seguem a indentação do bloco; linhas com vários
+> tokens (`Se(x) { y }`) não têm a própria indentação refeita.
 
 ---
 

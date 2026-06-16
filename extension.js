@@ -338,6 +338,224 @@ function computeHeaderEdits(document) {
 }
 
 // ---------------------------------------------------------------------------
+// Formatter (reindentação conservadora baseada em blocos)
+// ---------------------------------------------------------------------------
+
+/** Blanqueia comentários de bloco completos numa linha (preserva colunas). */
+function stripInlineBlockComments(line) {
+   return line.replace(/\/\*[\s\S]*?\*\//g, (m) => ' '.repeat(m.length));
+}
+
+/** Lista ordenada de tokens de bloco ('open'/'close') numa linha já limpa. */
+function scanBlockTokens(code) {
+   const tokens = [];
+   const re = /(\{)|(\})|\b(Inicio)\b|\b(Fim)\b/gi;
+   let m;
+   while ((m = re.exec(code)) !== null) {
+      tokens.push(m[1] || m[3] ? 'open' : 'close');
+   }
+   return tokens;
+}
+
+/**
+ * Rastreia strings literais ao longo de uma linha, considerando continuação por
+ * `\` no fim da linha (a LSP permite quebrar uma string em várias linhas físicas).
+ * Recebe o estado de entrada (se já estamos dentro de uma string e qual aspas) e
+ * devolve o estado ao fim da linha. Só sinaliza `inStr` quando a string fica aberta
+ * E a linha termina em `\` — assim o formatter nunca reindenta uma linha que faz
+ * parte do conteúdo de uma string (o que mudaria o texto da string).
+ */
+function scanStringContinuation(line, inStr, q) {
+   let i = 0;
+   const n = line.length;
+   if (inStr) {
+      while (i < n) {
+         if (line[i] === '\\') {
+            i += 2;
+            continue;
+         }
+         if (line[i] === q) {
+            inStr = false;
+            i++;
+            break;
+         }
+         i++;
+      }
+      if (inStr) return { inStr: /\\\s*$/.test(line), q };
+   }
+   while (i < n) {
+      const c = line[i];
+      if (c === '"' || c === "'") {
+         const qq = c;
+         i++;
+         let closed = false;
+         while (i < n) {
+            if (line[i] === '\\') {
+               i += 2;
+               continue;
+            }
+            if (line[i] === qq) {
+               i++;
+               closed = true;
+               break;
+            }
+            i++;
+         }
+         if (!closed) return { inStr: /\\\s*$/.test(line), q: qq };
+         continue;
+      }
+      if (c === '@') {
+         // Comentário de linha @-- ... --@ ou @ ... @ — pode conter aspas.
+         if (line.startsWith('@--', i)) {
+            const end = line.indexOf('--@', i + 3);
+            if (end === -1) return { inStr: false, q: '' };
+            i = end + 3;
+            continue;
+         }
+         const end = line.indexOf('@', i + 1);
+         if (end === -1) return { inStr: false, q: '' };
+         i = end + 1;
+         continue;
+      }
+      i++;
+   }
+   return { inStr: false, q: '' };
+}
+
+/**
+ * Calcula os TextEdits para reindentar o documento conforme o estilo do projeto:
+ * - `indentSize` espaços por nível (padrão 3);
+ * - `{`/`Inicio` ficam um nível abaixo do cabeçalho de controle; o corpo um nível
+ *   abaixo do `{`/`Inicio` (estilo do exemplo do projeto);
+ * - um comentário de seção sozinho na linha (`@-- ... --@`) recua as linhas-irmãs
+ *   seguintes em um nível, como no estilo do projeto; cabeçalhos de controle
+ *   (incl. `Funcao Nome();`) e limites de bloco encerram esse recuo de seção;
+ * - SÓ altera o espaço à esquerda da linha — nunca o conteúdo;
+ * - nunca toca em strings, comentários de linha (@..@, @--..--@) ou blocos /* *​/.
+ *
+ * A pilha de blocos é mantida varrendo TODOS os tokens de cada linha (não só o
+ * primeiro), para que linhas com `{` na mesma linha do controle (ex.: `Se(x) {`)
+ * não desbalanceiem a indentação das linhas seguintes. A indentação exibida da
+ * linha vem do seu primeiro token. Retorna apenas edits para linhas que mudam,
+ * o que torna a formatação idempotente.
+ */
+function computeFormatEdits(document, indentSize) {
+   const INDENT = indentSize > 0 ? indentSize : 3;
+   const edits = [];
+   const stack = []; // indentação (coluna) de cada bloco aberto
+   let pending = false; // cabeçalho de controle aguardando o abre-bloco
+   let controlIndent = 0;
+   let sectionOffset = 0; // recuo extra ativo por comentário de seção @-- --@
+   let inBlockComment = false;
+   let inString = false; // dentro de uma string literal multi-linha (\ no fim)
+   let stringQuote = '';
+
+   for (let i = 0; i < document.lineCount; i++) {
+      const lineObj = document.lineAt(i);
+      const raw = lineObj.text;
+
+      // --- Continuação de string literal multi-linha: NUNCA tocar ---
+      // (o recuo dessa linha faz parte do conteúdo da string).
+      if (inString) {
+         const st = scanStringContinuation(raw, true, stringQuote);
+         inString = st.inStr;
+         stringQuote = st.q;
+         continue;
+      }
+
+      const noStr = stripCommentsAndStrings(raw);
+
+      // --- Comentário de bloco /* */ multi-linha: não tocar ---
+      if (inBlockComment) {
+         if (raw.indexOf('*/') !== -1) inBlockComment = false;
+         continue;
+      }
+      const ob = noStr.indexOf('/*');
+      if (ob !== -1 && noStr.indexOf('*/', ob) === -1) {
+         inBlockComment = true;
+         continue;
+      }
+
+      // --- Linha em branco: normaliza para vazia, sem mexer no estado ---
+      if (raw.trim() === '') {
+         if (raw.length !== 0) edits.push(vscode.TextEdit.replace(lineObj.range, ''));
+         continue;
+      }
+
+      const code = stripInlineBlockComments(noStr);
+      const codeTrim = code.trim();
+      const isCommentOnly = codeTrim === '';
+      const content = raw.trimStart(); // conteúdo sem o recuo (mantém o final)
+
+      const leadingClose = /^\}/.test(codeTrim) || /^Fim\b/i.test(codeTrim);
+      const leadingOpen = /^\{/.test(codeTrim) || /^Inicio\b/i.test(codeTrim);
+      const leadingControl = /^(Senao|Se|Para|Enquanto|Funcao)\b/i.test(codeTrim);
+
+      const baseIndent = stack.length ? stack[stack.length - 1] + INDENT : 0;
+      let lineIndent;
+      if (leadingClose) {
+         lineIndent = stack.length ? stack[stack.length - 1] : 0;
+      } else if (leadingOpen) {
+         if (pending) lineIndent = controlIndent + INDENT;
+         else if (stack.length) lineIndent = stack[stack.length - 1] + INDENT;
+         else lineIndent = INDENT; // fallback p/ código top-level mal-formado
+      } else if (leadingControl || isCommentOnly) {
+         // Cabeçalho de controle e comentário de seção ficam no recuo do bloco
+         // (sem o recuo de seção — o comentário é quem o inicia).
+         lineIndent = baseIndent;
+      } else {
+         // Linha de conteúdo "regular": segue o recuo de seção ativo.
+         lineIndent = baseIndent + sectionOffset;
+      }
+
+      const newLine = ' '.repeat(lineIndent) + content;
+      if (newLine !== raw) edits.push(vscode.TextEdit.replace(lineObj.range, newLine));
+
+      // --- Atualiza a pilha com todos os tokens de bloco da linha ---
+      const tokens = scanBlockTokens(code);
+      let openCount = 0;
+      for (const tok of tokens) {
+         if (tok === 'open') {
+            stack.push(lineIndent + INDENT * openCount);
+            openCount++;
+            pending = false;
+         } else if (stack.length) {
+            stack.pop();
+         }
+      }
+      const hadOpen = openCount > 0;
+      const hadToken = tokens.length > 0;
+
+      // --- Gerência de pendingControl e do recuo de seção ---
+      if (isCommentOnly) {
+         // Comentário de seção: ativa o recuo das linhas-irmãs seguintes.
+         // Transparente ao pending (não cancela o abre-bloco esperado).
+         sectionOffset = INDENT;
+      } else if (leadingControl && !hadOpen) {
+         controlIndent = lineIndent;
+         pending = true;
+         sectionOffset = 0; // o controle inicia sua própria estrutura
+      } else if (hadToken) {
+         pending = false;
+         sectionOffset = 0; // limite de bloco encerra a seção
+      } else {
+         // Linha regular pura: cancela o pending, mas mantém o recuo de seção
+         // (irmãs sob o mesmo @-- ... --@ continuam recuadas).
+         pending = false;
+      }
+
+      // --- A linha abre uma string literal multi-linha (\ no fim)? ---
+      const sst = scanStringContinuation(raw, false, '');
+      if (sst.inStr) {
+         inString = true;
+         stringQuote = sst.q;
+      }
+   }
+
+   return edits;
+}
+
+// ---------------------------------------------------------------------------
 // Diagnostics (linter conservador das armadilhas da LSP)
 // ---------------------------------------------------------------------------
 
@@ -675,6 +893,39 @@ function activate(context) {
       },
    });
 
+   // 6b. FORMATTING — reindentação conservadora baseada em blocos
+   const getIndentSize = () =>
+      vscode.workspace.getConfiguration('lspt').get('format.indentSize', 3);
+   const formattingProvider = vscode.languages.registerDocumentFormattingEditProvider('lspt', {
+      provideDocumentFormattingEdits(document) {
+         try {
+            return computeFormatEdits(document, getIndentSize());
+         } catch (e) {
+            console.error('Erro ao formatar documento LSPT:', e);
+            return [];
+         }
+      },
+   });
+   const rangeFormattingProvider = vscode.languages.registerDocumentRangeFormattingEditProvider(
+      'lspt',
+      {
+         provideDocumentRangeFormattingEdits(document, range) {
+            try {
+               // A indentação depende do contexto anterior, então calculamos o
+               // documento inteiro e devolvemos só os edits dentro da seleção.
+               const all = computeFormatEdits(document, getIndentSize());
+               return all.filter(
+                  (e) =>
+                     e.range.start.line >= range.start.line && e.range.end.line <= range.end.line
+               );
+            } catch (e) {
+               console.error('Erro ao formatar seleção LSPT:', e);
+               return [];
+            }
+         },
+      }
+   );
+
    // 7. DIAGNOSTICS
    const diagnostics = vscode.languages.createDiagnosticCollection('lspt');
    const refresh = (document) => {
@@ -744,6 +995,8 @@ function activate(context) {
       definitionProvider,
       symbolProvider,
       foldingProvider,
+      formattingProvider,
+      rangeFormattingProvider,
       diagnostics,
       buscarFuncao,
       inserirCabecalho,
@@ -764,4 +1017,8 @@ function deactivate() {
 module.exports = {
    activate,
    deactivate,
+   // Exportados para testes (não fazem parte da API pública da extensão).
+   computeFormatEdits,
+   stripCommentsAndStrings,
+   scanBlockTokens,
 };

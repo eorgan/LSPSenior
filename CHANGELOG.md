@@ -8,6 +8,38 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.9.0] - 2026-06-16
+
+### ✨ Adicionado
+- **Format Document para `.lspt`/`.lsp`.** A extensão passa a registrar um
+  `DocumentFormattingEditProvider` (e `DocumentRangeFormattingEditProvider` para
+  *Format Selection*) — acaba o aviso *"There is no formatter for 'lspt' files installed"*.
+- **Reindentação conservadora baseada em blocos.** O formatter **só ajusta o recuo à
+  esquerda** — nunca reordena, remove ou altera o conteúdo da linha, e nunca toca em
+  strings ou comentários (`@..@`, `@--..--@`, `/* */`). Reproduz o estilo do projeto:
+  `{`/`Inicio` ficam **um nível abaixo** do cabeçalho de controle (`Se`/`Senao`/`Para`/
+  `Enquanto`/`Funcao`) e o corpo um nível abaixo do `{`/`Inicio`. É **idempotente**
+  (rodar duas vezes dá o mesmo resultado).
+- **Recuo sob comentário de seção.** Linhas sob um `@-- ... --@` sozinho na linha são
+  recuadas um nível (estilo do projeto — ex.: `Definir`s sob `@-- Declarar Variaveis --@`),
+  até o próximo comentário de seção, cabeçalho de controle ou limite de bloco.
+- **Seguro com strings/comentários multi-linha.** Strings literais quebradas com `\` no fim
+  da linha e blocos `/* ... */` **não são reindentados** (alterar o recuo dessas linhas
+  mudaria o conteúdo) — o `Se(x) {` na mesma linha também não desbalanceia as seguintes.
+- **Nova configuração** `lspt.format.indentSize` (padrão **3**; 1–8) — espaços por nível.
+
+### ⚠️ Limitações conhecidas do formatter
+- **Código no nível superior (fora de função/bloco)** é recuado para a **coluna 0**.
+  Declarações `Definir`/atribuições agrupadas sob um comentário de seção `@-- ... --@`
+  **não** mantêm o recuo cosmético — todas voltam à coluna 0.
+- **Comentários de seção `@-- ... --@`** seguem a indentação do bloco atual (não forçam
+  coluna 0). O primeiro `@--` do arquivo, antes de qualquer código, fica na coluna 0.
+- **Vários tokens na mesma linha** (ex.: `Se(x) { y }`): a indentação **da própria linha**
+  não é refeita, mas o balanceamento de blocos é mantido (as linhas seguintes não
+  desalinham). Para `Se(x) {` com o corpo em linhas separadas, o corpo é recuado em
+  estilo K&R (um nível abaixo do cabeçalho).
+- Não há formatação de espaçamento de operadores nem alinhamento — apenas o recuo.
+
 ## [1.8.1] - 2026-06-16
 
 ### 🐛 Corrigido
