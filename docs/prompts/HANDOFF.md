@@ -5,10 +5,12 @@ Registro de progresso entre sessões. Cada item do backlog é implementado em um
 
 ---
 
-## ✅ Item 1 — Cabeçalho automático com dados do Git — **CONCLUÍDO**
+## ✅ Item 1 — Cabeçalho automático com dados do Git — **CONCLUÍDO (1.8.1)**
 
-- **Release:** `1.8.0`, publicado no Open VSX (`eorgan.lspt-language-support v1.8.0`).
-- **Commit:** `d98edd4` em `origin/main` (`feat: cabeçalho LSP automático com dados do Git`).
+- **Release atual:** `1.8.1`, publicado no Open VSX (`eorgan.lspt-language-support v1.8.1`).
+- **Commits em `origin/main`:**
+  - `d98edd4` — `feat: cabeçalho LSP automático com dados do Git` (1.8.0).
+  - `f6eb875` — `fix: cabeçalho preenche Author/Email mesmo em arquivo sem título` (1.8.1).
 - **Prompt usado:** [01-cabecalho-git.md](01-cabecalho-git.md).
 
 ### O que entregou
@@ -23,11 +25,23 @@ Registro de progresso entre sessões. Cada item do backlog é implementado em um
   `lspt.header.fallback.email`.
 - Snippets estáticos `header`/`lspt-header` removidos (agora dinâmicos).
 
+### Bug encontrado e corrigido (1.8.0 → 1.8.1)
+- **Sintoma:** ao inserir o cabeçalho num arquivo **sem título (untitled)**, `@Author` e
+  `@Email` saíam **vazios** (e `@Date` caía no `Date.now()`); ao salvar, só `@Last
+  Modified by` resolvia.
+- **Causa:** `workspaceRootFor()` retornava `undefined` para untitled → identidade Git
+  vazia na inserção; o save não tocava em Author/Email.
+- **Correção (1.8.1):** `workspaceRootFor()` cai para a **1ª pasta do workspace** quando o
+  documento não tem raiz; e o save **preenche `@Author`/`@Email` vazios** (sem sobrescrever
+  valor digitado), autocorrigindo cabeçalhos antigos no primeiro save.
+
 ### Validação feita / pendente
 - ✅ `node --check extension.js`, JSONs válidos, lógica de data/regex/idempotência testada
   isoladamente.
-- ⏳ **Falta validação manual no VS Code/Antigravity** (pontos da seção "Validação" do
-  prompt 01): inserir em arquivo novo, salvar/re-salvar, pasta sem Git, `autoUpdate:false`.
+- ✅ Teste manual do usuário no 1.8.0 (que revelou o bug acima, já corrigido no 1.8.1).
+- ⏳ **Re-testar o 1.8.1 no VS Code/Antigravity:** inserir cabeçalho em `.lsp` novo (Author/
+  Email preenchidos), salvar arquivo com campos vazios (backfill), e os demais pontos da
+  seção "Validação" do prompt 01 (pasta sem Git, `autoUpdate:false`).
 
 ### Notas / dívidas deixadas (fora do escopo do item 1)
 - `docs/prompts/` está sendo **incluído no `.vsix`** (a pasta nova não está no
@@ -40,6 +54,6 @@ Registro de progresso entre sessões. Cada item do backlog é implementado em um
 
 ## ⏭️ Item 2 — Formatter de arquivos LSP — **PRONTO PARA INICIAR**
 
-- **Pré-requisito (item 1 / 1.8.0):** ✅ atendido.
+- **Pré-requisito (item 1 / 1.8.x):** ✅ atendido (release atual 1.8.1).
 - **Próximo passo:** abrir uma conversa nova e colar [02-formatter.md](02-formatter.md).
 - **Release alvo:** `1.9.0`.
