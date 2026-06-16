@@ -3,7 +3,7 @@
 Ideias aprovadas para implementar depois (não priorizadas no código ainda).
 
 > **Concluídos:** itens 1 (v1.8.0 + bugfix v1.8.1) e 2 (v1.9.0) — ver entradas abaixo.
-> **Em aberto:** item 3.
+> **Em aberto:** itens 3 e 4.
 
 ---
 
@@ -173,3 +173,41 @@ Fontes para extração:
 - [ ] Gramática `tmLanguage` atualizada automaticamente via `build-grammar-functions.js`.
 - [ ] (Opcional) Linter reconhece `SQL_*`/`Http*` para checagens específicas.
 - [ ] `reference/quick-reference.md` aponta para o catálogo (em vez de manter lista paralela).
+
+---
+
+## 4. Melhorar dobramento (folding) de código
+
+**Contexto:** o folding atual dobra `Inicio` → `Fim;`, mas a dobra começa **dentro** do bloco
+(no `Inicio`). Quando a função é colapsada, o preview mostra "Inicio" — pouco informativo.
+Além disso, `language-configuration.json` declara markers de start (`Se(|Enquanto(|Para(|Funcao`)
+que **não pareiam** com `Fim;`, causando dobras inconsistentes.
+
+**Objetivo:**
+1. Preview da dobra mostrar a linha do **cabeçalho** (`Funcao Nome();`, `Se (cond)`, etc.) em
+   vez de "Inicio".
+2. Permitir dobrar **seções** marcadas por `@-- TITULO --@` (estilo "região") — devs usam
+   essas marcações como índice do arquivo.
+3. Corrigir o bug do `language-configuration.json` (markers mal pareados).
+4. Tag de `FoldingRangeKind.Region`/`Comment` para integrar com **Fold All Regions/Comments**.
+
+### Viabilidade — ✅ possível
+
+Tudo via `FoldingRangeProvider` (já registrado em `extension.js`) + ajuste em
+`language-configuration.json`.
+
+### Pontos a decidir
+
+- Seções `@-- TITULO --@`: dobrar do título atual **até o próximo `@--`** ou **até a próxima
+  marca de mesmo nível**? Simplificação: até o próximo `@--` (ou EOF).
+- Manter ou remover o bloco `folding.markers` do `language-configuration.json`?
+  Recomendação: remover e centralizar a lógica no provider (única fonte de verdade,
+  evita conflitos).
+- Funções top-level sem `Inicio` (só `Definir Funcao Nome();`): dobrar ou não? Provavelmente não.
+
+### Critério de pronto
+
+- [ ] Colapsar uma função mostra `Funcao Nome(); …` no preview (não `Inicio`).
+- [ ] `Cmd+K Cmd+8` (Fold All Regions) colapsa todas as seções `@-- ... --@`.
+- [ ] Sem regressões em arquivos com `Se/Senao/Para/Enquanto` aninhados.
+- [ ] Idempotente: dobrar/desdobrar várias vezes não corrompe estado.
