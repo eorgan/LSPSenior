@@ -61,13 +61,32 @@ Prefixo por tipo + CamelCase, descritivo, sem acento, sem palavra reservada:
 Antes de usar uma função, confirme a assinatura real — **não invente**. A LSP é
 case-insensitive, então compare nomes ignorando a caixa.
 
+- **`scripts/buscar_funcao.py`** (forma recomendada): busca no catálogo e já mostra a
+  **direção** de cada parâmetro (`→ SAÍDA` vs `entrada`).
+  `python3 scripts/buscar_funcao.py <Nome>` · `--full` inclui exemplo · `--listar <prefixo>` só lista nomes.
 - **`functions.json`**: mapa `Nome → { signature, params[{name,type,direction,description}], returns[], description, code }`.
-  Procure-o **nesta pasta de skill** (bundle exportado) ou **na raiz do projeto**.
-  Para localizar uma função: `grep -i '"nomeFuncao"' functions.json` ou leia a entrada.
+  Procure-o **na raiz do projeto** (ou nesta pasta de skill, se houver bundle).
+  Para localizar manualmente: `grep -i '"nomeFuncao"' functions.json`.
 - **`docs/functions/<Nome>.md`** (quando presente no projeto): documentação completa por
   função, com **exemplo de uso real**. Use o nome canônico do `functions.json`.
 
 Sempre cheque a `direction` de cada parâmetro: `in` = você fornece; `out` (`end`) = recebe o resultado.
+
+> ⚠️ O `functions.json` cobre ~600 funções de regra, mas **não** inclui as APIs `SQL_*`
+> (cursores) nem `Http*` (requisições). Para essas, use os nomes/forma validados em
+> `reference/quick-reference.md` (extraídos dos exemplos reais `.lspt`).
+
+## 📚 Referência detalhada (carregue sob demanda)
+
+Mantenha este SKILL.md como guia rápido; abra o arquivo de referência quando precisar:
+
+- **`reference/sintaxe.md`** — operadores (incl. ausência de `%` → `RestoDivisao`),
+  palavras reservadas, variáveis de sistema, tipos, declaração (arrays/tamanho), blocos.
+- **`reference/erros-comuns.md`** — os 12 erros mais frequentes (incl. `Chr()` inexistente,
+  `FormatarData` com `Numero`, atribuição de data, `Truncar`, `p...` em `SQL_Retornar*`).
+- **`reference/quick-reference.md`** — cartões por categoria (strings, conversões, datas,
+  validação, HTTP, banco de dados) com nomes de função já validados.
+- **`reference/padroes.md`** — padrões prontos: validação, conversão segura, tratamento de erro.
 
 ## 🧩 Estrutura e sintaxe
 

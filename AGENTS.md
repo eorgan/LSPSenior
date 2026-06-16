@@ -19,6 +19,10 @@ Leia primeiro a skill **[.claude/skills/lsp-senior/SKILL.md](.claude/skills/lsp-
 
 ## Catálogo de funções (fonte da verdade deste projeto)
 
+- **`.claude/skills/lsp-senior/scripts/buscar_funcao.py`** (forma recomendada) — busca no
+  catálogo e já marca a **direção** de cada parâmetro (`→ SAÍDA` vs `entrada`):
+  `python3 .claude/skills/lsp-senior/scripts/buscar_funcao.py <Nome>` (`--full` inclui
+  exemplo; `--listar <prefixo>` só lista nomes). Acha o `functions.json` na raiz sozinho.
 - **`functions.json`** — ~600 funções: `Nome → { signature, params[{name,type,direction,description}], returns[], description }`.
   Busque com `grep -i '"nome"' functions.json`. Cheque `direction`: `in` (você fornece) vs `out`/`end` (recebe).
   Procure-o na **raiz do projeto** ou em **`.claude/skills/lsp-senior/functions.json`** (bundle exportado).
@@ -26,6 +30,23 @@ Leia primeiro a skill **[.claude/skills/lsp-senior/SKILL.md](.claude/skills/lsp-
   Pode estar em **`docs/functions/`** (raiz) ou em **`.claude/skills/lsp-senior/docs/functions/`**
   (quando o bundle foi exportado com `--with-docs`). Já o `functions.json` sozinho cobre
   assinatura, parâmetros descritos e valores de retorno — consulte o `.md` para ver um exemplo.
+
+> ⚠️ O `functions.json` **não** inclui as APIs `SQL_*` (cursores) nem `Http*` (requisições).
+> Para essas, use os nomes validados nos exemplos reais `.lspt` — ver
+> `.claude/skills/lsp-senior/reference/quick-reference.md`.
+
+## Referência detalhada da linguagem (na skill, carregue sob demanda)
+
+Além do `SKILL.md`, a skill traz referência aprofundada — abra o arquivo conforme a necessidade:
+
+- **[reference/sintaxe.md](.claude/skills/lsp-senior/reference/sintaxe.md)** — operadores
+  (incl. ausência de `%` → `RestoDivisao`), palavras reservadas, variáveis de sistema, tipos, arrays, blocos.
+- **[reference/erros-comuns.md](.claude/skills/lsp-senior/reference/erros-comuns.md)** — os 12
+  erros mais frequentes (`Chr()` inexistente, `FormatarData` com `Numero`, atribuição de data, `Truncar`, `p...` em `SQL_Retornar*`).
+- **[reference/quick-reference.md](.claude/skills/lsp-senior/reference/quick-reference.md)** —
+  cartões por categoria (strings, conversões, datas, validação, HTTP, banco) com nomes já validados.
+- **[reference/padroes.md](.claude/skills/lsp-senior/reference/padroes.md)** — padrões prontos:
+  validação, conversão segura, tratamento de erro.
 
 ## Exemplos essenciais
 
