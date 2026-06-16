@@ -2,9 +2,12 @@
 
 Ideias aprovadas para implementar depois (não priorizadas no código ainda).
 
+> **Concluídos:** itens 1 (v1.8.0 + bugfix v1.8.1) e 2 (v1.9.0) — ver entradas abaixo.
+> **Em aberto:** item 3.
+
 ---
 
-## 1. Cabeçalho automático com dados do Git (snippet `header`)
+## 1. Cabeçalho automático com dados do Git (snippet `header`) — ✅ Concluído (v1.8.0 + v1.8.1)
 
 **Objetivo:** ao inserir o cabeçalho (snippet `header`/`lspt-header`), preencher
 automaticamente os campos a partir do Git, e mantê-los atualizados ao salvar.
@@ -61,13 +64,16 @@ Abordagem técnica (padrão das extensões de file-header):
 
 ### Critério de pronto
 
-- [ ] Inserir cabeçalho preenche Author/Email (do Git) e Date (criação) automaticamente.
-- [ ] Salvar um `.lsp`/`.lspt` com cabeçalho atualiza "Last Modified by/time".
-- [ ] Funciona sem Git (degrada graciosamente) e é configurável/desativável.
+- [x] Inserir cabeçalho preenche Author/Email (do Git) e Date (criação) automaticamente.
+- [x] Salvar um `.lsp`/`.lspt` com cabeçalho atualiza "Last Modified by/time".
+- [x] Funciona sem Git (degrada graciosamente) e é configurável/desativável.
+
+**Releases:** v1.8.0 (feature) e v1.8.1 (bugfix: autofill de Author/Email mesmo em
+arquivo sem título).
 
 ---
 
-## 2. Formatter de arquivos LSP (`Format Document`)
+## 2. Formatter de arquivos LSP (`Format Document`) — ✅ Concluído (v1.9.0)
 
 **Objetivo:** habilitar "Format Document" para `.lsp`/`.lspt` (hoje aparece
 "There is no formatter for 'lspt' files installed").
@@ -124,6 +130,46 @@ nível abaixo do `{` — estilo peculiar, reprodutível mas opinativo.
 
 ### Critério de pronto
 
-- [ ] "Format Document" passa a funcionar em `.lsp`/`.lspt`.
-- [ ] Só altera indentação; conteúdo/strings/comentários preservados.
-- [ ] Recuo configurável; validado em arquivos reais de produção.
+- [x] "Format Document" passa a funcionar em `.lsp`/`.lspt`.
+- [x] Só altera indentação; conteúdo/strings/comentários preservados.
+- [x] Recuo configurável; validado em arquivos reais de produção.
+
+**Release:** v1.9.0 (reindentação conservadora, configurável via `lspt.format.indentSize`).
+
+---
+
+## 3. Catalogar APIs `SQL_*` e `Http*` em `functions.json`
+
+**Contexto:** descoberto durante a evolução da skill lsp-senior — o `functions.json`
+cobre ~600 funções de regra, mas **não** inclui as APIs `SQL_*` (cursores) nem `Http*`
+(requisições). Hoje a skill compensa documentando essas APIs em
+[`.claude/skills/lsp-senior/reference/quick-reference.md`](../.claude/skills/lsp-senior/reference/quick-reference.md)
+(nomes validados nos exemplos reais `.lspt`).
+
+**Objetivo:** trazer essas APIs para o catálogo canônico (assinatura/params/descrição/
+retorno), para que apareçam em hover, autocomplete, signature help, gramática e linter
+em pé de igualdade com as 600 funções atuais.
+
+### Viabilidade — ✅ possível
+
+Fontes para extração:
+- Manuais oficiais Senior (Tecnologia: `regra-para-web-services/`, cursores) — parte já
+  parseada no overlay ERP.
+- `reference/quick-reference.md` da skill (lista de nomes validados nos exemplos `.lspt`).
+- Exemplos reais em `Exemplos de Arquivos/` (e nos arquivos do projeto Gemma).
+
+### Pontos a decidir
+
+- Acrescentar um terceiro overlay (`data/functions-api.json`) ou estender o CSV?
+- Onde no esquema marcar "API vs função de regra"? Talvez um campo `category`
+  (`'rule'` / `'sql'` / `'http'`) em funcData.
+- Quais funções entrar de cara? (mínimo: as referenciadas pela skill + comuns nos exemplos).
+- O linter precisa de regras específicas para `SQL_*` (ex: cursor sem `SQL_FecharCursor`)?
+
+### Critério de pronto
+
+- [ ] `SQL_*` e `Http*` aparecem em autocomplete/hover/signature como as demais.
+- [ ] Doc rica (descrição + params + retorno) por função.
+- [ ] Gramática `tmLanguage` atualizada automaticamente via `build-grammar-functions.js`.
+- [ ] (Opcional) Linter reconhece `SQL_*`/`Http*` para checagens específicas.
+- [ ] `reference/quick-reference.md` aponta para o catálogo (em vez de manter lista paralela).
