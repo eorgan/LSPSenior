@@ -177,6 +177,9 @@ arquivo. Use o comando **`Cmd+Shift+P` → "LSPT: Inserir cabeçalho"** ou digit
 - `@Date` é a data de criação do arquivo.
 - Ao **salvar**, `@Last Modified by`/`@Last Modified time` são atualizados
   automaticamente (configurável em `lspt.header.*` — veja [Configurações](#️-configurações)).
+- Se `@Author`/`@Email` estiverem **vazios** (ex.: cabeçalho inserido num arquivo ainda
+  sem título), eles são **preenchidos no primeiro save** assim que a identidade do Git for
+  resolvida — sem nunca sobrescrever um valor que você já tenha digitado.
 - Sem Git, os campos usam o fallback das settings ou ficam vazios — o cabeçalho ainda é
   inserido.
 
