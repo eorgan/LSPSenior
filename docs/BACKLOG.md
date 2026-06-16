@@ -176,7 +176,7 @@ Fontes para extração:
 
 ---
 
-## 4. Melhorar dobramento (folding) de código
+## 4. Melhorar dobramento (folding) de código — ✅ Concluído (v1.10.0)
 
 **Contexto:** o folding atual dobra `Inicio` → `Fim;`, mas a dobra começa **dentro** do bloco
 (no `Inicio`). Quando a função é colapsada, o preview mostra "Inicio" — pouco informativo.
@@ -207,7 +207,25 @@ Tudo via `FoldingRangeProvider` (já registrado em `extension.js`) + ajuste em
 
 ### Critério de pronto
 
-- [ ] Colapsar uma função mostra `Funcao Nome(); …` no preview (não `Inicio`).
-- [ ] `Cmd+K Cmd+8` (Fold All Regions) colapsa todas as seções `@-- ... --@`.
-- [ ] Sem regressões em arquivos com `Se/Senao/Para/Enquanto` aninhados.
-- [ ] Idempotente: dobrar/desdobrar várias vezes não corrompe estado.
+- [x] Colapsar uma função mostra `Funcao Nome(); …` no preview (não `Inicio`).
+- [x] `Cmd+K Cmd+8` (Fold All Regions) colapsa todas as seções `@-- ... --@`.
+- [x] Sem regressões em arquivos com `Se/Senao/Para/Enquanto` aninhados.
+- [x] Idempotente: dobrar/desdobrar várias vezes não corrompe estado.
+
+### ✅ Resolução (v1.10.0)
+
+`provideFoldingRanges` reescrito em [extension.js](../extension.js): varredura linha a linha
+com pilha de blocos + `pendingHeader` (cabeçalho `Funcao`/`Se`/`Senao`/`Para`/`Enquanto`
+pareado ao próximo `Inicio`/`{`) + `sectionStart` para seções. Decisões aplicadas:
+
+- **Preview** começa no cabeçalho da função/controle (não em `Inicio`); linhas em branco
+  entre cabeçalho e `Inicio`/`{` são suportadas.
+- **Seções `@-- ... --@`** dobradas como `FoldingRangeKind.Region`, da marcação até logo
+  antes do próximo banner (ou EOF, sem linhas em branco finais). **Refinamento de
+  implementação:** só banners ancorados na **coluna 0** (`^@--`) viram seção — os arquivos
+  reais têm muitos comentários `@-- ... --@` **indentados** dentro de funções (notas inline)
+  que **não** devem dobrar. A regex original `^\s*@--` os transformaria em seções, quebrando
+  a UX. Validado nos 6 arquivos de `Exemplos de Arquivos/` (0 blocos não fechados, 0
+  sobreposições impróprias — o padrão `} Senao {` gera folds irmãos válidos).
+- **`folding.markers` removido** de `language-configuration.json` (fonte única no provider).
+- Funções só com `Definir Funcao Nome();` (sem corpo) **não** dobram.

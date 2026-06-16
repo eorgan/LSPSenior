@@ -859,14 +859,24 @@ function activate(context) {
       },
    });
 
-   // 6. FOLDING — blocos Inicio ... Fim
+   // 6. FOLDING — funções/blocos (Inicio…Fim, {…}) + seções @-- ... --@
+   //    Banner de seção: linha INTEIRA é um comentário @-- ... --@ ancorado na coluna 0.
+   //    Comentários @-- ... --@ indentados são notas inline e NÃO viram dobra de seção.
+   const SECTION_RE = /^@--.*--@\s*$/;
+   const HEADER_RE = /^\s*(Funcao|Se|Senao(?:\s+Se)?|Para|Enquanto)\b/i;
    const foldingProvider = vscode.languages.registerFoldingRangeProvider('lspt', {
       provideFoldingRanges(document) {
          const ranges = [];
-         const stack = [];
+         const stack = []; // linhas de início de cada bloco aberto (Inicio/{)
+         let pendingHeader = null; // cabeçalho de controle/Funcao ainda não pareado a Inicio/{
+         let sectionStart = null; // linha do último banner @-- ... --@
          let inBlockComment = false;
-         for (let i = 0; i < document.lineCount; i++) {
+         const lineCount = document.lineCount;
+
+         for (let i = 0; i < lineCount; i++) {
             let raw = document.lineAt(i).text;
+
+            // Comentário de bloco /* ... */ multi-linha: ignora o miolo inteiro.
             if (inBlockComment) {
                const end = raw.indexOf('*/');
                if (end === -1) continue;
@@ -878,17 +888,56 @@ function activate(context) {
                raw = raw.slice(0, ob);
                inBlockComment = true;
             }
+
+            // 1. Banner de seção: fecha a seção anterior e abre uma nova.
+            if (SECTION_RE.test(raw)) {
+               if (sectionStart !== null && i - 1 > sectionStart) {
+                  ranges.push(new vscode.FoldingRange(sectionStart, i - 1, vscode.FoldingRangeKind.Region));
+               }
+               sectionStart = i;
+               continue;
+            }
+
             const line = stripCommentsAndStrings(raw);
-            const re = /\b(Inicio)\b|\b(Fim)\b/gi;
+
+            // 2. Cabeçalho de bloco (Funcao/Se/Senao/Para/Enquanto): guarda a linha do header.
+            const isHeader = HEADER_RE.test(line);
+            if (isHeader) pendingHeader = i;
+
+            // 3/4. Aberturas (Inicio, {) e fechamentos (Fim, }) na ordem em que surgem.
+            let touchedBlock = false;
+            const tok = /\bInicio\b|\bFim\b|\{|\}/gi;
             let m;
-            while ((m = re.exec(line)) !== null) {
-               if (m[1]) stack.push(i);
-               else if (m[2]) {
-                  const start = stack.pop();
-                  if (start !== undefined && i > start) ranges.push(new vscode.FoldingRange(start, i));
+            while ((m = tok.exec(line)) !== null) {
+               touchedBlock = true;
+               const t = m[0];
+               if (t === '{' || /^Inicio$/i.test(t)) {
+                  const startLine = pendingHeader !== null ? pendingHeader : i;
+                  pendingHeader = null;
+                  stack.push(startLine);
+               } else {
+                  const startLine = stack.pop();
+                  if (startLine !== undefined && i > startLine) {
+                     ranges.push(new vscode.FoldingRange(startLine, i));
+                  }
                }
             }
+
+            // 5. Linha "regular" descarta cabeçalho órfão (não polui o próximo Inicio/{).
+            if (!isHeader && !touchedBlock && line.trim() !== '' && pendingHeader !== null) {
+               pendingHeader = null;
+            }
          }
+
+         // 6. Fecha a última seção até o fim do arquivo, sem incluir linhas em branco finais.
+         if (sectionStart !== null) {
+            let end = lineCount - 1;
+            while (end > sectionStart && document.lineAt(end).text.trim() === '') end--;
+            if (end > sectionStart) {
+               ranges.push(new vscode.FoldingRange(sectionStart, end, vscode.FoldingRangeKind.Region));
+            }
+         }
+
          return ranges;
       },
    });

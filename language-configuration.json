@@ -107,12 +107,6 @@
          "'"
       ]
    ],
-   "folding": {
-      "markers": {
-         "start": "^\\s*@--.*--@|Inicio|Se\\(|Enquanto\\(|Para\\(|Funcao",
-         "end": "Fim;?"
-      }
-   },
    "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
    "indentationRules": {
       "increaseIndentPattern": "^.*\\b(Inicio|Se\\(|Senao|Senao\\s+Se\\(|Enquanto\\(|Para\\(|Funcao)\\b.*$",

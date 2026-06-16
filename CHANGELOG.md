@@ -8,6 +8,26 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.10.0] - 2026-06-16
+
+### ✨ Adicionado
+- **Dobramento (folding) reescrito e centralizado no provider.** O *preview* da dobra de
+  uma função agora mostra o **cabeçalho** (`Funcao Nome(); ⋯`) em vez de `Inicio ⋯`. O mesmo
+  vale para `Se`/`Senao`/`Para`/`Enquanto`: a dobra começa na linha do controle, mesmo que o
+  `{`/`Inicio` esteja em linha seguinte (linhas em branco no meio são suportadas).
+- **Dobramento de seções `@-- ... --@`.** Banners de seção ancorados na **coluna 0**
+  (ex.: `@-- Declarar Variaveis --@`) viram **regiões dobráveis** (`FoldingRangeKind.Region`),
+  da marcação até logo antes do próximo banner (ou fim do arquivo). Permite colapsar todas as
+  seções de uma vez com **Fold All Regions** (`Cmd+K Cmd+8`). Comentários `@-- ... --@`
+  **indentados** (notas inline) **não** viram dobra.
+- **Suporte a blocos com chaves `{`/`}`** (estilo `Se(cond) { ... }`) além de `Inicio`/`Fim`,
+  com aninhamento em qualquer profundidade.
+
+### 🐛 Corrigido
+- Removido o bloco `folding.markers` mal pareado de `language-configuration.json` (os markers
+  `Se(`/`Enquanto(`/`Para(`/`Funcao` e `@--...--@` não pareavam com `Fim;`, gerando dobras
+  fantasmas). O *folding* passa a sair **exclusivamente** do provider — fonte única de verdade.
+
 ## [1.9.0] - 2026-06-16
 
 ### ✨ Adicionado

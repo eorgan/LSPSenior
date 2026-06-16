@@ -30,7 +30,7 @@ Resumo dos recursos:
 - **Autocomplete** de 600+ funções, palavras reservadas e variáveis de sistema (com ou sem `Dev.`)
 - **Signature help** e **hover** com descrição de parâmetros, valores de retorno e link para a doc oficial
 - **Linter** que avisa sobre as armadilhas da LSP (operação dentro de parâmetro, `Pare`/`Continue` fora de loop)
-- **Outline** das funções do arquivo, **folding** de blocos `Inicio`/`Fim`
+- **Outline** das funções do arquivo, **folding** inteligente — funções (preview mostra `Funcao Nome();`), blocos `Se`/`Senao`/`Para`/`Enquanto` (`Inicio`/`Fim` e `{`/`}`) e seções `@-- ... --@` como regiões dobráveis (`Cmd+K Cmd+8`)
 - **Format Document** — reindentação conservadora (só o recuo à esquerda) no estilo do projeto, com `lspt.format.indentSize` configurável
 - **Ir para definição** (funções do usuário no arquivo e doc oficial das built-in)
 - **Hover de variáveis de sistema** (`DatSis`, `CodEmp`, ...)
