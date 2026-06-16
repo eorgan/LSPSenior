@@ -24,11 +24,11 @@ Tradeoff aceito: o ID da extensão mudou de `eliezer-organ.lspt-language-support
 
 | Extensão | Versão | Papel |
 |----------|--------|-------|
-| `eorgan.lspt-language-support` | 1.5.7 | **Canônica/nova.** Namespace = ID do GitHub. |
+| `eorgan.lspt-language-support` | 1.7.1 | **Canônica.** Namespace = ID do GitHub. **Verificado ✅** |
 | `eliezer-organ.lspt-language-support` | 1.5.8 | Antiga, mantida viva com **aviso de migração**. |
 
 No `package.json`: `publisher: "eorgan"`, `repository.url: github.com/eorgan/LSPSenior`,
-versão `1.5.7`.
+versão `1.7.1`.
 
 ## Aviso de migração (na extensão antiga)
 
@@ -60,9 +60,9 @@ reverter com `git checkout package.json`.
 
 ## Pendências
 
-- [x] **Claim do namespace `eorgan`** (Opção 3) aberta em
-  https://github.com/EclipseFdn/open-vsx.org/issues — aguardando aprovação dos
-  mantenedores (a verificação fica `verified: false` até aprovarem).
+- [x] **Claim do namespace `eorgan` aprovada** — `verified: true` confirmado pela API do
+  Open VSX (`GET /api/eorgan/lspt-language-support`). O aviso de "publisher não verificado"
+  não aparece mais para novos instaladores.
 - [x] **Rotacionado/revogado** o token Open VSX antigo; `.env` atualizado com o novo.
 - [ ] (Opcional) Pedir remoção da `eliezer-organ.lspt-language-support` aos admins do
   Open VSX no futuro (o `ovsx` não tem `unpublish`).
