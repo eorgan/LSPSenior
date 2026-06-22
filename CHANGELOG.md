@@ -8,6 +8,15 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.11.4] - 2026-06-22
+
+### 📝 Documentação
+- **README** atualizado: linter agora menciona `SQL_AbrirCursor` sem fechamento na lista de
+  checagens; seção de configurações inclui `lspt.diagnostics.sqlCursorLeak`.
+- **Backlog** (item 5) marcado como concluído com resolução documentada.
+
+---
+
 ## [1.11.3] - 2026-06-22
 
 ### 🐛 Corrigido
