@@ -572,6 +572,7 @@ function computeDiagnostics(document) {
    const cursorScopes = [];
    const funcScopeDepths = [];
    let pendingFuncao = false;
+   const rootCursorScope = new Map();
 
    for (let lineNo = 0; lineNo < document.lineCount; lineNo++) {
       let raw = document.lineAt(lineNo).text;
@@ -645,8 +646,10 @@ function computeDiagnostics(document) {
       }
 
       // --- Rastreamento de cursor SQL (leak detector) ---
-      if (sqlCursorLeakEnabled && cursorScopes.length > 0) {
-         const currentScope = cursorScopes[cursorScopes.length - 1];
+      if (sqlCursorLeakEnabled) {
+         const currentScope = cursorScopes.length > 0
+            ? cursorScopes[cursorScopes.length - 1]
+            : rootCursorScope;
          const abrirM = /\bSQL_AbrirCursor\s*\(/i.exec(line);
          if (abrirM) {
             const openIdx = abrirM.index + abrirM[0].length - 1;
@@ -704,6 +707,20 @@ function computeDiagnostics(document) {
                )
             );
          }
+      }
+   }
+
+   // Emite warnings para cursores abertos no nível raiz (fora de qualquer função)
+   if (sqlCursorLeakEnabled) {
+      for (const [cursor, openLine] of rootCursorScope) {
+         const lineLen = document.lineAt(openLine).text.length;
+         diags.push(
+            new vscode.Diagnostic(
+               new vscode.Range(openLine, 0, openLine, lineLen),
+               `Cursor '${cursor}' aberto com SQL_AbrirCursor mas não fechado com SQL_FecharCursor/SQL_Destruir.`,
+               vscode.DiagnosticSeverity.Warning
+            )
+         );
       }
    }
 

@@ -8,6 +8,16 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.11.3] - 2026-06-22
+
+### 🐛 Corrigido
+- **Linter cursor SQL:** detecção estendida para código fora de funções (nível raiz do arquivo).
+  Antes, `SQL_AbrirCursor` sem `SQL_FecharCursor`/`SQL_Destruir` só gerava aviso dentro de
+  blocos `Funcao...Inicio...Fim`; agora também cobre scripts que executam cursores diretamente
+  no escopo raiz.
+
+---
+
 ## [1.11.2] - 2026-06-22
 
 ### ✨ Adicionado
