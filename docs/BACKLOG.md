@@ -2,8 +2,7 @@
 
 Ideias aprovadas para implementar depois (não priorizadas no código ainda).
 
-> **Concluídos:** itens 1 (v1.8.0 + bugfix v1.8.1) e 2 (v1.9.0) — ver entradas abaixo.
-> **Em aberto:** itens 3 e 4.
+> **Todos os itens (1–5) concluídos.**
 
 ---
 
@@ -226,7 +225,66 @@ Tudo via `FoldingRangeProvider` (já registrado em `extension.js`) + ajuste em
 - [x] Sem regressões em arquivos com `Se/Senao/Para/Enquanto` aninhados.
 - [x] Idempotente: dobrar/desdobrar várias vezes não corrompe estado.
 
-### ✅ Resolução (v1.10.0)
+---
+
+## 5. Linter: detectar cursor `SQL_*` aberto sem fechar — ✅ Concluído (v1.11.2 + v1.11.3)
+
+**Contexto:** ao catalogar as APIs `SQL_*` (item 3, v1.11.0), anotamos como item futuro
+uma checagem leve: se `SQL_AbrirCursor` é chamado em uma função sem um `SQL_FecharCursor`
+ou `SQL_Destruir` correspondente no mesmo escopo, o cursor vaza recursos.
+
+**Objetivo:** emitir um `Warning` no linter (`computeDiagnostics`) apontando a linha do
+`SQL_AbrirCursor` que não tem fechamento correspondente dentro da mesma função.
+
+### Viabilidade — ✅ possível (baixo risco)
+
+O linter em `extension.js:computeDiagnostics` já tem:
+- Pilha de blocos (`blockStack`) para rastrear `Inicio`/`Fim` e `{`/`}`
+- `stripCommentsAndStrings` para ignorar texto em strings/comentários
+- `extractArgs` para obter o 1º argumento de uma chamada de função
+
+A adição é: rastrear mudança de escopo de função (detectar `Funcao` + `Inicio` e o `Fim`
+correspondente) e, em cada escopo, manter um `Map<cursorVar → lineNo>` de cursores abertos.
+Ao fechar o escopo, qualquer cursor ainda no map vira Warning.
+
+### Pontos a decidir (todos pré-decididos)
+
+- **Escopo:** por função (`Funcao X()` → `Fim;`) **e** no nível raiz do arquivo (código
+  fora de qualquer função). Cursor aberto e não fechado = bug.
+- **Identificação do cursor:** 1º argumento de `SQL_AbrirCursor(X)`. Se for expressão
+  complexa (espaços/operadores), ignorar (conservador, sem falso positivo).
+- **Fechamento:** `SQL_FecharCursor(X)` **ou** `SQL_Destruir(X)` com o mesmo 1º argumento
+  (case-insensitive, trim).
+- **Setting:** `lspt.diagnostics.sqlCursorLeak` (boolean, padrão `true`), listado em
+  `contributes.configuration` do `package.json`.
+- **Severidade:** `Warning`.
+- **Mensagem:** `"Cursor '${cursor}' aberto com SQL_AbrirCursor mas não fechado com SQL_FecharCursor/SQL_Destruir nesta função."`
+
+### Critério de pronto
+
+- [x] Warning aparece na linha do `SQL_AbrirCursor` quando não há fechamento na mesma função.
+- [x] Sem falso positivo quando o cursor **é** fechado (mesmo nome, mesma função).
+- [x] `lspt.diagnostics.sqlCursorLeak: false` desabilita a checagem.
+- [x] Sem regressão nas checagens existentes (Pare/Continue e operações em parâmetros).
+- [x] Validado nos arquivos de `Exemplos de Arquivos/` (0 warnings indevidos).
+- [x] Cobertura estendida para código no nível raiz do arquivo (v1.11.3).
+
+---
+
+### ✅ Resolução (v1.11.2 + v1.11.3)
+
+- **`extension.js:computeDiagnostics`** estendido com pilha de escopos de função
+  (`cursorScopes`, `funcScopeDepths`) e mapa raiz (`rootCursorScope`).
+- Ao detectar `Funcao` + `Inicio`: abre escopo. Ao detectar `Fim` pareado: fecha escopo e
+  emite Warning para cada cursor ainda aberto na linha onde foi aberto.
+- Cursores no nível raiz rastreados em `rootCursorScope`; warnings emitidos ao final do
+  arquivo (v1.11.3).
+- Item 3's optional checkbox "linter reconhece `SQL_*`/`Http*` para checagens específicas"
+  entregue neste item.
+
+---
+
+### ✅ Resolução (v1.10.0) — item 4: Folding
 
 `provideFoldingRanges` reescrito em [extension.js](../extension.js): varredura linha a linha
 com pilha de blocos + `pendingHeader` (cabeçalho `Funcao`/`Se`/`Senao`/`Para`/`Enquanto`

@@ -29,7 +29,7 @@ Resumo dos recursos:
 
 - **Autocomplete** de 647+ funções (regras + APIs `SQL_*` de cursor e `Http*` de requisição), palavras reservadas e variáveis de sistema (com ou sem `Dev.`)
 - **Signature help** e **hover** com descrição de parâmetros, valores de retorno e link para a doc oficial
-- **Linter** que avisa sobre as armadilhas da LSP (operação dentro de parâmetro, `Pare`/`Continue` fora de loop)
+- **Linter** que avisa sobre as armadilhas da LSP (operação dentro de parâmetro, `Pare`/`Continue` fora de loop, `SQL_AbrirCursor` sem `SQL_FecharCursor`/`SQL_Destruir`)
 - **Outline** das funções do arquivo, **folding** inteligente — funções (preview mostra `Funcao Nome();`), blocos `Se`/`Senao`/`Para`/`Enquanto` (`Inicio`/`Fim` e `{`/`}`) e seções `@-- ... --@` como regiões dobráveis (`Cmd+K Cmd+8`)
 - **Format Document** — reindentação conservadora (só o recuo à esquerda) no estilo do projeto, com `lspt.format.indentSize` configurável
 - **Ir para definição** (funções do usuário no arquivo e doc oficial das built-in)
@@ -797,6 +797,8 @@ A extensão funciona automaticamente ao abrir arquivos `.lspt` ou `.lsp`. Não r
 {
   // Avisos em tempo real das armadilhas da LSP (padrão: ativado)
   "lspt.diagnostics.enabled": true,
+  // Aviso de cursor SQL aberto sem SQL_FecharCursor/SQL_Destruir (padrão: ativado)
+  "lspt.diagnostics.sqlCursorLeak": true,
   // Sinalizar funções não encontradas no catálogo (padrão: desativado — pode dar
   // falso-positivo com funções do usuário/externas)
   "lspt.diagnostics.unknownFunctions": false

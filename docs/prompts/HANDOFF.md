@@ -39,9 +39,7 @@ Registro de progresso entre sessões. Cada item do backlog é implementado em um
 - ✅ `node --check extension.js`, JSONs válidos, lógica de data/regex/idempotência testada
   isoladamente.
 - ✅ Teste manual do usuário no 1.8.0 (que revelou o bug acima, já corrigido no 1.8.1).
-- ⏳ **Re-testar o 1.8.1 no VS Code/Antigravity:** inserir cabeçalho em `.lsp` novo (Author/
-  Email preenchidos), salvar arquivo com campos vazios (backfill), e os demais pontos da
-  seção "Validação" do prompt 01 (pasta sem Git, `autoUpdate:false`).
+- ✅ Validação manual no Antigravity concluída pelo usuário (releases 1.8.1–1.11.1).
 
 ### Notas / dívidas deixadas (fora do escopo do item 1)
 - `docs/prompts/` está sendo **incluído no `.vsix`** (a pasta nova não está no
@@ -129,11 +127,35 @@ Registro de progresso entre sessões. Cada item do backlog é implementado em um
 
 ---
 
+## ✅ Item 5 — Linter: cursor `SQL_AbrirCursor` sem fechamento — **CONCLUÍDO (1.11.2 + 1.11.3)**
+
+- **Release atual:** `1.11.3`, publicado no Open VSX (`eorgan.lspt-language-support v1.11.3`).
+- **Prompt usado:** [05-linter-sql-cursor.md](05-linter-sql-cursor.md).
+
+### O que entregou
+- **Linter detecta `SQL_AbrirCursor` sem `SQL_FecharCursor`/`SQL_Destruir` correspondente**
+  no mesmo escopo, tanto dentro de funções (`Funcao...Inicio...Fim`) quanto no nível raiz
+  do arquivo (código fora de qualquer função).
+- Rastreamento por escopo: `cursorScopes` (pilha de Maps para funções) + `rootCursorScope`
+  (Map para o nível raiz). O 1º argumento é normalizado (`trim().toLowerCase()`); argumentos
+  complexos são ignorados (conservador, sem falso positivo).
+- **Nova configuração `lspt.diagnostics.sqlCursorLeak`** (boolean, padrão `true`) permite
+  desabilitar individualmente sem desativar o linter inteiro.
+- Warning na **linha do `SQL_AbrirCursor`**, colunas 0–fim.
+
+### Validação feita
+- ✅ Exemplos reais em `Exemplos de Arquivos/` — 0 warnings indevidos.
+- ✅ Caso leak em função → Warning correto.
+- ✅ Caso leak no nível raiz → Warning correto (1.11.3).
+- ✅ `SQL_Destruir` sem `SQL_FecharCursor` também suprime o warning.
+
+---
+
 ## 🎉 Backlog concluído
 
-Os quatro itens de [../BACKLOG.md](../BACKLOG.md) estão entregues: item 1 (cabeçalho, 1.8.x),
-item 2 (formatter, 1.9.0), item 4 (folding, 1.10.0) e item 3 (APIs `SQL_*`/`Http*`, 1.11.0).
+Os cinco itens de [../BACKLOG.md](../BACKLOG.md) estão entregues: item 1 (cabeçalho, 1.8.x),
+item 2 (formatter, 1.9.0), item 4 (folding, 1.10.0), item 3 (APIs `SQL_*`/`Http*`, 1.11.0)
+e item 5 (linter cursor leak, 1.11.2–1.11.3).
 
 ### Dívidas/notas ainda abertas
 - (Resolvida em 1.11.0) ~~`docs/prompts/` incluído no `.vsix`~~ — agora no `.vscodeignore`.
-- Possível item futuro: linter específico para ciclo de cursor `SQL_*` (ver acima).
