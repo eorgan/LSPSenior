@@ -8,6 +8,18 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.11.2] - 2026-06-22
+
+### ✨ Adicionado
+- **Linter: detecção de cursor SQL sem fechamento.** O `computeDiagnostics` agora rastreia
+  chamadas a `SQL_AbrirCursor(cursorVar)` por escopo de função e emite `Warning` quando a
+  função termina (`Fim`) sem um `SQL_FecharCursor(cursorVar)` ou `SQL_Destruir(cursorVar)`
+  correspondente no mesmo escopo.
+- **Nova configuração `lspt.diagnostics.sqlCursorLeak`** (boolean, default `true`) para
+  habilitar/desabilitar o aviso individualmente sem desativar o linter inteiro.
+
+---
+
 ## [1.11.1] - 2026-06-22
 
 ### 🐛 Corrigido

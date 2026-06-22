@@ -568,6 +568,10 @@ function computeDiagnostics(document) {
    const blockStack = [];
    let pendingLoop = false;
    let inBlockComment = false;
+   const sqlCursorLeakEnabled = cfg.get('diagnostics.sqlCursorLeak', true);
+   const cursorScopes = [];
+   const funcScopeDepths = [];
+   let pendingFuncao = false;
 
    for (let lineNo = 0; lineNo < document.lineCount; lineNo++) {
       let raw = document.lineAt(lineNo).text;
@@ -587,6 +591,11 @@ function computeDiagnostics(document) {
 
       const line = stripCommentsAndStrings(raw);
 
+      // Detecta início de definição de função para abrir escopo de cursor
+      if (sqlCursorLeakEnabled && /\bFuncao\b/i.test(line)) {
+         pendingFuncao = true;
+      }
+
       // --- Estrutura de blocos para validar Pare/Continue ---
       const tokenRe = /(\{)|(\})|\b(Inicio)\b|\b(Fim)\b|\b(Pare)\b|\b(Continue)\b|\b(?:Para|Enquanto)\s*\(/gi;
       let tk;
@@ -595,8 +604,28 @@ function computeDiagnostics(document) {
             // abre bloco ( { ou Inicio )
             blockStack.push(pendingLoop ? 'loop' : 'block');
             pendingLoop = false;
+            if (sqlCursorLeakEnabled && tk[3] && pendingFuncao) {
+               cursorScopes.push(new Map());
+               funcScopeDepths.push(blockStack.length);
+               pendingFuncao = false;
+            }
          } else if (tk[2] || tk[4]) {
             // fecha bloco ( } ou Fim )
+            if (sqlCursorLeakEnabled && tk[4] && cursorScopes.length > 0 &&
+                blockStack.length === funcScopeDepths[funcScopeDepths.length - 1]) {
+               funcScopeDepths.pop();
+               const scope = cursorScopes.pop();
+               for (const [cursor, openLine] of scope) {
+                  const lineLen = document.lineAt(openLine).text.length;
+                  diags.push(
+                     new vscode.Diagnostic(
+                        new vscode.Range(openLine, 0, openLine, lineLen),
+                        `Cursor '${cursor}' aberto com SQL_AbrirCursor mas não fechado com SQL_FecharCursor/SQL_Destruir nesta função.`,
+                        vscode.DiagnosticSeverity.Warning
+                     )
+                  );
+               }
+            }
             blockStack.pop();
          } else if (tk[5] || tk[6]) {
             // Pare / Continue
@@ -612,6 +641,27 @@ function computeDiagnostics(document) {
          } else {
             // cabeçalho de loop Para(/Enquanto(
             pendingLoop = true;
+         }
+      }
+
+      // --- Rastreamento de cursor SQL (leak detector) ---
+      if (sqlCursorLeakEnabled && cursorScopes.length > 0) {
+         const currentScope = cursorScopes[cursorScopes.length - 1];
+         const abrirM = /\bSQL_AbrirCursor\s*\(/i.exec(line);
+         if (abrirM) {
+            const openIdx = abrirM.index + abrirM[0].length - 1;
+            const firstArg = extractArgs(line, openIdx).split(',')[0].trim();
+            if (/^[A-Za-z_]\w*$/.test(firstArg)) {
+               currentScope.set(firstArg.toLowerCase(), lineNo);
+            }
+         }
+         const fecharM = /\b(?:SQL_FecharCursor|SQL_Destruir)\s*\(/i.exec(line);
+         if (fecharM) {
+            const openIdx = fecharM.index + fecharM[0].length - 1;
+            const firstArg = extractArgs(line, openIdx).split(',')[0].trim();
+            if (/^[A-Za-z_]\w*$/.test(firstArg)) {
+               currentScope.delete(firstArg.toLowerCase());
+            }
          }
       }
 

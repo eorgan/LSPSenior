@@ -2,7 +2,7 @@
    "name": "lspt-language-support",
    "displayName": "LSPT Language Support",
    "description": "Suporte completo para a linguagem LSP (Linguagem Senior de Programação) com syntax highlighting, snippets, IntelliSense e autocomplete para 640+ funções built-in (incluindo APIs SQL_* de cursor e Http* de requisição)",
-   "version": "1.11.1",
+   "version": "1.11.2",
    "publisher": "eorgan",
    "author": {
       "name": "Eliezer Organ",
@@ -87,6 +87,11 @@
                "type": "boolean",
                "default": false,
                "description": "Sinaliza chamadas a funções não encontradas no catálogo (pode gerar falso-positivo com funções do usuário/externas)."
+            },
+            "lspt.diagnostics.sqlCursorLeak": {
+               "type": "boolean",
+               "default": true,
+               "description": "Avisar quando um cursor SQL_AbrirCursor não for fechado com SQL_FecharCursor ou SQL_Destruir na mesma função."
             },
             "lspt.header.autoUpdate": {
                "type": "boolean",
