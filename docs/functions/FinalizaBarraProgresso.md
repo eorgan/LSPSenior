@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Finaliza a tela de barra de progresso.
+Finaliza e fecha a barra de progresso.
 
 ## Parâmetros
 

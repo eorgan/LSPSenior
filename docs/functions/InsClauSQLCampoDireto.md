@@ -11,19 +11,17 @@ N/A
 
 ## Descrição
 
-Esta função insere um campo novo no SELECT que poderá ser utilizado para agrupamentos e outros tipos de funções. Para associar este campo inserido no SQL com um controle do tipo **CADASTRO**, deve ser inserida uma descrição composta do prefixo **REQUERIDO_** junto ao nome passado pela função, na propriedade **NOME CAMPO** deste controle. Desta forma, quando o gerador executar o relatório, o valor será procurado e associado normalmente ao controle **CADASTRO**.
+Insere um campo novo no SELECT que poderá ser utilizado para agrupamentos e outros tipos de funções.
 
 ## Parâmetros
 
-- **SectionName** (`Alfa`) - Entrada: Nome da seção que contém o select onde o campo será inserido
-- **Campo** (`Alfa`) - Entrada: Campo a ser inserido
+- **SectionName** (`Alfa`) - Entrada: Nome da seção onde será inserido o campo
+- **Campo** (`Alfa`) - Entrada: Campo a ser inserido no SELECT
 
 ## Exemplo de Uso
 
 ```lspt
-InsClauSQLGroupBy ("Detalhe_1", "NUMEMP,
- TIPCOL, NUMCAD");
-InsClauSQLCampoDireto ("Detalhe_1", "Max(ValSal) ValorSal");
+InsClauSQLCampoDireto("Detalhe_1", "Max(ValSal) ValorSal");
 ```
 
 ## Fonte

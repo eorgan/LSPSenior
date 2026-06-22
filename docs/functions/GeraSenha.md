@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Retorna uma sequência de caracteres alfanuméricos aleatoriamente.
+Gera uma senha aleatória com caracteres alfanuméricos.
 
 ## Parâmetros
 
@@ -21,11 +21,42 @@ Retorna uma sequência de caracteres alfanuméricos aleatoriamente.
 ## Exemplo de Uso
 
 ```lspt
-Definir Alfa aSenha;
-@ GERANDO A SENHA DE 8 CARACTERES. @
-GeraSenha(8, aSenha);
-@ RETORNANDO UMA MENSAGEM COM A SENHA GERADA. @
-Mensagem(Retorna, aSenha);
+Definir Funcao criarSessaoSegura();
+
+@ Variáveis globais @
+Definir Alfa vaUsuario;
+Definir Alfa vaNonce;
+Definir Alfa vaTokenSessao;
+Definir Alfa vaSenhaTemporaria;
+Definir Alfa vaChaveSeguranca;
+
+vaUsuario = "joao.silva";
+
+criarSessaoSegura();
+
+Funcao criarSessaoSegura(); {
+  Definir Alfa vaMensagem;
+
+  @ 1. Gera nonce para a sessão @
+  GerarNonce(vaNonce);
+
+  @ 2. Gera token de sessão @
+  GeraToken(32, vaTokenSessao);
+
+  @ 3. Gera senha temporária @
+  GeraSenha(12, vaSenhaTemporaria);
+
+  @ 4. Cria chave de segurança combinada @
+  vaChaveSeguranca = vaUsuario + ":" + vaNonce + ":" + vaTokenSessao;
+  
+  @ 5. Registra sessão @
+  vaMensagem = "Sessão criada para: " + vaUsuario;
+  Mensagem(Retorna, vaMensagem);
+  vaMensagem = "Token: " + vaTokenSessao;
+  Mensagem(Retorna, vaMensagem);
+  vaMensagem = "Senha temporária: " + vaSenhaTemporaria;
+  Mensagem(Retorna, vaMensagem);
+}
 ```
 
 ## Fonte

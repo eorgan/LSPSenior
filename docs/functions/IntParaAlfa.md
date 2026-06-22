@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Converte um número para formato alfanumérico. Este valor numérico está limitado a até 15 caracteres.
+Converte um valor inteiro para o tipo Alfanumérico.
 
 ## Parâmetros
 
@@ -21,10 +21,11 @@ Converte um número para formato alfanumérico. Este valor numérico está limit
 ## Exemplo de Uso
 
 ```lspt
-Definir Alfa ValfAux;
-IntParaAlfa (VVlrAux,VAlfAux);
-@ Se a variável VVlrAux tivesse o valor 150,50, após o uso
- da função IntParaAlfa a variável VAlfAux teria 150. @
+Definir Numero vnInteiro;
+Definir Alfa vaTexto;
+
+vnInteiro = 123;
+IntParaAlfa(vnInteiro, vaTexto); @ vaTexto será "123" @
 ```
 
 ## Fonte

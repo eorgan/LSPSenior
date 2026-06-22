@@ -11,19 +11,19 @@ N/A
 
 ## Descrição
 
-Esta função monta o comando SQL para consulta em tabelas de histórico que não possuem sequência, com base no campo **Data** destas tabelas. Através do comando gerado, é retornado apenas uma ocorrência do histórico.
+Monta o comando SQL para consulta em tabelas de histórico que não possuem sequência.
 
 ## Parâmetros
 
-- **NomeTabela** (`Alfa`) - Entrada: Parâmetro alfa com o nome da tabela
-- **CampoTabela** (`Alfa`) - Entrada: Parâmetro alfa com o nome do campo da tabela
-- **SQLMontado** (`Alfa End`) - Saída: Parâmetro alfa com o retorno da função (cláusula SQL)
+- **NomeTabela** (`Alfa`) - Entrada: Nome da tabela
+- **CampoTabela** (`Alfa`) - Entrada: Nome do campo da tabela
+- **SQLMontado** (`Alfa End`) - Saída: Retorno da função (cláusula SQL)
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-MontarSQLHisCampo();
+Definir Alfa xauxsql;
+MontarSQLHisCampo("R038HLO", "DatAlt", xauxsql);
 ```
 
 ## Fonte

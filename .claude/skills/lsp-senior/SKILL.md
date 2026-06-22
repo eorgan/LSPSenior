@@ -72,9 +72,9 @@ case-insensitive, então compare nomes ignorando a caixa.
 
 Sempre cheque a `direction` de cada parâmetro: `in` = você fornece; `out` (`end`) = recebe o resultado.
 
-> ⚠️ O `functions.json` cobre ~600 funções de regra, mas **não** inclui as APIs `SQL_*`
-> (cursores) nem `Http*` (requisições). Para essas, use os nomes/forma validados em
-> `reference/quick-reference.md` (extraídos dos exemplos reais `.lspt`).
+> ✅ O `functions.json` cobre ~640 funções, **incluindo agora** as APIs `SQL_*` (cursores,
+> categoria `sql`) e `Http*` (requisições, categoria `http`). Consulte qualquer uma com
+> `python3 scripts/buscar_funcao.py <Nome>`; `reference/quick-reference.md` traz os padrões prontos.
 
 ## 📚 Referência detalhada (carregue sob demanda)
 

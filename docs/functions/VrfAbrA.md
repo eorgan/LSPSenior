@@ -11,12 +11,12 @@ N/A
 
 ## Descrição
 
-Verifica se um determinado valor está contido em uma abrangência especificada.
+Verifica se um valor alfanumérico está dentro de uma abrangência especificada.
 
 ## Parâmetros
 
-- **valor** - Entrada: Caracteres que se deseja procurar dentro de uma abrangência.
-- **abrangencia** - Entrada: Limite definido para busca dos caracteres informados na variável “valor”.
+- **valor** - Entrada: Valor a ser verificado
+- **abrangencia** - Entrada: Abrangência especificada
 
 ## Exemplo de Uso
 

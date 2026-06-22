@@ -15,15 +15,15 @@ Calcula a quantidade convertida de uma unidade de medida (de) para outra unidade
 
 ## Parâmetros
 
-- **aCodPro** (`Alfa`) - Entrada: Variável que indica o código de produto (opcional).
-- **aCodDer** (`Alfa`) - Entrada: Variável que indica o código da derivação (opcional).
-- **aUniMedDe** (`Alfa`) - Entrada: Variável que indica a unidade de medida origem (obrigatório).
-- **aUniMedPara** (`Alfa`) - Entrada: Variável que indica a unidade de medida destino (obrigatório).
-- **aQtde** (`Numero`) - Entrada: Variável que indica a quantidade a ser convertida (obrigatório).
-- **aCodFor** (`Numero`) - Entrada: Variável que indica o código do fornecedor (opcional).
-- **aQtdDec** (`Numero`) - Entrada: Variável que indica a quantidade de decimais usada na conversão (obrigatório), se não sabe-se a precisão, informar 5.
-- **aCodEmp** (`Numero`) - Entrada: Variável que indica o código da empresa (opcional), caso for informado zero, sera utilizado a empresa logada.
-- **aQtdCnv** (`Numero End`) - Saída: Variável que retorna a quantidade convertida da unidade de medida origem para a unidade de medida destino.
+- **aCodPro** (`Alfa`) - Entrada: Variável que indica o código de produto (opcional)
+- **aCodDer** (`Alfa`) - Entrada: Variável que indica o código da derivação (opcional)
+- **aUniMedDe** (`Alfa`) - Entrada: Variável que indica a unidade de medida origem (obrigatório)
+- **aUniMedPara** (`Alfa`) - Entrada: Variável que indica a unidade de medida destino (obrigatório)
+- **aQtde** (`Numero`) - Entrada: Variável que indica a quantidade a ser convertida (obrigatório)
+- **aCodFor** (`Numero`) - Entrada: Variável que indica o código do fornecedor (opcional)
+- **aQtdDec** (`Numero`) - Entrada: Variável que indica a quantidade de decimais usada na conversão (obrigatório), se não sabe-se a precisão, informar 5
+- **aCodEmp** (`Numero`) - Entrada: Variável que indica o código da empresa (opcional), caso for informado zero, será utilizado a empresa logada
+- **aQtdCnv** (`Numero End`) - Saída: Variável que retorna a quantidade convertida da unidade de medida origem para a unidade de medida destino
 
 ## Valores de Retorno
 
@@ -32,8 +32,9 @@ Calcula a quantidade convertida de uma unidade de medida (de) para outra unidade
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ConverteUnidadeMedida();
+Definir Numero vnQtdConv;
+ConverteUnidadeMedida("", "", "KM", "M", 100, 0, 3, 0, vnQtdConv);
+@ vnQtdConv será 100000 (100 km = 100000 metros) @
 ```
 
 ## Fonte

@@ -11,25 +11,29 @@ N/A
 
 ## Descrição
 
-Nota Função disponível para os sistemas Gestão Empresarial PME | GO UP, Gestão Empresarial | ERP, Gestão de Pessoas | HCM e Ronda Senior. Esta função altera a codificação de um texto contido em uma variável, onde este texto com a codificação alterada pode ser utilizado para comunicação com web services. Se o sistema não suportar a codificação informada, será emitida a seguinte mensagem: "A codificação X não é suportada. Verifique a documentação". Quando o texto possuir algum caractere não suportado pela codificação, a função retornará 1. Caso contrário, a função retornará 0.
+Esta função altera a codificação de um texto contido em uma variável, onde este texto com a codificação alterada pode ser utilizado para comunicação com web services.
 
 ## Parâmetros
 
 - **aString** (`Alfa`) - Entrada: Contém o texto original que necessita ter sua codificação alterada
-- **aCodificacao** (`Alfa`) - Entrada: Nome da codificação para a qual o texto será convertido, suporta as codificações: "UTF-8" ou "WINDOWS-1252"
+- **aCodificacao** (`Alfa`) - Entrada: Nome da codificação para a qual o texto será convertido ("UTF-8" ou "WINDOWS-1252")
 - **aResultado** (`Alfa End`) - Saída: Contém o texto com a codificação alterada
 
 ## Exemplo de Uso
 
 ```lspt
-Definir Alfa xTextoOriginal;
-Definir Alfa xTextoCodificacaoAlterada;
-xRetorno = ConverteCodificacaoString(xTextoOriginal,
-"UTF-8"
-, xTextoCodificacaoAlterada);
-se (xRetorno = 1)
-{
-Mensagem (Retorna, "Encontrado caracteres incompatíveis!");
+Definir Alfa vaTextoOriginal;
+Definir Alfa vaTextoCodificado;
+Definir Numero vnRetorno;
+
+vaTextoOriginal = "Acentuação especial";
+
+vnRetorno = ConverteCodificacaoString(vaTextoOriginal, "UTF-8", vaTextoCodificado);
+
+Se (vnRetorno = 1) {
+  Mensagem(Retorna, "Encontrado caracteres incompatíveis!");
+} Senao {
+  Mensagem(Retorna, "Conversão realizada com sucesso!");
 }
 ```
 

@@ -11,27 +11,30 @@ N/A
 
 ## Descrição
 
-> [!NOTE]
-> Adicione aqui a descrição completa da função.
+Adiciona ou define texto em uma célula específica de um controle tipo grade.
 
 ## Parâmetros
 
-- **ControlName** (`Alfa`) - Entrada: [Adicione descrição]
-- **Linha** (`Numero`) - Entrada: [Adicione descrição]
-- **Coluna** (`Numero`) - Entrada: [Adicione descrição]
-- **Texto** (`Alfa`) - Entrada: [Adicione descrição]
+- **ControlName** (`Alfa`) - Entrada: Nome do controle tipo grade onde será adicionada/setada a linha ou coluna
+- **Linha** (`Numero`) - Entrada: Número da linha onde será adicionado/setado o texto
+- **Coluna** (`Numero`) - Entrada: Número da coluna onde será adicionado/setado o texto
+- **Texto** (`Alfa`) - Entrada: Texto a ser adicionado/setado
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-AdicionaDadosGrade();
+AdicionaDadosGrade("Grade001", 2, 1, "Quarto teste da grade.");
+AdicionaDadosGrade("Grade001", 2, 2, "Gestão Empresarial | ERP da Senior Sistemas.");
+AdicionaDadosGrade("Grade001", 2, 3, "Inconstitucionalicimamentemente.");
+AdicionaDadosGrade("Grade001", 3, 1, "Sétimo teste para ver se imprime certo.");
+AdicionaDadosGrade("Grade001", 3, 2, "Oitavo");
+AdicionaDadosGrade("Grade001", 3, 3, "Nono");
 ```
 
-## Notas
+## Fonte
 
-- Adicione observações importantes sobre o uso da função
+[Documentação oficial Senior](https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerador-de-relatorios/adicionadadosgrade.htm)
 
-## Veja Também
-
-- Lista de funções relacionadas
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

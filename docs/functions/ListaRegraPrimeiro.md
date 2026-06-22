@@ -11,12 +11,12 @@ N/A
 
 ## Descrição
 
-Esta função serve para posicionar para o primeiro registro da lista.
+Posiciona a lista no primeiro registro.
 
 ## Parâmetros
 
-- **aLista** (`Numero`) - Entrada: variável numérica que recebe o endereço da lista
-- **aExecutou** (`Alfa End`) - Saída
+- **aLista** (`Numero`) - Entrada: Identificador da lista
+- **aExecutou** (`Alfa End`) - Saída: Variável alfa que receberá "S" se encontrou registro, "N" se não encontrou
 
 ## Valores de Retorno
 
@@ -25,8 +25,17 @@ Esta função serve para posicionar para o primeiro registro da lista.
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ListaRegraPrimeiro();
+Definir Numero nLista;
+Definir Alfa vaAchou;
+
+ListaRegraPrimeiro(nLista, vaAchou);
+Se (vaAchou = "S") {
+  @ Lista posicionada no primeiro registro @
+  Mensagem(Retorna, "Primeiro registro encontrado");
+} Senao {
+  @ Lista vazia @
+  Mensagem(Retorna, "Lista vazia");
+}
 ```
 
 ## Fonte

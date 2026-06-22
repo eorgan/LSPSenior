@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Exclui um arquivo criado pela função **CriarArquivoTemporario**. Deve ser passado o nome completo do arquivo conforme retornado da função anterior. Somente podem ser excluídos os arquivos da pasta temporária, se for passado um nome de arquivo que não esteja na pasta temporária, será gerado uma exceção.
+Exclui um arquivo temporário criado anteriormente.
 
 ## Parâmetros
 

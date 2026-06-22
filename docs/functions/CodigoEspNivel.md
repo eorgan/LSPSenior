@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função retorna o código especial de acordo com um determinado nível.
+Retorna o código especial de acordo com um determinado nível.
 
 ## Parâmetros
 

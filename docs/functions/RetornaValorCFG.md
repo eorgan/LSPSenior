@@ -11,27 +11,51 @@ N/A
 
 ## Descrição
 
-Responsável por retornar para a regra o valor de uma determinada chave da Central de Configuração Senior que está sendo utilizada pelo sistema. Esta função recebe um parâmetro do tipo alfanumérico referente ao nome da chave e retorna o valor da chave também em alfanumérico. A função pode ser chamada em qualquer regra de qualquer identificador de regra. Caso o valor da chave esteja em branco, o valor retornado é "( NULO )".
+Responsável por retornar para a regra o valor de uma determinada chave da Central de Configuração Senior que está sendo utilizada pelo sistema.
 
 ## Parâmetros
 
-- **aChave** (`Alfa`) - Entrada: Nome da chave de configuração. Que pode conter: o nome completo, a parte final de uma chave ou então de uma das opções abaixo para retornar o diretório desses recursos:   - LOGS - TBS - Além do diretório, traz o nome do arquivo. - IMAGENS - ARQUIVOS - GRAFICOS - IMPEXP - CONSULTAS - REGRAS - CUBOS - MODELOS - TBS_TRANSLATION_FILTER_FILE   Caso seja informada apenas a parte final do nome da chave, será retornado o valor da primeira chave localizada que contenha a parte final informada.
-- **aRetorno** (`Alfa End`) - Saída: Retorna o valor da chave.
+- **aChave** (`Alfa`) - Entrada: Nome da chave de configuração. Pode conter:
+- **aRetorno** (`Alfa End`) - Saída: Variável que receberá o valor da chave
 
 ## Exemplo de Uso
 
 ```lspt
-Definir Alfa aChave;
-Definir Alfa aRetorno;
-aChave = "LOGS";
-RetornaValorCFG(aChave, aRetorno);
-@Mostra na tela o valor "\\servidor\ERP\Sapiens\Logs", que é o diretório configurado para os logs@
-Mensagem(Retorna, aRetorno);
+Definir Funcao carregarConfiguracoes();
 
-aChave = "com.senior.printers.path";
-RetornaValorCFG(aChave, aRetorno);
-@Mostra na tela o valor "\\servidor\ERP\Impressoras", que é o diretório configurado para as impressoras@
-Mensagem(Retorna, aRetorno);
+@ Variáveis globais @
+Definir Alfa vaChaveTimeout;
+Definir Alfa vaChaveDebug;
+Definir Alfa vaValorTimeout;
+Definir Alfa vaValorDebug;
+Definir Numero vnTimeout;
+
+vaChaveTimeout = "app.timeout.request";
+vaChaveDebug = "app.debug.enabled";
+
+carregarConfiguracoes();
+
+Funcao carregarConfiguracoes(); {
+  Definir Alfa vaMensagem;
+  @ Carrega timeout da requisição @
+  RetornaValorCFG(vaChaveTimeout, vaValorTimeout);
+  Se (TamanhoAlfa(vaValorTimeout) > 0) {
+    AlfaParaInt(vaValorTimeout, vnTimeout);
+    vaMensagem = "Timeout configurado: " + vaValorTimeout + "ms";
+    Mensagem(Retorna, vaMensagem);
+  } Senao {
+    vnTimeout = 30000; @ Padrão: 30 segundos @
+    Mensagem(Retorna, "Timeout não configurado, usando padrão: 30000ms");
+  }
+  
+  @ Carrega modo debug @
+  RetornaValorCFG(vaChaveDebug, vaValorDebug);
+  Se (vaValorDebug = "true") {
+    Mensagem(Retorna, "Modo debug ativado");
+  } Senao {
+    Mensagem(Retorna, "Modo debug desativado");
+  }
+}
 ```
 
 ## Fonte

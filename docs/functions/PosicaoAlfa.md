@@ -11,20 +11,32 @@ N/A
 
 ## Descrição
 
-Procura por uma parte de texto dentro de um campo/variável do tipo **Alfa**, retornando a posição em que o texto inicia.
+Procuram por uma parte de texto dentro de um campo/variável, retornando a posição inicial através de parâmetro.
 
 ## Parâmetros
 
-- **Texto_Pesquisa** - Entrada: Informar entre aspas o texto que se está procurando
-- **Campo_Pesquisa** - Entrada: Nome do campo/variável em que se deseja fazer a procura
-- **Posicao** - Entrada: Retornará a posição inicial do texto procurado, dentro do **Campo_Pesquisa**
+- **Texto_Pesquisa** - Entrada: Texto que se está procurando
+- **Campo_Pesquisa** - Entrada: Campo/variável onde fazer a busca
+- **Posicao** - Entrada: Variável que receberá a posição inicial (0 se não encontrar)
 
 ## Exemplo de Uso
 
 ```lspt
-PosicaoAlfa ("Luis",R034Fun.NomEmp,Vposicao);
-@ Logo, se o nome do empregado fosse, por exemplo, "Ana Luisa Prates", a variável VPosicao retornaria 5. @
-@ Porém se o nome do empregado fosse, por exemplo, "Pedro Silva" a variável Vposicao retornaria 0 (zero). @
+Definir Alfa vaEmail;
+Definir Numero vnPosArroba;
+Definir Numero vnPosPonto;
+
+vaEmail = "usuario@empresa.com.br";
+PosicaoAlfa("@", vaEmail, vnPosArroba);
+PosicaoAlfa(".", vaEmail, vnPosPonto);
+
+Se (vnPosArroba = 0) {
+  Mensagem(Erro, "Email inválido: falta @");
+} Senao Se (vnPosPonto = 0) {
+  Mensagem(Erro, "Email inválido: falta domínio");
+} Senao {
+  Mensagem(Retorna, "Email válido!");
+}
 ```
 
 ## Fonte

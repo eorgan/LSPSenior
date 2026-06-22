@@ -11,24 +11,39 @@ N/A
 
 ## Descrição
 
-Esta função retorna a versão do sistema.
+Esta função retorna a versão do sistema Senior.
 
 ## Parâmetros
 
-- **majorVersion** - Entrada: Versão de primeiro dígito do sistema.
+- **majorVersion** - Entrada: Versão de primeiro dígito do sistema
 - **minorVersion** - Entrada: Versão de segundo dígito do sistema
 - **release** - Entrada: Versão de terceiro dígito do sistema (release)
-- **build** - Entrada: Versão de quarto dígito do sistema (build).
+- **build** - Entrada: Versão de quarto dígito do sistema (build)
 
 ## Exemplo de Uso
 
 ```lspt
-Definir Numero majorVersion;
-Definir Numero minorVersion;
-Definir Numero release;
-Definir Numero build;
-ObterVersaoSistema(majorVersions, minorVersion, release, build);
-@ Após a chamada da função as variáveis informadas conterão a versão do sistema. @
+Definir Numero vnMajorVersion;
+Definir Numero vnMinorVersion;
+Definir Numero vnRelease;
+Definir Numero vnBuild;
+Definir Alfa vaMensagem;
+
+ObterVersaoSistema(vnMajorVersion, vnMinorVersion, vnRelease, vnBuild);
+
+@ Após a chamada da função as variáveis conterão a versão do sistema @
+Definir Alfa vaMajorStr;
+Definir Alfa vaMinorStr;
+Definir Alfa vaReleaseStr;
+Definir Alfa vaBuildStr;
+
+IntParaAlfa(vnMajorVersion, vaMajorStr);
+IntParaAlfa(vnMinorVersion, vaMinorStr);
+IntParaAlfa(vnRelease, vaReleaseStr);
+IntParaAlfa(vnBuild, vaBuildStr);
+
+vaMensagem = "Versão: " + vaMajorStr + "." + vaMinorStr + "." + vaReleaseStr + "." + vaBuildStr;
+Mensagem(Retorna, vaMensagem);
 ```
 
 ## Fonte

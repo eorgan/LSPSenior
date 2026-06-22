@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Procura por um trecho específico dentro de um texto e o substitui, retornando um novo texto.
+Função avançada de substituição com mais opções de controle.
 
 ## Parâmetros
 
@@ -23,8 +23,19 @@ Procura por um trecho específico dentro de um texto e o substitui, retornando u
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-TrocaString();
+Definir Alfa vaTemplate;
+Definir Alfa vaNomeUsuario;
+Definir Alfa vaEmpresa;
+Definir Alfa vaMensagemFinal;
+
+vaTemplate = "Olá __NOME__, bem-vindo à __EMPRESA__!";
+vaNomeUsuario = "João Silva";
+vaEmpresa = "Senior Sistemas";
+
+vaMensagemFinal = vaTemplate;
+TrocaString(vaMensagemFinal, "__NOME__", vaNomeUsuario);
+TrocaString(vaMensagemFinal, "__EMPRESA__", vaEmpresa);
+@ vaMensagemFinal será "Olá João Silva, bem-vindo à Senior Sistemas!" @
 ```
 
 ## Fonte

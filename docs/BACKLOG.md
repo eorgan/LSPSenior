@@ -138,7 +138,7 @@ nível abaixo do `{` — estilo peculiar, reprodutível mas opinativo.
 
 ---
 
-## 3. Catalogar APIs `SQL_*` e `Http*` em `functions.json`
+## 3. Catalogar APIs `SQL_*` e `Http*` em `functions.json` — ✅ Concluído (v1.11.0)
 
 **Contexto:** descoberto durante a evolução da skill lsp-senior — o `functions.json`
 cobre ~600 funções de regra, mas **não** inclui as APIs `SQL_*` (cursores) nem `Http*`
@@ -168,11 +168,25 @@ Fontes para extração:
 
 ### Critério de pronto
 
-- [ ] `SQL_*` e `Http*` aparecem em autocomplete/hover/signature como as demais.
-- [ ] Doc rica (descrição + params + retorno) por função.
-- [ ] Gramática `tmLanguage` atualizada automaticamente via `build-grammar-functions.js`.
-- [ ] (Opcional) Linter reconhece `SQL_*`/`Http*` para checagens específicas.
-- [ ] `reference/quick-reference.md` aponta para o catálogo (em vez de manter lista paralela).
+- [x] `SQL_*` e `Http*` aparecem em autocomplete/hover/signature como as demais.
+- [x] Doc rica (descrição + params + retorno) por função.
+- [x] Gramática `tmLanguage` atualizada automaticamente via `build-grammar-functions.js`.
+- [ ] (Opcional) Linter reconhece `SQL_*`/`Http*` para checagens específicas. _(adiado — ver item futuro)_
+- [x] `reference/quick-reference.md` aponta para o catálogo (em vez de manter lista paralela).
+
+### ✅ Resolução (v1.11.0)
+
+- **13 `SQL_*` + 31 `Http*` no catálogo** (`functions.json` → categorias `sql`/`http`),
+  com assinatura, direção dos parâmetros e descrição validadas nos exemplos reais `.lspt`.
+- **Trilha A (`Http*`):** o extrator (`extract-from-erp-docs.js`) já capturava as ~35 funções
+  dos manuais — o overlay commitado estava apenas desatualizado. Bastou reexecutar o pipeline;
+  29 `Http*` com assinatura entraram automaticamente (+2 de cookie via overlay curado).
+- **Trilha B (`SQL_*`):** não havia *heading* estruturado nos manuais → criado o overlay
+  curado [`data/functions-api.json`](../data/functions-api.json), mesclado pelo
+  `generate-functions.js`.
+- **Esquema:** novo campo `category` (`rule`/`sql`/`http`) em cada função.
+- **Checagem leve do linter** (cursor sem `SQL_FecharCursor`/`SQL_Destruir`) ficou anotada
+  como item futuro de baixo risco.
 
 ---
 

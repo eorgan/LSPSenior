@@ -11,14 +11,14 @@ N/A
 
 ## Descrição
 
-Esta função carrega uma imagem **DXF** a partir de um arquivo para o controle **Imagem** e **ImagemVetorial** do modelo. Esta função não suporta cor de fundo, o fundo sempre será Branco.
+Carrega uma imagem DXF a partir de um arquivo para o controle Imagem e ImagemVetorial do modelo.
 
 ## Parâmetros
 
-- **NomeDoControleImagem** (`Alfa`) - Entrada: Variável alfa com o nome do controle imagem do modelo que carregará a imagem
-- **Caminho** (`Alfa`) - Entrada: Variável alfa com o caminho físico do arquivo (local ou na rede)
-- **Xms** (`Numero`) - Entrada: Variável numérica que define o tamanho em MB da heap mínimo Java. Se for informado **0** (**zero**) usará os valores padrões
-- **Xmx** (`Numero`) - Entrada: Variável numérica que define o tamanho máximo em MB da heap Java. Se for informado **0** (**zero**) usará os valores padrões
+- **NomeDoControleImagem** (`Alfa`) - Entrada: Nome do controle imagem do modelo
+- **Caminho** (`Alfa`) - Entrada: Caminho físico do arquivo (local ou na rede)
+- **Xms** (`Numero`) - Entrada: Tamanho em MB da heap mínimo Java (0 para valores padrões)
+- **Xmx** (`Numero`) - Entrada: Tamanho máximo em MB da heap Java (0 para valores padrões)
 
 ## Exemplo de Uso
 

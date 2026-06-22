@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Atualiza as mensagens apresentadas na tela da barra de progresso.
+Atualiza o progresso e a mensagem da barra.
 
 ## Parâmetros
 

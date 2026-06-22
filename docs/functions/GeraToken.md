@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Retorna um token criptografado. A String criptografada tem o formato **DD/MM/YYYY HH:MM:SS|<aNomeUsuario.**
+Gera um token criptográfico seguro.
 
 ## Parâmetros
 

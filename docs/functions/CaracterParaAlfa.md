@@ -11,18 +11,24 @@ N/A
 
 ## Descrição
 
-Converte um caracter (que fica armazenado pelo código ASCII) para o valor Alfanumérico correspondente. Importante Se for utilizar esta regra para inserir quebras de linha ao conteúdo para o envio de e-mail e na tela de **Envio de e-mail** da Central de Configurações Senior (Menu > Conexões de rede > Envio de e-mail), estiver habilitada a opção **Converter quebras de linha para HTML**, todas as quebras de linha Windows (compostas pelos caracteres ASCII 13 e 10) do conteúdo do e-mail serão convertidas para as tags <br/>, responsável por quebrar a linha no HTML.
+Converte um caracter (que fica armazenado pelo código ASCII) para o valor Alfanumérico correspondente.
 
 ## Parâmetros
 
-- **Caractere** - Entrada: Campo/Variável que mantém o código ASCII de um caracter;
+- **Caractere** - Entrada: Campo/Variável que mantém o código ASCII de um caracter
 - **Destino** - Entrada: Variável que receberá o resultado da conversão
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-CaracterParaAlfa();
+Definir Alfa vaLetra;
+Definir Alfa vaEnter;
+
+@ Conversão de código ASCII para caracter @
+CaracterParaAlfa(65, vaLetra); @ vaLetra será "A" @
+
+@ Quebra de linha @
+CaracterParaAlfa(13, vaEnter); @ vaEnter será quebra de linha @
 ```
 
 ## Fonte

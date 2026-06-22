@@ -11,11 +11,11 @@ N/A
 
 ## Descrição
 
-Retorna um número fracionário (onde a parte inteira é a data e a fração são as horas). A parte inteira é a quantidade de dias e a parte fracionada representa as horas do dia.
+Retorna um número fracionário onde a parte inteira é a data e a fração são as horas. A parte inteira é a quantidade de dias e a parte fracionada representa as horas do dia.
 
 ## Parâmetros
 
-- **DataHora** (`Numero end`) - Saída: Recebe a data e hora corrente.
+- **DataHora** (`Numero end`) - Saída: Variável do tipo Numero que receberá a data e hora corrente
 
 ## Exemplo de Uso
 

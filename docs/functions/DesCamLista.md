@@ -23,8 +23,8 @@ Permite pegar a descrição de um campo lista.
 
 ```lspt
 Definir Alfa Strdescr;
-DescamLista ("R034FUN.TIPCOL","1",strdescr);
-Strdescr conterá "Colaborador".
+DesCamLista("R034FUN.TIPCOL", "1", Strdescr);
+@ Strdescr conterá "Colaborador" @
 ```
 
 ## Fonte

@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Converte um número armazenado como **Alfa** e o retorna como um tipo **Numero**. No caso de impossibilidade de conversão, o resultado será **0** (zero).
+Converte um valor alfanumérico para o tipo Inteiro.
 
 ## Parâmetros
 
@@ -21,7 +21,11 @@ Converte um número armazenado como **Alfa** e o retorna como um tipo **Numero**
 ## Exemplo de Uso
 
 ```lspt
-AlfaParaInt (R034Fun.CadFol,Vcadastro);
+Definir Alfa vaTexto;
+Definir Numero vnInteiro;
+
+vaTexto = "123";
+AlfaParaInt(vaTexto, vnInteiro); @ vnInteiro será 123 @
 ```
 
 ## Fonte

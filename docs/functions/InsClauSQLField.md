@@ -11,19 +11,19 @@ N/A
 
 ## Descrição
 
-Esta função inclui um campo de tabela no código SQL montado pelo gerador, na seção detalhe escolhida.
+Inclui um campo de tabela no código SQL montado pelo gerador.
 
 ## Parâmetros
 
-- **Detalhe">** (`<"Seção`) - Entrada
-- **Variavel** - Entrada
+- **Detalhe">** (`<"Seção`) - Entrada: Código SQL para inclusão dos campos de tabela
+- **Variavel** - Entrada: Código SQL para inclusão dos campos de tabela
 
 ## Exemplo de Uso
 
 ```lspt
 Definir Alfa xsql;
 xsql = "CEPCLI AS E085CLI";
-InsClauSQLField("Detalhe_Clientes",xsql);
+InsClauSQLField("Detalhe_Clientes", xsql);
 ```
 
 ## Fonte

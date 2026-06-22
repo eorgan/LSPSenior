@@ -11,11 +11,11 @@ N/A
 
 ## Descrição
 
-Esta função insere espaços a direita de todos os controles no modelo. Deve ser usada somente no evento da Pré-Seleção do modelo.
+Insere espaços a direita de todos os controles no modelo.
 
 ## Parâmetros
 
-- **Valor** - Entrada: Variável numérica, que indica quantos espaços serão inseridos a direita do controle
+- **Valor** - Entrada: Quantos espaços serão inseridos a direita do controle
 
 ## Exemplo de Uso
 

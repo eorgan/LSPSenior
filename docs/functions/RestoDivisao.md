@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Retorna o resto da divisão de um número por outro. Os valores de entrada devem ser obrigatoriamente inteiros iguais ou maiores que 1. Por exemplo: ao informar 0.2, será considerado somente 0. Ao informar 1.1 será considerado 1.
+Calcula o resto da divisão (operação módulo).
 
 ## Parâmetros
 

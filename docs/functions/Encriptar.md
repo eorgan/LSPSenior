@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Criptografa a cadeia de caracteres. O uso é destinado apenas para o uso entre aplicações Senior. O algoritmo para encriptar os dados é proprietário Senior, não sendo possível descriptografar em outros aplicativos ou sistemas de terceiros. Importante Essa função não garante que um dado seja gravado e lido pelo banco. Com isso, é necessário o uso da função [Base64Encode](../regra-para-web-services/base64encode.md) para que o dado seja criptografado de maneira garantida que todas as strings sejam gravadas no banco corretamente, para que possam ser lidas posteriormente com a função [Desencriptar](desencriptar.md) e [Base64Decode](../regra-para-web-services/base64decode.md).
+Criptografa uma cadeia de caracteres usando algoritmo interno da Senior.
 
 ## Parâmetros
 

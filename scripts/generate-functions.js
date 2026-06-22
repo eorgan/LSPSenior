@@ -15,6 +15,10 @@ const DOCS_DIR = path.join(__dirname, '..', 'docs', 'functions');
 // Overlays de documentação. O do manual (curado/validado) tem precedência sobre o ERP.
 const OVERLAY_PATH = path.join(__dirname, '..', 'data', 'functions-doc.json');
 const OVERLAY_ERP_PATH = path.join(__dirname, '..', 'data', 'functions-doc-erp.json');
+// Overlay curado à mão das APIs SQL_* (cursores) e Http* (cookies) que não constam
+// como headings nos manuais. Assinaturas validadas nos exemplos reais `.lspt`. Maior
+// precedência: vence o manual e o ERP por campo.
+const OVERLAY_API_PATH = path.join(__dirname, '..', 'data', 'functions-api.json');
 
 function loadJson(file, label) {
    try {
@@ -34,6 +38,7 @@ function loadJson(file, label) {
 function loadOverlay() {
    const erp = loadJson(OVERLAY_ERP_PATH, OVERLAY_ERP_PATH);
    const manual = loadJson(OVERLAY_PATH, OVERLAY_PATH);
+   const api = loadJson(OVERLAY_API_PATH, OVERLAY_API_PATH);
    const merged = {}; // chave: nome em minúsculas
 
    for (const [k, v] of Object.entries(erp)) {
@@ -43,7 +48,18 @@ function loadOverlay() {
       const lk = k.toLowerCase();
       merged[lk] = { ...(merged[lk] || {}), ...v, name: k }; // manual sobrescreve campos
    }
+   for (const [k, v] of Object.entries(api)) {
+      const lk = k.toLowerCase();
+      merged[lk] = { ...(merged[lk] || {}), ...v, name: k }; // curado (SQL_*/Http*) vence
+   }
    return merged;
+}
+
+/** Categoria da função derivada do prefixo do nome: SQL_* → sql, Http<Maiúscula> → http, senão rule. */
+function categoryOf(name) {
+   if (/^SQL_/i.test(name)) return 'sql';
+   if (/^Http[A-Z]/.test(name)) return 'http';
+   return 'rule';
 }
 
 /**
@@ -402,11 +418,19 @@ function main() {
       added++;
    }
 
+   // Categoriza cada função pelo prefixo do nome (rule/sql/http).
+   const catCount = { rule: 0, sql: 0, http: 0 };
+   for (const fn of Object.values(functions)) {
+      fn.category = categoryOf(fn.name);
+      catCount[fn.category]++;
+   }
+
    // Salva JSON
    fs.writeFileSync(OUTPUT_JSON, JSON.stringify(functions, null, 2), 'utf8');
 
    console.log(`\n✅ Processamento completo!`);
    console.log(`   Total de funções: ${count + added} (CSV: ${count} + novas dos manuais: ${added})`);
+   console.log(`   Categorias: rule=${catCount.rule}, sql=${catCount.sql}, http=${catCount.http}`);
    console.log(`   Enriquecidas pelo manual: ${enriched}`);
    console.log(`   Docs .md preenchidos com conteúdo real: ${docsRich}`);
    console.log(`   Arquivo gerado: ${OUTPUT_JSON}`);

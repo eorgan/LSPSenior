@@ -91,14 +91,49 @@ Registro de progresso entre sessões. Cada item do backlog é implementado em um
 
 ---
 
+## ✅ Item 4 — Melhorar dobramento (folding) — **CONCLUÍDO (1.10.0)**
+
+- **Release:** `1.10.0`, publicado no Open VSX. **Prompt usado:** [04-folding-melhorias.md](04-folding-melhorias.md).
+- Preview da dobra mostra o cabeçalho (`Funcao Nome(); ⋯`); seções `@-- ... --@` viram
+  regiões dobráveis; suporte a blocos `{`/`}` além de `Inicio`/`Fim`. Detalhes no CHANGELOG.
+
+---
+
+## ✅ Item 3 — Catalogar APIs `SQL_*` e `Http*` — **CONCLUÍDO (1.11.0)**
+
+- **Release atual:** `1.11.0`, publicado no Open VSX (`eorgan.lspt-language-support v1.11.0`).
+- **Prompt usado:** [03-apis-sql-http.md](03-apis-sql-http.md).
+
+### O que entregou
+- **13 `SQL_*` + 31 `Http*` no catálogo** (`functions.json`, categorias `sql`/`http`), com
+  hover/autocomplete/signature/outline/gramática/linter — assinaturas e direção dos
+  parâmetros validadas nos exemplos reais `.lspt`.
+- **Trilha A (`Http*`):** sem bug no extrator — o overlay ERP estava **desatualizado**.
+  Reexecutar o pipeline trouxe as ~35 funções dos manuais (29 com assinatura entram no
+  catálogo; +2 de cookie via overlay curado).
+- **Trilha B (`SQL_*`):** sem *heading* nos manuais → overlay curado
+  [`../../data/functions-api.json`](../../data/functions-api.json), mesclado pelo
+  `generate-functions.js` (mesma lógica *case-insensitive*).
+- **Esquema:** novo campo `category` (`rule`/`sql`/`http`) em cada função.
+- **Higiene:** `docs/prompts/` agora está no `.vscodeignore` — **não vaza mais** para o `.vsix`
+  (confirmado no `vsce package`: só `docs/functions/` é empacotado).
+
+### Validação feita
+- ✅ `functions.json` parseia; `grep '"SQL_'` = 26 linhas, `grep '"Http[A-Z]'` = 62 linhas.
+- ✅ Pipeline **idempotente** (rodar 2× → `functions.json` com hash estável).
+- ✅ `buscar_funcao.py` encontra `SQL_AbrirCursor`/`HttpGet` com direção correta dos params.
+
+### Item futuro anotado
+- Checagem leve no linter: cursor `SQL_AbrirCursor` sem `SQL_FecharCursor`/`SQL_Destruir` no
+  mesmo escopo (WARNING). Deixado para um item de backlog futuro (baixo risco).
+
+---
+
 ## 🎉 Backlog concluído
 
-Os dois itens de [../BACKLOG.md](../BACKLOG.md) estão entregues: item 1 (cabeçalho
-automático, 1.8.x) e item 2 (formatter, 1.9.0). Não há próximo item pendente.
+Os quatro itens de [../BACKLOG.md](../BACKLOG.md) estão entregues: item 1 (cabeçalho, 1.8.x),
+item 2 (formatter, 1.9.0), item 4 (folding, 1.10.0) e item 3 (APIs `SQL_*`/`Http*`, 1.11.0).
 
 ### Dívidas/notas ainda abertas
-- `docs/prompts/` continua **incluído no `.vsix`** (não está no `.vscodeignore`). Se não
-  quiser empacotar os prompts, adicionar `docs/prompts/` lá.
-- Mudanças pré-existentes seguem **fora** dos commits de release: `AGENTS.md`,
-  `.claude/skills/lsp-senior/SKILL.md` e os diretórios não rastreados
-  `.claude/skills/lsp-senior/reference/` e `.../scripts/`.
+- (Resolvida em 1.11.0) ~~`docs/prompts/` incluído no `.vsix`~~ — agora no `.vscodeignore`.
+- Possível item futuro: linter específico para ciclo de cursor `SQL_*` (ver acima).

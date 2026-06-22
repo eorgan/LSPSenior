@@ -3118,6 +3118,243 @@
     },
     "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/horaparaminuto.htm"
   },
+  "HttpAdicionaExcecaoProxy": {
+    "description": "Adiciona o endereço passado no parâmetro `Endereço` na lista de exceções de *proxy*. Mais detalhes e exemplo são apresentados na documentação da função [`HttpLeContadorExcecoesProxy`](httplecontadorexcecoesproxy.md). **Observação:** O Endereço adicionado na lista **não** deve ser precedido do protocolo. Por exemplo, em vez de adicionar **http://localhost**, cadastrar apenas **localhost**. Ao verificar uma URL, é sempre comparado o início dela com os endereços cadastrados. Por exemplo, se na lista de exceções estiver cadastrado **www.senior.com** ou **www.senior.com.br**, a URL **http://www.senior.com.br/demonstracao/id001.htm** será acessada sem passar pelo servidor *proxy*. Nota Função disponível para os sistemas Gestão Empresarial PME | GO UP, Gestão Empresarial | ERP, Gestão de Pessoas | HCM e Ronda Senior. <!-- source: https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpalteraautenticacaoproxy.htm -->",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpadicionaexcecaoproxy.htm"
+  },
+  "HttpAlteraAutenticacaoProxy": {
+    "description": "Faz o inverso da função [`HttpLeAutenticacaoProxy`](httpleautenticacaoproxy.md), ou seja, altera os valores ao invés de ler.",
+    "signature": "HttpAlteraAutenticacaoProxy(Alfa Objeto, Alfa Usuario, Alfa Senha);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);\nHttpAlteraAutenticacaoProxy(vHTTP,\n\"nome\"\n,\n\"senha\"\n);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpalteraautenticacaoproxy.htm"
+  },
+  "HttpAlteraCabecalhoRequisicao": {
+    "description": "Altera os valores de cabeçalhos HTTP que serão enviados junto com a requisição. São válidos para todas os verbos (GET, POST, PUT, PATCH e DELETE) e também para o download.",
+    "signature": "HttpAlteraCabecalhoRequisicao(Alfa end Objeto, Alfa Nome, Alfa Valor);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir alfa vDados;\nHttpObjeto(vHTTP);\nHttpAlteraCabecalhoRequisicao(vHTTP,\n\"Accept\"\n,\n\"text/plain\"\n);\nHttpAlteraCabecalhoRequisicao(vHTTP,\n\"Content-Type\"\n,\n\"application/json\"\n);\nHttpAlteraCabecalhoRequisicao(vHTTP,\n\"Authorization\"\n,\n\"Basic eyJhbGciOi...\"\n);\nHttpPost(vHTTP,\n\"http://exemplo.com/app/path\"\n,\n\"<dados>\"\n, vHTML);",
+    "params": {
+      "Objeto": "Indica o objeto HTTP no qual o cabeçalho será alterado",
+      "Valor": "O novo valor para o cabeçalho. Nenhuma verificação quando a semântica do valor é realizada. O valor vazio faz com que o cabeçalho não seja enviado."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-altera-cabecalho-requisicao.htm"
+  },
+  "HttpAlteraCodifCaracPadrao": {
+    "description": "Altera a codificação de caracteres que é usado por padrão nas respostas do servidor. Esta configuração é usada apenas nos casos onde o servidor não especifica a codificação de caracteres no conteúdo da resposta.",
+    "signature": "HttpAlteraCodifCaracPadrao(Alfa end Objeto, alfa Codificacao);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\nHttpObjeto(vHTTP);\nHttpAlteraCodifCaracPadrao(vHTTP,\n\"utf-8\"\n);",
+    "params": {
+      "Objeto": "Indica o objeto HTTP no qual a configuração será aplicada.",
+      "Codificacao": "Nome da codificação que deve ser usada para as novas requisições. Por exemplo: \"UTF-8\", \"ISO-8859-1\", \"Windows-1252\", entre outros."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-altera-codif-carac-padrao.htm"
+  },
+  "HttpAlteraConfiguracaoProxy": {
+    "description": "Faz o inverso da função [HttpLeConfiguracaoProxy](#HttpLeConfiguracaoProxy), ou seja, altera os valores ao invés de ler.",
+    "signature": "HttpAlteraConfiguracaoProxy(Alfa Objeto, Numero UsarProxy, Alfa Servidor, Numero Porta, Numero AutPorUsu);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);\nHttpAlteraConfiguracaoProxy(vHTTP, 1,\n\"10.0.0.1\"\n, 3120, 1);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpalteraconfiguracaoproxy.htm"
+  },
+  "HttpAlteraConfiguracaoSSL": {
+    "description": "Faz o inverso da função [HttpLeConfiguracaoSSL](#HttpLeConfiguracaoSSL), ou seja, altera o valor ao invés de ler.",
+    "signature": "HttpAlteraConfiguracaoSSL(Alfa Objeto, Numero SSL);",
+    "example": "Definir Alfa vHTTP;\n\nHttpObjeto(vHTTP);\nHttpAlteraConfiguracaoSSL(vHTTP, 0);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpalteraconfiguracaossl.htm"
+  },
+  "HttpAlteraMostrarProgresso": {
+    "description": "Faz o inverso da função [HttpLeMostrarProgresso](#HttpLeMostrarProgresso), ou seja, altera o valor ao invés de ler.",
+    "signature": "HttpAlteraMostrarProgresso(Alfa Objeto, Numero Mostrar);",
+    "example": "Definir Alfa vHTTP;\n\nHttpObjeto(vHTTP);\nHttpAlteraMostrarProgresso(vHTTP, 1);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpalteramostrarprogresso.htm"
+  },
+  "HttpAlteraRedirecionamento": {
+    "description": "Especifica se as requisições realizadas devem tratar os redirecionamentos retornados pelo servidor destino.",
+    "signature": "HttpAlteraRedirecionamento(Alfa Objeto, Numero AceitaRedirecionamento);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);\nHttpAlteraRedirecionamento(vHTTP, 1);",
+    "params": {
+      "Objeto": "Objeto HTTP, criado na função [HttpObjeto](httpobjeto.md).",
+      "AceitaRedirecionamento": "0 = Não trata redirecionametos  1 = Trata redirecionamentos, caso retornado pelo servidor destino"
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-altera-redirecionamento.htm"
+  },
+  "HttpDelete": {
+    "description": "Executa uma requisição HTTP usando o método DELETE. O método de requisição DELETE é utilizado quando houver a necessidade de exclusão de um recurso no servidor.",
+    "signature": "HttpDelete(Alfa Objeto, Alfa URL, Alfa end HTML);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);\nHttpDelete(vHTTP, \"http://www.senior.com.br/registro/1\", vHTML);\nMensagem(Retorna, vHTML);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpdelete.htm"
+  },
+  "HttpDeleteBody": {
+    "description": "Executa uma requisição HTTP usando o método DELETE, porém permite enviar o parâmetro Body na requisição. O método de requisição DELETE é utilizado quando houver a necessidade de exclusão de um recurso no servidor.",
+    "signature": "HttpDeleteBody(Alfa Objeto, Alfa URL, Alfa Dados, Alfa end HTML);",
+    "example": "Definir Alfa vDados;\nDefinir Alfa vHTTP;\nHttpObjeto(vHTTP);\nvDados = \"[\n{\\\"id\\\": \\\"123\\\"}\n]\";\nHttpDeleteBody(vHTTP, \"http://www.senior.com.br/registro\", vDados, vHTML);\nMensagem(Retorna, vHTML);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpdeletebody.htm"
+  },
+  "HttpDesabilitaErroResposta": {
+    "description": "Desabilita a geração automática de erros de execução. Após esta chamada, nenhum erro será gerado caso a resposta do servidor seja diferente de 200 ou 204. Nas situações de erro, em que o servidor retorna um código diferente, o usuário deverá realizar o tratamento apropriado. Para consultar o código de retorna do servidor, deve-se utilizar a função HttpLeCodigoResposta.",
+    "signature": "HttpDesabilitaErroResposta(Alfa end Objeto);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir numero vCodigo;\nHttpObjeto(vHTTP);\nHttpDesabilitaErroResposta(vHTTP);\nHttpGet(vHTTP,\n\"http://exemplo.com/app/path\"\n, vHTML);\n/* Se algum erro for retornado pelo servidor, a regra continua a ser executada normalmente */",
+    "params": {
+      "Objeto": "Indica o objeto HTTP no qual a configuração será aplicada."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-desabilita-erro-resposta.htm"
+  },
+  "HttpDesabilitaSNI": {
+    "description": "Responsável por desabilitar o SNI (*Server Name Indication*) na requisição HTTP.",
+    "signature": "HttpDesabilitaSNI(Alfa Objeto);",
+    "example": "Definir Alfa vHTTP;\nDefinir Alfa vHTML;\nHttpObjeto(vHTTP);\n/* Por padrão, o SNI já está desabilitado */\nHttpDesabilitaSNI(vHTTP);\nHttpGet(vHTTP,\n\"https://www.google.com.br/\"\n, vHTML);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-desabilita-sni.htm"
+  },
+  "HttpDesabilitarCookies": {
+    "description": "Desabilita o recurso de manter os *cookies* ao utilizar requisições HTTP em regras LSP. Nota Função disponível para os sistemas Gestão Empresarial PME | GO UP, Gestão Empresarial | ERP, Gestão de Pessoas | HCM e Ronda Senior. <!-- source: https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-desabilita-sni.htm -->",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpdesabilitarcookies.htm"
+  },
+  "HttpDownload": {
+    "description": "Funciona da mesma maneira que a função [HttpGet](#HttpGet), porém o retorno não é na memória, mas sim em um arquivo salvo diretamente em disco. O arquivo de destino é definido no parâmetro `Arquivo`.",
+    "signature": "HttpDownload(Alfa Objeto, Alfa URL, Alfa Arquivo);",
+    "example": "Definir Alfa vHTTP;\n\nHttpObjeto(vHTTP);\nHttpDownload(vHTTP,\n\"http://www.senior.com.br/product.zip\"\n,\n\"C:\\\\Senior\\\\product.zip\"\n);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpdownload.htm"
+  },
+  "HttpExcluiExcecaoProxy": {
+    "description": "Exclui da lista de exceções de *proxy* o endereço do índice passado como parâmetro em Índice, contado a partir do 0 (zero). Mais detalhes e exemplo na função [HttpLeContadorExcecoesProxy](httplecontadorexcecoesproxy.md). Nota Função disponível para os sistemas Gestão Empresarial PME | GO UP, Gestão Empresarial | ERP, Gestão de Pessoas | HCM e Ronda Senior. <!-- source: https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpget.htm -->",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpexcluiexcecaoproxy.htm"
+  },
+  "HttpGet": {
+    "description": "Executa uma requisição HTTP (inclusive HTTPS) de acordo com a URL passada como parâmetro e salva a resposta da requisição, por exemplo, uma página HTML, no parâmetro de retorno HTML.",
+    "signature": "HttpGet(Alfa Objeto, Alfa URL, Alfa end HTML);",
+    "example": "Definir Alfa vHTTP;\n\nHttpObjeto(vHTTP);\n\nDefinir Alfa vHTML;\n\nHttpGet(vHTTP,\n\"http://www.senior.com.br/index.htm\"\n, vHTML);\nMensagem(Retorna, vHTML);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpget.htm"
+  },
+  "HttpHabilitaErroResposta": {
+    "description": "Habilita a geração automática de erros de execução. Estes erros são gerados quando a resposta do servidor não for os códigos 200 ou 204. Ou seja, caso uma requisição retorne um código diferente destes, o sistema irá gerar uma mensagem de erro e a execução da regra será cancelada. A mensagem de erro será apresentada ao usuário ou armazenada no log.",
+    "signature": "HttpHabilitaErroResposta(Alfa end Objeto);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\nHttpObjeto(vHTTP);\nHttpHabilitaErroResposta(vHTTP);\nHttpGet(vHTTP,\n\"http://exemplo.com/app/path\"\n, vHTML);\n/* Caso o servidor retorne algum código de erro, esta linha não será executada */",
+    "params": {
+      "Objeto": "Indica o objeto HTTP no qual a configuração será aplicada."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-habilita-erro-resposta.htm"
+  },
+  "HttpHabilitaSNI": {
+    "description": "Responsável por habilitar o SNI (*Server Name Indication*) na requisição HTTP. O padrão é desabilitado. Quando habilitado, ao realizar uma requisição HTTP, o nome do servidor é enviado na requisição com base na URL requisitada.",
+    "signature": "HttpHabilitaSNI(Alfa Objeto);",
+    "example": "Definir Alfa vHTTP;\nDefinir Alfa vHTML;\nHttpObjeto(vHTTP);\nHttpHabilitaSNI(vHTTP);\n/* Ao realizar o HttpGet o nome do servidor (google.com.br) será enviado junto a requisição */\nHttpGet(vHTTP,\n\"https://www.google.com.br/\"\n, vHTML);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-habilita-sni.htm"
+  },
+  "HttpHabilitarCookies": {
+    "description": "Habilita o recurso de manter os cookies ao utilizar requisições HTTP em regras LSP. Nota Função disponível para os sistemas Gestão Empresarial PME | GO UP, Gestão Empresarial | ERP, Gestão de Pessoas | HCM e Ronda Senior. <!-- source: https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-habilita-sni.htm -->",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httphabilitarcookies.htm"
+  },
+  "HttpLeAutenticacaoProxy": {
+    "description": "Faz a leitura e retorna os valores do usuário e senha de autenticação no servidor *proxy*. Caso o objeto HTTP esteja configurado para utilizar autenticação por usuário, serão retornados os [valores configurados no SGU](../../../gerenciador-de-usuarios/fruserproperties.htm), caso contrário serão retornados os valores das propriedades Usuário padrão e Senha padrão.",
+    "signature": "HttpLeAutenticacaoProxy(Alfa Objeto, Alfa end Usuário, Alfa end Senha);",
+    "example": "Definir Alfa vHTTP;\nDefinir Alfa vUsuario;\nDefinir Alfa vSenha;\n\nHttpObjeto(vHTTP);\nHttpLeAutenticacaoProxy(vHTTP, vUsuario, vSenha);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpleautenticacaoproxy.htm"
+  },
+  "HttpLeCabecalhoResposta": {
+    "description": "Consulta os valores associados à cabeçalhos de respostas das requisições. Estes valores apenas estão disponíveis após a realização de alguma requisição (GET, POST, PUT, PATCH e DELETE). Todos os valores são retornados com o tipo Alfa. Nenhuma conversão de dados é realizada.",
+    "signature": "HttpLeCabecalhoResposta(Alfa end Objeto, Alfa Nome, Alfa end Valor);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir alfa vContentType;\ndefinir alfa vContentLength;\nHttpObjeto(vHTTP);\nHttpGet(vHTTP,\n\"http://exemplo.com/app/path\"\n, vHTML);\nHttpLeCabecalhoResposta(vHTTP,\n\"Content-Type\"\n, vContentType);\nHttpLeCabecalhoResposta(vHTTP,\n\"Content-Length\"\n, vContentLength);",
+    "params": {
+      "Objeto": "Indica o objeto HTTP do qual o cabeçalho será obtido.",
+      "Valor": "Parâmetro que receberá o valor do cabeçalho. Se o cabeçalho não existir, vazio será retornado."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-le-cabecalho-resposta.htm"
+  },
+  "HttpLeCodigoResposta": {
+    "description": "Consulta o código de resposta de uma requisição enviada ao servidor. Está disponível para todos os verbos HTTP (GET, POST, PUT, PATCH e DELETE). O código apenas fica disponível após a execução e retorno de uma requisição HTTP.",
+    "signature": "HttpLeCodigoResposta(Alfa end Objeto, numero end Codigo);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir numero vCodigo;\nHttpObjeto(vHTTP);\nHttpDesabilitaErroResposta(vHTTP);\nHttpGet(vHTTP,\n\"http://exemplo.com/app/path\"\n, vHTML);\nHttpLeCodigoResposta(vHTTP, vCodigo);\nse (vCodigo = 401) {\nMensagem(Retorna,\n\"Não autorizado\"\n);\n} senao se (vCodigo = 404) {\nMensagem(Retorna,\n\"Não encontrado\"\n);\n}",
+    "params": {
+      "Objeto": "Indica o objeto HTTP do o código de retorno será obtido.",
+      "Codigo": "Parâmetro que irá receber o código de retorno da última operação realizada."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-le-codigo-resposta.htm"
+  },
+  "HttpLeConfiguracaoProxy": {
+    "description": "Faz a leitura do valor das propriedades **Utilizar servidor proxy**, **Servidor**, **Porta** e **Utilizar autenticação por usuário** do objeto HTTP e os retorna nos parâmetros UsarProxy, Servidor, Porta e AutPorUsu, respectivamente. Os valores retornados em Servidor e Porta representam o servidor *proxy*. Já os valores retornados em UsarProxy e AutPorUsu podem ter os seguintes valores: - 0 - A opção está desmarcada; - 1 - A opção está marcada.",
+    "signature": "HttpLeConfiguracaoProxy(Alfa Objeto, Numero end UsarProxy, Alfa end Servidor, Numero end Porta, Numero end AutPorUsu);",
+    "example": "Definir Alfa vHTTP;\nDefinir Numero vUsarProxy;\nDefinir Alfa vServidor;\nDefinir Numero vPorta;\nDefinir Numero vAutPorUsu;\n\nHttpObjeto(vHTTP);\n\tHttpLeConfiguracaoProxy(vHTTP, vUsarProxy, vServidor, vPorta, vAutPorUsu);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpleconfiguracaoproxy.htm"
+  },
+  "HttpLeConfiguracaoSSL": {
+    "description": "Faz a leitura da propriedade Utilizar SSL do objeto HTTP e retorna o valor em SSL. Os valores podem ser: - 0 - Automático; - 1 - Nunca; - 2 - Sempre.",
+    "signature": "HttpLeConfiguracaoSSL(Alfa Objeto, Numero end SSL);",
+    "example": "Definir Alfa vHTTP;\nDefinir Numero vRetorno;\n\n\tHttpObjeto(vHTTP);\nHttpLeConfiguracaoSSL(vHTTP, vRetorno);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpleconfiguracaossl.htm"
+  },
+  "HttpLeContadorExcecoesProxy": {
+    "description": "Neste contexto, exceções de *proxy* são endereços (URLs) que podem ser acessadas sem passar pelo servidor *proxy*. Estes endereços podem ser cadastrados na lista Não utilizar proxy para os endereços iniciados com da tela de configurações, a qual também pode ser manipulada na regra. Retorna a quantidade de exceções cadastradas no objeto HTTP utilizado. Ela pode ser usada em conjunto com as funções [HttpLimpaExcecoesProxy](#HttpLimpaExcecoesProxy), [HttpLeExcecaoProxy](#HttpLeExcecaoProxy), [HttpAdicionaExcecaoProxy](#HttpAdicionaExcecaoProxy) e [HttpExcluiExcecaoProxy](#HttpExcluiExcecaoProxy) para manipular a lista de acordo com o necessário.",
+    "signature": "HttpLeContadorExcecoesProxy(Alfa Objeto, Numero end Quantidade);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);\n\nDeifnir Alfa vEndereco;\nDefinir Numero vCont;\nDeifnir Numero vIndice = 0;\n\n@ Lê a quantidade de exceções. @\nHttpLeContadorExcecoesProxy(vHTTP, vCont);\n\n@ Faz um laço em todas as exceções e mestra cada uma delas em uma mensagem. @\nEnquanto (vIndice < xquantidade=\n\"\"\n )=\n\"\"\n {\nHttpLeExcecaoProxy(vHTTP, vIndice, vEndereco);\nMensagem(Retorna, vEndereco);\nvIndice = vIndice + 1;\n}\n\n@ Exclui todas as exceções da lista. @\nHttpLimpaExcecoesProxy(vHTTP);\n\n@ Adiciona algumas exceções. @\nHttpAdicionaExcecaoProxy(vHTTP,\n\"localhost\"\n);\nHttpAdicionaExcecaoProxy(vHTTP,\n\"127.0.0.1\"\n);\nHttpAdicionaExcecaoProxy(vHTTP,\n\"123.4.5.67\"\n);\nHttpAdicionaExcecaoProxy(vHTTP,\n\"10.0.30.25\"\n);\nHttpAdicionaExcecaoProxy(vHTTP,\n\"www.senior.com.br\"\n);\n\n@ Exclui a exceção do índice 2 - \"123.4.5.67\". @\nHttpExcluiExcecaoProxy(vHTTP, 2);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httplecontadorexcecoesproxy.htm"
+  },
+  "HttpLeExcecaoProxy": {
+    "description": "Retorna no parâmetro Endereço o endereço cadastrado na lista de exceções de *proxy* no índice passado como parâmetro em `Índice`, contado a partir do 0 (zero). Mais detalhes e exemplo na documentação da função [HttpLeContadorExcecoesProxy](httplecontadorexcecoesproxy.md). Nota Função disponível para os sistemas Gestão Empresarial PME | GO UP, Gestão Empresarial | ERP, Gestão de Pessoas | HCM e Ronda Senior. <!-- source: https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httplemostrarprogresso.htm -->",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpleexcecaoproxy.htm"
+  },
+  "HttpLeMostrarProgresso": {
+    "description": "Faz a leitura da propriedade **Exibir progresso de download** do objeto HTTP e retorna o valor em Mostrar. Os valores podem ser: - 0 - A opção está desmarcada; - 1 - A opção está marcada.",
+    "signature": "HttpLeMostrarProgresso(Alfa Objeto, Numero end Mostrar);",
+    "example": "Definir Alfa vHTTP;\nDefinir Numero vRetorno;\n\n\tHttpObjeto(vHTTP);\nHttpLeMostrarProgresso(vHTTP, vRetorno);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httplemostrarprogresso.htm"
+  },
+  "HttpLimpaExcecoesProxy": {
+    "description": "Exclui todos os endereços cadastrados na lista de exceções de *proxy*. Mais detalhes e exemplo na documentação da função [`HttpLeContadorExcecoesProxy`](httplecontadorexcecoesproxy.md). Nota Função disponível para os sistemas Gestão Empresarial PME | GO UP, Gestão Empresarial | ERP, Gestão de Pessoas | HCM e Ronda Senior. <!-- source: https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpnormalizaretorno.htm -->",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httplimpaexcecoesproxy.htm"
+  },
+  "HttpNormalizaRetorno": {
+    "description": "Aplica a normalização Unicode C (composição canônica) na resposta HTTP para caracteres acentuados que podem ser representados por dois code points (letra + caractere de combinação). Um exemplo é o caractere Á (a letra A maiúscula com acento agudo), que pode ser representada de duas formas: - Como um code point: `U+00C1 (LATIN CAPITAL LETTER A WITH ACUTE)`; - Como dois code points: `U+0041 (LATIN CAPITAL LETTER A) + U+0301 (COMBINING ACUTE ACCENT)`. Nesse caso A + ´ torna-se Á.",
+    "signature": "HttpNormalizaRetorno(Alfa end Objeto);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);\nHttpNormalizaRetorno(vHTTP);",
+    "params": {
+      "Objeto": "Indica o objeto HTTP no qual a configuração será aplicada."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpnormalizaretorno.htm"
+  },
+  "HttpObjeto": {
+    "description": "Esta função retorna um objeto HTTP inicializado com as configurações definidas na tela de Configurações de Internet da Central de Configurações. A referência deve ser armazenada em uma variável do tipo Alfa para poder ser usada nas demais funções HTTP.",
+    "signature": "HttpObjeto(Alfa end Objeto);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpobjeto.htm"
+  },
+  "HttpPatch": {
+    "description": "Executa uma requisição HTTP usando o método PATCH. O método de requisição PATCH, somente no formato texto e sem suporte para envio de arquivos, é usado para aplicar modificações parciais em um recurso.",
+    "signature": "HttpPatch(Alfa end Objeto, Alfa URL, Alfa Dados, Alfa end Retorno);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vRetorno;\nHttpObjeto(vHTTP);\nHttpPatch(vHTTP, \"http://exemplo.com/app/path\", vRetorno);",
+    "params": {
+      "Objeto": "Indica o objeto HTTP no qual a chamada deve ser realizada.",
+      "URL": "Indica a URL que será chamada usando o verbo PATCH.",
+      "Dados": "O dado, no formato alfanumérico, que será enviada no corpo da mensagem HTTP.",
+      "Retorno": "Será armazenado a resposta do servidor à requisição enviada."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-patch.htm"
+  },
+  "HttpPost": {
+    "description": "Executa uma requisição HTTP usando o método POST. O método de requisição POST, limitado ao formato texto e sem suporte para envio direto de arquivos como PDFs, JPEGs ou outros tipos, é utilizado quando há necessidade de enviar dados ao servidor como parte da solicitação, como no caso de formulários preenchidos.",
+    "signature": "HttpPost(Alfa Objeto, Alfa URL, Alfa Dados, Alfa end HTML);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);\nDefinir Alfa vHTML;\nDefinir Alfa vPostData;\nvPostData =\n\"NomeUsuario=SENIOR&EmailUsuario=senior@senior.com.br&Texto=SENIOR+SA\"\n;\nHttpPost(vHTTP,\n\"http://www.senior.com.br/cadastro.html\"\n,vPostData, vHTML);\nMensagem(Retorna, vHTML);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httppost.htm"
+  },
+  "HttpPut": {
+    "description": "Executa uma requisição HTTP usando o método PUT. O método de requisição PUT, somente no formato texto e sem suporte para envio de arquivos, é usado quando é necessário enviar dados ao servidor para alterar informações de uma URL já conhecida.",
+    "signature": "HttpPut(Alfa Objeto, Alfa URL, Alfa Dados, Alfa end HTML);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);\nDefinir Alfa vHTML;\nDefinir Alfa vPutData;\nvPutData =\n\"NomeUsuario=SENIOR&EmailUsuario=senior@senior.com.br&Texto=SENIOR+SA\"\n;\nHttpPut(vHTTP,\n\"http://www.senior.com.br/cadastro.html\"\n,vPutData, vHTML);\nMensagem(Retorna, vHTML);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-put.htm"
+  },
+  "HttpSetAttachment": {
+    "description": "Permite o envio de arquivos locais no corpo de uma requisição HTTP, disponível nos métodos POST, PUT e PATCH.",
+    "signature": "HttpSetAttachment(Alfa end Objeto, Alfa CaminhoArquivo);",
+    "example": "Definir Alfa vHTTP;\nHttpObjeto(vHTTP);\nHttpSetAttachment(vHTTP, \"C:\\\\temp\\\\arquivo.pdf\");",
+    "params": {
+      "Objeto": "Indica o objeto HTTP no qual a configuração será aplicada.",
+      "CaminhoArquivo": "Diretório local do arquivo que será anexado ao corpo da requisição."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpsetattachment.htm"
+  },
+  "HttpSetaTimeout": {
+    "description": "Atribui um timeout (tempo de espera) em segundos para uma requisição HTTP, inclusive HTTPS. Caso a requisição não retorne dentro do tempo estipulado, será lançada uma exceção.",
+    "signature": "HttpSetaTimeout(Alfa Objeto, Numero Timeout);",
+    "example": "Definir Alfa vHTTP;\nDefinir Alfa vHTML;\nHttpObjeto(vHTTP);\n/* Exemplo atribuindo 5 segundos de timeout */\nHttpSetaTimeout(vHTTP, 5);\nHttpGet(vHTTP, \"\nhttps://httpstat.us/200?sleep=4000\n\", vHTML);\nMensagem(Retorna, vHTML);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpsetatimeout.htm"
+  },
   "ImportaWebServiceSSF": {
     "description": "Permite a importação de arquivos somente com a extensão .ssf (web services) via LSP. **Sintaxe**: ImportaWebServiceSSF(Alfa Caminho, Alfa Provedor, Alfa End Status); **Parâmetros**: **Retorno**: Status da importação. **Exemplo**: ``` Definir Alfa xStatus; ImportaWebServiceSSF( \"C:MeusArquivoscom.senior.wf.utils.ssf\" , \"interno\" , xStatus); Se (xStatus = \"OK\" ) Inicio xMsg = \"Importado com Exito\" ; Mensagem(Retorna, xMsg); Fim; ``` **Observação**: se a importação for finalizada com êxito, o retorno será OK. Caso dê algum erro, o retorno será a mensagem deste erro. Nota Função disponível para os sistemas Gestão Empresarial PME | GO UP, Gestão Empresarial | ERP, Gestão de Pessoas | HCM e Ronda Senior. <!-- source: https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/regra-para-web-services/wsinstanciaservico.htm -->",
     "params": {

@@ -72,7 +72,8 @@ Enquanto (cond) { ... }       @ atualize a condição! @
 
 ## Card: HTTP e APIs
 
-Nomes conforme exemplos reais `.lspt` (não constam no `functions.json`):
+Funções `Http*` agora **constam no catálogo** (`functions.json`/`docs/functions/`, categoria
+`http`). Confirme a assinatura com `python3 scripts/buscar_funcao.py <Nome>`:
 
 | Função | Uso |
 | --- | --- |
@@ -88,7 +89,8 @@ JSON: `ValorElementoJson(json, grupo, elemento, valor)` para campo simples;
 
 ## Card: banco de dados (cursor SQL)
 
-Nomes conforme exemplos reais `.lspt` (não constam no `functions.json`).
+Funções `SQL_*` agora **constam no catálogo** (`functions.json`/`docs/functions/`, categoria
+`sql`); confirme com `python3 scripts/buscar_funcao.py <Nome>`.
 **Sempre feche e destrua o cursor.**
 
 | Etapa | Função |

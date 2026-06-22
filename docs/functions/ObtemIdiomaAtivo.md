@@ -15,14 +15,17 @@ Retorna o código do idioma utilizado pelo usuário.
 
 ## Parâmetros
 
-- **valorIdioma** - Entrada: Campo ou variável que receberá o valor de retorno do idioma utilizado. Exemplo: “PTBRN”.
+- **valorIdioma** - Entrada: Campo ou variável que receberá o valor de retorno do idioma utilizado (ex: "PTBRN")
 
 ## Exemplo de Uso
 
 ```lspt
-definir Alfa xValorIdioma;
-ObtemIdiomaAtivo(xValorIdioma);
-Mensagem(Retorna, xValorIdioma);
+Definir Alfa vaValorIdioma;
+
+ObtemIdiomaAtivo(vaValorIdioma);
+Definir Alfa vaMensagemIdioma;
+vaMensagemIdioma = "Idioma ativo: " + vaValorIdioma;
+Mensagem(Retorna, vaMensagemIdioma);
 ```
 
 ## Fonte

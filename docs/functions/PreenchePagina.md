@@ -11,20 +11,20 @@ N/A
 
 ## Descrição
 
-Esta função determina que uma página seja preenchida com rasuras.
+Determina que uma página seja preenchida com rasuras.
 
 ## Parâmetros
 
 - **Formato** - Entrada: Valor numérico entre 0 e 8
-- **Linha** (`Formato`) - Entrada
-- **Linha** (`Grossura`) - Entrada
-- **Linha** (`Cor`) - Entrada
-- **Textura** (`Cor`) - Entrada
+- **Linha** (`Formato`) - Entrada: Valor numérico entre 0 e 7
+- **Linha** (`Grossura`) - Entrada: Valor numérico
+- **Linha** (`Cor`) - Entrada: Nome da cor
+- **Textura** (`Cor`) - Entrada: Nome da cor da textura entre aspas
 
 ## Exemplo de Uso
 
 ```lspt
-PreenchePagina (8,1,2,"","Preto");
+PreenchePagina(8, 1, 2, "", "Preto");
 ListaSecao("Adicional_Salto_Pagina");
 ```
 

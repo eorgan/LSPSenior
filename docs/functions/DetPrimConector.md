@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Permite determinar qual será o primeiro conector a ser inserido para concatenar na cláusula WHERE, valor este inserido pela função [INSCLAUSQLWHERE](#InsClauSQLWhere).
+Permite determinar qual será o primeiro conector a ser inserido para concatenar na cláusula WHERE.
 
 ## Parâmetros
 
@@ -21,7 +21,7 @@ Permite determinar qual será o primeiro conector a ser inserido para concatenar
 ## Exemplo de Uso
 
 ```lspt
-DetPrimConector ("Detalhe_1"," OR");
+DetPrimConector("Detalhe_1", " OR");
 ```
 
 ## Fonte

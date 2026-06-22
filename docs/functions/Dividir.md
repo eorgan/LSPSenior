@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Função disponível para dividir um valor por outro.
+Realiza divisão com controle de erro para divisão por zero.
 
 ## Parâmetros
 

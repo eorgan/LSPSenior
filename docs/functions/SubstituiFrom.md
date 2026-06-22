@@ -11,19 +11,34 @@ N/A
 
 ## Descrição
 
-Esta função substitui uma cláusula FROM no SELECT da seção passada como parâmetro. A substituição pode ser parcial, se o parâmetro TabelaSubstituída for passado ou total, se o mesmo for omitido. Para usar esta função, é preciso desativar os relacionamentos automáticos que são feitos cada vez que uma nova tabela é adicionada a seção. Na propriedade Relacionamento da seção detalhe, onde são mostrados todos os relacionamentos automáticos, selecione-os e utilize a opção **Sem Conexão**. A função permite que apenas um Join seja informado no parâmetro NovaClausula. Junções Suportadas: - **CROSS JOIN** (Produto Cartesiano); - **INNER JOIN** (Junção); - **LEFT OUTER JOIN** (Junção Externa a Direita); - **RIGHT OUTER JOIN** (Junção Externa a Esquerda); - **NATURAL JOIN** (Junção Natural); - **KEYED JOIN** (Junção por Chave).
+Substitui uma cláusula FROM no SELECT da seção passada como parâmetro.
 
 ## Parâmetros
 
-- **SectionName** (`Alfa`) - Entrada: Nome da seção onde será substituída o **FROM** no SQL
-- **NovaClausula** (`Alfa`) - Entrada: Cláusula que irá substituir o **FROM** atual total ou parcialmente
-- **TabelaSubstituida** (`Alfa`) - Entrada
+- **SectionName** (`Alfa`) - Entrada: Nome da seção onde será substituída o FROM
+- **NovaClausula** (`Alfa`) - Entrada: Cláusula que irá substituir o FROM atual
+- **TabelaSubstituida** (`Alfa`) - Entrada: Nome da tabela que será substituída (opcional)
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-SubstituiFrom();
+@ Cross Join @
+SubstituiFrom("Detalhe_1", "(R034FUN CROSS JOIN R036DEP)", "");
+
+@ Inner Join @
+SubstituiFrom("Detalhe_1", "(R034FUN INNER JOIN R036DEP ON R034FUN.NUMEMP = R036DEP.NUMEMP)", "");
+
+@ Left Outer Join @
+SubstituiFrom("Detalhe_1", "(R034FUN LEFT OUTER JOIN R036DEP ON R034FUN.NUMEMP = R036DEP.NUMEMP AND R034FUN.NUMCAD = R036DEP.NUMCAD)", "");
+
+@ Right Outer Join @
+SubstituiFrom("Detalhe_1", "(R034FUN RIGHT OUTER JOIN R036DEP ON R034FUN.NUMEMP = R036DEP.NUMEMP AND R034FUN.NUMCAD = R036DEP.NUMCAD)", "");
+
+@ Natural Inner Join @
+SubstituiFrom("Detalhe_1", "(R034FUN NATURAL INNER JOIN R036DEP ON R034FUN.NUMEMP = R036DEP.NUMEMP)", "");
+
+@ Keyed Join @
+SubstituiFrom("Detalhe_1", "(R034FUN KEYED INNER JOIN R030EMP)", "");
 ```
 
 ## Fonte

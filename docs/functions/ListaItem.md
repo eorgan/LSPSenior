@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Retorna o valor de um item de uma lista de valores concatenados por um caracter separador. O índice do primeiro item da lista é **1** e do último item é igual a quantidade de itens da lista.
+Retorna um item específico de uma lista concatenada.
 
 ## Parâmetros
 
@@ -23,17 +23,16 @@ Retorna o valor de um item de uma lista de valores concatenados por um caracter 
 ## Exemplo de Uso
 
 ```lspt
-Definir Alfa xLista;
-Definir Alfa xValor;
-xLista = "valor1;valor2;valor3";
-ListaQuantidade(xLista, ";", xQtde);
-xIndice = 1;
-Enquanto (xIndice <= xqtde)
- Inicio
-  ListaItem(xLista, ";", xIndice, xValor);
-  Mensagem(Retorna, xValor);
-  xIndice = xIndice + 1;
-Fim;
+Definir Alfa vaLinhaCsv;
+Definir Alfa vaNome;
+Definir Alfa vaIdade;
+Definir Alfa vaCargo;
+
+vaLinhaCsv = "João Silva;30;Desenvolvedor;São Paulo";
+
+ListaItem(vaLinhaCsv, ";", 1, vaNome);    @ vaNome = "João Silva" @
+ListaItem(vaLinhaCsv, ";", 2, vaIdade);   @ vaIdade = "30" @
+ListaItem(vaLinhaCsv, ";", 3, vaCargo);   @ vaCargo = "Desenvolvedor" @
 ```
 
 ## Fonte

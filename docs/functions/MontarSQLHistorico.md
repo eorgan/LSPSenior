@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função monta o comando SQL para uso com os históricos do sistema, com base em uma data.
+Monta o comando SQL para uso com os históricos do sistema, com base em uma data.
 
 ## Parâmetros
 
@@ -22,15 +22,17 @@ Esta função monta o comando SQL para uso com os históricos do sistema, com ba
 ## Exemplo de Uso
 
 ```lspt
-Definir alfa xdatref;
-Definir alfa auxsql;
-Definir data EDatRef;
+Definir Alfa xdatref;
+Definir Alfa auxsql;
+Definir Data EDatRef;
+
 EDatRef = FimCmp;
-ConverteDataBanco(EDatREf, xdatref);
+ConverteDataBanco(EDatRef, xdatref);
+
 @ Relacionamento Histórico de Local @
 auxsql = " ";
-MontarSqlHistorico ("R038HLO", EDatRef, auxsql);
-InsClauSqlWhere("Detalhe_Aposentados", auxsql);
+MontarSQLHistorico("R038HLO", EDatRef, auxsql);
+InsClauSQLWhere("Detalhe_Aposentados", auxsql);
 ```
 
 ## Fonte

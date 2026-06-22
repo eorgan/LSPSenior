@@ -11,23 +11,21 @@ N/A
 
 ## Descrição
 
-Esta função verifica se o registro que está sendo listado na seção detalhe, é o último elemento.
+Verifica se o registro que está sendo listado na seção detalhe é o último elemento.
 
 ## Parâmetros
 
-- **Detalhe">** (`<"Seção`) - Entrada: Variável que retorna **0** (**zero**) caso não seja o último registro, ou **1** caso seja o último
-- **Retorno** - Entrada: Variável que retorna **0** (**zero**) caso não seja o último registro, ou **1** caso seja o último
+- **Detalhe">** (`<"Seção`) - Entrada: Retorna 0 caso não seja o último registro, ou 1 caso seja o último
+- **Retorno** - Entrada: Retorna 0 caso não seja o último registro, ou 1 caso seja o último
 
 ## Exemplo de Uso
 
 ```lspt
-			Definir Numero xvalor;
-			UltimoRegistro("Detalhe_Clientes",xvalor)
-			Se (xvalor = 0)
-			{
-			   ...
-@ Comandos. @
-			}
+Definir Numero xvalor;
+UltimoRegistro("Detalhe_Clientes", xvalor);
+Se (xvalor = 0) {
+  @ Comandos @
+}
 ```
 
 ## Fonte

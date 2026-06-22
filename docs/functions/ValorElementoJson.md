@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função serve para ler o valor de um campo específico de um arquivo Json.
+Esta função serve para ler o valor de um campo específico de um arquivo JSON.
 
 ## Parâmetros
 
@@ -27,28 +27,24 @@ Esta função serve para ler o valor de um campo específico de um arquivo Json.
 ## Exemplo de Uso
 
 ```lspt
-{
-"Documento":
- {
-"Id"
-: 183189,
-"Descricao"
-: "Descritivo do documento",
-"CodigoErp"
-:
-"9999"
-,
-"Comentarios"
-: [
-{
-"Id"
-: 173085,
-"Commentario"
-:
-"Produto 1101, e-mail: x@x.com.br"
-}
-]
-}
+Funcao processarRespostaAPI(); {
+  Definir Alfa vaHTTP;
+  Definir Alfa vaJSON;
+  Definir Alfa vaStatus;
+  Definir Alfa vaMensagem;
+  Definir Alfa vaUsuario;
+  
+  HttpObjeto(vaHTTP);
+  HttpGet(vaHTTP, "https://reqres.in/api/users/2", vaJSON);
+  
+  @ JSON retornado: {"data":{"id":2,"email":"janet.weaver@reqres.in","first_name":"Janet","last_name":"Weaver"},"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free..."}} @
+  
+  @ Extrair dados do usuário @
+  ValorElementoJson(vaJSON, "data", "first_name", vaUsuario);
+  ValorElementoJson(vaJSON, "data", "email", vaStatus);
+  
+  vaMensagem = "Usuário: " + vaUsuario + " - Email: " + vaStatus;
+  Mensagem(Retorna, vaMensagem);
 }
 ```
 

@@ -11,21 +11,27 @@ N/A
 
 ## Descrição
 
-Retorna a quantidade de itens de uma lista de valores concatenados por um caracter separador em um texto.
+Retorna a quantidade de itens em uma lista concatenada através de parâmetro de retorno.
 
 ## Parâmetros
 
-- **xLista** - Entrada: Texto que contém a lista com os valores concatenados por um caracter separador
-- **xSeparador** - Entrada: Caracter separador dos itens da lista
+- **xLista** - Entrada: Texto com itens separados
+- **xSeparador** - Entrada: Caractere que separa os itens
 
 ## Exemplo de Uso
 
 ```lspt
-Definir Alfa xLista;
-xLista = "valor1;valor2;valor3";
-ListaQuantidade(xLista, ";", xQtde);
-@ xQtde será igual a 3.
- @
+Definir Alfa vaEmails;
+Definir Numero vnQuantidade;
+Definir Alfa vaMensagem;
+Definir Alfa vaQuantidadeStr;
+
+vaEmails = "user1@teste.com,user2@teste.com,user3@teste.com";
+ListaQuantidade(vaEmails, ",", vnQuantidade);
+
+IntParaAlfa(vnQuantidade, vaQuantidadeStr);
+vaMensagem = "Total de emails: " + vaQuantidadeStr;
+Mensagem(Retorna, vaMensagem); @ "Total de emails: 3" @
 ```
 
 ## Fonte

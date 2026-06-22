@@ -15,21 +15,54 @@ Verifica se um arquivo físico existe no local especificado.
 
 ## Parâmetros
 
-- **caminhoArquivo** - Entrada: Específica o caminho do diretório junto com o nome do arquivo e sua extensão.
+- **caminhoArquivo** - Entrada: Caminho completo do arquivo
 
 ## Exemplo de Uso
 
 ```lspt
-xRet = ArqExiste("c:\\temp\\teste.txt");
-se (xRet = 1)
-{
-ValStr = "Arquivo EXISTE!!!";
+Definir Funcao verificarArquivos();
+
+  @ Variáveis globais @
+  Definir Alfa vaCaminhoArquivo;
+  Definir Alfa vaCaminhoConfig;
+  Definir Alfa vaCaminhoLog;
+  Definir Numero vnExisteArquivo;
+  Definir Numero vnExisteConfig;
+  Definir Numero vnExisteLog;
+  Definir Alfa vaMensagem;
+
+vaCaminhoArquivo = "C:\\temp\\dados.txt";
+vaCaminhoConfig = "C:\\config\\app.ini";
+vaCaminhoLog = "C:\\logs\\sistema.log";
+
+verificarArquivos();
+
+Funcao verificarArquivos(); {
+  @ Verifica arquivo de dados @
+  ArqExiste(vaCaminhoArquivo, vnExisteArquivo);
+  Se (vnExisteArquivo = 1) {
+    Mensagem(Retorna, "Arquivo de dados encontrado");
+  } Senao {
+    Definir Alfa vaMensagem;
+    vaMensagem = "Arquivo de dados não encontrado: " + vaCaminhoArquivo;
+    Mensagem(Erro, vaMensagem);
+  }
+  
+  @ Verifica arquivo de configuração @
+  ArqExiste(vaCaminhoConfig, vnExisteConfig);
+  Se (vnExisteConfig = 1) {
+    Mensagem(Retorna, "Arquivo de configuração encontrado");
+  } Senao {
+    Mensagem(Retorna, "Arquivo de configuração não encontrado, usando padrão");
+  }
+  
+  @ Verifica arquivo de log @
+  ArqExiste(vaCaminhoLog, vnExisteLog);
+  Se (vnExisteLog = 0) {
+    vaMensagem = "Arquivo de log será criado: " + vaCaminhoLog;
+    Mensagem(Retorna, vaMensagem);
+  }
 }
-senao
-{
-ValStr = "Arquivo NÂO EXISTE!!!";
-}
-Cancel(2);
 ```
 
 ## Fonte

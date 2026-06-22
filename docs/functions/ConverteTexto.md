@@ -15,18 +15,20 @@ Realiza a substituição de caracteres especiais de acordo com o padrão de codi
 
 ## Parâmetros
 
-- **aCodif** (`Alfa`) - Entrada: Codificação do formato de origem do texto - Formato suportado: "JSON"
+- **aCodif** (`Alfa`) - Entrada: Codificação do formato de origem do texto (formato suportado: "JSON")
 - **aStrOri** (`Alfa`) - Entrada: Texto contendo os caracteres que necessitam ser convertidos
 - **aStrFim** (`Alfa End`) - Saída: Variável que recebe o texto convertido
 
 ## Exemplo de Uso
 
 ```lspt
-Definir alfa aStrOri;
-Definir alfa aStrFim;
-aStrOri = "\u00c1gua";
-ConverteTexto("JSON", aStrOri, aStrFim);
-A variável aStrFim recebe o valor "Água".
+Definir Alfa vaTextoOrigem;
+Definir Alfa vaTextoDestino;
+
+vaTextoOrigem = "\\u00c1gua";
+
+ConverteTexto("JSON", vaTextoOrigem, vaTextoDestino);
+@ vaTextoDestino recebe o valor "Água" @
 ```
 
 ## Fonte

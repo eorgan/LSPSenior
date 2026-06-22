@@ -11,19 +11,19 @@ N/A
 
 ## Descrição
 
-Esta função inclui uma tabela no código SQL, montado pelo gerador, na seção detalhe escolhida.
+Inclui uma tabela no código SQL montado pelo gerador.
 
 ## Parâmetros
 
-- **Detalhe">** (`<"Seção`) - Entrada: Variável alfa numérica que possui o código SQL, para inclusão da tabela no código SQL, da seção detalhe determinada.
-- **Variavel** - Entrada: Variável alfa numérica que possui o código SQL, para inclusão da tabela no código SQL, da seção detalhe determinada.
+- **Detalhe">** (`<"Seção`) - Entrada: Código SQL para inclusão da tabela
+- **Variavel** - Entrada: Código SQL para inclusão da tabela
 
 ## Exemplo de Uso
 
 ```lspt
 Definir Alfa xsql;
 xsql = "E085CLI";
-InsClauSQLFrom("Detalhe_Clientes",xsql);
+InsClauSQLFrom("Detalhe_Clientes", xsql);
 ```
 
 ## Fonte

@@ -11,20 +11,36 @@ N/A
 
 ## Descrição
 
-Esta função somente aceita imagens do tipo .BMP ou .JPG. Carrega uma imagem qualquer a partir de um endereço, gravado no banco ou não ou ainda a partir de uma imagem gravada no banco.
+Carrega uma imagem do tipo .BMP ou .JPG a partir de um arquivo ou banco de dados.
 
 ## Parâmetros
 
-- **NomeDoControle** (`Alfa`) - Entrada: Variável que recebe o nome do controle do modelo ao qual se quer carregar a imagem.
-- **ArquivoOuBanco** (`Numero`) - Entrada: Variável que recebe 0 para carregar a imagem a partir de arquivo ou 1 para carregar do banco de dados.
-- **CaminhoOuCampo** (`Alfa`) - Entrada: Variável que recebe o Caminho do arquivo(Imagem de Arquivo), ou a TABELA.CAMPO (Imagem do Banco).
-- **SQL** (`Alfa`) - Entrada: Variável que recebe a condição que será inserida na clausula WHERE de busca da imagem no banco. (Somente usado se ArquivoOuBanco = 1).
+- **NomeDoControle** (`Alfa`) - Entrada: Nome do controle do modelo ao qual se quer carregar a imagem
+- **ArquivoOuBanco** (`Numero`) - Entrada: 0 para carregar a partir de arquivo ou 1 para carregar do banco de dados
+- **CaminhoOuCampo** (`Alfa`) - Entrada: Caminho do arquivo ou TABELA.CAMPO (se do banco)
+- **SQL** (`Alfa`) - Entrada: Condição WHERE para busca da imagem no banco (somente se ArquivoOuBanco = 1)
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-CarregaImagemControle();
+@ Carregando a partir de um endereço @
+CarregaImagemControle("Imagem001", 0, "c:\\ICO.ICO", "");
+CarregaImagemControle("Imagem002", 0, "\\\\Micro01\\temp\\JPG.JPG", "");
+
+@ Carregando do banco @
+CarregaImagemControle("Imagem001", 1, "R034FOT.FotEmp", "NUMCAD = 321");
+
+@ Carregando dinamicamente @
+Definir Alfa VEndFot;
+VEndFot = E075FOT.EndFot;
+EstaNulo(VEndFot, VRet);
+Se (VRet = 0) {
+  @ Se estiver gravado apenas o caminho da imagem no banco @
+  CarregaImagemControle("Imagem001", 0, VEndFot, "");
+} Senao {
+  @ Se a imagem estiver gravada no banco @
+  CarregaImagemControle("Imagem001", 1, "E075FOT.ImgFot", "");
+}
 ```
 
 ## Fonte

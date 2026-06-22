@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Cria um arquivo temporário de nome aleatório e único prefixado com o valor do parâmetro prefixo. O arquivo temporário será criado na pasta definida pela variável de ambiente **TMP**, se **TMP** não estiver definida, será verificada a variável de ambiente **TEMP**, caso está também não esteja disponível, o arquivo será criado no diretório atual.
+Cria um arquivo temporário com nome único.
 
 ## Parâmetros
 

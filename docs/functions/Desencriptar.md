@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Função para descriptografar uma cadeia de caracteres.
+Descriptografa uma cadeia de caracteres previamente criptografada.
 
 ## Parâmetros
 
@@ -22,8 +22,34 @@ Função para descriptografar uma cadeia de caracteres.
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-Desencriptar();
+Definir Funcao protegerDadosSensiveis();
+
+@ Variáveis globais @
+Definir Alfa vaDadosSensiveis;
+Definir Alfa vaDadosCriptografados;
+Definir Alfa vaDadosRecuperados;
+
+vaDadosSensiveis = "CPF:12345678901;SENHA:minhasenha123";
+
+protegerDadosSensiveis();
+
+Funcao protegerDadosSensiveis(); {
+  Definir Alfa vaMensagem;
+  @ Criptografa dados @
+  Encriptar(vaDadosSensiveis, vaDadosCriptografados);
+  vaMensagem = "Dados criptografados: " + vaDadosCriptografados;
+  Mensagem(Retorna, vaMensagem);
+
+  @ Descriptografa para uso @
+  Desencriptar(vaDadosCriptografados, vaDadosRecuperados);
+  
+  @ Verifica integridade @
+  Se (vaDadosRecuperados = vaDadosSensiveis) {
+    Mensagem(Retorna, "Dados recuperados com sucesso!");
+  } Senao {
+    Mensagem(Erro, "Erro na integridade dos dados!");
+  }
+}
 ```
 
 ## Fonte

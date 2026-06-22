@@ -11,12 +11,12 @@ N/A
 
 ## Descrição
 
-Esta função serve para posicionar no registro anterior da lista.
+Move para o próximo registro da lista.
 
 ## Parâmetros
 
-- **aLista** (`Numero`) - Entrada: variável numérica que recebe o endereço da lista
-- **aExecutou** (`Alfa End`) - Saída
+- **aLista** (`Numero`) - Entrada: Identificador da lista
+- **aExecutou** (`Alfa End`) - Saída: Variável alfa que receberá "S" se encontrou registro, "N" se chegou ao fim
 
 ## Valores de Retorno
 
@@ -25,8 +25,17 @@ Esta função serve para posicionar no registro anterior da lista.
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ListaRegraProximo();
+Definir Numero nLista;
+Definir Alfa vaAchou;
+
+ListaRegraProximo(nLista, vaAchou);
+Se (vaAchou = "S") {
+  @ Moveu para próximo registro @
+  Mensagem(Retorna, "Próximo registro encontrado");
+} Senao {
+  @ Chegou ao fim da lista @
+  Mensagem(Retorna, "Fim da lista");
+}
 ```
 
 ## Fonte

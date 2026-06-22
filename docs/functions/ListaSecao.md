@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função lista uma seção adicional do modelo a partir de um evento ou regra.
+Lista uma seção adicional do modelo a partir de um evento ou regra.
 
 ## Parâmetros
 
@@ -20,7 +20,7 @@ Esta função lista uma seção adicional do modelo a partir de um evento ou reg
 ## Exemplo de Uso
 
 ```lspt
-ListaSecao ("Adicional_1");
+ListaSecao("Adicional_1");
 ```
 
 ## Fonte

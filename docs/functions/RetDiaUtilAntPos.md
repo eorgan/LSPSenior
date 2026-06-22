@@ -11,14 +11,14 @@ N/A
 
 ## Descrição
 
-Verificar se uma data é dia útil ou não, retornando o dia útil imediatamente anterior e o posterior. Se a data informada for dia útil traz essa data em ambos os retornos.
+Verifica se uma data é dia útil ou não, retornando o dia útil imediatamente anterior e o posterior. Se a data informada for dia útil, traz essa data em ambos os retornos.
 
 ## Parâmetros
 
-- **pData** (`Numero`) - Entrada: Variável que recebe a data atual.
-- **pCEP** (`Numero`) - Entrada: Variável que recebe o CEP do local.
-- **pDataAnt** (`Numero End`) - Saída: Variável que retorna o dia útil imediatamente anterior, ou a data informada caso ela já seja dia útil.
-- **pDataPos** (`Numero End`) - Saída: Variável que retorna o dia útil imediatamente posterior, ou a data informada caso ela já seja dia útil.
+- **pData** (`Numero`) - Entrada: Variável numérica que recebe a data atual
+- **pCEP** (`Numero`) - Entrada: Variável numérica que recebe o CEP do local
+- **pDataAnt** (`Numero End`) - Saída: Variável numérica que retorna o dia útil imediatamente anterior, ou a data informada caso ela já seja dia útil
+- **pDataPos** (`Numero End`) - Saída: Variável numérica que retorna o dia útil imediatamente posterior, ou a data informada caso ela já seja dia útil
 
 ## Valores de Retorno
 
@@ -61,8 +61,40 @@ Verificar se uma data é dia útil ou não, retornando o dia útil imediatamente
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-RetDiaUtilAntPos();
+Definir Funcao exemploRetDiaUtilAntPos();
+
+@ Variáveis globais @
+Definir Numero vnData;
+Definir Numero vnCEP;
+Definir Numero vnDataAnt;
+Definir Numero vnDataPos;
+Definir Alfa vaDataAlf;
+Definir Alfa vaDataAntStr;
+Definir Alfa vaDataPosStr;
+
+exemploRetDiaUtilAntPos();
+
+Funcao exemploRetDiaUtilAntPos(); {
+  @ Exemplo com data de Natal (25/12/2024) @
+  vaDataAlf = "25/12/2024";
+  ConvDataInt(vaDataAlf, vnData);
+  vnCEP = 89107000;
+  
+  @ Verifica dias úteis anteriores e posteriores @
+  RetDiaUtilAntPos(vnData, vnCEP, vnDataAnt, vnDataPos);
+  
+  @ Converte as datas para string para exibição @
+  ConvDataExt(vnDataAnt, vaDataAntStr);
+  ConvDataExt(vnDataPos, vaDataPosStr);
+  
+  Definir Alfa vaMensagem;
+  vaMensagem = "Data base: " + vaDataAlf;
+  Mensagem(Retorna, vaMensagem);
+  vaMensagem = "Dia útil anterior: " + vaDataAntStr;
+  Mensagem(Retorna, vaMensagem);
+  vaMensagem = "Dia útil posterior: " + vaDataPosStr;
+  Mensagem(Retorna, vaMensagem);
+}
 ```
 
 ## Fonte

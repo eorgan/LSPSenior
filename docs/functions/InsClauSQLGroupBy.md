@@ -11,18 +11,17 @@ N/A
 
 ## Descrição
 
-Esta função insere uma cláusula GROUP BY no SELECT da seção passada como parâmetro.
+Insere uma cláusula GROUP BY no SELECT da seção passada como parâmetro.
 
 ## Parâmetros
 
-- **SectionName** (`Alfa`) - Entrada: Nome da seção onde será inserida o GROUP BY no SQL
+- **SectionName** (`Alfa`) - Entrada: Nome da seção onde será inserida o GROUP BY
 - **GroupByClau** (`Alfa`) - Entrada: Cláusula a ser inserida
 
 ## Exemplo de Uso
 
 ```lspt
-InsClauSQLGroupBy ("Detalhe_1", "NUMEMP,
- TIPCOL, NUMCAD");
+InsClauSQLGroupBy("Detalhe_1", "NUMEMP, TIPCOL, NUMCAD");
 ```
 
 ## Fonte

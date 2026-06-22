@@ -11,35 +11,34 @@ N/A
 
 ## Descrição
 
-Esta função busca o conteúdo atual de um campo alfanumérico de uma **VIEW** temporária.
+Busca o conteúdo atual de um campo alfanumérico de uma VIEW temporária.
 
 ## Parâmetros
 
-- **NomeCampo** (`Alfa`) - Entrada: Nome do campo da **View** e ser retornado
-- **NomeTabelaView** (`Alfa`) - Entrada: Nome da **View** temporária
-- **OpcionalWhere** (`Alfa`) - Entrada: Cláusula **WHERE** de filtro (opcional)
+- **NomeCampo** (`Alfa`) - Entrada: Nome do campo da View a ser retornado
+- **NomeTabelaView** (`Alfa`) - Entrada: Nome da View temporária
+- **OpcionalWhere** (`Alfa`) - Entrada: Cláusula WHERE de filtro (opcional)
 - **pRetorno** (`Alfa End`) - Saída: Variável onde o conteúdo buscado será retornado
-- **pAchou** (`Numero End`) - Saída: Variável que retorna **0** (**zero**) caso tenha encontrado resultados, ou **1** caso não tenha encontrado
+- **pAchou** (`Numero End`) - Saída: Retorna 0 caso tenha encontrado resultados, ou 1 caso não tenha encontrado
 
 ## Exemplo de Uso
 
 ```lspt
-			Definir Alfa xNomeView;
-			Definir Alfa xRetorno;
-			Definir Numero xAchou;
-			Definir Alfa xSQL;
-			xSQL = "SELECT UPPER(NOMFUN) NOMMAISC FROM R034FUN WHERE NUMCAD = 1";
-			CriaView (xSQL, xNomeView);
-			RetornaCampoAlfaTabela ("NOMMAISC", xNomeView, "", xRetorno, xAchou);
-			Se (xAchou = 0)
-			{
-			   ValStr = xRetorno;
-			}
-			Senao
-			{
-			   ValStr = "";
-			   Cancel(2);
-			}
+Definir Alfa xNomeView;
+Definir Alfa xRetorno;
+Definir Numero xAchou;
+Definir Alfa xSQL;
+
+xSQL = "SELECT UPPER(NOMFUN) NOMMAISC FROM R034FUN WHERE NUMCAD = 1";
+CriaView(xSQL, xNomeView);
+RetornaCampoAlfaTabela("NOMMAISC", xNomeView, "", xRetorno, xAchou);
+
+Se (xAchou = 0) {
+  ValStr = xRetorno;
+} Senao {
+  ValStr = "";
+  Cancel(2);
+}
 ```
 
 ## Fonte

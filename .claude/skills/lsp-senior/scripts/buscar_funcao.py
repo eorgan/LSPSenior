@@ -10,9 +10,9 @@ Sempre confira a coluna `direction` de cada parâmetro:
     in  = você fornece o valor
     out = parâmetro de saída (marcado com `End`/`end`) — é por aqui que a função "retorna".
 
-ATENÇÃO: o functions.json cobre ~600 funções, mas NÃO inclui as APIs SQL_* (cursores)
-nem Http* (requisições). Para essas, veja reference/quick-reference.md (nomes validados
-nos exemplos reais .lspt) ou a documentação oficial da Senior.
+O functions.json cobre ~640 funções, INCLUINDO as APIs SQL_* (cursores, categoria sql)
+e Http* (requisições, categoria http). Use este script para confirmar a assinatura de
+qualquer uma; reference/quick-reference.md traz os padrões de uso prontos.
 """
 import json
 import os

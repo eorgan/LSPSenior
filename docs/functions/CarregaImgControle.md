@@ -11,21 +11,37 @@ N/A
 
 ## Descrição
 
-Esta função carrega uma imagem do banco ou arquivo para um controle imagem do modelo.
+Carrega uma imagem do banco, arquivo ou variável para um controle imagem do modelo.
 
 ## Parâmetros
 
-- **NomeDoControleImagem** (`Alfa`) - Entrada: Variável alfa com o nome do controle imagem do modelo que carregará a imagem
-- **Arquivo0Banco1Variavel2** (`Numero`) - Entrada: Variável numérica com o tipo de localização do arquivo.   - Se o valor for **0** (**zero**), carregará a imagem de   um arquivo passado em **CaminhoCampoNome**, por exemplo, **c:Fig.BMP**; - Se o valor for **1**, carregará a imagem do banco do campo passado em **CaminhoCampoNome**; - Se o valor for **2**, carregará a imagem de uma   variável de sistema passada em **CaminhoCampoNome** , esta variável deverá conter uma imagem **ICO**, **BMP** ou   **EMF** associada;
-- **CaminhoCampoNome** (`Alfa`) - Entrada: Descrição do caminho do arquivo, do nome da tabela e campo, por exemplo, **R300CHR.FIGFUN**, através da cláusula **Where** passada em **SQL** ou nome da variável de sistema que contém a imagem a ser carregada, por exemplo, **ImgBMPGerador**
-- **SQL** (`Alfa`) - Entrada: Cláusula **Where** para buscar a imagem da tabela
-- **SqlSenior2** (`Numero`) - Entrada: Se for passado **0** (**zero**), o comando deverá ser passado em sintaxe **SQLSenior1**, e se for passado **1**, a sintaxe deverá obedecer ao padrão **SQLSenior2**
+- **NomeDoControleImagem** (`Alfa`) - Entrada: Nome do controle imagem do modelo
+- **Arquivo0Banco1Variavel2** (`Numero`) - Entrada: Caminho do arquivo, tabela.campo ou nome da variável
+- **CaminhoCampoNome** (`Alfa`) - Entrada: Caminho do arquivo, tabela.campo ou nome da variável
+- **SQL** (`Alfa`) - Entrada: Cláusula WHERE para busca da imagem da tabela
+- **SqlSenior2** (`Numero`) - Entrada: 0 para SQL Senior 1, 1 para SQL Senior 2
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-CarregaImgControle();
+@ Imagem BMP a partir de um arquivo @
+CarregaImgControle("Imagem001", 0, "C:\\temp\\Teste.BMP", "", 0);
+
+@ Imagem a partir do banco @
+Definir Alfa xSQL;
+Definir Alfa P1, P2, P3, D1;
+IntParaAlfa(R034FOT.NUMEMP, P1);
+IntParaAlfa(R034FOT.TIPCOL, P2);
+IntParaAlfa(R034FOT.NUMCAD, P3);
+ConverteDataBanco(R034FOT.DATFOT, D1);
+xSQL = "R034FOT.NUMEMP = " + P1 + " AND R034FOT.TIPCOL = " + P2 + " AND R034FOT.NUMCAD = " + P3 + " AND R034FOT.DATFOT = " + D1;
+CarregaImgControle("Imagem002", 1, "R034FOT.FotEmp", xSQL, 1);
+
+@ Imagem ICO a partir de uma variável @
+CarregaImgControle("Imagem002", 2, "ImgICOGerador", "", 0);
+
+@ Imagem EMF a partir de uma variável @
+CarregaImgControle("Imagem003", 2, "ImgEMFGerador", "", 0);
 ```
 
 ## Fonte

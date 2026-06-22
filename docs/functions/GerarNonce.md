@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Gera o valor do campo Nonce, um número aleatório.
+Gera um valor Nonce (número aleatório usado uma única vez).
 
 ## Parâmetros
 

@@ -15,15 +15,23 @@ Possibilita a composição de uma data, montando-a através de dia, mês e ano.
 
 ## Parâmetros
 
-- **dia** - Entrada: Valor correspondente ao dia.
-- **mes** - Entrada: Valor correspondente ao mês.
-- **ano** - Entrada: Valor correspondente ao ano.
+- **dia** - Entrada: Valor correspondente ao dia
+- **mes** - Entrada: Valor correspondente ao mês
+- **ano** - Entrada: Valor correspondente ao ano
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-CodData();
+Definir Data vdData;
+Definir Numero vnDia;
+Definir Numero vnMes;
+Definir Numero vnAno;
+
+vnDia = 10;
+vnMes = 1;
+vnAno = 2002;
+
+vdData = CodData(vnDia, vnMes, vnAno);
 ```
 
 ## Fonte

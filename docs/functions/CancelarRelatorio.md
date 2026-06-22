@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função cancela o relatório que está sendo executado, porém nas regras de Inicialização e Pré-Seleção, esta função não cancela a execução, pois ela ainda não foi iniciada.
+Cancela o relatório que está sendo executado.
 
 ## Parâmetros
 

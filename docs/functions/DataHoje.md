@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Retorna a data atual do sistema operacional.
+Obtém a data atual do sistema operacional (apenas data, sem hora).
 
 ## Parâmetros
 

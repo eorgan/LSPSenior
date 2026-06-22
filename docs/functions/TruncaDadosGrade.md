@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função permite ao desenvolvedor do modelo, fazer com que o dado de uma determinada célula seja truncado, evitando a quebra de linha e consequentemente o corte do texto que ultrapasse a largura da célula.
+Permite que o dado de uma determinada célula seja truncado, evitando a quebra de linha.
 
 ## Parâmetros
 

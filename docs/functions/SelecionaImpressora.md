@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função define a impressora padrão para o modelo.
+Define a impressora padrão para o modelo.
 
 ## Parâmetros
 
@@ -20,9 +20,7 @@ Esta função define a impressora padrão para o modelo.
 ## Exemplo de Uso
 
 ```lspt
-SelecionaImpressora ("HP DEKJET 660C");
-
-// Este exemplo seta a impressora HP DEKJET 660C para o modelo.
+SelecionaImpressora("HP DEKJET 660C");
 ```
 
 ## Fonte

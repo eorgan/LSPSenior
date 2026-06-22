@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Permite a execução de aplicativos durante a execução de regras.
+Executa um programa externo a partir da regra LSP.
 
 ## Parâmetros
 
@@ -22,15 +22,44 @@ Permite a execução de aplicativos durante a execução de regras.
 ## Exemplo de Uso
 
 ```lspt
-Definir alfa vPrograma;
-Definir alfa vParametro;
-vPrograma =
-"c:\\windows\\notepad.exe"
-;
-vParametro =
-""
-;
-ExecProg(vPrograma, vParametro, 0);
+Definir Funcao integracaoFerramentasExternas();
+
+@ Variáveis globais @
+Definir Alfa vaComando;
+Definir Alfa vaParametros;
+Definir Alfa vaCaminhoArquivo;
+
+vaCaminhoArquivo = "C:\\temp\\relatorio.txt";
+
+integracaoFerramentasExternas();
+
+Funcao integracaoFerramentasExternas(); {
+  Definir Alfa vaMensagem;
+  @ 1. Abre arquivo no Bloco de Notas @
+  vaComando = "notepad.exe";
+  vaParametros = vaCaminhoArquivo;
+  
+  Se (ArqExiste(vaCaminhoArquivo) = 1) {
+    ExecProg(vaComando, vaParametros, 0); @ Não aguarda terminar @
+    vaMensagem = "Arquivo aberto no Bloco de Notas";
+    Mensagem(Retorna, vaMensagem);
+  } Senao {
+    vaMensagem = "Arquivo não encontrado: " + vaCaminhoArquivo;
+    Mensagem(Erro, vaMensagem);
+  }
+  
+  @ 2. Abre explorador de arquivos @
+  vaComando = "explorer.exe";
+  vaParametros = "C:\\temp";
+  ExecProg(vaComando, vaParametros, 0);
+  Mensagem(Retorna, "Explorador de arquivos aberto");
+  
+  @ 3. Executa comando do sistema @
+  vaComando = "cmd.exe";
+  vaParametros = "/c dir C:\\temp > C:\\temp\\listagem.txt";
+  ExecProg(vaComando, vaParametros, 1); @ Aguarda terminar @
+  Mensagem(Retorna, "Listagem de arquivos gerada");
+}
 ```
 
 ## Fonte

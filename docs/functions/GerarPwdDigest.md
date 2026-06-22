@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Gera o Digest da senha, a partir do Nonce, Data e senha, em formato base64.
+Gera o Digest da senha para autenticação WS-Security.
 
 ## Parâmetros
 
@@ -23,9 +23,44 @@ Gera o Digest da senha, a partir do Nonce, Data e senha, em formato base64.
 ## Exemplo de Uso
 
 ```lspt
-GerarPwdDigest(xNonce, xCreatedTime,
-"Teste"
-, xPwdDigest);
+Definir Funcao autenticacaoWSecurity();
+
+@ Variáveis globais @
+Definir Alfa vaNonce;
+Definir Alfa vaCreated;
+Definir Alfa vaSenha;
+Definir Alfa vaDigest;
+Definir Alfa vaXMLSecurity;
+
+vaSenha = "minhasenhasecreta";
+
+autenticacaoWSecurity();
+
+Funcao autenticacaoWSecurity(); {
+  @ 1. Gera nonce @
+  GerarNonce(vaNonce);
+
+  @ 2. Data/hora atual formatada para WS-Security @
+  Definir Numero vnDataHora;
+  DataHora(vnDataHora);
+  FormatarData(vnDataHora, "yyyy-MM-ddTHH:mm:ssZ", vaCreated);
+
+  @ 3. Gera digest @
+  GerarPwdDigest(vaNonce, vaCreated, vaSenha, vaDigest);
+
+  @ 4. Monta XML de segurança @
+  vaXMLSecurity = "<wsse:Security>";
+  vaXMLSecurity = vaXMLSecurity + "<wsse:UsernameToken>";
+  vaXMLSecurity = vaXMLSecurity + "<wsse:Username>usuario</wsse:Username>";
+  vaXMLSecurity = vaXMLSecurity + "<wsse:Password Type=\"PasswordDigest\">";
+  vaXMLSecurity = vaXMLSecurity + vaDigest + "</wsse:Password>";
+  vaXMLSecurity = vaXMLSecurity + "<wsse:Nonce>" + vaNonce + "</wsse:Nonce>";
+  vaXMLSecurity = vaXMLSecurity + "<wsu:Created>" + vaCreated + "</wsu:Created>";
+  vaXMLSecurity = vaXMLSecurity + "</wsse:UsernameToken>";
+  vaXMLSecurity = vaXMLSecurity + "</wsse:Security>";
+
+  Mensagem(Retorna, "XML WS-Security gerado com sucesso!");
+}
 ```
 
 ## Fonte

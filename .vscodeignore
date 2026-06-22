@@ -21,6 +21,7 @@ webpack.config.js
 !README.md
 !CHANGELOG.md
 docs/*.md
+docs/prompts/**
 !docs/functions/**
 
 ## Ignore test files

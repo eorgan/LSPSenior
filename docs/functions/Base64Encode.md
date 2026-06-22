@@ -11,12 +11,12 @@ N/A
 
 ## Descrição
 
-Codifica para base64 o conteúdo passado.
+Codifica strings em Base64, comumente usado para autenticação básica HTTP.
 
 ## Parâmetros
 
-- **valor** (`Alfa`) - Entrada: Valor em alfanumérico.
-- **Base64Encode** (`Alfa end`) - Saída: Conteúdo do parâmetro "valor" em base64.
+- **valor** (`Alfa`) - Entrada: String a ser codificada em Base64
+- **Base64Encode** (`Alfa end`) - Saída: Variável que receberá o resultado codificado
 
 ## Exemplo de Uso
 

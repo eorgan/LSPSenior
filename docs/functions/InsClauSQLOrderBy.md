@@ -11,19 +11,19 @@ N/A
 
 ## Descrição
 
-Esta função inclui uma cláusula de ordenação no código SQL, montado pelo gerador, na seção detalhe escolhida.
+Inclui uma cláusula de ordenação no código SQL montado pelo gerador.
 
 ## Parâmetros
 
-- **Detalhe"** (`"Seção`) - Entrada: Variável alfa numérica que possui o código SQL, para inclusão da cláusula de ordenação do código SQL montado pela seção detalhe determinada
-- **Variavel** - Entrada: Variável alfa numérica que possui o código SQL, para inclusão da cláusula de ordenação do código SQL montado pela seção detalhe determinada
+- **Detalhe"** (`"Seção`) - Entrada: Código SQL para inclusão da cláusula de ordenação
+- **Variavel** - Entrada: Código SQL para inclusão da cláusula de ordenação
 
 ## Exemplo de Uso
 
 ```lspt
 Definir Alfa xsql;
 xsql = "R034FUN.DatAdm Desc";
-InsClauSQLOrderBy("Detalhe_Colaborador",xsql);
+InsClauSQLOrderBy("Detalhe_Colaborador", xsql);
 ```
 
 ## Fonte

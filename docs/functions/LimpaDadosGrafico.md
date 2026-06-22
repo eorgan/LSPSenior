@@ -11,11 +11,11 @@ N/A
 
 ## Descrição
 
-Esta função possibilita que um componente do tipo gráfico seja zerado e reutilizado no mesmo relatório. Desta forma, o gráfico não exibirá informações utilizadas anteriormente.
+Zera e reutiliza um componente do tipo gráfico no mesmo relatório.
 
 ## Parâmetros
 
-- **ControlName** (`Alfa`) - Entrada
+- **ControlName** (`Alfa`) - Entrada: Nome do controle tipo GRAFICO que se deseja limpar os dados
 
 ## Exemplo de Uso
 

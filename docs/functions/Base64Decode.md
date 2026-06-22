@@ -11,25 +11,34 @@ N/A
 
 ## Descrição
 
-Decodifica um valor base64 passado.
+Decodifica um valor Base64 de volta para texto original.
 
 ## Parâmetros
 
-- **valor** (`Alfa`) - Entrada: Valor em bas64.
-- **Base64Decode** (`Alfa end`) - Saída: Conteúdo do parâmetro "valor" em alfanumérico.
+- **valor** (`Alfa`) - Entrada: Valor em Base64 a ser decodificado
+- **Base64Decode** (`Alfa end`) - Saída: Variável que receberá o conteúdo decodificado
 
 ## Exemplo de Uso
 
 ```lspt
-Definir Alfa xValor;
-Definir Alfa xValorbase64;
+Definir Alfa vaTextoOriginal;
+Definir Alfa vaTextoCodificado;
+Definir Alfa vaTextoDecodificado;
 
-xValorbase64 =
-"dmFsb3IgcGFyYSBjb252ZXJ0ZXI="
-;
-Base64Decode(xValorbase64, xValor);
+vaTextoOriginal = "dados sensíveis da aplicação";
 
-Mensagem(Retorna, xValor);
+@ Codificar para transmissão segura @
+Base64Encode(vaTextoOriginal, vaTextoCodificado);
+Mensagem(Retorna, "Dados codificados: " + vaTextoCodificado);
+
+@ Decodificar após receber @
+Base64Decode(vaTextoCodificado, vaTextoDecodificado);
+Mensagem(Retorna, "Dados decodificados: " + vaTextoDecodificado);
+
+@ Verificar se são iguais @
+Se (vaTextoOriginal = vaTextoDecodificado) {
+  Mensagem(Retorna, "Codificação/Decodificação realizada com sucesso!");
+}
 ```
 
 ## Fonte

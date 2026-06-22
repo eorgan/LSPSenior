@@ -11,24 +11,21 @@ N/A
 
 ## Descrição
 
-Permite alterar o conteúdo de algumas **propriedades dos controles**:
+Permite alterar o conteúdo de algumas propriedades dos controles.
 
 ## Parâmetros
 
-- **Controle"** (`"Nome`) - Entrada
-- **"Propriedade"** - Entrada
+- **Controle"** (`"Nome`) - Entrada: Nome da propriedade entre aspas duplas
+- **"Propriedade"** - Entrada: Valor que a propriedade vai assumir
 - **"Parametro"** - Entrada
 
 ## Exemplo de Uso
 
 ```lspt
-AlteraControle("Subtitulo2","Salto Página","Não");
-AlteraControle("Desenho001","Configurar
- Desenho", "Desenho=1;Cor Textura=$005E20;Cor Linha=Preto;Espessura=2");
-AlteraControle("Grafico001", "Conf. Gráfico", "Pano
- Fundo;Verdadeiro");
-AlteraControle("Grafico001", "Conf. Gráfico", "Pano
- Fundo;Falso");
+AlteraControle("Subtitulo2", "Salto Página", "Não");
+AlteraControle("Desenho001", "Configurar Desenho", "Desenho=1;Cor Textura=$005E20;Cor Linha=Preto;Espessura=2");
+AlteraControle("Grafico001", "Conf. Gráfico", "Pano Fundo;Verdadeiro");
+AlteraControle("Grafico001", "Conf. Gráfico", "Pano Fundo;Falso");
 ```
 
 ## Fonte

@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função apaga uma determinada quantidade de caracteres de uma variável/campo a partir da posição informada.
+Remove uma quantidade específica de caracteres de uma posição determinada.
 
 ## Parâmetros
 

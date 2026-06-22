@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função salta de página manualmente.
+Salta de página manualmente.
 
 ## Parâmetros
 

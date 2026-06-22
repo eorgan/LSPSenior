@@ -11,15 +11,15 @@ N/A
 
 ## Descrição
 
-Esta função busca o conteúdo atual de um campo numérico de uma **VIEW** temporária.
+Busca o conteúdo atual de um campo numérico de uma VIEW temporária.
 
 ## Parâmetros
 
-- **NomeCampo** (`Alfa`) - Entrada: Nome do campo da **View** e ser retornado
-- **NomeTabelaView** (`Alfa`) - Entrada: Nome da **View** temporária
-- **OpcionalWhere** (`Alfa`) - Entrada: Cláusula **WHERE** de filtro (opcional)
+- **NomeCampo** (`Alfa`) - Entrada: Nome do campo da View a ser retornado
+- **NomeTabelaView** (`Alfa`) - Entrada: Nome da View temporária
+- **OpcionalWhere** (`Alfa`) - Entrada: Cláusula WHERE de filtro (opcional)
 - **pRetorno** (`Numero End`) - Saída: Variável onde o conteúdo buscado será retornado
-- **pAchou** (`Numero End`) - Saída: Variável que retorna **0** (**zero**) caso tenha encontrado resultados, ou **1** caso não tenha encontrado
+- **pAchou** (`Numero End`) - Saída: Retorna 0 caso tenha encontrado resultados, ou 1 caso não tenha encontrado
 
 ## Exemplo de Uso
 
@@ -28,19 +28,16 @@ Definir Alfa xNomeView;
 Definir Numero xRetorno;
 Definir Numero xAchou;
 Definir Alfa xSQL;
-xSQL = "SELECT NUMEMP, TIPCOL, SUM(VALSAL) VALORSAL FROM R034FUN GROUP
- BY NUMEMP, TIPCOL";
-CriaView (xSQL, xNomeView);
-RetornaCampoNumeroTabela ("VALORSAL", xNomeView, "NUMEMP
- = 1 and TIPCOL = 1 ", xRetorno, xAchou);
-			Se (xAchou = 0)
-			{
-			   Formula001 = xRetorno;
-			}
-			Senao
-			{
-			   Formula001 = 0;
-			}
+
+xSQL = "SELECT NUMEMP, TIPCOL, SUM(VALSAL) VALORSAL FROM R034FUN GROUP BY NUMEMP, TIPCOL";
+CriaView(xSQL, xNomeView);
+RetornaCampoNumeroTabela("VALORSAL", xNomeView, "NUMEMP = 1 and TIPCOL = 1", xRetorno, xAchou);
+
+Se (xAchou = 0) {
+  Formula001 = xRetorno;
+} Senao {
+  Formula001 = 0;
+}
 ```
 
 ## Fonte

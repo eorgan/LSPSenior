@@ -154,5 +154,5 @@ Funcao minhaFuncao(Numero pCodigo, Numero End pResultado); {
 }
 ```
 
-> Nota: `SQL_*` e `Http*` não constam no `functions.json` (catálogo cobre ~600 funções
-> de regra). Os nomes/forma de uso aqui seguem os exemplos reais `.lspt` do projeto.
+> Nota: `SQL_*` e `Http*` agora constam no `functions.json` (categorias `sql`/`http`);
+> confirme a assinatura com `python3 scripts/buscar_funcao.py <Nome>`.

@@ -11,21 +11,29 @@ N/A
 
 ## Descrição
 
-Esta função copia parte do conteúdo de uma variável/campo **alfanumérico** para a variável **alfanumérica Retorno**.
+Copiam parte do conteúdo de uma variável/campo alfanumérico modificando a própria variável de origem.
 
 ## Parâmetros
 
-- **VarAlfa** - Entrada: Variável com o conteúdo do qual se deseja copiar uma parte do texto, retornando o conteúdo copiado
-- **Posicao_Inicial** - Entrada: Posição a partir da qual se deseja copiar os caracteres
-- **Quantidade_Caracteres** - Entrada: Quantidade de caracteres que se deseja copiar a partir da **Posicao_Inicial**
+- **VarAlfa** - Entrada: Variável que contém o texto e que será modificada para conter apenas a parte copiada
+- **Posicao_Inicial** - Entrada: Posição inicial (baseada em 1)
+- **Quantidade_Caracteres** - Entrada: Quantidade de caracteres a copiar
 
 ## Exemplo de Uso
 
 ```lspt
-Definir Alfa exemplo;
-exemplo = "texto de exemplo";
-CopiarAlfa (exemplo,12,3);
-@ Após o uso da função CopiarAlfa o conteúdo da variável "exemplo" seria "emp". @
+Definir Alfa vaTexto;
+Definir Alfa vaNome;
+Definir Alfa vaSobrenome;
+
+@ Para extrair "João" @
+vaTexto = "João Silva Santos";
+vaNome = vaTexto;  @ Faz uma cópia primeiro @
+CopiarAlfa(vaNome, 1, 4); @ vaNome será "João" @
+
+@ Para extrair "Silva" @
+vaSobrenome = vaTexto;  @ Faz uma cópia primeiro @
+CopiarAlfa(vaSobrenome, 6, 5); @ vaSobrenome será "Silva" @
 ```
 
 ## Fonte

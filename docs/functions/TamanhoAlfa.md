@@ -11,21 +11,32 @@ N/A
 
 ## Descrição
 
-Verifica o tamanho do campo **Alfa** especificado em Origem.
+Retornam o tamanho de uma variável/campo alfanumérico através de parâmetro de retorno.
 
 ## Parâmetros
 
 - **Origem** - Entrada: Campo/Variável que se deseja saber o tamanho
-- **Tamanho** - Entrada: Variável tipo Numero que retornará o tamanho do campo/variável especificado em Origem
+- **Tamanho** - Entrada: Variável Numero que receberá o tamanho
 
 ## Exemplo de Uso
 
 ```lspt
-Definir Numero TamExemplo;
-Definir Alfa xExemplo;
-xExemplo = "abcdef";
-TamanhoAlfa (xExemplo, TamExemplo);
-@ Neste caso, a variável TamExemplo retorna 6. @
+Definir Alfa vaSenha;
+Definir Numero vnTamanho;
+Definir Alfa vaMensagem;
+Definir Alfa vaNumeroStr;
+
+vaSenha = "minhasenha123";
+TamanhoAlfa(vaSenha, vnTamanho);
+
+Se (vnTamanho < 8) {
+  vaMensagem = "Senha deve ter pelo menos 8 caracteres";
+  Mensagem(Erro, vaMensagem);
+} Senao {
+  IntParaAlfa(vnTamanho, vaNumeroStr);
+  vaMensagem = "Senha válida com " + vaNumeroStr + " caracteres";
+  Mensagem(Retorna, vaMensagem);
+}
 ```
 
 ## Fonte

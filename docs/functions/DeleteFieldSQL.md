@@ -11,18 +11,19 @@ N/A
 
 ## Descrição
 
-Esta função retira um campo do SELECT da seção passada como parâmetro. No gerador para facilitar na confecção e execução da maioria dos modelos, os campos chaves de todas as tabelas utilizadas nos relacionamentos das detalhes são adicionados no SELECT automaticamente. Entretanto, para utilizar funções de agrupamento (GROUP BY) e outros tipos de relacionamentos, algumas vezes estes campos não são necessários ou não devem ser inseridos automaticamente. Para isto basta chamar esta função passando quais campos que não se deseja que sejam adicionados automaticamente.
+Retira um campo do SELECT da seção passada como parâmetro.
 
 ## Parâmetros
 
 - **SectionName** (`Alfa`) - Entrada: Nome da seção que contém o SELECT onde o campo será excluído
-- **TableFieldName** (`Alfa`) - Entrada: Campo a ser excluído, sua descrição deve ser igual a que é feita pelo gerador, no padrão **TABELA.CAMPO**
+- **TableFieldName** (`Alfa`) - Entrada: Campo a ser excluído no padrão TABELA.CAMPO
 
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-DeleteFieldSQL();
+InsClauSQLGroupBy("Detalhe_1", "NUMEMP, TIPCOL");
+InsClauSQLCampoDireto("Detalhe_1", "Max(ValSal) ValorSal");
+DeleteFieldSQL("Detalhe_1", "R034FUN.NUMCAD");
 ```
 
 ## Fonte

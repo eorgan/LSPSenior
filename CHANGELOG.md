@@ -8,6 +8,29 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.11.0] - 2026-06-22
+
+### ✨ Adicionado
+- **APIs `SQL_*` (cursores) e `Http*` (requisições) no catálogo canônico.** As 13 funções
+  do ciclo de cursor (`SQL_Criar`, `SQL_UsarSqlSenior2`, `SQL_UsarAbrangencia`,
+  `SQL_DefinirComando`, `SQL_AbrirCursor`, `SQL_EOF`, `SQL_Proximo`,
+  `SQL_RetornarAlfa/Inteiro/Data/Flutuante`, `SQL_FecharCursor`, `SQL_Destruir`) e 31 funções
+  `Http*` agora aparecem em hover, autocomplete, signature help, *outline*, gramática e linter
+  — como as ~600 funções de regra. Assinaturas e direção dos parâmetros validadas nos exemplos
+  reais `.lspt`.
+- **Campo `category` em cada função do `functions.json`** (`rule`, `sql` ou `http`), derivado
+  do prefixo do nome. Base para filtros e checagens futuras do linter.
+- **Overlay curado `data/functions-api.json`** com as `SQL_*` e as `Http*` de cookie que não
+  constam como *headings* nos manuais, mesclado pelo `generate-functions.js` com a mesma lógica
+  *case-insensitive* dos demais overlays.
+
+### 🐛 Corrigido
+- **Pipeline de extração de `Http*` regenerado.** O overlay ERP (`data/functions-doc-erp.json`)
+  estava desatualizado e não trazia as ~35 funções `Http*` que já existiam nos manuais; ao
+  reexecutar o pipeline, 29 `Http*` com assinatura entram no catálogo automaticamente.
+- **Higiene de empacotamento:** `docs/prompts/` deixou de vazar para o `.vsix`
+  (adicionado ao `.vscodeignore`).
+
 ## [1.10.0] - 2026-06-16
 
 ### ✨ Adicionado

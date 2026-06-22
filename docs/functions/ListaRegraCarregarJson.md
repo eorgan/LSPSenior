@@ -11,7 +11,14 @@ N/A
 
 ## Descrição
 
-Esta função lê os dados de um arquivo Json e os carrega em uma lista onde cada campo do Json é uma coluna na lista e cada registro é uma linha.
+**Quando usar:** Para processar arrays de objetos JSON e trabalhar com múltiplos registros.
+
+**Características:**
+
+- Carrega múltiplos registros em uma lista estruturada
+- Ideal para dados tabulares ou coleções
+- Permite navegar pelos registros usando funções de lista
+- Não consegue percorrer arrays aninhados
 
 ## Parâmetros
 
@@ -27,29 +34,27 @@ Esta função lê os dados de um arquivo Json e os carrega em uma lista onde cad
 ## Exemplo de Uso
 
 ```lspt
-{
-"Documento": {
-"Id": 183190,
-"Descricao": "TESTE",
-"CriadoPor": "email@email.com.br",
-"AtualizadoPor": "email@email.com.br",
-"CodigoErp": "1072"
-},
-"itens": [
-{
-"Id": 204923,
-"Codigo": "1001000002",
-"Descricao": "TESTE DE DESCRICAO DO ITEM 1",
-"Complemento": "TESTE DE COMPLEMENTO",
-"Grupo": "D"
-},
-{
-"Id": 204922,
-"Codigo": "1001000001",
-"Descricao": "TESTE DESCRICAO DO ITEM",
-"Grupo": "I"
-}
-]
+Definir Numero vnLista;
+Definir Alfa vaAchou;
+Definir Alfa vaNome;
+Definir Alfa vaEmail;
+
+vaJSON = "{\"usuarios\": [{\"nome\": \"João\", \"email\": \"joao@exemplo.com\"}, {\"nome\": \"Maria\", \"email\": \"maria@exemplo.com\"}]}";
+
+@ Criar lista e carregar usuários @
+ListaRegraCriarLista(vnLista);
+ListaRegraCarregarJson(vnLista, vaJSON, "usuarios", "nome;email");
+
+@ Navegar pela lista @
+ListaRegraPrimeiro(vnLista, vaAchou);
+Enquanto (vaAchou = "S") {
+  ListaRegraObterValorAlfa(vnLista, "nome", vaNome, vaAchou);
+  ListaRegraObterValorAlfa(vnLista, "email", vaEmail, vaAchou);
+  
+  @ Processar cada usuário @
+  Mensagem(Retorna, "Usuário: " + vaNome + " - " + vaEmail);
+  
+  ListaRegraProximo(vnLista, vaAchou);
 }
 ```
 

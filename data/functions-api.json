@@ -1,0 +1,123 @@
+{
+  "SQL_Criar": {
+    "signature": "Funcao SQL_Criar(Alfa end Cursor);",
+    "description": "Cria um objeto de cursor SQL e armazena seu identificador na variável informada. É o primeiro passo do ciclo de cursor; o identificador retornado é usado em todas as demais funções SQL_*.",
+    "params": {
+      "Cursor": "Variável Alfa que recebe o identificador do cursor criado (saída)."
+    },
+    "example": "Definir Alfa vaSql;\nDefinir Alfa vaComando;\nDefinir Alfa vaNome;\n\nvaComando = \"SELECT NomFun FROM R034FUN WHERE NumCpf = '12345678900'\";\n\nSQL_Criar(vaSql);\nSQL_UsarSqlSenior2(vaSql, 0);\nSQL_UsarAbrangencia(vaSql, 0);\nSQL_DefinirComando(vaSql, vaComando);\nSQL_AbrirCursor(vaSql);\nEnquanto (SQL_EOF(vaSql) = 0)\n   {\n      SQL_RetornarAlfa(vaSql, \"NomFun\", vaNome);\n      SQL_Proximo(vaSql);\n   }\nSQL_FecharCursor(vaSql);\nSQL_Destruir(vaSql);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/banco-de-dados/"
+  },
+  "SQL_UsarSqlSenior2": {
+    "signature": "Funcao SQL_UsarSqlSenior2(Alfa Cursor, Numero Tipo);",
+    "description": "Define o dialeto SQL usado pelo cursor. Use 0 para SQL nativo do banco e 1 para SQL Senior (com tradução de nomes lógicos).",
+    "params": {
+      "Cursor": "Identificador do cursor criado por SQL_Criar.",
+      "Tipo": "0 = SQL nativo do banco; 1 = SQL Senior."
+    }
+  },
+  "SQL_UsarAbrangencia": {
+    "signature": "Funcao SQL_UsarAbrangencia(Alfa Cursor, Numero Abrangencia);",
+    "description": "Define se o cursor aplica filtro de abrangência (empresa/filial) automaticamente. Use 0 para desligar e 1 para ligar.",
+    "params": {
+      "Cursor": "Identificador do cursor.",
+      "Abrangencia": "0 = sem abrangência; 1 = com abrangência."
+    }
+  },
+  "SQL_DefinirComando": {
+    "signature": "Funcao SQL_DefinirComando(Alfa Cursor, Alfa Comando);",
+    "description": "Define o comando SQL (SELECT) que o cursor irá executar. Deve ser chamada antes de SQL_AbrirCursor.",
+    "params": {
+      "Cursor": "Identificador do cursor.",
+      "Comando": "Texto do comando SQL a ser executado."
+    }
+  },
+  "SQL_AbrirCursor": {
+    "signature": "Funcao SQL_AbrirCursor(Alfa Cursor);",
+    "description": "Executa o comando definido e abre o cursor, posicionando-o no primeiro registro do resultado. Após abrir, itere com SQL_EOF/SQL_Proximo e leia campos com as funções SQL_Retornar*.",
+    "params": {
+      "Cursor": "Identificador do cursor com comando já definido."
+    }
+  },
+  "SQL_EOF": {
+    "signature": "Funcao SQL_EOF(Alfa Cursor);",
+    "description": "Indica se o cursor chegou ao fim do resultado. Retorna 0 enquanto houver registro corrente e 1 quando não há mais registros. Use como condição do laço Enquanto (SQL_EOF(cursor) = 0).",
+    "params": {
+      "Cursor": "Identificador do cursor aberto."
+    },
+    "returns": ["0 = ainda há registro corrente.", "1 = fim do resultado (sem mais registros)."]
+  },
+  "SQL_Proximo": {
+    "signature": "Funcao SQL_Proximo(Alfa Cursor);",
+    "description": "Avança o cursor para o próximo registro do resultado. Chame ao final de cada iteração do laço, depois de ler os campos do registro corrente.",
+    "params": {
+      "Cursor": "Identificador do cursor aberto."
+    }
+  },
+  "SQL_RetornarAlfa": {
+    "signature": "Funcao SQL_RetornarAlfa(Alfa Cursor, Alfa Campo, Alfa end Valor);",
+    "description": "Lê o valor de um campo do tipo texto (Alfa) no registro corrente do cursor. O valor é devolvido no parâmetro de saída. Nunca passe variáveis de parâmetro (prefixo 'p') no destino — use variável local.",
+    "params": {
+      "Cursor": "Identificador do cursor aberto.",
+      "Campo": "Nome (alias) do campo no SELECT.",
+      "Valor": "Variável Alfa que recebe o valor lido (saída)."
+    }
+  },
+  "SQL_RetornarInteiro": {
+    "signature": "Funcao SQL_RetornarInteiro(Alfa Cursor, Alfa Campo, Numero end Valor);",
+    "description": "Lê o valor de um campo inteiro no registro corrente do cursor, devolvendo-o no parâmetro de saída. Não use variáveis de parâmetro (prefixo 'p') no destino — use variável local.",
+    "params": {
+      "Cursor": "Identificador do cursor aberto.",
+      "Campo": "Nome (alias) do campo no SELECT.",
+      "Valor": "Variável Numero que recebe o valor inteiro lido (saída)."
+    }
+  },
+  "SQL_RetornarData": {
+    "signature": "Funcao SQL_RetornarData(Alfa Cursor, Alfa Campo, Data end Valor);",
+    "description": "Lê o valor de um campo de data no registro corrente do cursor, devolvendo-o no parâmetro de saída.",
+    "params": {
+      "Cursor": "Identificador do cursor aberto.",
+      "Campo": "Nome (alias) do campo no SELECT.",
+      "Valor": "Variável Data que recebe a data lida (saída)."
+    }
+  },
+  "SQL_RetornarFlutuante": {
+    "signature": "Funcao SQL_RetornarFlutuante(Alfa Cursor, Alfa Campo, Numero end Valor);",
+    "description": "Lê o valor de um campo numérico de ponto flutuante (decimal) no registro corrente do cursor, devolvendo-o no parâmetro de saída.",
+    "params": {
+      "Cursor": "Identificador do cursor aberto.",
+      "Campo": "Nome (alias) do campo no SELECT.",
+      "Valor": "Variável Numero que recebe o valor decimal lido (saída)."
+    }
+  },
+  "SQL_FecharCursor": {
+    "signature": "Funcao SQL_FecharCursor(Alfa Cursor);",
+    "description": "Fecha o cursor liberando o resultado da consulta. Sempre feche o cursor após o laço de leitura e antes de SQL_Destruir.",
+    "params": {
+      "Cursor": "Identificador do cursor a fechar."
+    }
+  },
+  "SQL_Destruir": {
+    "signature": "Funcao SQL_Destruir(Alfa Cursor);",
+    "description": "Destrói o objeto de cursor liberando a memória associada. Deve ser a última chamada do ciclo, após SQL_FecharCursor.",
+    "params": {
+      "Cursor": "Identificador do cursor a destruir."
+    }
+  },
+  "HttpHabilitarCookies": {
+    "signature": "Funcao HttpHabilitarCookies(Alfa end Objeto);",
+    "description": "Habilita o recurso de manter os cookies ao utilizar requisições HTTP em regras LSP.",
+    "params": {
+      "Objeto": "Objeto HTTP criado por HttpObjeto no qual a configuração será aplicada."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httphabilitarcookies.htm"
+  },
+  "HttpDesabilitarCookies": {
+    "signature": "Funcao HttpDesabilitarCookies(Alfa end Objeto);",
+    "description": "Desabilita o recurso de manter os cookies ao utilizar requisições HTTP em regras LSP.",
+    "params": {
+      "Objeto": "Objeto HTTP criado por HttpObjeto no qual a configuração será aplicada."
+    },
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-desabilita-cookies.htm"
+  }
+}

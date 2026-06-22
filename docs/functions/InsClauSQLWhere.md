@@ -11,19 +11,19 @@ N/A
 
 ## Descrição
 
-Esta função inclui uma cláusula WHERE no código SQL, montado pelo gerador, na seção detalhe escolhida. As tabelas referenciadas no SQL são incluídas na cláusula FROM do comando SQL.
+Inclui uma cláusula WHERE no código SQL montado pelo gerador.
 
 ## Parâmetros
 
-- **Detalhe">** (`<"Seção`) - Entrada: Variável alfa numérica que possui o código SQL, para inclusão da cláusula **WHERE** no código SQL montado pela seção detalhe determinada
-- **Variavel** - Entrada: Variável alfa numérica que possui o código SQL, para inclusão da cláusula **WHERE** no código SQL montado pela seção detalhe determinada
+- **Detalhe">** (`<"Seção`) - Entrada: Código SQL para inclusão da cláusula WHERE
+- **Variavel** - Entrada: Código SQL para inclusão da cláusula WHERE
 
 ## Exemplo de Uso
 
 ```lspt
 Definir Alfa xsql;
 xsql = "R034FUN.SITAFA <> 7";
-InsClauSQLWhere("Detalhe_Clientes",xsql);
+InsClauSQLWhere("Detalhe_Clientes", xsql);
 ```
 
 ## Fonte

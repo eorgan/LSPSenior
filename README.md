@@ -1,6 +1,6 @@
 # LSPT Language Support - Guia do Usuário
 
-> Extensão completa para desenvolvimento em **LSP** (Linguagem Senior de Programação) com IntelliSense, syntax highlighting, linter e autocomplete para **600+ funções built-in** documentadas (assinatura, parâmetros, valores de retorno e exemplos).
+> Extensão completa para desenvolvimento em **LSP** (Linguagem Senior de Programação) com IntelliSense, syntax highlighting, linter e autocomplete para **640+ funções built-in** documentadas (assinatura, parâmetros, valores de retorno e exemplos) — incluindo as APIs **`SQL_*`** (cursores) e **`Http*`** (requisições).
 
 ## 🚀 Instalação Rápida
 
@@ -27,7 +27,7 @@ code --install-extension lspt-language-support-1.7.0.vsix
 
 Resumo dos recursos:
 
-- **Autocomplete** de 600+ funções, palavras reservadas e variáveis de sistema (com ou sem `Dev.`)
+- **Autocomplete** de 640+ funções (regras + APIs `SQL_*` de cursor e `Http*` de requisição), palavras reservadas e variáveis de sistema (com ou sem `Dev.`)
 - **Signature help** e **hover** com descrição de parâmetros, valores de retorno e link para a doc oficial
 - **Linter** que avisa sobre as armadilhas da LSP (operação dentro de parâmetro, `Pare`/`Continue` fora de loop)
 - **Outline** das funções do arquivo, **folding** inteligente — funções (preview mostra `Funcao Nome();`), blocos `Se`/`Senao`/`Para`/`Enquanto` (`Inicio`/`Fim` e `{`/`}`) e seções `@-- ... --@` como regiões dobráveis (`Cmd+K Cmd+8`)
@@ -876,7 +876,7 @@ A extensão funciona automaticamente ao abrir arquivos `.lspt` ou `.lsp`. Não r
 Veja [CHANGELOG.md](CHANGELOG.md) para histórico completo de versões.
 
 ### Destaques recentes (1.6.x – 1.7.0)
-- 📚 Catálogo ampliado para **600+ funções** com descrição, parâmetros e exemplos
+- 📚 Catálogo ampliado para **640+ funções** (incluindo APIs `SQL_*` de cursor e `Http*` de requisição) com descrição, parâmetros e exemplos
 - 🩺 **Linter** das armadilhas da LSP; autocomplete geral; Outline; folding
 - 🔗 Hover/signature com valores de retorno e link para a documentação oficial
 

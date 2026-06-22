@@ -11,14 +11,14 @@ N/A
 
 ## Descrição
 
-Função responsável para obter valores das colunas em alfa.
+Obtém o valor de um campo específico do registro atual da lista.
 
 ## Parâmetros
 
-- **aLista** (`Numero`) - Entrada: variável numérica que recebe o endereço da lista
-- **aColuna** (`Alfa`) - Entrada: variável alfa que recebe o nome da coluna a qual deseja obter o valor
-- **aValor** (`Alfa End`) - Saída
-- **aObteve** (`Alfa End`) - Saída
+- **aLista** (`Numero`) - Entrada: Identificador da lista
+- **aColuna** (`Alfa`) - Entrada: Nome do campo a ser obtido
+- **aValor** (`Alfa End`) - Saída: Variável alfa que receberá o valor do campo
+- **aObteve** (`Alfa End`) - Saída: Variável alfa que receberá "S" se obteve valor, "N" se não obteve
 
 ## Valores de Retorno
 
@@ -28,8 +28,22 @@ Função responsável para obter valores das colunas em alfa.
 ## Exemplo de Uso
 
 ```lspt
-@-- Adicione exemplo de uso aqui --@
-ListaRegraObterValorAlfa();
+Definir Numero nLista;
+Definir Alfa vaNome;
+Definir Alfa vaIdade;
+Definir Alfa vaObteve;
+
+@ Obter nome do registro atual @
+ListaRegraObterValorAlfa(nLista, "nome", vaNome, vaObteve);
+Se (vaObteve = "S") {
+  Mensagem(Retorna, "Nome: " + vaNome);
+}
+
+@ Obter idade do registro atual @
+ListaRegraObterValorAlfa(nLista, "idade", vaIdade, vaObteve);
+Se (vaObteve = "S") {
+  Mensagem(Retorna, "Idade: " + vaIdade);
+}
 ```
 
 ## Fonte

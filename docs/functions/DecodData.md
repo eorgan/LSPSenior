@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Permite a separação de uma data em dia, mês e ano para que os dados possam ser usados separadamente.
+Decompõe uma data em dia, mês e ano separadamente.
 
 ## Parâmetros
 
@@ -23,11 +23,46 @@ Permite a separação de uma data em dia, mês e ano para que os dados possam se
 ## Exemplo de Uso
 
 ```lspt
-Definir Alfa xretorno;
-DecodData(1345, pDia, pMes, pAno);
-IntParaAlfa(pAno, xRetorno);
-ValStr = "O ano da data é: " + xretorno;
-Cancel(2);
+Definir Funcao validarDataNascimento();
+
+@ Variáveis globais @
+Definir Numero vnDia;
+Definir Numero vnMes;
+Definir Numero vnAno;
+Definir Data vdDataNascimento;
+Definir Data vdDataAtual;
+Definir Numero vnIdade;
+
+vnDia = 15;
+vnMes = 8;
+vnAno = 1990;
+
+validarDataNascimento();
+
+Funcao validarDataNascimento(); {
+  @ 1. Monta a data @
+  CodData(vnDia, vnMes, vnAno, vdDataNascimento);
+  
+  @ 2. Obtém data atual para validação @
+  DataHoje(vdDataAtual);
+  
+  @ 3. Verifica se a data é válida (não futura) @
+  Se (vdDataNascimento > vdDataAtual) {
+    Mensagem(Erro, "Data de nascimento não pode ser futura!");
+  } Senao {
+    @ 4. Calcula idade aproximada @
+    vnIdade = vnAno - 2024; @ Simplificado para exemplo @
+    Se (vnIdade < 0) {
+      vnIdade = vnIdade * -1;
+    }
+    
+    Definir Alfa vaIdadeStr;
+    IntParaAlfa(vnIdade, vaIdadeStr);
+    Definir Alfa vaMensagem;
+    vaMensagem = "Data válida! Idade aproximada: " + vaIdadeStr;
+    Mensagem(Retorna, vaMensagem);
+  }
+}
 ```
 
 ## Fonte

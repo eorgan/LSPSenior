@@ -11,7 +11,7 @@ N/A
 
 ## Descrição
 
-Esta função monta o comando SQL para uso com os históricos do sistema, com base em uma data e sequência.
+Monta o comando SQL para uso com os históricos do sistema, com base em uma data e sequência.
 
 ## Parâmetros
 
@@ -22,26 +22,19 @@ Esta função monta o comando SQL para uso com os históricos do sistema, com ba
 ## Exemplo de Uso
 
 ```lspt
-@  Relacionamento Histórico
- Tipo Salário (DINÂMICO) @
-
-Se (EAbrTsa <> "")
- {
-@ Monta a restrição para data de alteração @
-  MontarSqlHistoricoSeq ("R038HSA",EDatRef,AuxSQLHist);
-@ Monta a restrição para campo de abrangência @
-  MontaAbrangencia("R038HSA.TipSal",EAbrTsa,AuxSQLAbr);
-  AuxSql = AuxRelac + " R038HSA.NUMEMP = R034FUN.NUMEMP
- "
-      + " AND R038HSA.TIPCOL = R034FUN.TIPCOL
- "
-      + " AND R038HSA.NUMCAD = R034FUN.NUMCAD
- "
-      + " AND "+AuxSQLHist
-      + " AND "+AuxSQLAbr;
-   InsClauSqlWhere("Detalhe_1",AuxSql);
-   AuxRelac = " AND ";
- };
+@ Relacionamento Histórico Tipo Salário (DINÂMICO) @
+Se (EAbrTsa <> "") {
+  @ Monta a restrição para data de alteração @
+  MontarSQLHistoricoSeq("R038HSA", EDatRef, AuxSQLHist);
+  
+  @ Monta a restrição para campo de abrangência @
+  MontaAbrangencia("R038HSA.TipSal", EAbrTsa, AuxSQLAbr);
+  
+  AuxSql = AuxRelac + " R038HSA.NUMEMP = R034FUN.NUMEMP " + " AND R038HSA.TIPCOL = R034FUN.TIPCOL " + " AND R038HSA.NUMCAD = R034FUN.NUMCAD " + " AND " + AuxSQLHist + " AND " + AuxSQLAbr;
+  
+  InsClauSQLWhere("Detalhe_1", AuxSql);
+  AuxRelac = " AND ";
+}
 ```
 
 ## Fonte
