@@ -20,7 +20,7 @@ Função responsável por retorna o total de linhas na listas. Quando lista esti
 
 ## Valores de Retorno
 
-- aTotal: Total de linhas na lista.
+- ** aTotal: Total de linhas na lista.
 
 ## Exemplo de Uso
 

@@ -22,7 +22,7 @@ Função responsável para pesquisar valor com tipo data na lista.
 
 ## Valores de Retorno
 
-- aExecutou: Indica se foi adicionado valor. "S" para adicionada ou "N" para não adicionado.
+- ** aExecutou: Indica se foi adicionado valor. "S" para adicionada ou "N" para não adicionado.
 - **Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md)
 
 ## Exemplo de Uso

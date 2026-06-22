@@ -19,7 +19,7 @@ _Sem parâmetros_
 
 ## Valores de Retorno
 
-- Não Possui.
+- ** Não Possui.
 
 ## Exemplo de Uso
 

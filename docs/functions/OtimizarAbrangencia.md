@@ -11,7 +11,7 @@ Funcao OtimizarAbrangencia(Alfa pAbrangecia, Alfa End pAbrangeciaOtimizada);
 
 ## Descrição
 
-Essa função de programador tem o objetivo de otimizar abrangências numéricas. **Sintaxe**: Funcao OtimizarAbrangencia(Alfa pAbrangecia, Alfa End pAbrangeciaOtimizada); **Parâmetro**: **Retorno**: pAbrangeciaOtimizada: variável alfa com a abrangência otimizada **Exemplo**: OtimizarAbrangencia("1,2,3,4,7,9,10,11", pRetorno); pRetorno = "1-4,7,9-11"; <!-- source: https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/pegartipovar.htm -->
+Essa função de programador tem o objetivo de otimizar abrangências numéricas.
 
 ## Parâmetros
 

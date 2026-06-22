@@ -70,8 +70,8 @@ function textLines(block) {
       .filter((l) => l.length > 0 && !/^#{1,6}\s/.test(l));
 }
 
-// Marcadores aceitos em ambos os formatos: "Sintaxe:" (plain) e "**Sintaxe:**" (bold).
-const MARKER_RE = /(^|\n)[ \t]*\*{0,2}(Sintaxe|Par[âa]metros|Tipo de retorno|Exemplo)[ \t]*:\*{0,2}/gi;
+// Marcadores aceitos: "Sintaxe:" (plain), "**Sintaxe:**" e "**Sintaxe**:" (bold, colon antes ou depois do **).
+const MARKER_RE = /(^|\n)[ \t]*\*{0,2}(Sintaxe|Par[âa]metros|Tipo de retorno|Exemplo)\*{0,2}[ \t]*:/gi;
 
 function markerKind(word) {
    const w = word.toLowerCase();

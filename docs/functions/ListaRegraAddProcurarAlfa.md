@@ -22,7 +22,7 @@ Função responsável para adicionar colunas e valores a serem pesquisadas valor
 
 ## Valores de Retorno
 
-- aExecutou: Indica se foi adicionado valor. "S" para adicionada ou "N" para não adicionado.
+- ** aExecutou: Indica se foi adicionado valor. "S" para adicionada ou "N" para não adicionado.
 - **Utilização da Função (dependentes):** [ListaRegraInicializarProcurar](listaregrainicializarprocurar.md)
 
 ## Exemplo de Uso

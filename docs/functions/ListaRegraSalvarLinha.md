@@ -19,7 +19,7 @@ Função responsável por salvar uma linha na lista.
 
 ## Valores de Retorno
 
-- aExecutou: Indica se foi adicionado valor. "S" para adicionada ou "N" para não adicionado.
+- ** aExecutou: Indica se foi adicionado valor. "S" para adicionada ou "N" para não adicionado.
 - **Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md), [ListaRegraAddValorLinhaAlfa](listaregraaddvalorlinhaalfa.md), [ListaRegraAddValorLinhaNumero](listaregraaddvalorlinhanumero.md), [ListaRegraAddValorLinhaData](listaregraaddvalorlinhadata.md)
 
 ## Exemplo de Uso

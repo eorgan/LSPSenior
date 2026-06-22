@@ -20,7 +20,7 @@ O objetivo dessa função é gravar as informações da tela de entrada obedecen
 
 ## Valores de Retorno
 
-- Não Possui.
+- ** Não Possui.
 
 ## Exemplo de Uso
 

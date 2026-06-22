@@ -21,7 +21,7 @@ Função responsável por verificar se existe mais algum registro com os mesmos 
 
 ## Valores de Retorno
 
-- aExecutou: Indicativo se foi posicionado na lista. "S" para posicionado ou "N" para não posicionado.
+- ** aExecutou: Indicativo se foi posicionado na lista. "S" para posicionado ou "N" para não posicionado.
 
 ## Exemplo de Uso
 

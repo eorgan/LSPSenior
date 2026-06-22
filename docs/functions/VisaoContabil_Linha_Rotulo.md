@@ -20,7 +20,7 @@ Esta função irá retornar o nível de uma linha da consulta da visão, conform
 
 ## Valores de Retorno
 
-- Numero IndRot: Retorna se a linha passada como parâmetro é um rotulo..
+- ** Numero IndRot: Retorna se a linha passada como parâmetro é um rotulo..
 
 ## Exemplo de Uso
 

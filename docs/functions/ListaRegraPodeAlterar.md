@@ -20,7 +20,7 @@ Função responsável por retornar se usuário da regra tem permissão para alte
 
 ## Valores de Retorno
 
-- aPermite: Indicativo se pode excluir uma linha. "S" para pode excluir ou "N" para não pode excluir.
+- ** aPermite: Indicativo se pode excluir uma linha. "S" para pode excluir ou "N" para não pode excluir.
 
 ## Exemplo de Uso
 

@@ -20,6 +20,7 @@ Posiciona a lista no primeiro registro.
 
 ## Valores de Retorno
 
+- **
 - aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada.
 
 ## Exemplo de Uso

@@ -22,7 +22,7 @@ Esta função serve para ler o valor de um campo específico de um arquivo JSON.
 
 ## Valores de Retorno
 
-- aValor: variável alfanumérica que recebe o valor do campo lido do Json.
+- ** aValor: variável alfanumérica que recebe o valor do campo lido do Json.
 
 ## Exemplo de Uso
 

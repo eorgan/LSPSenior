@@ -20,7 +20,7 @@ Função responsável por limpar pesquisas anteriores e preparar lista pra uma n
 
 ## Valores de Retorno
 
-- aExecutou: Indica se foi adicionado valor. "S" para adicionada ou "N" para não adicionado.
+- ** aExecutou: Indica se foi adicionado valor. "S" para adicionada ou "N" para não adicionado.
 
 ## Exemplo de Uso
 

@@ -20,7 +20,7 @@ Função responsável para ver a situação da linha, se permite incluir novas c
 
 ## Valores de Retorno
 
-- aEmInclusao: Indica se situalção da lista permite incluir novas colunas na linha. "S" para permite incluir ou "N" para não permite incluir.
+- ** aEmInclusao: Indica se situalção da lista permite incluir novas colunas na linha. "S" para permite incluir ou "N" para não permite incluir.
 
 ## Exemplo de Uso
 

@@ -2285,7 +2285,7 @@
     "description": "Estorna os componentes já baixados da O.P. Nota - Se o sistema estiver [parametrizado](../menu_controladoria/processo-bloco-k.htm#ParametrizacoesIniciais) para a geração do Bloco K, algumas consistências e bloqueios podem ser realizadas nessa função, garantindo a correta geração de informações do arquivo, conforme guia prático. Confira estas consistências na tela Parâmetros e consistências da empresa [(F070ECN)](../menu_cadastros/f070ecn.htm) - Esta função utiliza o identificador de regra CHA-900RETRC01, no qual pode ser definido se irá ou não retornar a quantidade estornada para a reserva do componente",
     "signature": "EstornaComponentes(Alfa aCodOri, Numero aNumOrp, Numero aCodEtg, Alfa aCodPro, Alfa aCodDer, Alfa aCodCmp, Numero aQtdEst, Numero aDatFim, Alfa aCodTns, Alfa End Retorno);",
     "returns": [
-      "status da execução da função. Retorna \"OK\" caso tenha sido processado",
+      "** status da execução da função. Retorna \"OK\" caso tenha sido processado",
       "com sucesso."
     ],
     "example": "Definir Alfa Retorno;\nEstornaComponentes(\n\"PEC\"\n, 8, 110,\n\"GABINETE\"\n,\n\"MS\"\n,\n\"\"\n,\n\"\"\n, 5, 0,\n\"90203\"\n,\nRetorno);\nSe (Retorno <>\n\"OK\")\n  GeraLog(Retorno);",
@@ -2543,7 +2543,7 @@
     "description": "Essa função finaliza a gravação das informações adicionadas através da função [GravacaoCampoEntrada](gravacaocampoentrada.md).",
     "signature": "FinalizarGravacaoDadosEntrada();",
     "returns": [
-      "Não Possui."
+      "** Não Possui."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/finalizargravacaodadosentrada.htm"
   },
@@ -3064,7 +3064,7 @@
     "description": "O objetivo dessa função é gravar as informações da tela de entrada obedecendo seus parâmetros.",
     "signature": "GravacaoCampoEntrada(Alfa aCampo, Alfa aValor);",
     "returns": [
-      "Não Possui."
+      "** Não Possui."
     ],
     "params": {
       "aCampo": "Informar o nome do campo da tela de entrada.",
@@ -3356,7 +3356,9 @@
     "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpsetatimeout.htm"
   },
   "ImportaWebServiceSSF": {
-    "description": "Permite a importação de arquivos somente com a extensão .ssf (web services) via LSP. **Sintaxe**: ImportaWebServiceSSF(Alfa Caminho, Alfa Provedor, Alfa End Status); **Parâmetros**: **Retorno**: Status da importação. **Exemplo**: ``` Definir Alfa xStatus; ImportaWebServiceSSF( \"C:MeusArquivoscom.senior.wf.utils.ssf\" , \"interno\" , xStatus); Se (xStatus = \"OK\" ) Inicio xMsg = \"Importado com Exito\" ; Mensagem(Retorna, xMsg); Fim; ``` **Observação**: se a importação for finalizada com êxito, o retorno será OK. Caso dê algum erro, o retorno será a mensagem deste erro. Nota Função disponível para os sistemas Gestão Empresarial PME | GO UP, Gestão Empresarial | ERP, Gestão de Pessoas | HCM e Ronda Senior. <!-- source: https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/regra-para-web-services/wsinstanciaservico.htm -->",
+    "description": "Permite a importação de arquivos somente com a extensão .ssf (web services) via LSP.",
+    "signature": "ImportaWebServiceSSF(Alfa Caminho, Alfa Provedor, Alfa End Status);",
+    "example": "Definir Alfa xStatus;\nImportaWebServiceSSF(\n\"C:\\\\MeusArquivos\\\\com.senior.wf.utils.ssf\"\n,\n\"interno\"\n, xStatus);\nSe (xStatus =\n\"OK\"\n)\nInicio\nxMsg =\n\"Importado com Exito\"\n;\nMensagem(Retorna, xMsg);\nFim;",
     "params": {
       "Caminho": "Caminho em que está o arquivo de web service.",
       "Provedor": "Nome do provedor. Necessário na hora de fazer a importação."
@@ -3510,7 +3512,7 @@
     "description": "Essa função irá iniciar a gravação das informações adicionadas atravez da função [GravacaoCampoEntrada](gravacaocampoentrada.md).",
     "signature": "IniciarGravacaoDadosEntrada(Alfa aNomeRelatorio);",
     "returns": [
-      "Não Possui."
+      "** Não Possui."
     ],
     "params": {
       "aNomeRelatorio": "Informar o nome do relatório."
@@ -3969,7 +3971,8 @@
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/lememlistproop.htm"
   },
   "LeTransferenciaProduto": {
-    "description": "Lê a lista de registros da consulta de transferências de estoque carregada, ao mandar imprimir na tela F211LIG. **Sintaxe**: LeTransferenciaProduto(Numero NPos,Numero End FLis, Numero End Emp,Alfa End Pro,Alfa End Der,Alfa End Dep,Numero End Dat,Numero End Seq,Alfa End Tns,Numero End Qtd,Numero End Vlr,Alfa End EoS,Numero End Doc,Alfa End EstMov).",
+    "description": "Lê a lista de registros da consulta de transferências de estoque carregada, ao mandar imprimir na tela F211LIG.",
+    "signature": "LeTransferenciaProduto(Numero NPos,Numero End FLis, Numero End Emp,Alfa End Pro,Alfa End Der,Alfa End Dep,Numero End Dat,Numero End Seq,Alfa End Tns,Numero End Qtd,Numero End Vlr,Alfa End EoS,Numero End Doc,Alfa End EstMov);",
     "params": {
       "NPos": "Variável que deve conter a posição atual na lista de componentes",
       "FLis": "Variável numérica que retorna 0 ou 1. Quando for 1 indica que acabou a lista",
@@ -4177,7 +4180,7 @@
     "description": "Função responsável para adicionar colunas e valores a serem pesquisadas valor na lista. Pode ser executada quantas vezes for necessárias.",
     "signature": "Funcao ListaRegraAddProcurarAlfa(Numero aLista, Alfa aColuna, Alfa aValor, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraInicializarProcurar](listaregrainicializarprocurar.md)"
     ],
     "params": {
@@ -4191,7 +4194,7 @@
     "description": "Função responsável para adicionar colunas e valores a serem pesquisadas valor na lista. Pode ser executada quantas vezes for necessárias.",
     "signature": "Funcao ListaRegraAddProcurarData(Numero aLista, Alfa aColuna, Data aValor, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):**[ListaRegraInicializarProcurar](listaregrainicializarprocurar.md)"
     ],
     "params": {
@@ -4205,7 +4208,7 @@
     "description": "Função responsável para adicionar colunas e valores a serem pesquisadas valor na lista. Pode ser executada quantas vezes for necessárias.",
     "signature": "Funcao ListaRegraAddProcurarNumero(Numero aLista, Alfa aColuna, Numero aValor, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraInicializarProcurar](listaregrainicializarprocurar.md)"
     ],
     "params": {
@@ -4219,7 +4222,7 @@
     "description": "Função responsável para pesquisar valor com tipo data na lista.",
     "signature": "Funcao ListaRegraAddValorLinhaAlfa(Numero aLista, Alfa aColuna, Alfa aValor, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md)"
     ],
     "params": {
@@ -4233,7 +4236,7 @@
     "description": "Função responsável por adicionar coluna em uma linha.",
     "signature": "Funcao ListaRegraAddValorLinhaData(Numero aLista, Alfa aColuna, Data aValor, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md)"
     ],
     "params": {
@@ -4247,7 +4250,7 @@
     "description": "Função responsável por adicionar coluna em uma linha.",
     "signature": "Funcao ListaRegraAddValorLinhaNumero(Numero aLista, Alfa aColuna, Numero aValor, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md)"
     ],
     "params": {
@@ -4261,7 +4264,7 @@
     "description": "Função responsável por alterar valor de uma coluna em uma linha da lista.",
     "signature": "Funcao ListaRegraAlterarLinhaAlfa(Numero aLista, Alfa aColuna, Alfa aValor, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
+      "** aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista",
@@ -4274,7 +4277,7 @@
     "description": "Função responsável por alerar valor de uma coluna em uma linha da lista.",
     "signature": "Funcao ListaRegraAlterarLinhaData(Numero aLista, Alfa aColuna, Data aValor, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
+      "** aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista",
@@ -4287,7 +4290,7 @@
     "description": "Função responsável por alterar valor de uma coluna em uma linha da lista.",
     "signature": "Funcao ListaRegraAlterarLinhaNumero(Numero aLista, Alfa aColuna, Numero aValor, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
+      "** aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista",
@@ -4300,7 +4303,7 @@
     "description": "Esta função serve para posicionar no último registro da lista.",
     "signature": "Funcao ListaRegraAnterior(Numero aLista, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
+      "** aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4311,7 +4314,7 @@
     "description": "Esta função lê os dados de um arquivo Json e os carrega em uma lista onde cada campo do Json é uma coluna na lista e cada registro é uma linha.",
     "signature": "Funcao ListaRegraCarregarJson(Numero aLista, Alfa aJson, Alfa aGrupo, Alfa aCampos);",
     "returns": [
-      "nenhum."
+      "** nenhum."
     ],
     "example": "{\n\"Documento\": {\n\"Id\": 183190,\n\"Descricao\": \"TESTE\",\n\"CriadoPor\": \"email@email.com.br\",\n\"AtualizadoPor\": \"email@email.com.br\",\n\"CodigoErp\": \"1072\"\n},\n\"itens\": [\n{\n\"Id\": 204923,\n\"Codigo\": \"1001000002\",\n\"Descricao\": \"TESTE DE DESCRICAO DO ITEM 1\",\n\"Complemento\": \"TESTE DE COMPLEMENTO\",\n\"Grupo\": \"D\"\n},\n{\n\"Id\": 204922,\n\"Codigo\": \"1001000001\",\n\"Descricao\": \"TESTE DESCRICAO DO ITEM\",\n\"Grupo\": \"I\"\n}\n]\n}",
     "params": {
@@ -4326,7 +4329,7 @@
     "description": "Esta função cria uma lista para manipular valores dentro da regra.",
     "signature": "Funcao ListaRegraCriarLista(Numero End aLista);",
     "returns": [
-      "aLista: retorna o número do endereço de memória da lista criada."
+      "** aLista: retorna o número do endereço de memória da lista criada."
     ],
     "example": "ListaRegraCriarLista(nListaFornecedores);",
     "params": {
@@ -4338,7 +4341,7 @@
     "description": "Função responsável para ver a situação da linha, se permite incluir novas colunas.",
     "signature": "Funcao ListaRegraEmInclusao(Numero aLista, Alfa End aEmInclusao);",
     "returns": [
-      "aEmInclusao: Indica se situalção da lista permite incluir novas colunas na linha. \"S\" para permite incluir ou \"N\" para não permite incluir."
+      "** aEmInclusao: Indica se situalção da lista permite incluir novas colunas na linha. \"S\" para permite incluir ou \"N\" para não permite incluir."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4357,7 +4360,7 @@
     "description": "Função responsável por limpar pesquisas anteriores e preparar lista pra uma nova consulta. Deve ser chamado uma única vez antes das funções ([ListaRegraAddProcurarAlfa](listaregraaddprocuraralfa.md), [ListaRegraAddProcurarNumero](listaregraaddprocurarnumero.md) ou [ListaRegraAddProcurarData](listaregraaddprocurardata.md))",
     "signature": "Funcao ListaRegraInicializarProcurar(Numero aLista, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado."
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4368,7 +4371,7 @@
     "description": "Esta função serve para posicionar no último registro da lista.",
     "signature": "Funcao ListaRegraInicio(Numero aLista, Alfa End aExecutou);",
     "returns": [
-      "aInicio: variável alfa que retorna se está no início da lista. 'S' para início e 'N' para não está no início da lista."
+      "** aInicio: variável alfa que retorna se está no início da lista. 'S' para início e 'N' para não está no início da lista."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4379,7 +4382,7 @@
     "description": "Função responsável por verificar se existe mais algum registro com os mesmos valores informado na pesquisa anterior. Procurar da linha anterior até a primeira linha da lista. Caso não localizar um novo registro, não será alterado a posição atual.",
     "signature": "Funcao ListaRegraIrPara(Numero aLista, Numero aPosicao, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: Indicativo se foi posicionado na lista. \"S\" para posicionado ou \"N\" para não posicionado."
+      "** aExecutou: Indicativo se foi posicionado na lista. \"S\" para posicionado ou \"N\" para não posicionado."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista",
@@ -4391,7 +4394,7 @@
     "description": "Esta função libera a lista criada para manipular valores dentro da regra.",
     "signature": "Funcao ListaRegraLiberarLista();",
     "returns": [
-      "nenhum."
+      "** nenhum."
     ],
     "example": "ListaRegraLiberarLista();",
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraliberarlista.htm"
@@ -4408,6 +4411,7 @@
     "description": "Função responsável para obter valores das colunas em alfa.",
     "signature": "Funcao ListaRegraObterValorAlfa(Numero aLista, Alfa aColuna, Alfa End aValor, Alfa End aObteve);",
     "returns": [
+      "**",
       "aValor: variável alfa que retorna o valor da coluna",
       "aObteve: Indica se foi possível obter o valor. 'S' para obteve e 'N' para não obteve o valor"
     ],
@@ -4421,6 +4425,7 @@
     "description": "Função responsável para obter valores das colunas em data.",
     "signature": "Funcao ListaRegraObterValorData(Numero aLista, Alfa aColuna, Data End aValor, Alfa End aObteve);",
     "returns": [
+      "**",
       "aValor: variável alfa que retorna o valor da coluna",
       "aObteve: Indica se foi possível obter o valor. 'S' para obteve e 'N' para não obteve o valor"
     ],
@@ -4434,6 +4439,7 @@
     "description": "Função responsável para obter valores das colunas em número.",
     "signature": "Funcao ListaRegraObterValorNumero(Numero aLista, Alfa aColuna, Numero End aValor, Alfa End aObteve);",
     "returns": [
+      "**",
       "aValor: variável alfa que retorna o valor da coluna",
       "aObteve: Indica se foi possível obter o valor. 'S' para obteve e 'N' para não obteve o valor"
     ],
@@ -4447,7 +4453,7 @@
     "description": "Função responsável por retornar se usuário da regra tem permissão para alterar valor de uma coluna da linha em que está posicionado.",
     "signature": "Funcao ListaRegraPodeAlterar(Numero aLista, Alfa End aPermite);",
     "returns": [
-      "aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
+      "** aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4458,7 +4464,7 @@
     "description": "Função responsável por retornar se usuário da regra tem permissão para excluir a linha em que está posicionado.",
     "signature": "Funcao ListaRegraPodeExcluir(Numero aLista, Alfa End aPermite);",
     "returns": [
-      "aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
+      "** aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4469,7 +4475,7 @@
     "description": "Função responsável por retornar se usuário da regra tem permissão para incluir uma nova linha;",
     "signature": "Funcao ListaRegraPodeIncluir(Numero aLista, Alfa End aPermite);",
     "returns": [
-      "aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
+      "** aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4480,7 +4486,7 @@
     "description": "Função responsável por retornar o posicionamento atual da lista, linha atual que está posicionado. Lista inicia na posição 0 até o total de linhas - 1. Quando estiver em uma posição inválida será retornado valor -1.",
     "signature": "Funcao ListaRegraPosicaoAtual(Numero aLista, Numero End aPosicao);",
     "returns": [
-      "aPosicao: Retorna a posição em que está na lista."
+      "** aPosicao: Retorna a posição em que está na lista."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4491,6 +4497,7 @@
     "description": "Esta função serve para posicionar para o primeiro registro da lista.",
     "signature": "Funcao ListaRegraPrimeiro(Numero aLista, Alfa End aExecutou);",
     "returns": [
+      "**",
       "aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
     ],
     "params": {
@@ -4502,7 +4509,7 @@
     "description": "Função responsável para pesquisar valor com tipo alfa na lista.",
     "signature": "Funcao ListaRegraProcurarAlfa(Numero aLista, Alfa aColuna, Alfa aValor, Alfa End aExisteRegistro);",
     "returns": [
-      "aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
+      "** aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista",
@@ -4515,7 +4522,7 @@
     "description": "Função responsável por verificar se existe mais algum registro com os mesmos valores informado na pesquisa anterior. Procura da linha anterior até a primeira linha da lista. Caso não localizar um novo registro, não será alterado a posição atual.",
     "signature": "Funcao ListaRegraProcurarAnterior(Numero aLista, Alfa End aExisteRegistro);",
     "returns": [
-      "aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. \"S\" para localizou novo registro ou \"N\" para não localizou novo registro.",
+      "** aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. \"S\" para localizou novo registro ou \"N\" para não localizou novo registro.",
       "**Utilização da Função (dependentes):** [ListaRegraProcurarRegistro](listaregraprocurarregistro.md), [ListaRegraProcurarAlfa](listaregraprocuraralfa.md), [ListaRegraProcurarNumero](listaregraprocurarnumero.md), [ListaRegraProcurarData](listaregraprocurardata.md)"
     ],
     "params": {
@@ -4527,7 +4534,7 @@
     "description": "Função responsável para pesquisar valor com tipo data na lista.",
     "signature": "Funcao ListaRegraProcurarData(Numero aLista, Alfa aColuna, Data aValor, Alfa End aExisteRegistro);",
     "returns": [
-      "aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
+      "** aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista",
@@ -4540,7 +4547,7 @@
     "description": "Função responsável para pesquisar valor com tipo alfa na lista.",
     "signature": "Funcao ListaRegraProcurarNumero(Numero aLista, Alfa aColuna, Numero aValor, Alfa End aExisteRegistro);",
     "returns": [
-      "aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
+      "** aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista",
@@ -4553,7 +4560,7 @@
     "description": "Função responsável por verificar se existe mais algum registro com os mesmos valores informado na pesquisa anterior. Procura da próxima linha válida até a última linha da lista. Caso não localizar um novo registro, não será alterado a posição atual.",
     "signature": "Funcao ListaRegraProcurarProximo(Numero aLista, Alfa End aExisteRegistro);",
     "returns": [
-      "aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. \"S\" para localizou novo registro ou \"N\" para não localizou novo registro.",
+      "** aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. \"S\" para localizou novo registro ou \"N\" para não localizou novo registro.",
       "**Utilização da Função (dependentes):** [ListaRegraProcurarRegistro](listaregraprocurarregistro.md), [ListaRegraProcurarAlfa](listaregraprocuraralfa.md), [ListaRegraProcurarNumero](listaregraprocurarnumero.md), [ListaRegraProcurarData](listaregraprocurardata.md)"
     ],
     "params": {
@@ -4565,7 +4572,7 @@
     "description": "Esta função serve para posicionar no registro anterior da lista.",
     "signature": "Funcao ListaRegraProximo(Numero aLista, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
+      "** aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4576,7 +4583,7 @@
     "description": "Função responsável por salvar uma linha na lista.",
     "signature": "Funcao ListaRegraSalvarLinha(Numero aLista);",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md), [ListaRegraAddValorLinhaAlfa](listaregraaddvalorlinhaalfa.md), [ListaRegraAddValorLinhaNumero](listaregraaddvalorlinhanumero.md), [ListaRegraAddValorLinhaData](listaregraaddvalorlinhadata.md)"
     ],
     "params": {
@@ -4599,7 +4606,7 @@
     "description": "Função responsável por retorna o total de linhas na listas. Quando lista estiver vazia será retornado valor -1.",
     "signature": "Funcao ListaRegraTotalLinhas(Numero aLista, Numero End aTotal);",
     "returns": [
-      "aTotal: Total de linhas na lista."
+      "** aTotal: Total de linhas na lista."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4610,7 +4617,7 @@
     "description": "Esta função serve para posicionar no último registro da lista.",
     "signature": "Funcao ListaRegraUltimo(Numero aLista, Alfa End aExecutou);",
     "returns": [
-      "aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
+      "** aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -4621,7 +4628,7 @@
     "description": "Verificar se é o fim da lista de registro.",
     "signature": "Funcao ListaRegrafim(Numero aLista, Alfa End aInicio);",
     "returns": [
-      "aFim: variável alfa que retorna se está no fim da lista. 'S' para fim e 'N' para não está no final da lista."
+      "** aFim: variável alfa que retorna se está no fim da lista. 'S' para fim e 'N' para não está no final da lista."
     ],
     "params": {
       "aLista": "variável numérica que recebe o endereço da lista"
@@ -5292,7 +5299,8 @@
     "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/obtemidiomaativo.htm"
   },
   "ObterProximoId": {
-    "description": "Gerar um ID único para controlar os sequenciais das tabelas. **Sintaxe**: função Alfa Identificador, Numero Incremento, Alfa Filtro, Numero End ProximoId",
+    "description": "Gerar um ID único para controlar os sequenciais das tabelas.",
+    "signature": "função Alfa Identificador, Numero Incremento, Alfa Filtro, Numero End ProximoId",
     "params": {
       "Identificador": "Variável com um identificador único, usado para a geração do sequencial.",
       "Incremento": "Variável com a quantidade que será incrementada no sequencial.",
@@ -5421,7 +5429,8 @@
     "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerador-de-relatorios/ordenacaoselecionada.htm"
   },
   "OtimizarAbrangencia": {
-    "description": "Essa função de programador tem o objetivo de otimizar abrangências numéricas. **Sintaxe**: Funcao OtimizarAbrangencia(Alfa pAbrangecia, Alfa End pAbrangeciaOtimizada); **Parâmetro**: **Retorno**: pAbrangeciaOtimizada: variável alfa com a abrangência otimizada **Exemplo**: OtimizarAbrangencia(\"1,2,3,4,7,9,10,11\", pRetorno); pRetorno = \"1-4,7,9-11\"; <!-- source: https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/pegartipovar.htm -->",
+    "description": "Essa função de programador tem o objetivo de otimizar abrangências numéricas.",
+    "signature": "Funcao OtimizarAbrangencia(Alfa pAbrangecia, Alfa End pAbrangeciaOtimizada);",
     "params": {
       "pAbrangecia": "Variável com um abrangência númerica"
     },
@@ -5645,7 +5654,9 @@
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/remeterretornarservico.htm"
   },
   "RemoveExpressoesProibidas": {
-    "description": "Remove expressões proibidas para não permitir que campos de relatórios/regras aceitem algum tipo de script. **Sintaxe**: RemoveExpressoesProibidas(Alfa End aTexto) **Parâmetros**: **Exemplo**: ``` Definir Alfa ETexto; RemoveExpressoesProibidas(ETexto); ``` **Observação**: Ao não informar o [valor de uma ou mais expressões regulares](../../../central-de-configuracao/cfgkeysform.htm#remove-expressoes) na Central de Configurações Senior, em Chaves, a função já remove a expressão script. <!-- source: https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/restodivisao.htm -->",
+    "description": "Remove expressões proibidas para não permitir que campos de relatórios/regras aceitem algum tipo de script.",
+    "signature": "RemoveExpressoesProibidas(Alfa End aTexto)",
+    "example": "Definir Alfa ETexto;\nRemoveExpressoesProibidas(ETexto);",
     "params": {
       "aTexto": "Expressão que será removida de campos de relatórios/regras."
     },
@@ -6736,7 +6747,7 @@
     "description": "Esta função serve para ler o valor de um campo específico de um arquivo Json.",
     "signature": "Funcao ValorElementoJson(Alfa aJson, Alfa aGrupo, Alfa aElemento, Alfa End aValor);",
     "returns": [
-      "aValor: variável alfanumérica que recebe o valor do campo lido do Json."
+      "** aValor: variável alfanumérica que recebe o valor do campo lido do Json."
     ],
     "example": "{\n\"Documento\":\n {\n\"Id\"\n: 183189,\n\"Descricao\"\n: \"Descritivo do documento\",\n\"CodigoErp\"\n:\n\"9999\"\n,\n\"Comentarios\"\n: [\n{\n\"Id\"\n: 173085,\n\"Commentario\"\n:\n\"Produto 1101, e-mail: x@x.com.br\"\n}\n]\n}\n}",
     "params": {
@@ -6815,7 +6826,7 @@
     "description": "Esta função irá retornar o nível de uma linha da consulta da visão, conforme o parâmetro NumLin.",
     "signature": "VisaoContabil_Linha_Rotulo(Numero NumLin, Numero End IndRot);",
     "returns": [
-      "Numero IndRot: Retorna se a linha passada como parâmetro é um rotulo.."
+      "** Numero IndRot: Retorna se a linha passada como parâmetro é um rotulo.."
     ],
     "params": {
       "NumLin": "Deve indicar qual linha da consulta da visão que queira obter se a mesma é um rotulo ou não."
@@ -6826,7 +6837,7 @@
     "description": "Esta função irá retornar o nível de uma linha da consulta da visão, conforme o parâmetro NumLin.",
     "signature": "VisaoContabil_Nivel_Conta(Numero NumLin, Numero End NivCta);",
     "returns": [
-      "Numero NivCta: Retorna o nível de uma linha da visão."
+      "** Numero NivCta: Retorna o nível de uma linha da visão."
     ],
     "params": {
       "NumLin": "Deve indicar qual linha da consulta da visão queira obter a nível."

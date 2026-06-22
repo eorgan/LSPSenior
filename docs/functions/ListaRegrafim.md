@@ -20,7 +20,7 @@ Verificar se é o fim da lista de registro.
 
 ## Valores de Retorno
 
-- aFim: variável alfa que retorna se está no fim da lista. 'S' para fim e 'N' para não está no final da lista.
+- ** aFim: variável alfa que retorna se está no fim da lista. 'S' para fim e 'N' para não está no final da lista.
 
 ## Exemplo de Uso
 

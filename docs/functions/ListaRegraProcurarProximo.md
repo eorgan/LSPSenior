@@ -20,7 +20,7 @@ Função responsável por verificar se existe mais algum registro com os mesmos 
 
 ## Valores de Retorno
 
-- aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. "S" para localizou novo registro ou "N" para não localizou novo registro.
+- ** aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. "S" para localizou novo registro ou "N" para não localizou novo registro.
 - **Utilização da Função (dependentes):** [ListaRegraProcurarRegistro](listaregraprocurarregistro.md), [ListaRegraProcurarAlfa](listaregraprocuraralfa.md), [ListaRegraProcurarNumero](listaregraprocurarnumero.md), [ListaRegraProcurarData](listaregraprocurardata.md)
 
 ## Exemplo de Uso

@@ -22,6 +22,7 @@ Função responsável para obter valores das colunas em número.
 
 ## Valores de Retorno
 
+- **
 - aValor: variável alfa que retorna o valor da coluna
 - aObteve: Indica se foi possível obter o valor. 'S' para obteve e 'N' para não obteve o valor
 

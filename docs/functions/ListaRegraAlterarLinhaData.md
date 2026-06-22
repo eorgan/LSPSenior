@@ -22,7 +22,7 @@ Função responsável por alerar valor de uma coluna em uma linha da lista.
 
 ## Valores de Retorno
 
-- aExecutou: Indica se foi alterado valor. "S" para alterado ou "N" para não alterado.
+- ** aExecutou: Indica se foi alterado valor. "S" para alterado ou "N" para não alterado.
 
 ## Exemplo de Uso
 

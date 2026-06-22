@@ -19,7 +19,7 @@ _Sem parâmetros_
 
 ## Valores de Retorno
 
-- nenhum.
+- ** nenhum.
 
 ## Exemplo de Uso
 

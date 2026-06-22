@@ -9045,7 +9045,7 @@
     ],
     "description": "Estorna os componentes já baixados da O.P. Nota - Se o sistema estiver [parametrizado](../menu_controladoria/processo-bloco-k.htm#ParametrizacoesIniciais) para a geração do Bloco K, algumas consistências e bloqueios podem ser realizadas nessa função, garantindo a correta geração de informações do arquivo, conforme guia prático. Confira estas consistências na tela Parâmetros e consistências da empresa [(F070ECN)](../menu_cadastros/f070ecn.htm) - Esta função utiliza o identificador de regra CHA-900RETRC01, no qual pode ser definido se irá ou não retornar a quantidade estornada para a reserva do componente",
     "returns": [
-      "status da execução da função. Retorna \"OK\" caso tenha sido processado",
+      "** status da execução da função. Retorna \"OK\" caso tenha sido processado",
       "com sucesso."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/estornacomponenteop.htm",
@@ -10180,7 +10180,7 @@
         "direction": "out"
       }
     ],
-    "description": "Essa função de programador tem o objetivo de otimizar abrangências numéricas. **Sintaxe**: Funcao OtimizarAbrangencia(Alfa pAbrangecia, Alfa End pAbrangeciaOtimizada); **Parâmetro**: **Retorno**: pAbrangeciaOtimizada: variável alfa com a abrangência otimizada **Exemplo**: OtimizarAbrangencia(\"1,2,3,4,7,9,10,11\", pRetorno); pRetorno = \"1-4,7,9-11\"; <!-- source: https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/pegartipovar.htm -->",
+    "description": "Essa função de programador tem o objetivo de otimizar abrangências numéricas.",
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/otimizar-abrangencia.htm",
     "category": "rule"
   },
@@ -10666,7 +10666,7 @@
     ],
     "description": "Cria uma nova lista de regras para armazenar dados estruturados.",
     "returns": [
-      "aLista: retorna o número do endereço de memória da lista criada."
+      "** aLista: retorna o número do endereço de memória da lista criada."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregracriarlista.htm",
     "category": "rule"
@@ -10678,7 +10678,7 @@
     "params": [],
     "description": "Esta função libera a lista criada para manipular valores dentro da regra.",
     "returns": [
-      "nenhum."
+      "** nenhum."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraliberarlista.htm",
     "category": "rule"
@@ -11075,7 +11075,7 @@
         "direction": "out"
       }
     ],
-    "description": "Gerar um ID único para controlar os sequenciais das tabelas. **Sintaxe**: função Alfa Identificador, Numero Incremento, Alfa Filtro, Numero End ProximoId",
+    "description": "Gerar um ID único para controlar os sequenciais das tabelas.",
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/obterproximoid.htm",
     "category": "rule"
   },
@@ -16007,7 +16007,7 @@
     "params": [],
     "description": "Essa função finaliza a gravação das informações adicionadas através da função [GravacaoCampoEntrada](gravacaocampoentrada.md).",
     "returns": [
-      "Não Possui."
+      "** Não Possui."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/finalizargravacaodadosentrada.htm",
     "category": "rule"
@@ -16567,7 +16567,7 @@
     ],
     "description": "O objetivo dessa função é gravar as informações da tela de entrada obedecendo seus parâmetros.",
     "returns": [
-      "Não Possui."
+      "** Não Possui."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/gravacaocampoentrada.htm",
     "category": "rule"
@@ -17374,6 +17374,33 @@
     "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/httpsetatimeout.htm",
     "category": "http"
   },
+  "ImportaWebServiceSSF": {
+    "code": "N/A",
+    "name": "ImportaWebServiceSSF",
+    "signature": "Funcao ImportaWebServiceSSF(Alfa Caminho, Alfa Provedor, Alfa End Status);",
+    "params": [
+      {
+        "name": "Caminho",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Caminho em que está o arquivo de web service."
+      },
+      {
+        "name": "Provedor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do provedor. Necessário na hora de fazer a importação."
+      },
+      {
+        "name": "Status",
+        "type": "Alfa End",
+        "direction": "out"
+      }
+    ],
+    "description": "Permite a importação de arquivos somente com a extensão .ssf (web services) via LSP.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/regra-para-web-services/importawebservicessf.htm",
+    "category": "rule"
+  },
   "ImportacaoCotacoesMoeda": {
     "code": "N/A",
     "name": "ImportacaoCotacoesMoeda",
@@ -17593,7 +17620,7 @@
     ],
     "description": "Essa função irá iniciar a gravação das informações adicionadas atravez da função [GravacaoCampoEntrada](gravacaocampoentrada.md).",
     "returns": [
-      "Não Possui."
+      "** Não Possui."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/iniciargravacaodadosentrada.htm",
     "category": "rule"
@@ -18224,6 +18251,100 @@
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/lememlistanaembfil.htm",
     "category": "rule"
   },
+  "LeTransferenciaProduto": {
+    "code": "N/A",
+    "name": "LeTransferenciaProduto",
+    "signature": "Funcao LeTransferenciaProduto(Numero NPos,Numero End FLis, Numero End Emp,Alfa End Pro,Alfa End Der,Alfa End Dep,Numero End Dat,Numero End Seq,Alfa End Tns,Numero End Qtd,Numero End Vlr,Alfa End EoS,Numero End Doc,Alfa End EstMov);",
+    "params": [
+      {
+        "name": "NPos",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Variável que deve conter a posição atual na lista de componentes"
+      },
+      {
+        "name": "FLis",
+        "type": "Numero End",
+        "direction": "out",
+        "description": "Variável numérica que retorna 0 ou 1. Quando for 1 indica que acabou a lista"
+      },
+      {
+        "name": "Emp",
+        "type": "Numero End",
+        "direction": "out",
+        "description": "Código da empresa"
+      },
+      {
+        "name": "Pro",
+        "type": "Alfa End",
+        "direction": "out",
+        "description": "Código do produto movimentado"
+      },
+      {
+        "name": "Der",
+        "type": "Alfa End",
+        "direction": "out",
+        "description": "Código da derivação do produto movimentado"
+      },
+      {
+        "name": "Dep",
+        "type": "Alfa End",
+        "direction": "out",
+        "description": "Código do depósito movimentado"
+      },
+      {
+        "name": "Dat",
+        "type": "Numero End",
+        "direction": "out",
+        "description": "Data da movimentação do estoque"
+      },
+      {
+        "name": "Seq",
+        "type": "Numero End",
+        "direction": "out",
+        "description": "Sequência de movimento na data de movimentação"
+      },
+      {
+        "name": "Tns",
+        "type": "Alfa End",
+        "direction": "out",
+        "description": "Código da transação de movimentação de estoque"
+      },
+      {
+        "name": "Qtd",
+        "type": "Numero End",
+        "direction": "out",
+        "description": "Quantidade do movimento"
+      },
+      {
+        "name": "Vlr",
+        "type": "Numero End",
+        "direction": "out",
+        "description": "Valor do movimento"
+      },
+      {
+        "name": "EoS",
+        "type": "Alfa End",
+        "direction": "out",
+        "description": "Entrada ou saída de estoque (E ou S)"
+      },
+      {
+        "name": "Doc",
+        "type": "Numero End",
+        "direction": "out",
+        "description": "Número do documento base da movimentação"
+      },
+      {
+        "name": "EstMov",
+        "type": "Alfa End",
+        "direction": "out",
+        "description": "Tipo de estoque movimentado"
+      }
+    ],
+    "description": "Lê a lista de registros da consulta de transferências de estoque carregada, ao mandar imprimir na tela F211LIG.",
+    "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/letransferenciaproduto.htm",
+    "category": "rule"
+  },
   "LerPosicaoAlfa": {
     "code": "N/A",
     "name": "LerPosicaoAlfa",
@@ -18392,7 +18513,7 @@
     ],
     "description": "Função responsável para adicionar colunas e valores a serem pesquisadas valor na lista. Pode ser executada quantas vezes for necessárias.",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraInicializarProcurar](listaregrainicializarprocurar.md)"
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraaddprocuraralfa.htm",
@@ -18429,7 +18550,7 @@
     ],
     "description": "Função responsável para adicionar colunas e valores a serem pesquisadas valor na lista. Pode ser executada quantas vezes for necessárias.",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):**[ListaRegraInicializarProcurar](listaregrainicializarprocurar.md)"
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraaddprocurardata.htm",
@@ -18466,7 +18587,7 @@
     ],
     "description": "Função responsável para adicionar colunas e valores a serem pesquisadas valor na lista. Pode ser executada quantas vezes for necessárias.",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraInicializarProcurar](listaregrainicializarprocurar.md)"
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraaddprocurarnumero.htm",
@@ -18503,7 +18624,7 @@
     ],
     "description": "Função responsável para pesquisar valor com tipo data na lista.",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md)"
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraaddvalorlinhaalfa.htm",
@@ -18540,7 +18661,7 @@
     ],
     "description": "Função responsável por adicionar coluna em uma linha.",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md)"
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraaddvalorlinhadata.htm",
@@ -18577,7 +18698,7 @@
     ],
     "description": "Função responsável por adicionar coluna em uma linha.",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md)"
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraaddvalorlinhanumero.htm",
@@ -18614,7 +18735,7 @@
     ],
     "description": "Função responsável por alterar valor de uma coluna em uma linha da lista.",
     "returns": [
-      "aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
+      "** aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraalterarlinhaalfa.htm",
     "category": "rule"
@@ -18650,7 +18771,7 @@
     ],
     "description": "Função responsável por alerar valor de uma coluna em uma linha da lista.",
     "returns": [
-      "aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
+      "** aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraalterarlinhadata.htm",
     "category": "rule"
@@ -18686,7 +18807,7 @@
     ],
     "description": "Função responsável por alterar valor de uma coluna em uma linha da lista.",
     "returns": [
-      "aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
+      "** aExecutou: Indica se foi alterado valor. \"S\" para alterado ou \"N\" para não alterado."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraalterarlinhanumero.htm",
     "category": "rule"
@@ -18710,7 +18831,7 @@
     ],
     "description": "Esta função serve para posicionar no último registro da lista.",
     "returns": [
-      "aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
+      "** aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraanterior.htm",
     "category": "rule"
@@ -18747,7 +18868,7 @@
     ],
     "description": "**Quando usar:** Para processar arrays de objetos JSON e trabalhar com múltiplos registros.\n\n**Características:**\n\n- Carrega múltiplos registros em uma lista estruturada\n- Ideal para dados tabulares ou coleções\n- Permite navegar pelos registros usando funções de lista\n- Não consegue percorrer arrays aninhados",
     "returns": [
-      "nenhum."
+      "** nenhum."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregracarregarjson.htm",
     "category": "rule"
@@ -18771,7 +18892,7 @@
     ],
     "description": "Função responsável para ver a situação da linha, se permite incluir novas colunas.",
     "returns": [
-      "aEmInclusao: Indica se situalção da lista permite incluir novas colunas na linha. \"S\" para permite incluir ou \"N\" para não permite incluir."
+      "** aEmInclusao: Indica se situalção da lista permite incluir novas colunas na linha. \"S\" para permite incluir ou \"N\" para não permite incluir."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraeminclusao.htm",
     "category": "rule"
@@ -18811,7 +18932,7 @@
     ],
     "description": "Função responsável por limpar pesquisas anteriores e preparar lista pra uma nova consulta. Deve ser chamado uma única vez antes das funções ([ListaRegraAddProcurarAlfa](listaregraaddprocuraralfa.md), [ListaRegraAddProcurarNumero](listaregraaddprocurarnumero.md) ou [ListaRegraAddProcurarData](listaregraaddprocurardata.md))",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado."
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregrainicializarprocurar.htm",
     "category": "rule"
@@ -18835,7 +18956,7 @@
     ],
     "description": "Esta função serve para posicionar no último registro da lista.",
     "returns": [
-      "aInicio: variável alfa que retorna se está no início da lista. 'S' para início e 'N' para não está no início da lista."
+      "** aInicio: variável alfa que retorna se está no início da lista. 'S' para início e 'N' para não está no início da lista."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregrainicio.htm",
     "category": "rule"
@@ -18865,7 +18986,7 @@
     ],
     "description": "Função responsável por verificar se existe mais algum registro com os mesmos valores informado na pesquisa anterior. Procurar da linha anterior até a primeira linha da lista. Caso não localizar um novo registro, não será alterado a posição atual.",
     "returns": [
-      "aExecutou: Indicativo se foi posicionado na lista. \"S\" para posicionado ou \"N\" para não posicionado."
+      "** aExecutou: Indicativo se foi posicionado na lista. \"S\" para posicionado ou \"N\" para não posicionado."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregrairpara.htm",
     "category": "rule"
@@ -18918,6 +19039,7 @@
     ],
     "description": "Obtém o valor de um campo específico do registro atual da lista.",
     "returns": [
+      "**",
       "aValor: variável alfa que retorna o valor da coluna",
       "aObteve: Indica se foi possível obter o valor. 'S' para obteve e 'N' para não obteve o valor"
     ],
@@ -18954,6 +19076,7 @@
     ],
     "description": "Função responsável para obter valores das colunas em data.",
     "returns": [
+      "**",
       "aValor: variável alfa que retorna o valor da coluna",
       "aObteve: Indica se foi possível obter o valor. 'S' para obteve e 'N' para não obteve o valor"
     ],
@@ -18990,6 +19113,7 @@
     ],
     "description": "Função responsável para obter valores das colunas em número.",
     "returns": [
+      "**",
       "aValor: variável alfa que retorna o valor da coluna",
       "aObteve: Indica se foi possível obter o valor. 'S' para obteve e 'N' para não obteve o valor"
     ],
@@ -19015,7 +19139,7 @@
     ],
     "description": "Função responsável por retornar se usuário da regra tem permissão para alterar valor de uma coluna da linha em que está posicionado.",
     "returns": [
-      "aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
+      "** aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregrapodealterar.htm",
     "category": "rule"
@@ -19039,7 +19163,7 @@
     ],
     "description": "Função responsável por retornar se usuário da regra tem permissão para excluir a linha em que está posicionado.",
     "returns": [
-      "aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
+      "** aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregrapodeexcluir.htm",
     "category": "rule"
@@ -19063,7 +19187,7 @@
     ],
     "description": "Função responsável por retornar se usuário da regra tem permissão para incluir uma nova linha;",
     "returns": [
-      "aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
+      "** aPermite: Indicativo se pode excluir uma linha. \"S\" para pode excluir ou \"N\" para não pode excluir."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregrapodeincluir.htm",
     "category": "rule"
@@ -19087,7 +19211,7 @@
     ],
     "description": "Função responsável por retornar o posicionamento atual da lista, linha atual que está posicionado. Lista inicia na posição 0 até o total de linhas - 1. Quando estiver em uma posição inválida será retornado valor -1.",
     "returns": [
-      "aPosicao: Retorna a posição em que está na lista."
+      "** aPosicao: Retorna a posição em que está na lista."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraposicaoatual.htm",
     "category": "rule"
@@ -19112,6 +19236,7 @@
     ],
     "description": "Posiciona a lista no primeiro registro.",
     "returns": [
+      "**",
       "aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraprimeiro.htm",
@@ -19148,7 +19273,7 @@
     ],
     "description": "Função responsável para pesquisar valor com tipo alfa na lista.",
     "returns": [
-      "aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
+      "** aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraprocuraralfa.htm",
     "category": "rule"
@@ -19172,7 +19297,7 @@
     ],
     "description": "Função responsável por verificar se existe mais algum registro com os mesmos valores informado na pesquisa anterior. Procura da linha anterior até a primeira linha da lista. Caso não localizar um novo registro, não será alterado a posição atual.",
     "returns": [
-      "aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. \"S\" para localizou novo registro ou \"N\" para não localizou novo registro.",
+      "** aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. \"S\" para localizou novo registro ou \"N\" para não localizou novo registro.",
       "**Utilização da Função (dependentes):** [ListaRegraProcurarRegistro](listaregraprocurarregistro.md), [ListaRegraProcurarAlfa](listaregraprocuraralfa.md), [ListaRegraProcurarNumero](listaregraprocurarnumero.md), [ListaRegraProcurarData](listaregraprocurardata.md)"
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraprocuraranterior.htm",
@@ -19209,7 +19334,7 @@
     ],
     "description": "Função responsável para pesquisar valor com tipo data na lista.",
     "returns": [
-      "aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
+      "** aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraprocurardata.htm",
     "category": "rule"
@@ -19245,7 +19370,7 @@
     ],
     "description": "Função responsável para pesquisar valor com tipo alfa na lista.",
     "returns": [
-      "aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
+      "** aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraprocurarnumero.htm",
     "category": "rule"
@@ -19269,7 +19394,7 @@
     ],
     "description": "Função responsável por verificar se existe mais algum registro com os mesmos valores informado na pesquisa anterior. Procura da próxima linha válida até a última linha da lista. Caso não localizar um novo registro, não será alterado a posição atual.",
     "returns": [
-      "aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. \"S\" para localizou novo registro ou \"N\" para não localizou novo registro.",
+      "** aExisteRegistro: Indicativo se foi localizado um novo registro com os mesmos parâmetros da pesquisa anterior. \"S\" para localizou novo registro ou \"N\" para não localizou novo registro.",
       "**Utilização da Função (dependentes):** [ListaRegraProcurarRegistro](listaregraprocurarregistro.md), [ListaRegraProcurarAlfa](listaregraprocuraralfa.md), [ListaRegraProcurarNumero](listaregraprocurarnumero.md), [ListaRegraProcurarData](listaregraprocurardata.md)"
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraprocurarproximo.htm",
@@ -19295,7 +19420,7 @@
     ],
     "description": "Move para o próximo registro da lista.",
     "returns": [
-      "aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
+      "** aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraproximo.htm",
     "category": "rule"
@@ -19314,7 +19439,7 @@
     ],
     "description": "Função responsável por salvar uma linha na lista.",
     "returns": [
-      "aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
+      "** aExecutou: Indica se foi adicionado valor. \"S\" para adicionada ou \"N\" para não adicionado.",
       "**Utilização da Função (dependentes):** [ListaRegraNovaLinha](listaregranovalinha.md), [ListaRegraAddValorLinhaAlfa](listaregraaddvalorlinhaalfa.md), [ListaRegraAddValorLinhaNumero](listaregraaddvalorlinhanumero.md), [ListaRegraAddValorLinhaData](listaregraaddvalorlinhadata.md)"
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregrasalvarlinha.htm",
@@ -19373,7 +19498,7 @@
     ],
     "description": "Função responsável por retorna o total de linhas na listas. Quando lista estiver vazia será retornado valor -1.",
     "returns": [
-      "aTotal: Total de linhas na lista."
+      "** aTotal: Total de linhas na lista."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregratotallinhas.htm",
     "category": "rule"
@@ -19397,7 +19522,7 @@
     ],
     "description": "Esta função serve para posicionar no último registro da lista.",
     "returns": [
-      "aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
+      "** aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregraultimo.htm",
     "category": "rule"
@@ -19421,7 +19546,7 @@
     ],
     "description": "Verificar se é o fim da lista de registro.",
     "returns": [
-      "aFim: variável alfa que retorna se está no fim da lista. 'S' para fim e 'N' para não está no final da lista."
+      "** aFim: variável alfa que retorna se está no fim da lista. 'S' para fim e 'N' para não está no final da lista."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/listaregrafim.htm",
     "category": "rule"
@@ -21013,6 +21138,22 @@
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/rateiointegracaofin.htm",
     "category": "rule"
   },
+  "RemoveExpressoesProibidas": {
+    "code": "N/A",
+    "name": "RemoveExpressoesProibidas",
+    "signature": "Funcao RemoveExpressoesProibidas(Alfa End aTexto);",
+    "params": [
+      {
+        "name": "aTexto",
+        "type": "Alfa End",
+        "direction": "out",
+        "description": "Expressão que será removida de campos de relatórios/regras."
+      }
+    ],
+    "description": "Remove expressões proibidas para não permitir que campos de relatórios/regras aceitem algum tipo de script.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/removeexpressoesproibidas.htm",
+    "category": "rule"
+  },
   "RestoDivisao": {
     "code": "N/A",
     "name": "RestoDivisao",
@@ -22059,7 +22200,7 @@
     ],
     "description": "Esta função serve para ler o valor de um campo específico de um arquivo JSON.",
     "returns": [
-      "aValor: variável alfanumérica que recebe o valor do campo lido do Json."
+      "** aValor: variável alfanumérica que recebe o valor do campo lido do Json."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/valorelementojson.htm",
     "category": "rule"
@@ -22099,7 +22240,7 @@
     ],
     "description": "Esta função irá retornar o nível de uma linha da consulta da visão, conforme o parâmetro NumLin.",
     "returns": [
-      "Numero IndRot: Retorna se a linha passada como parâmetro é um rotulo.."
+      "** Numero IndRot: Retorna se a linha passada como parâmetro é um rotulo.."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/visaocontabil-linha-rotulo.htm",
     "category": "rule"
@@ -22123,7 +22264,7 @@
     ],
     "description": "Esta função irá retornar o nível de uma linha da consulta da visão, conforme o parâmetro NumLin.",
     "returns": [
-      "Numero NivCta: Retorna o nível de uma linha da visão."
+      "** Numero NivCta: Retorna o nível de uma linha da visão."
     ],
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/visaocontabil-nivel-conta.htm",
     "category": "rule"

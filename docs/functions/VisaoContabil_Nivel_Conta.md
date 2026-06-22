@@ -20,7 +20,7 @@ Esta função irá retornar o nível de uma linha da consulta da visão, conform
 
 ## Valores de Retorno
 
-- Numero NivCta: Retorna o nível de uma linha da visão.
+- ** Numero NivCta: Retorna o nível de uma linha da visão.
 
 ## Exemplo de Uso
 

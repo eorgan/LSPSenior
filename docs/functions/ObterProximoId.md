@@ -11,7 +11,7 @@ Funcao ObterProximoId(Alfa Identificador, Numero Incremento, Alfa Filtro, Numero
 
 ## Descrição
 
-Gerar um ID único para controlar os sequenciais das tabelas. **Sintaxe**: função Alfa Identificador, Numero Incremento, Alfa Filtro, Numero End ProximoId
+Gerar um ID único para controlar os sequenciais das tabelas.
 
 ## Parâmetros
 

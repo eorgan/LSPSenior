@@ -22,7 +22,7 @@ Função responsável para pesquisar valor com tipo alfa na lista.
 
 ## Valores de Retorno
 
-- aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe.
+- ** aExisteRegistro: Indica se existe valor na lista. 'S' para existe e 'N' para não existe.
 
 ## Exemplo de Uso
 

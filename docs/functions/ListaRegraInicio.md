@@ -20,7 +20,7 @@ Esta função serve para posicionar no último registro da lista.
 
 ## Valores de Retorno
 
-- aInicio: variável alfa que retorna se está no início da lista. 'S' para início e 'N' para não está no início da lista.
+- ** aInicio: variável alfa que retorna se está no início da lista. 'S' para início e 'N' para não está no início da lista.
 
 ## Exemplo de Uso
 

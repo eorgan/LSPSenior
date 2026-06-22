@@ -8,6 +8,17 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.11.1] - 2026-06-22
+
+### 🐛 Corrigido
+- **Extrator ERP (`extract-from-erp-docs.js`):** `MARKER_RE` agora reconhece o formato
+  `**Sintaxe**:` (colon fora do negrito), além dos já suportados `**Sintaxe:**` e `Sintaxe:`.
+  Resultado: +4 funções com assinatura recuperadas do manual — `ImportaWebServiceSSF`,
+  `LeTransferenciaProduto`, `RemoveExpressoesProibidas` e `OtimizarAbrangencia`.
+  Total do catálogo: **647 funções** (era 644 em v1.11.0).
+
+---
+
 ## [1.11.0] - 2026-06-22
 
 ### ✨ Adicionado

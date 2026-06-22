@@ -29,7 +29,7 @@ Estorna os componentes já baixados da O.P. Nota - Se o sistema estiver [paramet
 
 ## Valores de Retorno
 
-- status da execução da função. Retorna "OK" caso tenha sido processado
+- ** status da execução da função. Retorna "OK" caso tenha sido processado
 - com sucesso.
 
 ## Exemplo de Uso

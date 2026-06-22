@@ -20,7 +20,7 @@ Esta função serve para posicionar no último registro da lista.
 
 ## Valores de Retorno
 
-- aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada.
+- ** aExecutou: variável alfa que retorna se a instrução foi executada. 'S' para executada e 'N' para não executada.
 
 ## Exemplo de Uso
 
