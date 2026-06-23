@@ -1,0 +1,38 @@
+# Tracking_Transferir
+
+## Assinatura
+
+```lspt
+Funcao Tracking_Transferir(Numero pCodEmp, Numero pCodFil, Alfa pTipDoc, Alfa pNumDoc, Alfa pSerDoc, Alfa end pStatus, Alfa end pMensagemErro);
+```
+
+## Código
+959
+
+## Descrição
+
+Essa função criará um evento de registro de documento na tabela E000ETK, para que posteriormente possa ser consumido pelo processo automático [168 - Integração ERP x Tracking - Envio](../processos-automaticos/168-integracao-erp-tracking-envio.htm).
+
+## Parâmetros
+
+- **pCodEmp** (`Numero`) - Entrada: Código da empresa
+- **pCodFil** (`Numero`) - Entrada: Código da filial
+- **pTipDoc** (`Alfa`) - Entrada: Tipo de documento no tracking
+- **pNumDoc** (`Alfa`) - Entrada: Número do documento
+- **pSerDoc** (`Alfa`) - Entrada: Série do documento
+- **pStatus** (`Alfa end`) - Saída: Retorna o status da execução
+- **pMensagemErro** (`Alfa end`) - Saída: Retorna a mensagem de erro
+
+## Exemplo de Uso
+
+```lspt
+ @ Variáveis passadas para a regra @ Definir Numero xEmpresa; Definir Numero xFilial; Definir Numero xNumeroAnaliseEmbarque; Definir Numero xNumeroPreFatura;  @ Variáveis auxiliares da regra @ Definir Alfa ATipoDocumento; Definir Alfa ASerieDocumento; Definir Alfa ANumeroDocumento;  Definir Alfa AStatus; Definir Alfa AMensagemErro;  inicio   ATipoDocumento = "Pre-fatura";   IntParaAlfa(xNumeroAnaliseEmbarque, ANumeroDocumento);     IntParaAlfa(xNumeroPreFatura, ASerieDocumento);      Tracking_Transferir(xEmpresa, xFilial, ATipoDocumento, ANumeroDocumento, ASerieDocumento, AStatus, AMensagemErro); fim
+```
+
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/tracking_transferir.htm)
+
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

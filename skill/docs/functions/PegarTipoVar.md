@@ -1,0 +1,53 @@
+# PegarTipoVar
+
+## Assinatura
+
+```lspt
+Funcao PegarTipoVar(Alfa aVar, Numero End aTipo);
+```
+
+## Código
+619
+
+## Descrição
+
+Retorna o tipo de uma variável qualquer, passada como string.
+
+## Parâmetros
+
+- **aVar** (`Alfa`) - Entrada: String contendo o nome da variável a ser verificada
+- **aTipo** (`Numero End`) - Saída: Variável numérica que receberá o código do tipo (retorno)
+
+## Valores de Retorno
+
+- aTipo: Variável numérica que contém a informação do tipo da
+- variável. Retornos:
+- - -1: Variável não encontrada;
+- - 0: Variável do tipo número;
+- - 1: Variável do tipo data;
+- - 2: Variável do tipo alfa;
+- - 9: variável de outros tipos;
+
+## Exemplo de Uso
+
+```lspt
+Definir Numero vNum;
+Definir Data vDat;
+Definir Alfa vAlf;
+Definir Cursor vCur;
+Definir Numero vTipo;
+
+PegarTipoVar("vNum", vTipo); @ vTipo = 0 @
+PegarTipoVar("vDat", vTipo); @ vTipo = 1 @
+PegarTipoVar("vAlf", vTipo); @ vTipo = 2 @
+PegarTipoVar("vCur", vTipo); @ vTipo = 9 @
+PegarTipoVar("vXXX", vTipo); @ vTipo = -1 @
+```
+
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/pegartipovar.htm)
+
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

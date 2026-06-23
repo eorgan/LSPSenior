@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check extension.js)",
+      "Bash(node -e \"JSON.parse*)",
+      "Bash(python3 scripts/buscar_funcao.py *)",
+      "Bash(python3 -c ' *)",
+      "Bash(node scripts/generate-functions.js)",
+      "Bash(node scripts/build-grammar-functions.js)",
+      "Bash(node scripts/extract-from-erp-docs.js)",
+      "Bash(node scripts/extract-from-docs.js)",
+      "Bash(npx @vscode/vsce@latest package)",
+      "Bash(npx @vscode/vsce@latest package *)",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Bash(git config *)",
+      "Bash(git check-ignore *)",
+      "Bash(git checkout *)",
+      "Bash(gh api *)",
+      "WebFetch(domain:open-vsx.org)",
+      "WebFetch(domain:marketplace.visualstudio.com)"
+    ]
+  }
+}

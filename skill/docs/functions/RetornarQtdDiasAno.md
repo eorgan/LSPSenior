@@ -1,0 +1,68 @@
+# RetornarQtdDiasAno
+
+## Assinatura
+
+```lspt
+Funcao RetornarQtdDiasAno(Data aData, Numero aTipoAno, Numero end aQtdDiasAno);
+```
+
+## Código
+901
+
+## Descrição
+
+Retorna a quantidade de dias do ano tomando como base o ano da data passada, considerando diferentes tipos de ano.
+
+## Parâmetros
+
+- **aData** (`Data`) - Entrada: Variável do tipo Data que recebe a data base
+- **aTipoAno** (`Numero`) - Entrada: Variável numérica que indica o tipo de ano:
+- **aQtdDiasAno** (`Numero end`) - Saída: Variável numérica que retorna a quantidade de dias do ano
+
+## Exemplo de Uso
+
+```lspt
+Definir Funcao exemploRetornarQtdDiasAno();
+
+@ Variáveis globais @
+Definir Data vdData;
+Definir Numero vnDiasUtil;
+Definir Numero vnDiasComercial;
+Definir Numero vnDiasCivil;
+Definir Alfa vaDiasUtilStr;
+Definir Alfa vaDiasComercialStr;
+Definir Alfa vaDiasCivilStr;
+
+exemploRetornarQtdDiasAno();
+
+Funcao exemploRetornarQtdDiasAno(); {
+  @ Define uma data de exemplo (02/07/2024) @
+  vdData = CodData(2, 7, 2024);
+  
+  @ Obtém quantidade de dias para cada tipo de ano @
+  RetornarQtdDiasAno(vdData, 0, vnDiasUtil);       @ Ano útil @
+  RetornarQtdDiasAno(vdData, 1, vnDiasComercial);  @ Ano comercial @
+  RetornarQtdDiasAno(vdData, 2, vnDiasCivil);      @ Ano civil @
+  
+  @ Converte para string para exibição @
+  IntParaAlfa(vnDiasUtil, vaDiasUtilStr);
+  IntParaAlfa(vnDiasComercial, vaDiasComercialStr);
+  IntParaAlfa(vnDiasCivil, vaDiasCivilStr);
+  
+  Definir Alfa vaMensagem;
+  vaMensagem = "Dias úteis no ano: " + vaDiasUtilStr;
+  Mensagem(Retorna, vaMensagem);
+  vaMensagem = "Dias comerciais no ano: " + vaDiasComercialStr;
+  Mensagem(Retorna, vaMensagem);
+  vaMensagem = "Dias civis no ano: " + vaDiasCivilStr;
+  Mensagem(Retorna, vaMensagem);
+}
+```
+
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/retornarqtddiasano.htm)
+
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.

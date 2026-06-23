@@ -1,0 +1,40 @@
+# Arredonda
+
+## Assinatura
+
+```lspt
+funcao Arredonda(numero end Valor, numero Decimais);
+```
+
+## Código
+503
+
+## Descrição
+
+Esta função arredonda um valor tipo acerto, conforme a precisão informada.
+
+## Parâmetros
+
+- **Valor** (`numero end`) - Saída: Qualquer valor que se deseja arredondar
+- **Decimais** (`numero`) - Entrada
+
+## Valores de Retorno
+
+- Valor: Variável numérica que receberá o valor arredondado.
+
+## Exemplo de Uso
+
+```lspt
+Definir Numero vnValor;
+vnValor = 1475.12845;
+Arredonda Valor Tipo Acerto(vnValor, 1); @ Retorna 1475.13 @
+Arredonda Valor Tipo Acerto(vnValor, 2); @ Retorna 1475.12 @
+```
+
+## Fonte
+
+[Documentação oficial Senior](https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/arredonda.htm)
+
+> Gerado automaticamente a partir da documentação oficial da LSP por `generate-functions.js`.
+> Arquivos com esta nota são regenerados a cada execução; remova-a para editar manualmente
+> sem ser sobrescrito.
