@@ -284,6 +284,54 @@ Ao fechar o escopo, qualquer cursor ainda no map vira Warning.
 
 ---
 
+## 6. Índice navegável dos web services Senior
+
+**Contexto:** novo scraping (jun/2026) trouxe dois consolidados ainda não consumidos pelo
+pipeline: `senior_erp_webservices_completo.md` (12 MB, **456 web services** SOAP/REST
+`com.senior.g5.co.*` com portas, WSDL e exemplos de requisição/resposta) e
+`senior_erp_integracoes_completo.md` (integrações com parceiros + Identificadores de Regra).
+
+**Decisão de escopo (usuário):** apenas **índice navegável dos web services** (nome, portas,
+WSDL). **Fora de escopo:** catalogar variáveis `VSxxx` para autocomplete e o material de
+integrações — ficam como itens futuros se desejado.
+
+**Objetivo:** gerar um índice consultável dos 456 web services para servir de referência
+(dentro e fora da IA), no mesmo espírito de `docs/functions/` — porém os WS **não** entram
+em `functions.json`/autocomplete (não são funções LSP).
+
+### Viabilidade — ✅ possível (baixo risco, só geração)
+
+Fonte: `../WebScraping/output/_consolidado/senior_erp_webservices_completo.md`.
+Estrutura confirmada:
+- Heading do WS: `### Web service Com.senior.*` (434) ou `### Com.senior.*` (15) →
+  filtro `^### (?:Web service )?Com\.senior\.`
+- Descrição: 1º parágrafo após o heading (antes do 1º `####`).
+- `#### WSDL`: linhas `- Síncrono/Assíncrono/Agendado: URL` (host anonimizado `example.com`).
+- `#### Portas`: linhas `- [NomePorta](#ancora)`.
+
+### Decisões já tomadas
+
+- **Saídas:** `data/webservices.json` (canônico, estruturado) + `docs/WEBSERVICES.md`
+  (índice único navegável, agrupado por módulo do pacote: cad, mfi, mct, tes, etc.).
+- **Script:** `scripts/generate-webservices.js`, idempotente (rodar 2× → saída estável),
+  zero-deps (puro `fs`).
+- **Campos por WS:** nome normalizado, descrição (1 linha), lista de portas, paths WSDL
+  (Síncrono/Assíncrono/Agendado — host é placeholder de ambiente).
+- **Packaging:** `docs/WEBSERVICES.md` no `.vscodeignore` (referência pura, extensão não
+  consome — mantém o `.vsix` enxuto).
+
+### Critério de pronto
+
+- [ ] `data/webservices.json` lista os ~449 web services com nome/descrição/portas/WSDL.
+- [ ] `docs/WEBSERVICES.md` navegável, agrupado por módulo, 1 clique por WS.
+- [ ] Geração idempotente (hash estável em 2 execuções).
+- [ ] WS **não** entram em `functions.json` nem no autocomplete (fora de escopo).
+- [ ] `docs/WEBSERVICES.md` adicionado ao `.vscodeignore`.
+
+**Prompt:** [prompts/06-webservices-indice.md](prompts/06-webservices-indice.md).
+
+---
+
 ### ✅ Resolução (v1.10.0) — item 4: Folding
 
 `provideFoldingRanges` reescrito em [extension.js](../extension.js): varredura linha a linha

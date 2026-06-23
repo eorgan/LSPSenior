@@ -27,7 +27,7 @@ prompt e me entregue. Mantenha respostas enxutas (esta conversa tende a ficar lo
 
 ## Estado atual (atualizar a cada release)
 
-- **Versão:** v1.11.0 (confira `package.json` e `git log` — pode ter avançado).
+- **Versão:** v1.11.1 (confira `package.json` e `git log` — pode ter avançado).
 - **Catálogo:** ~644 funções em `functions.json` (369 do CSV + manuais + APIs SQL_*/Http*).
 - **Recursos da extensão:** autocomplete geral, signature help, hover (com params, retorno
   e link da doc oficial), go-to-definition (built-in + funções do usuário), outline,
@@ -77,7 +77,7 @@ git push origin main
   scripts/buscar_funcao.py. Autodispara no Claude Code ao editar `.lsp`/`.lspt`.
 - `AGENTS.md` (raiz) — guia para agentes que não autodescobrem skills (Antigravity).
 
-## Backlog — TODOS OS 4 ITENS CONCLUÍDOS
+## Backlog
 
 | # | Item | Release |
 |---|------|---------|
@@ -85,15 +85,13 @@ git push origin main
 | 2 | Formatter (Format Document) | ✅ v1.9.0 |
 | 3 | Catalogar `SQL_*` e `Http*` | ✅ v1.11.0 |
 | 4 | Folding melhorado | ✅ v1.10.0 |
+| 5 | Linter: cursor `SQL_AbrirCursor` sem fechar | 🔲 pendente |
 
 ## Pendências em aberto (não-bloqueantes)
 
-1. **Validação manual no Antigravity** dos últimos releases (1.8.1 cabeçalho, 1.9.0
-   formatter, 1.10.0 folding, 1.11.0 SQL_*/Http*) — testar em arquivos `.lspt` reais.
+1. ✅ ~~**Validação manual no Antigravity**~~ — validado pelo usuário (releases 1.8.1–1.11.1).
 2. **~114 funções** do CSV ainda com descrição genérica (não constam em nenhuma fonte
    parseada). Só enriquecem com uma nova fonte de documentação.
-3. **Sem novos itens de backlog** — se surgir ideia, registrar em `docs/BACKLOG.md` e, se
-   for implementar, gerar `docs/prompts/0N-*.md` no mesmo formato dos existentes.
 
 ## Convenções que venho seguindo
 
