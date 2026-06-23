@@ -19,3 +19,7 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Python (scripts da skill)
+__pycache__/
+*.pyc

@@ -9,10 +9,10 @@ de **dois artefatos**: o texto da skill e o **catálogo** (`functions.json`).
 No diretório deste projeto (`LSPSenior`):
 
 ```bash
-# bundle COMPLETO (SKILL.md + functions.json + docs/functions + AGENTS.md)
+# bundle COMPLETO (SKILL.md + functions.json + reference + scripts + docs/functions + AGENTS.md)
 bash scripts/export-skill.sh /caminho/do/outro/projeto
 
-# bundle ENXUTO (sem docs/functions; functions.json já cobre assinatura/params/retorno)
+# bundle ENXUTO (sem docs/functions; reference/ e scripts/ continuam incluídos)
 bash scripts/export-skill.sh /caminho/do/outro/projeto --lean
 ```
 
@@ -24,8 +24,14 @@ Isso cria no destino:
 └── .claude/skills/lsp-senior/
     ├── SKILL.md                           # autodispara no Claude Code
     ├── functions.json                     # catálogo (assinatura, params, retorno, descrição)
+    ├── reference/*.md                     # sintaxe, erros, padrões, web services, parâmetros CLI
+    ├── scripts/*.py                       # buscar_funcao.py, buscar_ws.py (referenciados no SKILL.md)
     └── docs/functions/*.md                # exemplos por função (omitido com --lean)
 ```
+
+> `reference/` e `scripts/` são **sempre** copiados (mesmo em `--lean`): o `SKILL.md` aponta
+> para esses arquivos, então omiti-los deixaria referências quebradas no destino. O `--lean`
+> só omite `docs/functions/` (a parte volumosa).
 
 ## Opção 2 — Manual (3 passos)
 
