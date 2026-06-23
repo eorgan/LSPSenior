@@ -114,8 +114,8 @@ Prefixo de tipo + CamelCase descritivo:
 | `vn` | Numero | `vnValorTotal` |
 | `vd` | Data | `vdDataVencimento` |
 
-Parâmetros de função costumam usar `p`/`a` (`pCodigo`, `aTela`). Evite nomes genéricos
-(`vnX`, `va1`). Sem acento, sem palavra reservada.
+Parâmetros de função usam `p` (`pCodigo`, `pTela`). Evite nomes genéricos
+(`vnX`, `a1`). Sem acento, sem palavra reservada.
 
 ## Comandos / palavras reservadas (resumo)
 

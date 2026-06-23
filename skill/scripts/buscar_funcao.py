@@ -61,7 +61,7 @@ def main(argv):
     nomes = sorted(k for k in dados if termo in k.lower())
     if not nomes:
         print(f"Nenhuma função contém '{termos[0]}'. (catálogo: {caminho})")
-        print("Lembre: SQL_* e Http* NÃO estão no functions.json — veja reference/quick-reference.md.")
+        print("Dica: SQL_* e Http* já estão no functions.json; veja também reference/quick-reference.md para padrões prontos.")
         return 0
 
     if listar:
