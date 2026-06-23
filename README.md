@@ -839,6 +839,50 @@ A extensão funciona automaticamente ao abrir arquivos `.lspt` ou `.lsp`. Não r
 
 ---
 
+## ⌨️ Parâmetros de linha de comando do executável Senior
+
+> ℹ️ **Operacional, não é sintaxe LSP.** Estes parâmetros dizem respeito a como *iniciar* o
+> cliente Senior (campo *Destino* do atalho do Windows ou via `CMD`), para **depurar e testar**
+> regras/WebServices já escritos. Use em ambiente de teste/homologação.
+
+No ecossistema da Senior Sistemas (Tecnologia G5/G6 — ERP Senior, Sapiens, Vetorh, Ronda,
+entre outros), os parâmetros de linha de comando ativam modos de teste, depurações avançadas
+e otimizações de infraestrutura. Para depurar uma **regra LSP**, o mais relevante é a dupla
+`-mcdebug` + `-candebug` (parar passo a passo no Editor de Regras nas linhas disparadas por um
+WebService em Modo Local).
+
+### Depuração e testes de integração
+
+| Parâmetro | Comportamento |
+|---|---|
+| `-mcdebug` | Inicia o sistema direto na tela de **Multicamada/MCDebug** (Teste de Funcionamento de Web Services). Permite preencher os parâmetros de entrada e testar qualquer WebService nativo ou customizado. |
+| `-candebug` | Habilita o **"Canal de Depuração"** local. Usado com `-mcdebug` para o Editor de Regras interceptar e parar **passo a passo** nas linhas de LSP disparadas por WebServices em **Modo Local**. |
+| `-agendador:?` | Força a inicialização/listagem técnica dos **Processos Agendados**, isolando a execução dos serviços automáticos pelo atalho. |
+
+### Diagnóstico, banco de dados e logs
+
+| Parâmetro | Comportamento |
+|---|---|
+| `-sqlmon` | Abre o utilitário nativo de **monitoramento de banco** da Senior. Rastreia em tempo real as instruções SQL (`PREPARE`, `EXECUTE`, filtros do *DATA IN* e retornos do *DATA OUT*) enviadas ao banco. |
+| `-log` | Ativa a gravação geral de **logs locais** de rotinas internas e do motor de regras. |
+| `-logservico` | Incrementa a **verbosidade** dos logs, registrando a comunicação com as camadas de negócio e as filas do Middleware. |
+
+### Otimizações e limpeza de cache
+
+| Parâmetro | Comportamento |
+|---|---|
+| `-limpar` | **Limpeza pesada do cache local** (definições de tabelas, esquemas XML, layouts, telas) antes de renderizar a interface. Útil em erros inexplicáveis após atualização de versão. |
+| `-ENABLE_NEW_SHOW_USER` | Força os **novos algoritmos** otimizados de controle/renderização de **usuários ativos** (Notas de Versão). |
+| `-DISABLE_NEW_SHOW_USER` | **Desativa** os novos mecanismos de usuários ativos — chave de segurança se a funcionalidade causar instabilidade/lentidão. |
+
+### Navegação e automação de interface
+
+| Parâmetro | Comportamento |
+|---|---|
+| `-form:<CÓDIGO_DA_TELA>` | Abre o ERP **pulando o menu padrão**, direto numa tela pré-configurada. Ex.: `-form:F070EMP` abre o cadastro de Empresas após o login. |
+
+---
+
 ## 🐛 Solução de Problemas
 
 ### Autocomplete não aparece?

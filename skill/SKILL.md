@@ -115,6 +115,9 @@ Mantenha este SKILL.md como guia rápido; abra o arquivo de referência quando p
 - **`reference/quick-reference.md`** — cartões por categoria (strings, conversões, datas,
   validação, HTTP, banco de dados) com nomes de função já validados.
 - **`reference/padroes.md`** — padrões prontos: validação, conversão segura, tratamento de erro.
+- **`reference/parametros-linha-comando.md`** — parâmetros de CLI do executável Senior (G5/G6)
+  para depuração/testes: `-mcdebug`/`-candebug` (debug de WS passo a passo), `-sqlmon`, `-log`,
+  `-limpar`, `-form:<tela>`. Operacional, não é sintaxe LSP.
 
 ## 🧩 Estrutura e sintaxe
 
