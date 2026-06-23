@@ -2,7 +2,7 @@
 
 Ideias aprovadas para implementar depois (não priorizadas no código ainda).
 
-> **Todos os itens (1–5) concluídos.**
+> **Itens 1–5 concluídos; item 6 pendente.**
 
 ---
 

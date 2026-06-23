@@ -27,7 +27,7 @@ prompt e me entregue. Mantenha respostas enxutas (esta conversa tende a ficar lo
 
 ## Estado atual (atualizar a cada release)
 
-- **Versão:** v1.11.1 (confira `package.json` e `git log` — pode ter avançado).
+- **Versão:** v1.11.4 (confira `package.json` e `git log` — pode ter avançado).
 - **Catálogo:** ~644 funções em `functions.json` (369 do CSV + manuais + APIs SQL_*/Http*).
 - **Recursos da extensão:** autocomplete geral, signature help, hover (com params, retorno
   e link da doc oficial), go-to-definition (built-in + funções do usuário), outline,
@@ -64,7 +64,7 @@ git push origin main
 
 ## Documentos de estado (leia se precisar de detalhe)
 
-- `docs/BACKLOG.md` — itens e status (1–4 concluídos).
+- `docs/BACKLOG.md` — itens e status (1–5 concluídos; 6 pendente).
 - `docs/prompts/HANDOFF.md` — progresso de implementação dos itens.
 - `docs/PLANO-ENRIQUECIMENTO.md` — as 7 fases do enriquecimento do catálogo.
 - `docs/MIGRACAO-OPENVSX.md` — migração de publisher e verificação de namespace.
@@ -85,7 +85,8 @@ git push origin main
 | 2 | Formatter (Format Document) | ✅ v1.9.0 |
 | 3 | Catalogar `SQL_*` e `Http*` | ✅ v1.11.0 |
 | 4 | Folding melhorado | ✅ v1.10.0 |
-| 5 | Linter: cursor `SQL_AbrirCursor` sem fechar | 🔲 pendente |
+| 5 | Linter: cursor `SQL_AbrirCursor` sem fechar | ✅ v1.11.2–1.11.3 |
+| 6 | Índice navegável dos web services Senior | 🔲 pendente |
 
 ## Pendências em aberto (não-bloqueantes)
 
