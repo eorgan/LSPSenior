@@ -2,7 +2,7 @@
 
 Ideias aprovadas para implementar depois (não priorizadas no código ainda).
 
-> **Itens 1–5 concluídos; item 6 pendente.**
+> **Todos os itens (1–6) concluídos.**
 
 ---
 
@@ -284,7 +284,7 @@ Ao fechar o escopo, qualquer cursor ainda no map vira Warning.
 
 ---
 
-## 6. Índice navegável dos web services Senior
+## 6. Índice navegável dos web services Senior — ✅ Concluído
 
 **Contexto:** novo scraping (jun/2026) trouxe dois consolidados ainda não consumidos pelo
 pipeline: `senior_erp_webservices_completo.md` (12 MB, **456 web services** SOAP/REST
@@ -322,13 +322,23 @@ Estrutura confirmada:
 
 ### Critério de pronto
 
-- [ ] `data/webservices.json` lista os ~449 web services com nome/descrição/portas/WSDL.
-- [ ] `docs/WEBSERVICES.md` navegável, agrupado por módulo, 1 clique por WS.
-- [ ] Geração idempotente (hash estável em 2 execuções).
-- [ ] WS **não** entram em `functions.json` nem no autocomplete (fora de escopo).
-- [ ] `docs/WEBSERVICES.md` adicionado ao `.vscodeignore`.
+- [x] `data/webservices.json` lista os **449 web services** com nome/descrição/portas/WSDL.
+- [x] `docs/WEBSERVICES.md` navegável, agrupado por módulo, 1 clique por WS.
+- [x] Geração idempotente (MD5 estável em 2 execuções).
+- [x] WS **não** entram em `functions.json` nem no autocomplete (fora de escopo).
+- [x] `docs/WEBSERVICES.md` excluído do `.vsix` (já coberto pela regra `docs/*.md` do `.vscodeignore`).
 
 **Prompt:** [prompts/06-webservices-indice.md](prompts/06-webservices-indice.md).
+
+### ✅ Resolução
+
+- **`scripts/generate-webservices.js`** — parser state-machine sobre o consolidado (~191k
+  linhas); extrai nome, módulo, descrição, portas e WSDLs de **449 web services** via
+  `/^### (?:Web service )?(Com\.senior\.[\w.]+)\s*$/i`. Zero-deps, idempotente.
+- **`data/webservices.json`** — 449 objetos ordenados por `name` (MD5 estável entre execuções).
+- **`docs/WEBSERVICES.md`** — índice agrupado por módulo (cad, ger, mct, mfi…), portas inline
+  e 3 paths WSDL por WS. Excluído do pacote pela regra `docs/*.md` existente (não precisou de
+  nova entrada no `.vscodeignore`).
 
 ---
 

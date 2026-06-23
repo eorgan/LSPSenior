@@ -64,7 +64,7 @@ git push origin main
 
 ## Documentos de estado (leia se precisar de detalhe)
 
-- `docs/BACKLOG.md` — itens e status (1–5 concluídos; 6 pendente).
+- `docs/BACKLOG.md` — itens e status (1–6 concluídos).
 - `docs/prompts/HANDOFF.md` — progresso de implementação dos itens.
 - `docs/PLANO-ENRIQUECIMENTO.md` — as 7 fases do enriquecimento do catálogo.
 - `docs/MIGRACAO-OPENVSX.md` — migração de publisher e verificação de namespace.
@@ -86,7 +86,7 @@ git push origin main
 | 3 | Catalogar `SQL_*` e `Http*` | ✅ v1.11.0 |
 | 4 | Folding melhorado | ✅ v1.10.0 |
 | 5 | Linter: cursor `SQL_AbrirCursor` sem fechar | ✅ v1.11.2–1.11.3 |
-| 6 | Índice navegável dos web services Senior | 🔲 pendente |
+| 6 | Índice navegável dos web services Senior | ✅ (449 WS) |
 
 ## Pendências em aberto (não-bloqueantes)
 
