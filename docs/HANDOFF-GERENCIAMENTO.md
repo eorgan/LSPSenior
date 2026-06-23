@@ -28,12 +28,14 @@ prompt e me entregue. Mantenha respostas enxutas (esta conversa tende a ficar lo
 ## Estado atual (atualizar a cada release)
 
 - **Versão:** v1.11.4 (confira `package.json` e `git log` — pode ter avançado).
-- **Catálogo:** ~644 funções em `functions.json` (369 do CSV + manuais + APIs SQL_*/Http*).
+- **Catálogo:** **647 funções** em `functions.json` (369 do CSV + manuais + APIs SQL_*/Http*).
+- **Web services:** **449 WS** Senior em `data/webservices.json` + índice navegável
+  `docs/WEBSERVICES.md` (referência pura; não entra em autocomplete nem no `.vsix`).
 - **Recursos da extensão:** autocomplete geral, signature help, hover (com params, retorno
   e link da doc oficial), go-to-definition (built-in + funções do usuário), outline,
-  folding melhorado, linter das armadilhas, comando "Buscar função", cabeçalho automático
-  com Git, formatter (Format Document), 62 snippets, gramática com ~644 funções +
-  reservadas + variáveis de sistema.
+  folding melhorado, linter das armadilhas (inclui cursor `SQL_*` sem fechar), comando
+  "Buscar função", cabeçalho automático com Git, formatter (Format Document), 62 snippets,
+  gramática com 647 funções + reservadas + variáveis de sistema.
 
 ## Pipeline do catálogo (idempotente)
 
@@ -90,7 +92,7 @@ git push origin main
 
 ## Pendências em aberto (não-bloqueantes)
 
-1. ✅ ~~**Validação manual no Antigravity**~~ — validado pelo usuário (releases 1.8.1–1.11.1).
+1. ✅ ~~**Validação manual no Antigravity**~~ — validado pelo usuário (releases 1.8.1–1.11.4).
 2. **~114 funções** do CSV ainda com descrição genérica (não constam em nenhuma fonte
    parseada). Só enriquecem com uma nova fonte de documentação.
 
