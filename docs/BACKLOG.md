@@ -2,7 +2,9 @@
 
 Ideias aprovadas para implementar depois (não priorizadas no código ainda).
 
-> **Todos os itens (1–6) concluídos.**
+> **Itens 1–6 concluídos.** Itens 7–8 aprovados, prompts prontos em `docs/prompts/`
+> (`07-quick-fixes.md`, `08-polish-icone-walkthrough.md`) — pendentes de implementação.
+> Demais ideias em "Futuras implementações" (fim do arquivo).
 
 ---
 
@@ -359,3 +361,37 @@ pareado ao próximo `Inicio`/`{`) + `sectionStart` para seções. Decisões apli
   sobreposições impróprias — o padrão `} Senao {` gera folds irmãos válidos).
 - **`folding.markers` removido** de `language-configuration.json` (fonte única no provider).
 - Funções só com `Definir Funcao Nome();` (sem corpo) **não** dobram.
+
+---
+
+## 7. Code Actions / Quick Fixes — 🔜 Aprovado (prompt: `docs/prompts/07-quick-fixes.md`)
+
+Lâmpada 💡 de correção rápida para os avisos do linter. MVP: Quick Fix do cursor
+`SQL_AbrirCursor` não fechado → insere `SQL_FecharCursor`/`SQL_Destruir`. Estabelece o padrão
+(provider + `diagnostic.code` estável) para fixes futuros. Mudança cirúrgica em `extension.js`.
+
+## 8. Polish — ícone de arquivo + Walkthrough — 🔜 Aprovado (prompt: `docs/prompts/08-polish-icone-walkthrough.md`)
+
+- **8a:** ícone próprio para `.lsp`/`.lspt` no explorer (`contributes.languages[].icon`).
+- **8b:** walkthrough "Primeiros passos" na tela de boas-vindas (`contributes.walkthroughs`),
+  com 5 passos cobrindo autocomplete, buscar função, cabeçalho Git, formatter/linter e snippets.
+
+Declarativo via `package.json` + assets (`icons/`, `walkthroughs/`). Sobem juntos num release.
+
+---
+
+## Futuras implementações (não priorizadas)
+
+Ideias levantadas mas ainda sem prompt. Promover a item numerado quando forem priorizadas.
+
+- **Find All References + Rename Symbol (F2)** — complementa o go-to-definition existente.
+- **Semantic tokens** — destaque por contexto (variável × função × parâmetro × built-in),
+  além do regex da gramática.
+- **Workspace Symbols (Ctrl+T)** — buscar funções/rotinas em todo o projeto, não só no arquivo.
+- **Inlay hints** — nome do parâmetro inline nas chamadas de função.
+- **CodeLens** — "N referências" acima de cada definição.
+- **Hover com link** — link "📖 ver doc" apontando para `docs/functions/*.md` / índice de WS.
+- **Format on save / range formatting automáticos** — gatilhos para o formatter existente.
+- **Snippets contextuais** — pares `SQL_Open…SQL_Close` completados juntos.
+- **Diagnóstico de Web Services** — validar chamadas contra os 449 WS catalogados.
+- **Enriquecer ~114 funções** com descrição genérica (depende de nova fonte de documentação).
