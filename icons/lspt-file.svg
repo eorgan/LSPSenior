@@ -1,0 +1,12 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquivo LSPT">
+  <defs>
+    <linearGradient id="lsptFile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1FC79A"/>
+      <stop offset="1" stop-color="#12A983"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="28" height="28" rx="6" fill="url(#lsptFile)"/>
+  <text x="16" y="21.5" text-anchor="middle"
+        font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="14" font-weight="700" letter-spacing="-0.5" fill="#ffffff">SP</text>
+</svg>

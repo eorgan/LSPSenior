@@ -2,8 +2,7 @@
 
 Ideias aprovadas para implementar depois (não priorizadas no código ainda).
 
-> **Itens 1–7 concluídos.** Item 8 aprovado, prompt pronto em
-> `docs/prompts/08-polish-icone-walkthrough.md` — pendente de implementação.
+> **Itens 1–8 concluídos.** (Item 8 — ícone de arquivo + walkthrough — entregue na v1.13.0.)
 > Demais ideias em "Futuras implementações" (fim do arquivo).
 
 ---
@@ -387,7 +386,7 @@ Lâmpada 💡 de correção rápida para os avisos do linter. MVP: Quick Fix do 
 - Detecção rastreia cursores **pelo nome da variável** (abrir o mesmo nome N vezes sem fechar =
   1 aviso; nomes diferentes = avisos individuais).
 
-## 8. Polish — ícone de arquivo + Walkthrough — 🔜 Aprovado (prompt: `docs/prompts/08-polish-icone-walkthrough.md`)
+## 8. Polish — ícone de arquivo + Walkthrough — ✅ Concluído (v1.13.0)
 
 - **8a:** ícone próprio para `.lsp`/`.lspt` no explorer (`contributes.languages[].icon`).
 - **8b:** walkthrough "Primeiros passos" na tela de boas-vindas (`contributes.walkthroughs`),

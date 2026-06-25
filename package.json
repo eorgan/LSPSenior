@@ -2,7 +2,7 @@
    "name": "lspt-language-support",
    "displayName": "LSPT Language Support",
    "description": "Suporte completo para a linguagem LSP (Linguagem Senior de Programação) com syntax highlighting, snippets, IntelliSense e autocomplete para 640+ funções built-in (incluindo APIs SQL_* de cursor e Http* de requisição)",
-   "version": "1.12.1",
+   "version": "1.13.0",
    "publisher": "eorgan",
    "author": {
       "name": "Eliezer Organ",
@@ -47,7 +47,11 @@
                ".lspt",
                ".lsp"
             ],
-            "configuration": "./language-configuration.json"
+            "configuration": "./language-configuration.json",
+            "icon": {
+               "light": "./icons/lspt-file.svg",
+               "dark": "./icons/lspt-file.svg"
+            }
          }
       ],
       "grammars": [
@@ -116,7 +120,62 @@
                "description": "Número de espaços por nível de indentação no Format Document."
             }
          }
-      }
+      },
+      "walkthroughs": [
+         {
+            "id": "lsptGettingStarted",
+            "title": "Primeiros passos com LSPT",
+            "description": "Conheça os recursos do LSPT Language Support para a Linguagem Senior.",
+            "steps": [
+               {
+                  "id": "autocomplete",
+                  "title": "Autocomplete inteligente",
+                  "description": "Complete as 647 funções do catálogo com signature help e hover.",
+                  "media": {
+                     "markdown": "walkthroughs/01-autocomplete.md"
+                  }
+               },
+               {
+                  "id": "buscarFuncao",
+                  "title": "Buscar função",
+                  "description": "Use \"LSPT: Buscar função\" para inserir a chamada com parâmetros.",
+                  "media": {
+                     "markdown": "walkthroughs/02-buscar-funcao.md"
+                  },
+                  "completionEvents": [
+                     "onCommand:lspt.buscarFuncao"
+                  ]
+               },
+               {
+                  "id": "cabecalho",
+                  "title": "Cabeçalho automático",
+                  "description": "Insira o cabeçalho preenchido pelo Git e atualizado ao salvar.",
+                  "media": {
+                     "markdown": "walkthroughs/03-cabecalho.md"
+                  },
+                  "completionEvents": [
+                     "onCommand:lspt.inserirCabecalho"
+                  ]
+               },
+               {
+                  "id": "formatterLinter",
+                  "title": "Formatter e Linter",
+                  "description": "Formate o documento e veja avisos com Quick Fix.",
+                  "media": {
+                     "markdown": "walkthroughs/04-formatter-linter.md"
+                  }
+               },
+               {
+                  "id": "snippets",
+                  "title": "Snippets e realce",
+                  "description": "62 snippets e gramática de sintaxe da LSP.",
+                  "media": {
+                     "markdown": "walkthroughs/05-snippets.md"
+                  }
+               }
+            ]
+         }
+      ]
    },
    "scripts": {
       "package": "vsce package",

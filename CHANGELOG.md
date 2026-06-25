@@ -8,6 +8,23 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.13.0] - 2026-06-25
+
+### ✨ Adicionado
+- **Ícone próprio para arquivos `.lsp`/`.lspt` (item 8 do backlog).** Um badge verde Senior com
+  as letras "SP" passa a identificar os arquivos da Linguagem Senior no explorer, via
+  `contributes.languages[].icon` (`icons/lspt-file.svg`). Aparece quando o icon theme ativo
+  delega ao ícone da linguagem (comportamento padrão do tema do VS Code e do "Seti").
+- **Walkthrough "Primeiros passos com LSPT" (item 8 do backlog).** Novo guia em
+  **Help → Welcome** (`Welcome: Open Walkthrough`) com 5 passos: autocomplete, "Buscar função",
+  cabeçalho automático, formatter/linter e snippets. Os passos de comando se marcam como
+  concluídos via `completionEvents` ao executar `lspt.buscarFuncao` / `lspt.inserirCabecalho`.
+
+> Mudança puramente declarativa (`contributes` + assets em `icons/` e `walkthroughs/`); nenhuma
+> alteração em `extension.js`.
+
+---
+
 ## [1.12.1] - 2026-06-25
 
 ### ✨ Adicionado
