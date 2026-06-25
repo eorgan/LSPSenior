@@ -118,6 +118,12 @@ Mantenha este SKILL.md como guia rápido; abra o arquivo de referência quando p
 - **`reference/parametros-linha-comando.md`** — parâmetros de CLI do executável Senior (G5/G6)
   para depuração/testes: `-mcdebug`/`-candebug` (debug de WS passo a passo), `-sqlmon`, `-log`,
   `-limpar`, `-form:<tela>`. Operacional, não é sintaxe LSP.
+- **`reference/identificadores.md`** — índice dos 3157 Identificadores de Regras (pontos onde o ERP
+  aciona sua regra), por módulo. Detalhe (variáveis ENTRADA/SAÍDA + exemplo):
+  `scripts/buscar_identificador.py <código|tela|termo> [--full]`. Ver seção 🧩 abaixo.
+- **`reference/tabelas.md`** — índice das 3120 tabelas nativas do dicionário de dados (R996TBL),
+  agrupadas por módulo. Campos de uma tabela:
+  `scripts/buscar_tabela.py <TABELA> --campos`. Ver seção 🗃️ abaixo.
 
 ## 🧩 Estrutura e sintaxe
 
@@ -305,6 +311,49 @@ Senao
    }
 ```
 
+## 🧩 Identificadores de Regras (onde a sua regra se acopla ao ERP)
+
+Uma regra LSP **não roda sozinha** — ela é acionada pelo ERP num **Identificador de Regra**: um
+ponto de extensão (hook) que o código-fonte do sistema dispara em rotinas específicas. É o elo que
+fecha o ciclo: **identificador (onde) → variáveis (o quê) → funções/SQL/WS (como)**.
+
+**Como funciona:**
+- Em pontos do código, o ERP faz um `select` na tabela **E098REG** e só executa a sua regra se o
+  identificador estiver cadastrado e **ativo** (`E098REG.SitReg = 'A'`).
+- Cadastro/ativação é por **empresa**, na tela **F098REG** (Cadastros > Identificadores e parâmetros).
+  Para usar em várias empresas, cadastre em cada uma.
+- Nomenclatura: `MOD-CODTELANN` (ex.: `CHA-900BACMC01` = módulo CHA, tela F900BAC).
+- Um identificador **pode não usar regra** — aí funciona como um parâmetro/flag (liga/desliga
+  comportamento) e não tem variáveis.
+
+**Variáveis: ENTRADA vs SAÍDA.** A ficha de cada identificador traz uma tabela com a coluna
+**Retorna Valor**:
+- **`N` = ENTRADA** — contexto que o ERP fornece; você só **lê** (use em consistências, SQL, cálculo).
+- **`S` = SAÍDA** — você **atribui** na regra para devolver o resultado e alterar o comportamento padrão.
+- Sufixo **`<9>`** no nome = **grade multi-registro**: repita o campo com `1`, `2`, `3`… (ex.:
+  `ChaACodCmp1`, `ChaACodCmp2`). Comece em 1 e **não pule número** — o ERP para no primeiro ausente.
+
+```lsp
+@-- declare as variáveis do identificador (mesmo nome da ficha) e atribua as de SAÍDA @
+Definir Alfa ChaAAbrOri;     @ ENTRADA: você lê @
+Definir Alfa ChaACodCmp1;    @ SAÍDA: você preenche (1º registro da grade) @
+Definir Numero ChaNQtdUti1;
+...
+ChaACodCmp1 = "1405";        @ devolve ao ERP @
+ChaNQtdUti1 = 7;
+```
+
+**Rollback (importante):** identificadores rodam **dentro da transação nativa**. Qualquer erro de
+consistência ou `GeraLog` faz **rollback de tudo** — inclusive tabelas/campos de usuário. Para
+persistir apesar do rollback: grave numa tabela auxiliar via **trigger** ou via **WS no Middleware**
+(`ModoExecucao` 2/3 — **não** Modo Local, que é desfeito junto). Ver seção de Web Service abaixo.
+
+**Onde consultar** (não inlinar — são 3157 identificadores):
+- Índice por módulo: `reference/identificadores.md`.
+- Detalhe de um identificador (variáveis ENTRADA/SAÍDA + exemplo de regra):
+  `python3 scripts/buscar_identificador.py <código|tela|termo> [--full]`
+  (ex.: `... CHA-900BACMC01 --full`, ou por tela `... F900BAC`).
+
 ## 🌐 Acionar um Web Service interno da Senior (preferir ao INSERT cru)
 
 Para **criar/atualizar entidades de cadastro** (cliente, fornecedor, produto, movimento de estoque,
@@ -352,6 +401,46 @@ Se ((vaRet = "OK")) { @ ok @ } Senao { @ trata erro @ }
 
 **Decisão:** a entidade tem porta `Gravar`/`Importar`/`Incluir`? **Prefira o WS ao `INSERT` cru.**
 
+## 🗃️ Dicionário de Tabelas e Campos (quando precisar escrever SELECTs)
+
+O ERP Senior usa tabelas Oracle nomeadas no padrão `XNNNYYY` (ex.: `E070EMP`, `E028SNF`).
+Para descobrir o nome correto de uma tabela ou campo antes de escrever um `ExecutarComandoSQL`:
+
+```
+python3 scripts/buscar_tabela.py <termo>             # busca tabelas por nome ou descrição
+python3 scripts/buscar_tabela.py <TABELA> --campos   # campos com tipo, tamanho e enum
+python3 scripts/buscar_tabela.py <TABELA> --joins    # FKs: campo → tabela destino
+python3 scripts/buscar_tabela.py --enum <LSTNAM>     # valores possíveis de uma lista/enum
+```
+
+Exemplos práticos:
+```
+buscar_tabela.py "nota fiscal entrada"   → encontra E440NFC, E440DPR, etc.
+buscar_tabela.py E070EMP --campos        → mostra CodEmp (Num/4), NomEmp (Alfa/100), etc.
+buscar_tabela.py E440NFC --joins         → CodFor → E095FOR.NomFor, CodEmp → E070EMP.NomEmp…
+buscar_tabela.py --enum LTipNfe          → 1=Normal, 2=Complementar… (via ENUNAM no --campos)
+```
+
+**Tipos de campo (DATTYP):**
+
+| Código | Tipo | Uso em LSP |
+| --- | --- | --- |
+| 1 | Alfa (texto) | variável `va…` / parâmetro Alfa |
+| 2 | Num (numérico) | variável `vn…` / parâmetro Numero |
+| 3 | Data | variável `vd…` / parâmetro Data |
+| 4 | Lóg (lógico) | variável `vn…` (0/1) |
+| 5 | Memo | variável `va…` longa |
+
+**Regras ao escrever SELECTs em LSP:**
+- Use `SQL_Criar` → `SQL_DefinirComando` → `SQL_AbrirCursor` → `SQL_Retornar*` → `SQL_FecharCursor` → `SQL_Destruir`.
+- `SQL_RetornarAlfa`, `SQL_RetornarNumero`, `SQL_RetornarData` — prefixo `p` se a coluna tem alias `p<campo>`.
+- Parâmetros bind com `:campo`; atribua com `SQL_DefinirAlfa` / `SQL_DefinirNumero` / `SQL_DefinirData`.
+- Chave primária da tabela está em `PKFLDS` no índice — sempre inclua no `WHERE` de joins.
+- Confirmação de tabela/campo: consulte `reference/tabelas.md` ou o script acima.
+
+**Decisão:** precisa unir ou filtrar dados nativos do ERP? **Use SELECT via `ExecutarComandoSQL`
+(leitura) ou WS interno (escrita/cadastro).** Nunca `INSERT`/`UPDATE`/`DELETE` direto nas tabelas nativas.
+
 ## ✅ Checklist antes de finalizar
 
 - [ ] Nenhuma operação/concatenação/conversão dentro de parâmetros de função.
@@ -362,3 +451,28 @@ Se ((vaRet = "OK")) { @ ok @ } Senao { @ trata erro @ }
 - [ ] `Pare;` apenas dentro de `Para`/`Enquanto`.
 - [ ] Arquivos abertos com `Abrir` têm `Fechar` correspondente.
 - [ ] Cadastro (cliente/fornecedor/produto…) criado/atualizado via **WS interno** (`interno.<pacote>.Gravar…`), não por `INSERT` cru, quando existe porta de escrita.
+- [ ] Regra acoplada a um **Identificador de Regra** existente: variáveis de **SAÍDA** (`Retorna Valor = S`) atribuídas, **ENTRADA** apenas lidas; grades `<9>` numeradas a partir de 1 sem pular (confira em `scripts/buscar_identificador.py <código>`).
+- [ ] Nomes de tabelas e campos em SELECTs verificados contra o dicionário (`scripts/buscar_tabela.py`).
+
+---
+
+## 📋 Snippets e Templates LSP
+
+Use snippets como blocos de construção ao gerar regras LSP. Disponível em dois modos:
+
+**Busca explícita** — quando o usuário pede um template específico:
+```bash
+python3 scripts/buscar_snippet.py cursor              # busca por keyword
+python3 scripts/buscar_snippet.py --categoria sql     # todos de uma categoria
+python3 scripts/buscar_snippet.py --lista             # índice completo
+python3 scripts/buscar_snippet.py cursor --full       # com código LSP completo
+python3 scripts/buscar_snippet.py --tipo padrao       # só padrões completos
+```
+
+**Categorias disponíveis:** `sql` · `ws` · `http` · `parametros` · `funcoes` · `log`
+
+**Granularidade:**
+- `BLOCO` — trecho cirúrgico (ex: só o loop de cursor, só a declaração do WS)
+- `PADRÃO` — função completa pronta para copiar e adaptar
+
+**Ao gerar uma regra nova:** consulte os snippets da categoria relevante com `--full` e componha a regra usando os blocos e padrões como ponto de partida. Os snippets usam `@ TODO: @` nos pontos de personalização.
