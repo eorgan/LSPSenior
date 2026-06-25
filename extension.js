@@ -618,13 +618,18 @@ function computeDiagnostics(document) {
                const scope = cursorScopes.pop();
                for (const [cursor, openLine] of scope) {
                   const lineLen = document.lineAt(openLine).text.length;
-                  diags.push(
-                     new vscode.Diagnostic(
-                        new vscode.Range(openLine, 0, openLine, lineLen),
-                        `Cursor '${cursor}' aberto com SQL_AbrirCursor mas não fechado com SQL_FecharCursor/SQL_Destruir nesta função.`,
-                        vscode.DiagnosticSeverity.Warning
-                     )
+                  const d = new vscode.Diagnostic(
+                     new vscode.Range(openLine, 0, openLine, lineLen),
+                     `Cursor '${cursor}' aberto com SQL_AbrirCursor mas não fechado com SQL_FecharCursor/SQL_Destruir nesta função.`,
+                     vscode.DiagnosticSeverity.Warning
                   );
+                  d.code = 'sqlCursorLeak';
+                  d.source = 'lspt';
+                  // guarda o nome do cursor para o Quick Fix não precisar re-parsear a mensagem
+                  d.cursorName = cursor;
+                  // linha do `Fim` desta função: o Quick Fix insere o fechamento antes dela
+                  d.scopeEndLine = lineNo;
+                  diags.push(d);
                }
             }
             blockStack.pop();
@@ -714,13 +719,18 @@ function computeDiagnostics(document) {
    if (sqlCursorLeakEnabled) {
       for (const [cursor, openLine] of rootCursorScope) {
          const lineLen = document.lineAt(openLine).text.length;
-         diags.push(
-            new vscode.Diagnostic(
-               new vscode.Range(openLine, 0, openLine, lineLen),
-               `Cursor '${cursor}' aberto com SQL_AbrirCursor mas não fechado com SQL_FecharCursor/SQL_Destruir.`,
-               vscode.DiagnosticSeverity.Warning
-            )
+         const d = new vscode.Diagnostic(
+            new vscode.Range(openLine, 0, openLine, lineLen),
+            `Cursor '${cursor}' aberto com SQL_AbrirCursor mas não fechado com SQL_FecharCursor/SQL_Destruir.`,
+            vscode.DiagnosticSeverity.Warning
          );
+         d.code = 'sqlCursorLeak';
+         d.source = 'lspt';
+         // guarda o nome do cursor para o Quick Fix não precisar re-parsear a mensagem
+         d.cursorName = cursor;
+         // sem função envolvente: o Quick Fix insere o fechamento no fim do arquivo
+         d.scopeEndLine = document.lineCount;
+         diags.push(d);
       }
    }
 
@@ -1042,6 +1052,55 @@ function activate(context) {
       }
    );
 
+   // 6b. QUICK FIX — fechar cursor SQL não fechado (item 7 do backlog)
+   //     Oferece a lâmpada 💡 para diagnósticos marcados com code 'sqlCursorLeak'.
+   const quickFixProvider = vscode.languages.registerCodeActionsProvider(
+      'lspt',
+      {
+         provideCodeActions(document, range, ctx) {
+            const actions = [];
+            for (const diag of ctx.diagnostics) {
+               if (diag.code !== 'sqlCursorLeak') continue;
+               const cursor = diag.cursorName || '<cursor>';
+               const openLine = diag.range.start.line;
+               const indent = (document.lineAt(openLine).text.match(/^\s*/) || [''])[0];
+               const eol = document.eol === vscode.EndOfLine.CRLF ? '\r\n' : '\n';
+
+               // Insere o fechamento no FIM do escopo, depois de todo o uso do cursor:
+               // logo antes do `Fim` da função, ou no fim do arquivo (cursor de nível raiz).
+               // `scopeEndLine` vem do diagnóstico; fallback = linha após o abrir.
+               const scopeEnd = typeof diag.scopeEndLine === 'number' ? diag.scopeEndLine : openLine + 1;
+               let insertPos;
+               let makeText;
+               if (scopeEnd >= document.lineCount) {
+                  // sem `Fim` (nível raiz): anexa após a última linha, com quebra antes
+                  const lastLine = Math.max(0, document.lineCount - 1);
+                  insertPos = new vscode.Position(lastLine, document.lineAt(lastLine).text.length);
+                  makeText = (fn) => `${eol}${indent}${fn}(${cursor});`;
+               } else {
+                  // insere uma linha nova logo antes do `Fim`, no nível de indentação do corpo
+                  insertPos = new vscode.Position(scopeEnd, 0);
+                  makeText = (fn) => `${indent}${fn}(${cursor});${eol}`;
+               }
+
+               for (const fn of ['SQL_FecharCursor', 'SQL_Destruir']) {
+                  const action = new vscode.CodeAction(
+                     `Fechar cursor '${cursor}' com ${fn}`,
+                     vscode.CodeActionKind.QuickFix
+                  );
+                  action.diagnostics = [diag];
+                  action.isPreferred = fn === 'SQL_FecharCursor';
+                  action.edit = new vscode.WorkspaceEdit();
+                  action.edit.insert(document.uri, insertPos, makeText(fn));
+                  actions.push(action);
+               }
+            }
+            return actions;
+         },
+      },
+      { providedCodeActionKinds: [vscode.CodeActionKind.QuickFix] }
+   );
+
    // 7. DIAGNOSTICS
    const diagnostics = vscode.languages.createDiagnosticCollection('lspt');
    const refresh = (document) => {
@@ -1113,6 +1172,7 @@ function activate(context) {
       foldingProvider,
       formattingProvider,
       rangeFormattingProvider,
+      quickFixProvider,
       diagnostics,
       buscarFuncao,
       inserirCabecalho,
@@ -1135,6 +1195,7 @@ module.exports = {
    deactivate,
    // Exportados para testes (não fazem parte da API pública da extensão).
    computeFormatEdits,
+   computeDiagnostics,
    stripCommentsAndStrings,
    scanBlockTokens,
 };

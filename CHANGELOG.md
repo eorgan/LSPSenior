@@ -8,6 +8,24 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.12.1] - 2026-06-25
+
+### ✨ Adicionado
+- **Quick Fix: fechar cursor SQL não fechado (item 7 do backlog).** Os avisos de
+  `SQL_AbrirCursor` sem `SQL_FecharCursor`/`SQL_Destruir` agora oferecem a lâmpada 💡 de
+  correção rápida, com duas opções: `SQL_FecharCursor` (preferida) e `SQL_Destruir`. A chamada
+  de fechamento é inserida **no fim do escopo** — logo antes do `Fim` da função (ou no fim do
+  arquivo, para cursores no nível raiz) — depois de todo o uso do cursor, com a indentação do
+  corpo. Assim o código gerado fecha o cursor *após* utilizá-lo.
+- Diagnósticos de cursor não fechado agora carregam `code: 'sqlCursorLeak'` e `source: 'lspt'`
+  estáveis, estabelecendo o padrão para futuros Quick Fixes da extensão.
+
+> Observação: a detecção rastreia cursores **pelo nome da variável**. Abrir o mesmo nome
+> várias vezes sem fechar conta como um único cursor em aberto (1 aviso, resolvido por um
+> fechamento). Cursores com nomes diferentes são avisados individualmente.
+
+---
+
 ## [1.11.4] - 2026-06-22
 
 ### 📝 Documentação
