@@ -75,6 +75,7 @@ Funcao BuscaParametro();
       Definir Alfa vaComPdv;
       gaValParam = "";
 
+      @ AVISO: gaChaParam deve ser uma constante literal — nunca derivar de input de usuário (risco de injeção SQL) @
       vaComPdv = "SELECT VLRPDV FROM E000PDV WHERE CHAPDV = '" + gaChaParam + "'";
 
       SQL_Criar(vaCurPdv);

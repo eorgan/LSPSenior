@@ -47,10 +47,10 @@ wsNome.Itens.CampoB = vaValorB;
 **Tags:** ws, interno, loop, grid, retorno, iterar, qtdlinhas
 
 ```lspt
-xQtd = wsNome.GridRetorno.QtdLinhas; @ TODO: ajustar nome do grid @
-Para (nLin = 0; nLin < xQtd; nLin++)
+vnQtd = wsNome.GridRetorno.QtdLinhas; @ TODO: ajustar nome do grid @
+Para (vnLin = 0; vnLin < vnQtd; vnLin++)
    Inicio
-      wsNome.GridRetorno.LinhaAtual = nLin;
+      wsNome.GridRetorno.LinhaAtual = vnLin;
       vaVar = wsNome.GridRetorno.Campo; @ TODO: ajustar campo e variável @
    Fim;
 ```
@@ -79,6 +79,8 @@ Se (vaErroExec <> "")
 Funcao ChamarWS();
    Inicio
       wsNome.CampoEntrada = vaValor;     @ TODO: ajustar campos de entrada @
+      wsNome.ModoExecucao = 2;  @ TODO: 1=Local / 2=Síncrono / 3=Assíncrono / 4=Agendado @
+      wsNome.Executar();
       vaErroExec  = wsNome.erroExecucao;
       vaResultado = wsNome.CampoSaida;   @ TODO: ajustar campo de saída @
    Fim;
@@ -115,7 +117,9 @@ Funcao ChamarWSMulti();
             wsNome.Itens.CampoB = vaValorB;
          Fim;
 
-      @ Ler retorno @
+      @ Executar e ler retorno @
+      wsNome.ModoExecucao = 2;  @ TODO: 1=Local / 2=Síncrono / 3=Assíncrono / 4=Agendado @
+      wsNome.Executar();
       vaErroExec = wsNome.erroExecucao;
       Se (vaErroExec <> "")
          {
