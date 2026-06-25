@@ -2,8 +2,8 @@
 
 Ideias aprovadas para implementar depois (não priorizadas no código ainda).
 
-> **Itens 1–6 concluídos.** Itens 7–8 aprovados, prompts prontos em `docs/prompts/`
-> (`07-quick-fixes.md`, `08-polish-icone-walkthrough.md`) — pendentes de implementação.
+> **Itens 1–7 concluídos.** Item 8 aprovado, prompt pronto em
+> `docs/prompts/08-polish-icone-walkthrough.md` — pendente de implementação.
 > Demais ideias em "Futuras implementações" (fim do arquivo).
 
 ---
@@ -364,11 +364,28 @@ pareado ao próximo `Inicio`/`{`) + `sectionStart` para seções. Decisões apli
 
 ---
 
-## 7. Code Actions / Quick Fixes — 🔜 Aprovado (prompt: `docs/prompts/07-quick-fixes.md`)
+## 7. Code Actions / Quick Fixes — ✅ Concluído (v1.12.1)
 
 Lâmpada 💡 de correção rápida para os avisos do linter. MVP: Quick Fix do cursor
 `SQL_AbrirCursor` não fechado → insere `SQL_FecharCursor`/`SQL_Destruir`. Estabelece o padrão
 (provider + `diagnostic.code` estável) para fixes futuros. Mudança cirúrgica em `extension.js`.
+
+**Prompt:** [prompts/07-quick-fixes.md](prompts/07-quick-fixes.md).
+
+### ✅ Resolução (v1.12.1)
+
+- **`CodeActionProvider`** registrado para `lspt`: o aviso de cursor não fechado oferece 2 ações
+  — `SQL_FecharCursor` (preferida) e `SQL_Destruir`.
+- Diagnósticos de cursor passaram a carregar `code: 'sqlCursorLeak'` e `source: 'lspt'` estáveis,
+  estabelecendo o **padrão** para Quick Fixes futuros.
+- **Ajuste de design vs. prompt:** em vez de inserir o fechamento na linha logo após o
+  `SQL_AbrirCursor` (proposta conservadora do prompt), a implementação insere **no fim do
+  escopo** — antes do `Fim` da função (ou fim do arquivo, para cursores no nível raiz), após
+  todo o uso do cursor, com a indentação do corpo. Semanticamente mais correto (fecha depois de
+  usar).
+- Teste headless `scripts/test_quickfix.js` cobrindo EOL LF/CRLF.
+- Detecção rastreia cursores **pelo nome da variável** (abrir o mesmo nome N vezes sem fechar =
+  1 aviso; nomes diferentes = avisos individuais).
 
 ## 8. Polish — ícone de arquivo + Walkthrough — 🔜 Aprovado (prompt: `docs/prompts/08-polish-icone-walkthrough.md`)
 
