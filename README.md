@@ -664,12 +664,21 @@ AtualizarCampos();
 
 ### SQL e Cursores
 - `SQL_Criar` - Cria cursor SQL
+- `SQL_UsarSqlSenior2` / `SQL_UsarAbrangencia` - Modo de sintaxe e abrangência do cursor
+- `SQL_DefinirComando` - Define o comando SQL do cursor
+- `SQL_DefinirAlfa` - Bind de parâmetro `:nome` com valor alfa
+- `SQL_DefinirInteiro` - Bind de parâmetro `:nome` com valor inteiro
+- `SQL_DefinirFlutuante` - Bind de parâmetro `:nome` com valor decimal
+- `SQL_DefinirData` - Bind de parâmetro `:nome` com valor data
 - `SQL_AbrirCursor` - Abre cursor
 - `SQL_Proximo` - Move para próximo registro
 - `SQL_EOF` - Verifica fim do cursor
 - `SQL_FecharCursor` - Fecha cursor
+- `SQL_Destruir` - Destrói o cursor (sempre em par com `SQL_Criar`)
 - `SQL_RetornarAlfa` - Retorna valor alfa
-- `SQL_RetornarNumero` - Retorna valor numérico
+- `SQL_RetornarInteiro` - Retorna valor numérico inteiro
+- `SQL_RetornarFlutuante` - Retorna valor numérico decimal
+- `SQL_RetornarData` - Retorna valor data
 
 ### Arquivos e I/O
 - `Abrir` - Abre arquivo
@@ -745,17 +754,18 @@ Funcao ExemploCursor();
       Definir Alfa aNomeCli;
       Definir Numero nCodCli;
       
-      aSqlCom = "SELECT CODCLI, NOMCLI FROM E070CLI WHERE CODCLI > 100";
+      aSqlCom = "SELECT CODCLI, NOMCLI FROM E070CLI WHERE CODCLI > :xCodMin";
       
       SQL_Criar(aSqlInt);
       SQL_UsarSqlSenior2(aSqlInt, 0);
       SQL_DefinirComando(aSqlInt, aSqlCom);
+      SQL_DefinirInteiro(aSqlInt, "xCodMin", 100);   @ bind: nome sem os ":" @
       SQL_AbrirCursor(aSqlInt);
       
       Enquanto(SQL_EOF(aSqlInt) = 0)
          {
             SQL_RetornarAlfa(aSqlInt, "NOMCLI", aNomeCli);
-            SQL_RetornarNumero(aSqlInt, "CODCLI", nCodCli);
+            SQL_RetornarInteiro(aSqlInt, "CODCLI", nCodCli);
             
             Mensagem(Retorna, "Cliente: " + aNomeCli);
             

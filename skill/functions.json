@@ -10351,7 +10351,7 @@
         "direction": "in"
       }
     ],
-    "description": "Função built-in: Sleep",
+    "description": "Pausa (bloqueia) a execução da regra por aTempo milissegundos. Útil para aguardar entre tentativas de consulta a um WS.",
     "category": "rule"
   },
   "DuplicarFilial": {
@@ -22399,6 +22399,114 @@
       }
     ],
     "description": "Define o comando SQL (SELECT) que o cursor irá executar. Deve ser chamada antes de SQL_AbrirCursor.",
+    "category": "sql"
+  },
+  "SQL_DefinirAlfa": {
+    "code": "N/A",
+    "name": "SQL_DefinirAlfa",
+    "signature": "Funcao SQL_DefinirAlfa(Alfa Cursor, Alfa Parametro, Alfa Valor);",
+    "params": [
+      {
+        "name": "Cursor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Identificador do cursor."
+      },
+      {
+        "name": "Parametro",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos (`:xChave` no SQL → \"xChave\" aqui)."
+      },
+      {
+        "name": "Valor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Valor Alfa atribuído ao parâmetro."
+      }
+    ],
+    "description": "Atribui valor Alfa a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor. Use bind em vez de concatenar valores no SQL.",
+    "category": "sql"
+  },
+  "SQL_DefinirInteiro": {
+    "code": "N/A",
+    "name": "SQL_DefinirInteiro",
+    "signature": "Funcao SQL_DefinirInteiro(Alfa Cursor, Alfa Parametro, Numero Valor);",
+    "params": [
+      {
+        "name": "Cursor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Identificador do cursor."
+      },
+      {
+        "name": "Parametro",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos."
+      },
+      {
+        "name": "Valor",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Valor inteiro atribuído ao parâmetro."
+      }
+    ],
+    "description": "Atribui valor numérico inteiro a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
+    "category": "sql"
+  },
+  "SQL_DefinirFlutuante": {
+    "code": "N/A",
+    "name": "SQL_DefinirFlutuante",
+    "signature": "Funcao SQL_DefinirFlutuante(Alfa Cursor, Alfa Parametro, Numero Valor);",
+    "params": [
+      {
+        "name": "Cursor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Identificador do cursor."
+      },
+      {
+        "name": "Parametro",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos."
+      },
+      {
+        "name": "Valor",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Valor numérico decimal atribuído ao parâmetro."
+      }
+    ],
+    "description": "Atribui valor numérico decimal a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
+    "category": "sql"
+  },
+  "SQL_DefinirData": {
+    "code": "N/A",
+    "name": "SQL_DefinirData",
+    "signature": "Funcao SQL_DefinirData(Alfa Cursor, Alfa Parametro, Data Valor);",
+    "params": [
+      {
+        "name": "Cursor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Identificador do cursor."
+      },
+      {
+        "name": "Parametro",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos."
+      },
+      {
+        "name": "Valor",
+        "type": "Data",
+        "direction": "in",
+        "description": "Valor Data atribuído ao parâmetro."
+      }
+    ],
+    "description": "Atribui valor Data a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
     "category": "sql"
   },
   "SQL_AbrirCursor": {

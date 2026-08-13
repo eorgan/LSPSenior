@@ -12,31 +12,62 @@ Definir Alfa vaComando;  @ SQL montado como string @
 ---
 
 ## BLOCO: montar-sql
-**Uso:** Montar string SQL com concatenação segura (nunca interpolando variável numérica direta)
+**Uso:** Montar string SQL com parâmetros bind (`:nome`) em vez de concatenar valores
+**Tags:** sql, cursor, montar, bind, parametro, empresa
+
+```lspt
+vaComando = "SELECT CAMPO1, CAMPO2 FROM TABELA"; @ TODO: ajustar colunas e tabela @
+vaComando = vaComando + " WHERE CODEMP = :xCodEmp";
+vaComando = vaComando + " AND SITUACAO = :xSituacao";  @ TODO: ajustar filtro @
+vaComando = vaComando + " ORDER BY CAMPO1";            @ TODO: ajustar ordem @
+```
+
+---
+
+## BLOCO: montar-sql-concatenado
+**Uso:** Último recurso — concatenar valor no SQL quando bind não for possível
 **Tags:** sql, cursor, montar, concatenar, empresa
 
 ```lspt
-@ Converter número para alfa ANTES de concatenar @
+@ Só para NÚMERO já re-serializado; nunca concatene Alfa vindo de fora @
 IntParaAlfa(xEmp, vaCodEmpSql);
 
 vaComando = "SELECT CAMPO1, CAMPO2 FROM TABELA"; @ TODO: ajustar colunas e tabela @
 vaComando = vaComando + " WHERE CODEMP = " + vaCodEmpSql;
 vaComando = vaComando + " AND SITUACAO = 'A'";   @ TODO: ajustar filtro @
-vaComando = vaComando + " ORDER BY CAMPO1";      @ TODO: ajustar ordem @
 ```
 
 ---
 
 ## BLOCO: abrir-cursor
-**Uso:** Inicializar e abrir cursor SQL (sempre após montar vaComando)
-**Tags:** sql, cursor, abrir, inicializar
+**Uso:** Inicializar, dar bind nos parâmetros e abrir cursor SQL (após montar vaComando)
+**Tags:** sql, cursor, abrir, inicializar, bind
 
 ```lspt
 SQL_Criar(vaCursor);
 SQL_UsarSqlSenior2(vaCursor, 0);
 SQL_UsarAbrangencia(vaCursor, 0);
 SQL_DefinirComando(vaCursor, vaComando);
+
+@ bind de cada :parametro do comando — nome SEM os dois-pontos @
+SQL_DefinirInteiro(vaCursor, "xCodEmp", xEmp);        @ TODO: ajustar @
+SQL_DefinirAlfa(vaCursor, "xSituacao", "A");          @ TODO: ajustar @
+
 SQL_AbrirCursor(vaCursor);
+```
+
+---
+
+## BLOCO: bind-parametro
+**Uso:** Atribuir valor a um parâmetro `:nome` do comando (entre DefinirComando e AbrirCursor)
+**Tags:** sql, cursor, bind, parametro, definir
+
+```lspt
+SQL_DefinirAlfa(vaCursor, "xParam", vaValor);        @ Alfa @
+SQL_DefinirInteiro(vaCursor, "xParam", vnValor);     @ Numero inteiro @
+SQL_DefinirFlutuante(vaCursor, "xParam", vnValor);   @ Numero decimal @
+SQL_DefinirData(vaCursor, "xParam", vdValor);        @ Data @
+@ NÃO existe SQL_DefinirNumero @
 ```
 
 ---
@@ -49,7 +80,7 @@ SQL_AbrirCursor(vaCursor);
 Enquanto (SQL_EOF(vaCursor) = 0)
    {
       SQL_RetornarAlfa(vaCursor, "CAMPO_ALFA", vaVar);   @ TODO: ajustar @
-      SQL_RetornarNumero(vaCursor, "CAMPO_NUM", vnVar);  @ TODO: ajustar @
+      SQL_RetornarInteiro(vaCursor, "CAMPO_NUM", vnVar); @ TODO: ajustar @
 
       @ ... processar registro ... @
 
@@ -80,12 +111,22 @@ SQL_RetornarAlfa(vaCursor, "NOME_COLUNA", vaVariavel); @ TODO: ajustar coluna e 
 
 ---
 
-## BLOCO: retornar-numero
-**Uso:** Ler coluna numérica do cursor para variável Numero
-**Tags:** sql, cursor, retornar, numero, ler, coluna
+## BLOCO: retornar-inteiro
+**Uso:** Ler coluna numérica inteira do cursor para variável Numero
+**Tags:** sql, cursor, retornar, numero, inteiro, ler, coluna
 
 ```lspt
-SQL_RetornarNumero(vaCursor, "NOME_COLUNA", vnVariavel); @ TODO: ajustar coluna e variável @
+SQL_RetornarInteiro(vaCursor, "NOME_COLUNA", vnVariavel); @ TODO: ajustar coluna e variável @
+```
+
+---
+
+## BLOCO: retornar-flutuante
+**Uso:** Ler coluna numérica decimal do cursor para variável Numero
+**Tags:** sql, cursor, retornar, numero, decimal, flutuante, ler, coluna
+
+```lspt
+SQL_RetornarFlutuante(vaCursor, "NOME_COLUNA", vnVariavel); @ TODO: ajustar coluna e variável @
 ```
 
 ---
@@ -109,7 +150,7 @@ SQL_RetornarData(vaCursor, "NOME_COLUNA", vdVariavel); @ TODO: ajustar coluna e 
 Definir Funcao BuscaDados(); @ TODO: renomear @
 Definir Alfa   vaCursor;
 Definir Alfa   vaComando;
-Definir Alfa   vaCodEmpSql;
+Definir Alfa   vaChave;        @ TODO: ajustar @
 Definir Alfa   vaResultado;    @ TODO: ajustar tipo/nome conforme campo buscado @
 Definir Numero vnEncontrado;
 
@@ -124,16 +165,17 @@ Se (vnEncontrado = 0)
 Funcao BuscaDados();
    Inicio
       vnEncontrado = 0;
-      IntParaAlfa(xEmp, vaCodEmpSql);
 
       vaComando = "SELECT CAMPO FROM TABELA";       @ TODO: ajustar @
-      vaComando = vaComando + " WHERE CODEMP = " + vaCodEmpSql;
-      vaComando = vaComando + " AND CHAVE = '" + vaChave + "'"; @ TODO: ajustar @
+      vaComando = vaComando + " WHERE CODEMP = :xCodEmp";
+      vaComando = vaComando + " AND CHAVE = :xChave"; @ TODO: ajustar @
 
       SQL_Criar(vaCursor);
       SQL_UsarSqlSenior2(vaCursor, 0);
       SQL_UsarAbrangencia(vaCursor, 0);
       SQL_DefinirComando(vaCursor, vaComando);
+      SQL_DefinirInteiro(vaCursor, "xCodEmp", xEmp);
+      SQL_DefinirAlfa(vaCursor, "xChave", vaChave);   @ TODO: ajustar @
       SQL_AbrirCursor(vaCursor);
 
       Se (SQL_EOF(vaCursor) = 0)
@@ -156,15 +198,23 @@ Funcao BuscaDados();
 ```lspt
 @ --- Declarações --- @
 Definir Alfa   vaComandoDML;
-Definir Numero vnRetExec;
+Definir Alfa   vaResExec;
+Definir Numero vnLinhas;
+
+/*
+ * ATENÇÃO: ExecutarComandoSQL só aceita INSERT/UPDATE e NÃO tem parâmetro bind
+ * (não existe cursor). O valor precisa ir concatenado — então valide/converta
+ * antes: número via AlfaParaInt + IntParaAlfa, e nunca concatene Alfa recebido
+ * de fora (parâmetro de WS, campo de tela) sem tratar.
+ */
 
 @ --- Execução --- @
 vaComandoDML = "UPDATE TABELA SET CAMPO = 'VALOR'";       @ TODO: ajustar @
 vaComandoDML = vaComandoDML + " WHERE CHAVE = '" + vaChave + "'"; @ TODO: ajustar @
 
-ExecutarComandoSQL(vaComandoDML, vnRetExec);
-Se (vnRetExec <> 0)
+ExecutarComandoSQL(vaComandoDML, "N", vnLinhas, vaResExec); @ "N" = sem conexão paralela @
+Se (vaResExec <> "OK")
    {
-      MensagemErro("Falha ao executar SQL."); @ TODO: ajustar mensagem @
+      MensagemErro("Falha ao executar SQL: " + vaResExec); @ TODO: ajustar mensagem @
    }
 ```

@@ -43,6 +43,7 @@ Thumbs.db
 
 ## Ignore development sources (não necessários em runtime)
 .claude/**
+skill/**
 scripts/**
 data/**
 Exemplos de Arquivos/**

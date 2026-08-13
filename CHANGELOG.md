@@ -8,6 +8,39 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.14.0] - 2026-08-13
+
+### ✨ Adicionado
+- **4 funções de bind SQL no catálogo (`functions.json`): `SQL_DefinirAlfa`, `SQL_DefinirInteiro`,
+  `SQL_DefinirFlutuante`, `SQL_DefinirData`.** Faltavam na documentação oficial da Senior — e,
+  por isso, no catálogo — apesar de serem usadas em mais de 1500 pontos de regras `.lspt` em
+  produção. O autocomplete e o "Buscar função" agora as reconhecem. Total: **651 funções**.
+- **Skill `lsp-senior`: dicionário do eDocs.** `reference/tabelas-edocs.md` (344 tabelas `N*` —
+  NF-e, NFS-e, CT-e, MDF-e, eSocial, GNRE, NFC-e…) e `scripts/buscar_tabela_edocs.py`. O eDocs
+  tem banco próprio, separado das tabelas `E0*` do ERP.
+- **Skill `lsp-senior`: detecção do SGBD em tempo de execução.** Receita em três níveis
+  (`RetornaValorCFG` da chave `db_kind` → `RowNum` → sonda) para regras que precisam montar SQL
+  com sintaxe nativa (`ROWNUM` × `TOP` × `LIMIT`). `db_kind` retorna `oracle_19` / `mssql_2019`,
+  então o casamento é por **prefixo**, nunca por igualdade.
+- **Snippets SQL de bind**: `bind-parametro` e `montar-sql` com `:parametro`.
+
+### 🐛 Corrigido
+- **`SQL_RetornarNumero` e `SQL_DefinirNumero` não existem** — o README e os snippets da skill os
+  citavam. O correto é `SQL_RetornarInteiro`/`SQL_RetornarFlutuante` e
+  `SQL_DefinirInteiro`/`SQL_DefinirFlutuante`.
+- **`ExecutarComandoSQL` nos snippets estava com 2 parâmetros**; a assinatura real tem 4
+  (`pComando, pParalela, pLinhasAfetadas, pResultado`) e o sucesso se verifica com
+  `pResultado = "OK"`, não com código numérico. Afetava `snippets/sql.md` e `snippets/log.md`.
+- **`Sleep` documentado**: o parâmetro é em **milissegundos** e bloqueia a regra.
+- **`docs/functions/ConverteMascara.md`** da cópia da skill estava desatualizado (versão
+  auto-gerada, sem as correções de tipo/direção de parâmetro).
+
+### 📦 Empacotamento
+- `.vscodeignore` passa a excluir `skill/**` e `.gitignore` passa a excluir `.claude/`
+  (config local e worktrees) — não vão para o `.vsix` nem para o repositório.
+
+---
+
 ## [1.13.0] - 2026-06-25
 
 ### ✨ Adicionado

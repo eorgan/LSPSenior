@@ -23,7 +23,8 @@ sGravaLog.DesLog = "Mensagem descritiva aqui"; @ TODO: descrição do evento @
 
 ```lspt
 Definir Alfa   vaComLog;
-Definir Numero vnRetLog;
+Definir Alfa   vaResLog;
+Definir Numero vnLinLog;
 Definir Alfa   vaEmpSql;
 
 IntParaAlfa(xEmp, vaEmpSql);
@@ -31,7 +32,11 @@ vaComLog = "INSERT INTO TABELA_LOG (CODEMP, DATSYS, HORSYS, CODUSU, DESLOG)"; @ 
 vaComLog = vaComLog + " VALUES (" + vaEmpSql + ", '" + xDatSis + "', '" + xHorSis + "'";
 vaComLog = vaComLog + ", '" + xUsu + "', '" + vaDescricao + "')"; @ TODO: ajustar variáveis @
 
-ExecutarComandoSQL(vaComLog, vnRetLog);
+ExecutarComandoSQL(vaComLog, "N", vnLinLog, vaResLog); @ "N" = sem conexão paralela @
+Se (vaResLog <> "OK")
+   {
+      MensagemAviso("Falha ao gravar log: " + vaResLog);
+   }
 ```
 
 ---

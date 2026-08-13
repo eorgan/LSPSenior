@@ -23,3 +23,8 @@ npm-debug.log*
 # Python (scripts da skill)
 __pycache__/
 *.pyc
+
+# Claude Code (config local e worktrees) — nunca versionar nem empacotar no .vsix
+.claude/
+skill/.claude/
+skill/settings.local.json
