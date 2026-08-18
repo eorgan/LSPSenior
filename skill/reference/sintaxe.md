@@ -53,8 +53,10 @@ Se vnX < vnY {        @ ❌ não compila @
 Dentro de literais, `"` (aspas) e `\` (barra) devem ser escapados com `\`:
 
 ```lsp
-EnviaEMail("Joao","joao@senior.com.br", "", "", "Teste","\"\\\\Servidor\\teste.txt\"", "");
+EnviarEmail("joao@senior.com.br", "Teste", "maria@senior.com.br", "", "", "Corpo da mensagem", "\"\\\\Servidor\\teste.txt\"", "T");
 ```
+
+(Assinatura real no catálogo: `EnviarEmail(Remetente, Assunto, Destinatario, CopiaPara, CopiaOculta, Corpo, Anexo, FormatoMensagem)` — não existe `EnviaEMail`.)
 
 ## Operadores
 

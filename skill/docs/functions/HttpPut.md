@@ -34,9 +34,9 @@ HttpAlteraCabecalhoRequisicao(vaHTTP, "Content-Type", "application/json");
 HttpAlteraCabecalhoRequisicao(vaHTTP, "Authorization", "Bearer token123");
 
 @ Dados para atualização @
-vaDados = "{\"nome\": \"João Silva\", \"status\": \"ativo\", \"email\": \"joao.silva@exemplo.com\"}";
+vaDados = "{\"nome\": \"João Silva\", \"status\": \"ativo\", \"email\": \"joao.silva@example.com\"}";
 
-HttpPut(vaHTTP, "https://api.exemplo.com/usuarios/123", vaDados, vaResposta);
+HttpPut(vaHTTP, "https://api.example.com/usuarios/123", vaDados, vaResposta);
 ```
 
 ## Fonte

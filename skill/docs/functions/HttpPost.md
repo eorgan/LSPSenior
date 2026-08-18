@@ -35,8 +35,8 @@ vaToken = "Bearer seu_token_aqui";
 HttpAlteraCabecalhoRequisicao(vaHTTP, "Authorization", vaToken);
 HttpAlteraCabecalhoRequisicao(vaHTTP, "Content-Type", "application/json");
 
-vaDados = "{\"nome\": \"João\", \"email\": \"joao@exemplo.com\"}";
-HttpPost(vaHTTP, "https://api.exemplo.com/usuarios", vaDados, vaResposta);
+vaDados = "{\"nome\": \"João\", \"email\": \"joao@example.com\"}";
+HttpPost(vaHTTP, "https://api.example.com/usuarios", vaDados, vaResposta);
 ```
 
 ## Fonte

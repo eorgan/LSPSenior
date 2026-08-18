@@ -35,7 +35,7 @@ vaComLog = vaComLog + ", '" + xUsu + "', '" + vaDescricao + "')"; @ TODO: ajusta
 ExecutarComandoSQL(vaComLog, "N", vnLinLog, vaResLog); @ "N" = sem conexão paralela @
 Se (vaResLog <> "OK")
    {
-      MensagemAviso("Falha ao gravar log: " + vaResLog);
+      Mensagem(Retorna, "Falha ao gravar log: " + vaResLog);
    }
 ```
 

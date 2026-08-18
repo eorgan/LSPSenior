@@ -65,7 +65,7 @@ gaChaParam = "MINHA_CHAVE"; @ TODO: ajustar chave @
 BuscaParametro();
 Se (gaValParam = "")
    {
-      MensagemAviso("Parâmetro não configurado: " + gaChaParam);
+      Mensagem(Retorna, "Parâmetro não configurado: " + gaChaParam);
    }
 
 @ --- Implementação --- @

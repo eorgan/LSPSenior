@@ -102,6 +102,6 @@ Funções `SQL_*` agora **constam no catálogo** (`functions.json`/`docs/functio
 | Iterar | `Enquanto (SQL_EOF(sql) = 0) { ... SQL_Proximo(sql); }` |
 | Ler campo | `SQL_RetornarAlfa` / `SQL_RetornarInteiro` / `SQL_RetornarFlutuante` / `SQL_RetornarData` |
 | Encerrar | `SQL_FecharCursor(sql)` · `SQL_Destruir(sql)` |
-| Escrita | `ExecSQLEx(comando, xErro, xMensagem)` e trate `xErro` |
+| Escrita | `ExecSQLEx(comando, xErro, xMensagem)` e trate `xErro` — **fora do catálogo**, validada em regras `.lspt` reais |
 
 Modelo completo de cursor está no `SKILL.md`.

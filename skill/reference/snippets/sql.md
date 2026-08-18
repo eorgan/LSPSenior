@@ -158,7 +158,7 @@ Definir Numero vnEncontrado;
 BuscaDados();
 Se (vnEncontrado = 0)
    {
-      MensagemAviso("Registro não encontrado."); @ TODO: ajustar mensagem @
+      Mensagem(Retorna, "Registro não encontrado."); @ TODO: ajustar mensagem @
    }
 
 @ --- Implementação --- @
@@ -215,6 +215,6 @@ vaComandoDML = vaComandoDML + " WHERE CHAVE = '" + vaChave + "'"; @ TODO: ajusta
 ExecutarComandoSQL(vaComandoDML, "N", vnLinhas, vaResExec); @ "N" = sem conexão paralela @
 Se (vaResExec <> "OK")
    {
-      MensagemErro("Falha ao executar SQL: " + vaResExec); @ TODO: ajustar mensagem @
+      Mensagem(Erro, "Falha ao executar SQL: " + vaResExec); @ TODO: ajustar mensagem @
    }
 ```

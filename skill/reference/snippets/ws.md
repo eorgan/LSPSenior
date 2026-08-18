@@ -72,7 +72,7 @@ Definir Alfa vaResultado; @ TODO: ajustar tipo/nome @
 ChamarWS();
 Se (vaErroExec <> "")
    {
-      MensagemErro("Erro no WS: " + vaErroExec); @ TODO: ajustar @
+      Mensagem(Erro, "Erro no WS: " + vaErroExec); @ TODO: ajustar @
    }
 
 @ --- Implementação --- @
@@ -123,7 +123,7 @@ Funcao ChamarWSMulti();
       vaErroExec = wsNome.erroExecucao;
       Se (vaErroExec <> "")
          {
-            MensagemErro("Erro no WS: " + vaErroExec); @ TODO: ajustar @
+            Mensagem(Erro, "Erro no WS: " + vaErroExec); @ TODO: ajustar @
          }
       Senao
          {
@@ -135,7 +135,7 @@ Funcao ChamarWSMulti();
                   vaMsgRet = wsNome.GridRetorno.Mensagem;
                   Se (vnTipRet <> 1)
                      {
-                        MensagemAviso("Linha " + vnLin + ": " + vaMsgRet);
+                        Mensagem(Retorna, "Linha " + vnLin + ": " + vaMsgRet);
                      }
                Fim;
          }

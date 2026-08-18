@@ -63,13 +63,13 @@ Definir Numero vnCodHttp;
 ChamarAPI();
 Se (vnCodHttp <> 200)
    {
-      MensagemErro("Falha na chamada HTTP. Código: " + vnCodHttp); @ TODO: ajustar @
+      Mensagem(Erro, "Falha na chamada HTTP. Código: " + vnCodHttp); @ TODO: ajustar @
    }
 
 @ --- Implementação --- @
 Funcao ChamarAPI();
    Inicio
-      vaURL   = "https://api.exemplo.com/endpoint"; @ TODO: ajustar URL @
+      vaURL   = "https://api.example.com/endpoint"; @ TODO: ajustar URL @
       vaToken = "Bearer seu_token";                 @ TODO: ajustar ou ler de E000PDV @
       vaDados = "{\"campo\": \"valor\"}";           @ TODO: ajustar corpo JSON @
 
@@ -108,7 +108,7 @@ ConfiguraHosts();
 EnviaComFailover();
 Se (gnCodHttp = 0)
    {
-      MensagemErro("Todos os hosts falharam."); @ TODO: ajustar @
+      Mensagem(Erro, "Todos os hosts falharam."); @ TODO: ajustar @
    }
 
 @ --- Lê hosts de E000PDV --- @

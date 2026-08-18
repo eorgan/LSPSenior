@@ -31,7 +31,7 @@ HttpObjeto(vaHTTP);
 @ Configurar proxy corporativo @
 HttpAlteraConfiguracaoProxy(vaHTTP, 1, "proxy.empresa.com.br", 8080, 1);
 
-HttpGet(vaHTTP, "https://api.externa.com/dados", vaResposta);
+HttpGet(vaHTTP, "https://api.externa.example.com/dados", vaResposta);
 ```
 
 ## Fonte

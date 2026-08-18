@@ -26,7 +26,7 @@ definir numero vCodigo;
 HttpObjeto(vHTTP);
 HttpDesabilitaErroResposta(vHTTP);
 HttpGet(vHTTP,
-"http://exemplo.com/app/path"
+"http://example.com/app/path"
 , vHTML);
 /* Se algum erro for retornado pelo servidor, a regra continua a ser executada normalmente */
 ```

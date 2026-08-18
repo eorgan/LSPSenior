@@ -25,7 +25,7 @@ definir alfa vHTML;
 HttpObjeto(vHTTP);
 HttpHabilitaErroResposta(vHTTP);
 HttpGet(vHTTP,
-"http://exemplo.com/app/path"
+"http://example.com/app/path"
 , vHTML);
 /* Caso o servidor retorne algum código de erro, esta linha não será executada */
 ```

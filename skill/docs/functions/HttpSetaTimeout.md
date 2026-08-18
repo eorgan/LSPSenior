@@ -28,11 +28,11 @@ HttpObjeto(vaHTTP);
 
 @ Para APIs rápidas - timeout baixo @
 HttpSetaTimeout(vaHTTP, 10);
-HttpGet(vaHTTP, "https://api-rapida.exemplo.com/dados", vaResposta);
+HttpGet(vaHTTP, "https://api-rapida.example.com/dados", vaResposta);
 
 @ Para APIs lentas - timeout maior @
 HttpSetaTimeout(vaHTTP, 120);
-HttpGet(vaHTTP, "https://api-lenta.exemplo.com/relatorio", vaResposta);
+HttpGet(vaHTTP, "https://api-lenta.example.com/relatorio", vaResposta);
 ```
 
 ## Fonte

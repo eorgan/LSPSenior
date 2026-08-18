@@ -27,7 +27,7 @@ definir numero vCodigo;
 HttpObjeto(vHTTP);
 HttpDesabilitaErroResposta(vHTTP);
 HttpGet(vHTTP,
-"http://exemplo.com/app/path"
+"http://example.com/app/path"
 , vHTML);
 HttpLeCodigoResposta(vHTTP, vCodigo);
 se (vCodigo = 401) {

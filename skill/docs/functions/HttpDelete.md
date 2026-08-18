@@ -32,7 +32,7 @@ HttpDesabilitaErroResposta(vaHTTP);
 @ Configurar autenticação @
 HttpAlteraCabecalhoRequisicao(vaHTTP, "Authorization", "Bearer token123");
 
-HttpDelete(vaHTTP, "https://api.exemplo.com/usuarios/123", vaResposta);
+HttpDelete(vaHTTP, "https://api.example.com/usuarios/123", vaResposta);
 
 @ Verificar resultado @
 HttpLeCodigoResposta(vaHTTP, vnStatus);

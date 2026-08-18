@@ -29,7 +29,7 @@ HttpObjeto(vaHTTP);
 @ Habilitar tratamento automático de redirecionamentos @
 HttpAlteraRedirecionamento(vaHTTP, 1);
 
-HttpGet(vaHTTP, "https://site-com-redirect.exemplo.com", vaResposta);
+HttpGet(vaHTTP, "https://site-com-redirect.example.com", vaResposta);
 ```
 
 ## Fonte

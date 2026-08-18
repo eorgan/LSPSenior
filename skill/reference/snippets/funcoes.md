@@ -111,7 +111,7 @@ Definir Numero vnRetorno;
 Processar();
 Se (vnRetorno <> 0)
    {
-      MensagemErro("Erro no processamento."); @ TODO: ajustar mensagem @
+      Mensagem(Erro, "Erro no processamento."); @ TODO: ajustar mensagem @
    }
 
 @-- Implementação das funções --@

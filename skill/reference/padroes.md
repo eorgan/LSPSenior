@@ -58,7 +58,7 @@ Mensagem(Retorna, vaMensagem);     @ 4. passa pronto @
 Funções de gravação devolvem um código/flag — sempre verifique e trate.
 
 ```lsp
-Definir Alfa xErro;
+Definir Numero xErro;
 Definir Alfa xMensagem;
 
 ExecSQLEx(vaComando, xErro, xMensagem);
@@ -71,6 +71,10 @@ Senao
     @ ... sucesso ... @
   }
 ```
+
+> ⚠️ `ExecSQLEx` **não está no `functions.json`** (buraco do catálogo, como a família
+> `SQL_Definir*`): assinatura validada nas regras `.lspt` reais —
+> `ExecSQLEx(comando, erro, mensagem)`, com `erro` comparado a `0`/`1` (0 = sucesso).
 
 ## Padrão: validação de entrada externa (ex.: CPF/CEP)
 

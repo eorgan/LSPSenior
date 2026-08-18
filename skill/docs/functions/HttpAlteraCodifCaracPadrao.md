@@ -29,7 +29,7 @@ HttpObjeto(vaHTTP);
 @ Configurar para UTF-8 @
 HttpAlteraCodifCaracPadrao(vaHTTP, "utf-8");
 
-HttpGet(vaHTTP, "https://api.exemplo.com/dados", vaResposta);
+HttpGet(vaHTTP, "https://api.example.com/dados", vaResposta);
 ```
 
 ## Fonte

@@ -32,7 +32,7 @@ HttpAlteraCabecalhoRequisicao(vaHTTP, "Content-Type", "application/json");
 HttpAlteraCabecalhoRequisicao(vaHTTP, "Authorization", "Bearer token123");
 HttpAlteraCabecalhoRequisicao(vaHTTP, "User-Agent", "MeuApp/1.0");
 
-HttpPost(vaHTTP, "https://exemplo.com/app/path", "<dados>", vaResposta);
+HttpPost(vaHTTP, "https://example.com/app/path", "<dados>", vaResposta);
 ```
 
 ## Fonte

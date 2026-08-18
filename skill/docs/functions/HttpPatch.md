@@ -31,12 +31,12 @@ Definir Numero vnStatus;
 HttpObjeto(vaHTTP);
 HttpDesabilitaErroResposta(vaHTTP);
 
-vaDados = "{\"email\": \"novo@exemplo.com\"}";
+vaDados = "{\"email\": \"novo@example.com\"}";
 
 HttpAlteraCabecalhoRequisicao(vaHTTP, "Content-Type", "application/json");
 HttpAlteraCabecalhoRequisicao(vaHTTP, "Authorization", "Bearer token123");
 
-HttpPatch(vaHTTP, "https://api.exemplo.com/perfil", vaDados, vaResposta);
+HttpPatch(vaHTTP, "https://api.example.com/perfil", vaDados, vaResposta);
 
 HttpLeCodigoResposta(vaHTTP, vnStatus);
 Se (vnStatus = 200) {
