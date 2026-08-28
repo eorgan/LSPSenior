@@ -28,10 +28,10 @@ HttpObjeto(vaHTTP);
 
 @ Para múltiplos arquivos, fazer requisições separadas @
 HttpSetAttachment(vaHTTP, "C:\\docs\\relatorio.pdf");
-HttpPost(vaHTTP, "https://api.exemplo.com/upload", "", vaResposta);
+HttpPost(vaHTTP, "https://api.example.com/upload", "", vaResposta);
 
 HttpSetAttachment(vaHTTP, "C:\\docs\\planilha.xlsx");
-HttpPost(vaHTTP, "https://api.exemplo.com/upload", "", vaResposta);
+HttpPost(vaHTTP, "https://api.example.com/upload", "", vaResposta);
 ```
 
 ## Fonte

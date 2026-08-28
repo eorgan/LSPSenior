@@ -37,7 +37,7 @@ Se (vnMostrarProgresso = 1) {
 }
 
 @ Fazer download com progresso visível @
-HttpDownload(vaHTTP, "https://exemplo.com/arquivo-grande.zip", "C:\\Downloads\\arquivo.zip");
+HttpDownload(vaHTTP, "https://example.com/arquivo-grande.zip", "C:\\Downloads\\arquivo.zip");
 
 @ Desabilitar progresso para próximas operações @
 HttpAlteraMostrarProgresso(vaHTTP, 0);

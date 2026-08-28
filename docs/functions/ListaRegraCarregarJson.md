@@ -39,7 +39,7 @@ Definir Alfa vaAchou;
 Definir Alfa vaNome;
 Definir Alfa vaEmail;
 
-vaJSON = "{\"usuarios\": [{\"nome\": \"João\", \"email\": \"joao@exemplo.com\"}, {\"nome\": \"Maria\", \"email\": \"maria@exemplo.com\"}]}";
+vaJSON = "{\"usuarios\": [{\"nome\": \"João\", \"email\": \"joao@example.com\"}, {\"nome\": \"Maria\", \"email\": \"maria@example.com\"}]}";
 
 @ Criar lista e carregar usuários @
 ListaRegraCriarLista(vnLista);

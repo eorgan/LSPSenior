@@ -29,10 +29,10 @@ HttpObjeto(vaHTTP);
 HttpHabilitarCookies(vaHTTP);
 
 @ Fazer login @
-HttpPost(vaHTTP, "https://app.exemplo.com/login", "user=admin&pass=123", vaResposta);
+HttpPost(vaHTTP, "https://app.example.com/login", "user=admin&pass=123", vaResposta);
 
 @ Os cookies de sessão serão enviados automaticamente @
-HttpGet(vaHTTP, "https://app.exemplo.com/dashboard", vaResposta);
+HttpGet(vaHTTP, "https://app.example.com/dashboard", vaResposta);
 
 @ Desabilitar cookies se necessário @
 HttpDesabilitarCookies(vaHTTP);

@@ -29,7 +29,7 @@ Definir Numero vnStatus;
 HttpObjeto(vaHTTP);
 HttpDesabilitaErroResposta(vaHTTP);
 
-HttpGet(vaHTTP, "https://api.exemplo.com/usuarios", vaResposta);
+HttpGet(vaHTTP, "https://api.example.com/usuarios", vaResposta);
 HttpLeCodigoResposta(vaHTTP, vnStatus);
 
 Se (vnStatus = 200) {

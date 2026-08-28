@@ -606,7 +606,7 @@
       "Nome": "Nome do cabeçalho (não pode ser vazio)",
       "Valor": "Valor do cabeçalho (vazio remove o cabeçalho)"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Accept\", \"text/plain\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"User-Agent\", \"MeuApp/1.0\");\n\nHttpPost(vaHTTP, \"https://exemplo.com/app/path\", \"<dados>\", vaResposta);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Accept\", \"text/plain\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"User-Agent\", \"MeuApp/1.0\");\n\nHttpPost(vaHTTP, \"https://example.com/app/path\", \"<dados>\", vaResposta);"
   },
   "HttpAlteraCodifCaracPadrao": {
     "description": "Configura a codificação de caracteres para respostas do servidor quando não especificada.",
@@ -614,7 +614,7 @@
       "Objeto": "Objeto HTTP criado com HttpObjeto",
       "Codificacao": "Nome da codificação (UTF-8, ISO-8859-1, Windows-1252)"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar para UTF-8 @\nHttpAlteraCodifCaracPadrao(vaHTTP, \"utf-8\");\n\nHttpGet(vaHTTP, \"https://api.exemplo.com/dados\", vaResposta);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar para UTF-8 @\nHttpAlteraCodifCaracPadrao(vaHTTP, \"utf-8\");\n\nHttpGet(vaHTTP, \"https://api.example.com/dados\", vaResposta);"
   },
   "HttpAlteraConfiguracaoProxy": {
     "description": "Configura as definições de servidor proxy para as requisições.",
@@ -624,7 +624,7 @@
       "Porta": "Porta do servidor proxy",
       "AutPorUsu": "0 = Sem autenticação, 1 = Com autenticação"
     },
-    "example": "Definir Alfa vaHTTP;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar proxy corporativo @\nHttpAlteraConfiguracaoProxy(vaHTTP, 1, \"proxy.empresa.com.br\", 8080, 1);\n\nHttpGet(vaHTTP, \"https://api.externa.com/dados\", vaResposta);"
+    "example": "Definir Alfa vaHTTP;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar proxy corporativo @\nHttpAlteraConfiguracaoProxy(vaHTTP, 1, \"proxy.empresa.com.br\", 8080, 1);\n\nHttpGet(vaHTTP, \"https://api.externa.example.com/dados\", vaResposta);"
   },
   "HttpAlteraConfiguracaoSSL": {
     "description": "Controla as configurações SSL/TLS para requisições HTTPS.",
@@ -635,7 +635,7 @@
     "params": {
       "Mostrar": "0 = Não exibir progresso, 1 = Exibir progresso"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Numero vnMostrarProgresso;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar barra de progresso para downloads @\nHttpAlteraMostrarProgresso(vaHTTP, 1);\n\n@ Verificar configuração atual @\nHttpLeMostrarProgresso(vaHTTP, vnMostrarProgresso);\n\nSe (vnMostrarProgresso = 1) {\n  Mensagem(Retorna, \"Progresso de download habilitado\");\n}\n\n@ Fazer download com progresso visível @\nHttpDownload(vaHTTP, \"https://exemplo.com/arquivo-grande.zip\", \"C:\\\\Downloads\\\\arquivo.zip\");\n\n@ Desabilitar progresso para próximas operações @\nHttpAlteraMostrarProgresso(vaHTTP, 0);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Numero vnMostrarProgresso;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar barra de progresso para downloads @\nHttpAlteraMostrarProgresso(vaHTTP, 1);\n\n@ Verificar configuração atual @\nHttpLeMostrarProgresso(vaHTTP, vnMostrarProgresso);\n\nSe (vnMostrarProgresso = 1) {\n  Mensagem(Retorna, \"Progresso de download habilitado\");\n}\n\n@ Fazer download com progresso visível @\nHttpDownload(vaHTTP, \"https://example.com/arquivo-grande.zip\", \"C:\\\\Downloads\\\\arquivo.zip\");\n\n@ Desabilitar progresso para próximas operações @\nHttpAlteraMostrarProgresso(vaHTTP, 0);"
   },
   "HttpAlteraRedirecionamento": {
     "description": "Controla o tratamento automático de redirecionamentos HTTP (3xx).",
@@ -643,7 +643,7 @@
       "Objeto": "Objeto HTTP criado com HttpObjeto",
       "AceitaRedirecionamento": "0 = Não trata, 1 = Trata redirecionamentos"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar tratamento automático de redirecionamentos @\nHttpAlteraRedirecionamento(vaHTTP, 1);\n\nHttpGet(vaHTTP, \"https://site-com-redirect.exemplo.com\", vaResposta);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar tratamento automático de redirecionamentos @\nHttpAlteraRedirecionamento(vaHTTP, 1);\n\nHttpGet(vaHTTP, \"https://site-com-redirect.example.com\", vaResposta);"
   },
   "HttpDelete": {
     "description": "Executa uma requisição HTTP DELETE para remover recursos. Usado para exclusão de dados específicos.",
@@ -652,7 +652,7 @@
       "URL": "URL do recurso a ser removido",
       "HTML": "Variável que receberá a resposta"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Numero vnStatus;\n\nHttpObjeto(vaHTTP);\nHttpDesabilitaErroResposta(vaHTTP);\n\n@ Configurar autenticação @\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\n\nHttpDelete(vaHTTP, \"https://api.exemplo.com/usuarios/123\", vaResposta);\n\n@ Verificar resultado @\nHttpLeCodigoResposta(vaHTTP, vnStatus);\nSe (vnStatus = 204) {\n  Mensagem(Retorna, \"Usuário excluído com sucesso!\");\n} Senao {\n  Mensagem(Erro, \"Erro ao excluir usuário. Status: \" + vnStatus);\n}"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Numero vnStatus;\n\nHttpObjeto(vaHTTP);\nHttpDesabilitaErroResposta(vaHTTP);\n\n@ Configurar autenticação @\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\n\nHttpDelete(vaHTTP, \"https://api.example.com/usuarios/123\", vaResposta);\n\n@ Verificar resultado @\nHttpLeCodigoResposta(vaHTTP, vnStatus);\nSe (vnStatus = 204) {\n  Mensagem(Retorna, \"Usuário excluído com sucesso!\");\n} Senao {\n  Mensagem(Erro, \"Erro ao excluir usuário. Status: \" + vnStatus);\n}"
   },
   "HttpDeleteBody": {
     "description": "Executa uma requisição HTTP DELETE com dados no corpo da mensagem. Útil para exclusões em lote ou com parâmetros específicos.",
@@ -662,7 +662,7 @@
       "Dados": "Dados a serem enviados no corpo",
       "HTML": "Variável que receberá a resposta"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaDados;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar cabeçalhos @\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\n\n@ Lista de IDs para exclusão em lote @\nvaDados = \"[{\\\"id\\\": \\\"123\\\"}, {\\\"id\\\": \\\"456\\\"}, {\\\"id\\\": \\\"789\\\"}]\";\n\nHttpDeleteBody(vaHTTP, \"https://api.exemplo.com/usuarios/lote\", vaDados, vaResposta);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaDados;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar cabeçalhos @\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\n\n@ Lista de IDs para exclusão em lote @\nvaDados = \"[{\\\"id\\\": \\\"123\\\"}, {\\\"id\\\": \\\"456\\\"}, {\\\"id\\\": \\\"789\\\"}]\";\n\nHttpDeleteBody(vaHTTP, \"https://api.example.com/usuarios/lote\", vaDados, vaResposta);"
   },
   "HttpDesabilitaSNI": {
     "description": "Controla o envio do nome do servidor na requisição HTTPS.",
@@ -670,7 +670,7 @@
   },
   "HttpDesabilitarCookies": {
     "description": "Controla o armazenamento e envio automático de cookies durante as requisições.",
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar cookies para manter sessão @\nHttpHabilitarCookies(vaHTTP);\n\n@ Fazer login @\nHttpPost(vaHTTP, \"https://app.exemplo.com/login\", \"user=admin&pass=123\", vaResposta);\n\n@ Os cookies de sessão serão enviados automaticamente @\nHttpGet(vaHTTP, \"https://app.exemplo.com/dashboard\", vaResposta);\n\n@ Desabilitar cookies se necessário @\nHttpDesabilitarCookies(vaHTTP);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar cookies para manter sessão @\nHttpHabilitarCookies(vaHTTP);\n\n@ Fazer login @\nHttpPost(vaHTTP, \"https://app.example.com/login\", \"user=admin&pass=123\", vaResposta);\n\n@ Os cookies de sessão serão enviados automaticamente @\nHttpGet(vaHTTP, \"https://app.example.com/dashboard\", vaResposta);\n\n@ Desabilitar cookies se necessário @\nHttpDesabilitarCookies(vaHTTP);"
   },
   "HttpDownload": {
     "description": "Faz download de arquivos diretamente para o disco, sem carregar na memória. Ideal para arquivos grandes.",
@@ -679,7 +679,7 @@
       "URL": "URL do arquivo para download",
       "Arquivo": "Caminho completo onde salvar o arquivo"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Numero vnStatus;\nDefinir Alfa vaCaminho;\n\nHttpObjeto(vaHTTP);\nHttpDesabilitaErroResposta(vaHTTP);\n\nvaCaminho = \"C:\\\\Downloads\\\\relatorio.pdf\";\nHttpDownload(vaHTTP, \"https://exemplo.com/relatorio.pdf\", vaCaminho);\n\nHttpLeCodigoResposta(vaHTTP, vnStatus);\nSe (vnStatus = 200) {\n  Mensagem(Retorna, \"Download concluído: \" + vaCaminho);\n} Senao {\n  Mensagem(Erro, \"Erro no download. Status: \" + vnStatus);\n}"
+    "example": "Definir Alfa vaHTTP;\nDefinir Numero vnStatus;\nDefinir Alfa vaCaminho;\n\nHttpObjeto(vaHTTP);\nHttpDesabilitaErroResposta(vaHTTP);\n\nvaCaminho = \"C:\\\\Downloads\\\\relatorio.pdf\";\nHttpDownload(vaHTTP, \"https://example.com/relatorio.pdf\", vaCaminho);\n\nHttpLeCodigoResposta(vaHTTP, vnStatus);\nSe (vnStatus = 200) {\n  Mensagem(Retorna, \"Download concluído: \" + vaCaminho);\n} Senao {\n  Mensagem(Erro, \"Erro no download. Status: \" + vnStatus);\n}"
   },
   "HttpGet": {
     "description": "Executa uma requisição HTTP GET para obter dados de um servidor. É o método mais utilizado para consulta de dados em APIs REST.",
@@ -688,7 +688,7 @@
       "URL": "URL completa do endpoint (deve incluir http:// ou https://)",
       "HTML": "Variável que receberá a resposta do servidor"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Numero vnStatus;\n\nHttpObjeto(vaHTTP);\nHttpDesabilitaErroResposta(vaHTTP);\n\nHttpGet(vaHTTP, \"https://api.exemplo.com/usuarios\", vaResposta);\nHttpLeCodigoResposta(vaHTTP, vnStatus);\n\nSe (vnStatus = 200) {\n  @ Processar resposta @\n  Mensagem(Retorna, \"Dados recebidos com sucesso!\");\n} Senao {\n  @ Tratar erro @\n  Mensagem(Erro, \"Erro na requisição. Status: \" + vnStatus);\n}"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Numero vnStatus;\n\nHttpObjeto(vaHTTP);\nHttpDesabilitaErroResposta(vaHTTP);\n\nHttpGet(vaHTTP, \"https://api.example.com/usuarios\", vaResposta);\nHttpLeCodigoResposta(vaHTTP, vnStatus);\n\nSe (vnStatus = 200) {\n  @ Processar resposta @\n  Mensagem(Retorna, \"Dados recebidos com sucesso!\");\n} Senao {\n  @ Tratar erro @\n  Mensagem(Erro, \"Erro na requisição. Status: \" + vnStatus);\n}"
   },
   "HttpHabilitaSNI": {
     "description": "Controla o envio do nome do servidor na requisição HTTPS.",
@@ -696,7 +696,7 @@
   },
   "HttpHabilitarCookies": {
     "description": "Controla o armazenamento e envio automático de cookies durante as requisições.",
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar cookies para manter sessão @\nHttpHabilitarCookies(vaHTTP);\n\n@ Fazer login @\nHttpPost(vaHTTP, \"https://app.exemplo.com/login\", \"user=admin&pass=123\", vaResposta);\n\n@ Os cookies de sessão serão enviados automaticamente @\nHttpGet(vaHTTP, \"https://app.exemplo.com/dashboard\", vaResposta);\n\n@ Desabilitar cookies se necessário @\nHttpDesabilitarCookies(vaHTTP);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar cookies para manter sessão @\nHttpHabilitarCookies(vaHTTP);\n\n@ Fazer login @\nHttpPost(vaHTTP, \"https://app.example.com/login\", \"user=admin&pass=123\", vaResposta);\n\n@ Os cookies de sessão serão enviados automaticamente @\nHttpGet(vaHTTP, \"https://app.example.com/dashboard\", vaResposta);\n\n@ Desabilitar cookies se necessário @\nHttpDesabilitarCookies(vaHTTP);"
   },
   "HttpLeAutenticacaoProxy": {
     "description": "Configura e lê as credenciais de autenticação para o servidor proxy.",
@@ -713,7 +713,7 @@
       "Nome": "Nome do cabeçalho a consultar",
       "Valor": "Variável que receberá o valor (vazio se não existir)"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaContentType;\nDefinir Alfa vaContentLength;\nDefinir Alfa vaServer;\n\nHttpObjeto(vaHTTP);\n\nHttpGet(vaHTTP, \"https://exemplo.com/api/dados\", vaResposta);\n\n@ Ler cabeçalhos de resposta @\nHttpLeCabecalhoResposta(vaHTTP, \"Content-Type\", vaContentType);\nHttpLeCabecalhoResposta(vaHTTP, \"Content-Length\", vaContentLength);\nHttpLeCabecalhoResposta(vaHTTP, \"Server\", vaServer);\n\nMensagem(Retorna, \"Tipo: \" + vaContentType + \", Tamanho: \" + vaContentLength);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaContentType;\nDefinir Alfa vaContentLength;\nDefinir Alfa vaServer;\n\nHttpObjeto(vaHTTP);\n\nHttpGet(vaHTTP, \"https://example.com/api/dados\", vaResposta);\n\n@ Ler cabeçalhos de resposta @\nHttpLeCabecalhoResposta(vaHTTP, \"Content-Type\", vaContentType);\nHttpLeCabecalhoResposta(vaHTTP, \"Content-Length\", vaContentLength);\nHttpLeCabecalhoResposta(vaHTTP, \"Server\", vaServer);\n\nMensagem(Retorna, \"Tipo: \" + vaContentType + \", Tamanho: \" + vaContentLength);"
   },
   "HttpLeConfiguracaoProxy": {
     "description": "Lê as configurações atuais de proxy do objeto HTTP.",
@@ -728,11 +728,11 @@
     "params": {
       "Mostrar": "0 = Não exibir progresso, 1 = Exibir progresso"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Numero vnMostrarProgresso;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar barra de progresso para downloads @\nHttpAlteraMostrarProgresso(vaHTTP, 1);\n\n@ Verificar configuração atual @\nHttpLeMostrarProgresso(vaHTTP, vnMostrarProgresso);\n\nSe (vnMostrarProgresso = 1) {\n  Mensagem(Retorna, \"Progresso de download habilitado\");\n}\n\n@ Fazer download com progresso visível @\nHttpDownload(vaHTTP, \"https://exemplo.com/arquivo-grande.zip\", \"C:\\\\Downloads\\\\arquivo.zip\");\n\n@ Desabilitar progresso para próximas operações @\nHttpAlteraMostrarProgresso(vaHTTP, 0);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Numero vnMostrarProgresso;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar barra de progresso para downloads @\nHttpAlteraMostrarProgresso(vaHTTP, 1);\n\n@ Verificar configuração atual @\nHttpLeMostrarProgresso(vaHTTP, vnMostrarProgresso);\n\nSe (vnMostrarProgresso = 1) {\n  Mensagem(Retorna, \"Progresso de download habilitado\");\n}\n\n@ Fazer download com progresso visível @\nHttpDownload(vaHTTP, \"https://example.com/arquivo-grande.zip\", \"C:\\\\Downloads\\\\arquivo.zip\");\n\n@ Desabilitar progresso para próximas operações @\nHttpAlteraMostrarProgresso(vaHTTP, 0);"
   },
   "HttpNormalizaRetorno": {
     "description": "Aplica normalização Unicode para caracteres acentuados em respostas HTTP.",
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar normalização Unicode @\nHttpNormalizaRetorno(vaHTTP);\n\nHttpGet(vaHTTP, \"https://api.exemplo.com/dados-acentuados\", vaResposta);\n\n@ A resposta terá caracteres acentuados normalizados @\nMensagem(Retorna, vaResposta);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Habilitar normalização Unicode @\nHttpNormalizaRetorno(vaHTTP);\n\nHttpGet(vaHTTP, \"https://api.example.com/dados-acentuados\", vaResposta);\n\n@ A resposta terá caracteres acentuados normalizados @\nMensagem(Retorna, vaResposta);"
   },
   "HttpPatch": {
     "description": "Executa uma requisição HTTP PATCH para aplicar modificações parciais em um recurso. Ideal para atualizações que modificam apenas alguns campos.",
@@ -742,7 +742,7 @@
       "Dados": "Dados de modificação parcial no formato texto",
       "Retorno": "Variável que receberá a resposta"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaDados;\nDefinir Numero vnStatus;\n\nHttpObjeto(vaHTTP);\nHttpDesabilitaErroResposta(vaHTTP);\n\nvaDados = \"{\\\"email\\\": \\\"novo@exemplo.com\\\"}\";\n\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\n\nHttpPatch(vaHTTP, \"https://api.exemplo.com/perfil\", vaDados, vaResposta);\n\nHttpLeCodigoResposta(vaHTTP, vnStatus);\nSe (vnStatus = 200) {\n  Mensagem(Retorna, \"Perfil atualizado com sucesso!\");\n} Senao {\n  Mensagem(Erro, \"Erro ao atualizar. Status: \" + vnStatus);\n}"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaDados;\nDefinir Numero vnStatus;\n\nHttpObjeto(vaHTTP);\nHttpDesabilitaErroResposta(vaHTTP);\n\nvaDados = \"{\\\"email\\\": \\\"novo@example.com\\\"}\";\n\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\n\nHttpPatch(vaHTTP, \"https://api.example.com/perfil\", vaDados, vaResposta);\n\nHttpLeCodigoResposta(vaHTTP, vnStatus);\nSe (vnStatus = 200) {\n  Mensagem(Retorna, \"Perfil atualizado com sucesso!\");\n} Senao {\n  Mensagem(Erro, \"Erro ao atualizar. Status: \" + vnStatus);\n}"
   },
   "HttpPost": {
     "description": "Executa uma requisição HTTP POST para enviar dados ao servidor. Utilizado para criação de recursos, envio de formulários e dados em geral.",
@@ -752,7 +752,7 @@
       "Dados": "Dados a serem enviados no corpo da requisição",
       "HTML": "Variável que receberá a resposta"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaDados;\nDefinir Alfa vaToken;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar autenticação @\nvaToken = \"Bearer seu_token_aqui\";\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", vaToken);\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\n\nvaDados = \"{\\\"nome\\\": \\\"João\\\", \\\"email\\\": \\\"joao@exemplo.com\\\"}\";\nHttpPost(vaHTTP, \"https://api.exemplo.com/usuarios\", vaDados, vaResposta);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaDados;\nDefinir Alfa vaToken;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar autenticação @\nvaToken = \"Bearer seu_token_aqui\";\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", vaToken);\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\n\nvaDados = \"{\\\"nome\\\": \\\"João\\\", \\\"email\\\": \\\"joao@example.com\\\"}\";\nHttpPost(vaHTTP, \"https://api.example.com/usuarios\", vaDados, vaResposta);"
   },
   "HttpPut": {
     "description": "Executa uma requisição HTTP PUT para atualizar recursos existentes. Usado para modificar dados de um recurso específico.",
@@ -762,7 +762,7 @@
       "Dados": "Dados de atualização",
       "HTML": "Variável que receberá a resposta"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaDados;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar cabeçalhos @\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\n\n@ Dados para atualização @\nvaDados = \"{\\\"nome\\\": \\\"João Silva\\\", \\\"status\\\": \\\"ativo\\\", \\\"email\\\": \\\"joao.silva@exemplo.com\\\"}\";\n\nHttpPut(vaHTTP, \"https://api.exemplo.com/usuarios/123\", vaDados, vaResposta);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\nDefinir Alfa vaDados;\n\nHttpObjeto(vaHTTP);\n\n@ Configurar cabeçalhos @\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Content-Type\", \"application/json\");\nHttpAlteraCabecalhoRequisicao(vaHTTP, \"Authorization\", \"Bearer token123\");\n\n@ Dados para atualização @\nvaDados = \"{\\\"nome\\\": \\\"João Silva\\\", \\\"status\\\": \\\"ativo\\\", \\\"email\\\": \\\"joao.silva@example.com\\\"}\";\n\nHttpPut(vaHTTP, \"https://api.example.com/usuarios/123\", vaDados, vaResposta);"
   },
   "HttpSetAttachment": {
     "description": "Permite o envio de arquivos locais no corpo de uma requisição HTTP. Disponível para os métodos POST, PUT e PATCH.",
@@ -770,7 +770,7 @@
       "Objeto": "Objeto HTTP criado com HttpObjeto",
       "CaminhoArquivo": "Caminho completo do arquivo local a ser anexado"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Para múltiplos arquivos, fazer requisições separadas @\nHttpSetAttachment(vaHTTP, \"C:\\\\docs\\\\relatorio.pdf\");\nHttpPost(vaHTTP, \"https://api.exemplo.com/upload\", \"\", vaResposta);\n\nHttpSetAttachment(vaHTTP, \"C:\\\\docs\\\\planilha.xlsx\");\nHttpPost(vaHTTP, \"https://api.exemplo.com/upload\", \"\", vaResposta);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Para múltiplos arquivos, fazer requisições separadas @\nHttpSetAttachment(vaHTTP, \"C:\\\\docs\\\\relatorio.pdf\");\nHttpPost(vaHTTP, \"https://api.example.com/upload\", \"\", vaResposta);\n\nHttpSetAttachment(vaHTTP, \"C:\\\\docs\\\\planilha.xlsx\");\nHttpPost(vaHTTP, \"https://api.example.com/upload\", \"\", vaResposta);"
   },
   "HttpSetaTimeout": {
     "description": "Define um timeout (tempo limite) para requisições HTTP. Evita travamentos em requisições lentas.",
@@ -778,7 +778,7 @@
       "Objeto": "Objeto HTTP criado com HttpObjeto",
       "Timeout": "Tempo limite em segundos"
     },
-    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Para APIs rápidas - timeout baixo @\nHttpSetaTimeout(vaHTTP, 10);\nHttpGet(vaHTTP, \"https://api-rapida.exemplo.com/dados\", vaResposta);\n\n@ Para APIs lentas - timeout maior @\nHttpSetaTimeout(vaHTTP, 120);\nHttpGet(vaHTTP, \"https://api-lenta.exemplo.com/relatorio\", vaResposta);"
+    "example": "Definir Alfa vaHTTP;\nDefinir Alfa vaResposta;\n\nHttpObjeto(vaHTTP);\n\n@ Para APIs rápidas - timeout baixo @\nHttpSetaTimeout(vaHTTP, 10);\nHttpGet(vaHTTP, \"https://api-rapida.example.com/dados\", vaResposta);\n\n@ Para APIs lentas - timeout maior @\nHttpSetaTimeout(vaHTTP, 120);\nHttpGet(vaHTTP, \"https://api-lenta.example.com/relatorio\", vaResposta);"
   },
   "InsClauSQLCampoDireto": {
     "description": "Insere um campo novo no SELECT que poderá ser utilizado para agrupamentos e outros tipos de funções.",
@@ -951,7 +951,7 @@
   },
   "ListaRegraCarregarJson": {
     "description": "**Quando usar:** Para processar arrays de objetos JSON e trabalhar com múltiplos registros.\n\n**Características:**\n\n- Carrega múltiplos registros em uma lista estruturada\n- Ideal para dados tabulares ou coleções\n- Permite navegar pelos registros usando funções de lista\n- Não consegue percorrer arrays aninhados",
-    "example": "Definir Numero vnLista;\nDefinir Alfa vaAchou;\nDefinir Alfa vaNome;\nDefinir Alfa vaEmail;\n\nvaJSON = \"{\\\"usuarios\\\": [{\\\"nome\\\": \\\"João\\\", \\\"email\\\": \\\"joao@exemplo.com\\\"}, {\\\"nome\\\": \\\"Maria\\\", \\\"email\\\": \\\"maria@exemplo.com\\\"}]}\";\n\n@ Criar lista e carregar usuários @\nListaRegraCriarLista(vnLista);\nListaRegraCarregarJson(vnLista, vaJSON, \"usuarios\", \"nome;email\");\n\n@ Navegar pela lista @\nListaRegraPrimeiro(vnLista, vaAchou);\nEnquanto (vaAchou = \"S\") {\n  ListaRegraObterValorAlfa(vnLista, \"nome\", vaNome, vaAchou);\n  ListaRegraObterValorAlfa(vnLista, \"email\", vaEmail, vaAchou);\n  \n  @ Processar cada usuário @\n  Mensagem(Retorna, \"Usuário: \" + vaNome + \" - \" + vaEmail);\n  \n  ListaRegraProximo(vnLista, vaAchou);\n}"
+    "example": "Definir Numero vnLista;\nDefinir Alfa vaAchou;\nDefinir Alfa vaNome;\nDefinir Alfa vaEmail;\n\nvaJSON = \"{\\\"usuarios\\\": [{\\\"nome\\\": \\\"João\\\", \\\"email\\\": \\\"joao@example.com\\\"}, {\\\"nome\\\": \\\"Maria\\\", \\\"email\\\": \\\"maria@example.com\\\"}]}\";\n\n@ Criar lista e carregar usuários @\nListaRegraCriarLista(vnLista);\nListaRegraCarregarJson(vnLista, vaJSON, \"usuarios\", \"nome;email\");\n\n@ Navegar pela lista @\nListaRegraPrimeiro(vnLista, vaAchou);\nEnquanto (vaAchou = \"S\") {\n  ListaRegraObterValorAlfa(vnLista, \"nome\", vaNome, vaAchou);\n  ListaRegraObterValorAlfa(vnLista, \"email\", vaEmail, vaAchou);\n  \n  @ Processar cada usuário @\n  Mensagem(Retorna, \"Usuário: \" + vaNome + \" - \" + vaEmail);\n  \n  ListaRegraProximo(vnLista, vaAchou);\n}"
   },
   "ListaRegraCriarLista": {
     "description": "Cria uma nova lista de regras para armazenar dados estruturados.",

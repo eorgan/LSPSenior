@@ -3131,7 +3131,7 @@
   "HttpAlteraCabecalhoRequisicao": {
     "description": "Altera os valores de cabeçalhos HTTP que serão enviados junto com a requisição. São válidos para todas os verbos (GET, POST, PUT, PATCH e DELETE) e também para o download.",
     "signature": "HttpAlteraCabecalhoRequisicao(Alfa end Objeto, Alfa Nome, Alfa Valor);",
-    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir alfa vDados;\nHttpObjeto(vHTTP);\nHttpAlteraCabecalhoRequisicao(vHTTP,\n\"Accept\"\n,\n\"text/plain\"\n);\nHttpAlteraCabecalhoRequisicao(vHTTP,\n\"Content-Type\"\n,\n\"application/json\"\n);\nHttpAlteraCabecalhoRequisicao(vHTTP,\n\"Authorization\"\n,\n\"Basic eyJhbGciOi...\"\n);\nHttpPost(vHTTP,\n\"http://exemplo.com/app/path\"\n,\n\"<dados>\"\n, vHTML);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir alfa vDados;\nHttpObjeto(vHTTP);\nHttpAlteraCabecalhoRequisicao(vHTTP,\n\"Accept\"\n,\n\"text/plain\"\n);\nHttpAlteraCabecalhoRequisicao(vHTTP,\n\"Content-Type\"\n,\n\"application/json\"\n);\nHttpAlteraCabecalhoRequisicao(vHTTP,\n\"Authorization\"\n,\n\"Basic eyJhbGciOi...\"\n);\nHttpPost(vHTTP,\n\"http://example.com/app/path\"\n,\n\"<dados>\"\n, vHTML);",
     "params": {
       "Objeto": "Indica o objeto HTTP no qual o cabeçalho será alterado",
       "Valor": "O novo valor para o cabeçalho. Nenhuma verificação quando a semântica do valor é realizada. O valor vazio faz com que o cabeçalho não seja enviado."
@@ -3191,7 +3191,7 @@
   "HttpDesabilitaErroResposta": {
     "description": "Desabilita a geração automática de erros de execução. Após esta chamada, nenhum erro será gerado caso a resposta do servidor seja diferente de 200 ou 204. Nas situações de erro, em que o servidor retorna um código diferente, o usuário deverá realizar o tratamento apropriado. Para consultar o código de retorna do servidor, deve-se utilizar a função HttpLeCodigoResposta.",
     "signature": "HttpDesabilitaErroResposta(Alfa end Objeto);",
-    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir numero vCodigo;\nHttpObjeto(vHTTP);\nHttpDesabilitaErroResposta(vHTTP);\nHttpGet(vHTTP,\n\"http://exemplo.com/app/path\"\n, vHTML);\n/* Se algum erro for retornado pelo servidor, a regra continua a ser executada normalmente */",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir numero vCodigo;\nHttpObjeto(vHTTP);\nHttpDesabilitaErroResposta(vHTTP);\nHttpGet(vHTTP,\n\"http://example.com/app/path\"\n, vHTML);\n/* Se algum erro for retornado pelo servidor, a regra continua a ser executada normalmente */",
     "params": {
       "Objeto": "Indica o objeto HTTP no qual a configuração será aplicada."
     },
@@ -3226,7 +3226,7 @@
   "HttpHabilitaErroResposta": {
     "description": "Habilita a geração automática de erros de execução. Estes erros são gerados quando a resposta do servidor não for os códigos 200 ou 204. Ou seja, caso uma requisição retorne um código diferente destes, o sistema irá gerar uma mensagem de erro e a execução da regra será cancelada. A mensagem de erro será apresentada ao usuário ou armazenada no log.",
     "signature": "HttpHabilitaErroResposta(Alfa end Objeto);",
-    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\nHttpObjeto(vHTTP);\nHttpHabilitaErroResposta(vHTTP);\nHttpGet(vHTTP,\n\"http://exemplo.com/app/path\"\n, vHTML);\n/* Caso o servidor retorne algum código de erro, esta linha não será executada */",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\nHttpObjeto(vHTTP);\nHttpHabilitaErroResposta(vHTTP);\nHttpGet(vHTTP,\n\"http://example.com/app/path\"\n, vHTML);\n/* Caso o servidor retorne algum código de erro, esta linha não será executada */",
     "params": {
       "Objeto": "Indica o objeto HTTP no qual a configuração será aplicada."
     },
@@ -3251,7 +3251,7 @@
   "HttpLeCabecalhoResposta": {
     "description": "Consulta os valores associados à cabeçalhos de respostas das requisições. Estes valores apenas estão disponíveis após a realização de alguma requisição (GET, POST, PUT, PATCH e DELETE). Todos os valores são retornados com o tipo Alfa. Nenhuma conversão de dados é realizada.",
     "signature": "HttpLeCabecalhoResposta(Alfa end Objeto, Alfa Nome, Alfa end Valor);",
-    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir alfa vContentType;\ndefinir alfa vContentLength;\nHttpObjeto(vHTTP);\nHttpGet(vHTTP,\n\"http://exemplo.com/app/path\"\n, vHTML);\nHttpLeCabecalhoResposta(vHTTP,\n\"Content-Type\"\n, vContentType);\nHttpLeCabecalhoResposta(vHTTP,\n\"Content-Length\"\n, vContentLength);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir alfa vContentType;\ndefinir alfa vContentLength;\nHttpObjeto(vHTTP);\nHttpGet(vHTTP,\n\"http://example.com/app/path\"\n, vHTML);\nHttpLeCabecalhoResposta(vHTTP,\n\"Content-Type\"\n, vContentType);\nHttpLeCabecalhoResposta(vHTTP,\n\"Content-Length\"\n, vContentLength);",
     "params": {
       "Objeto": "Indica o objeto HTTP do qual o cabeçalho será obtido.",
       "Valor": "Parâmetro que receberá o valor do cabeçalho. Se o cabeçalho não existir, vazio será retornado."
@@ -3261,7 +3261,7 @@
   "HttpLeCodigoResposta": {
     "description": "Consulta o código de resposta de uma requisição enviada ao servidor. Está disponível para todos os verbos HTTP (GET, POST, PUT, PATCH e DELETE). O código apenas fica disponível após a execução e retorno de uma requisição HTTP.",
     "signature": "HttpLeCodigoResposta(Alfa end Objeto, numero end Codigo);",
-    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir numero vCodigo;\nHttpObjeto(vHTTP);\nHttpDesabilitaErroResposta(vHTTP);\nHttpGet(vHTTP,\n\"http://exemplo.com/app/path\"\n, vHTML);\nHttpLeCodigoResposta(vHTTP, vCodigo);\nse (vCodigo = 401) {\nMensagem(Retorna,\n\"Não autorizado\"\n);\n} senao se (vCodigo = 404) {\nMensagem(Retorna,\n\"Não encontrado\"\n);\n}",
+    "example": "definir alfa vHTTP;\ndefinir alfa vHTML;\ndefinir numero vCodigo;\nHttpObjeto(vHTTP);\nHttpDesabilitaErroResposta(vHTTP);\nHttpGet(vHTTP,\n\"http://example.com/app/path\"\n, vHTML);\nHttpLeCodigoResposta(vHTTP, vCodigo);\nse (vCodigo = 401) {\nMensagem(Retorna,\n\"Não autorizado\"\n);\n} senao se (vCodigo = 404) {\nMensagem(Retorna,\n\"Não encontrado\"\n);\n}",
     "params": {
       "Objeto": "Indica o objeto HTTP do o código de retorno será obtido.",
       "Codigo": "Parâmetro que irá receber o código de retorno da última operação realizada."
@@ -3318,7 +3318,7 @@
   "HttpPatch": {
     "description": "Executa uma requisição HTTP usando o método PATCH. O método de requisição PATCH, somente no formato texto e sem suporte para envio de arquivos, é usado para aplicar modificações parciais em um recurso.",
     "signature": "HttpPatch(Alfa end Objeto, Alfa URL, Alfa Dados, Alfa end Retorno);",
-    "example": "definir alfa vHTTP;\ndefinir alfa vRetorno;\nHttpObjeto(vHTTP);\nHttpPatch(vHTTP, \"http://exemplo.com/app/path\", vRetorno);",
+    "example": "definir alfa vHTTP;\ndefinir alfa vRetorno;\nHttpObjeto(vHTTP);\nHttpPatch(vHTTP, \"http://example.com/app/path\", vRetorno);",
     "params": {
       "Objeto": "Indica o objeto HTTP no qual a chamada deve ser realizada.",
       "URL": "Indica a URL que será chamada usando o verbo PATCH.",

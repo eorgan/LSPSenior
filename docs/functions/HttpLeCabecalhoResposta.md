@@ -30,7 +30,7 @@ Definir Alfa vaServer;
 
 HttpObjeto(vaHTTP);
 
-HttpGet(vaHTTP, "https://exemplo.com/api/dados", vaResposta);
+HttpGet(vaHTTP, "https://example.com/api/dados", vaResposta);
 
 @ Ler cabeçalhos de resposta @
 HttpLeCabecalhoResposta(vaHTTP, "Content-Type", vaContentType);

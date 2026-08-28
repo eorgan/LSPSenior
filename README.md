@@ -10,7 +10,7 @@ editor (VS Code, Antigravity e outros baseados em Open VSX) e clique em *Install
 
 ### Método 2: Via VSIX
 ```bash
-code --install-extension lspt-language-support-1.15.0.vsix
+code --install-extension lspt-language-support-1.15.1.vsix
 ```
 
 ### Método 3: Compilar do Código Fonte
@@ -18,7 +18,7 @@ code --install-extension lspt-language-support-1.15.0.vsix
 git clone https://github.com/eorgan/LSPSenior.git
 cd LSPSenior
 npm run package
-code --install-extension lspt-language-support-1.15.0.vsix
+code --install-extension lspt-language-support-1.15.1.vsix
 ```
 
 ---

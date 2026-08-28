@@ -36,7 +36,7 @@ HttpAlteraCabecalhoRequisicao(vaHTTP, "Authorization", "Bearer token123");
 @ Lista de IDs para exclusão em lote @
 vaDados = "[{\"id\": \"123\"}, {\"id\": \"456\"}, {\"id\": \"789\"}]";
 
-HttpDeleteBody(vaHTTP, "https://api.exemplo.com/usuarios/lote", vaDados, vaResposta);
+HttpDeleteBody(vaHTTP, "https://api.example.com/usuarios/lote", vaDados, vaResposta);
 ```
 
 ## Fonte

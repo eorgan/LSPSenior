@@ -8,6 +8,15 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.15.1] - 2026-08-28
+
+### 🐛 Corrigido
+- **Exemplos das funções `Http*` usavam `exemplo.com` e `api.externa.com`** — domínios de
+  terceiros. Trocados pelo domínio reservado para documentação (`example.com`, RFC 2606).
+  A correção existia só na cópia da skill; agora está nos overlays (`data/functions-doc*.json`),
+  que são a origem das `docs/functions/` empacotadas no `.vsix` — antes ela voltaria atrás na
+  próxima regeneração do catálogo.
+
 ## [1.15.0] - 2026-08-28
 
 ### ✨ Adicionado

@@ -28,7 +28,7 @@ HttpObjeto(vaHTTP);
 @ Habilitar normalização Unicode @
 HttpNormalizaRetorno(vaHTTP);
 
-HttpGet(vaHTTP, "https://api.exemplo.com/dados-acentuados", vaResposta);
+HttpGet(vaHTTP, "https://api.example.com/dados-acentuados", vaResposta);
 
 @ A resposta terá caracteres acentuados normalizados @
 Mensagem(Retorna, vaResposta);

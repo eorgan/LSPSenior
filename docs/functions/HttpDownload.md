@@ -30,7 +30,7 @@ HttpObjeto(vaHTTP);
 HttpDesabilitaErroResposta(vaHTTP);
 
 vaCaminho = "C:\\Downloads\\relatorio.pdf";
-HttpDownload(vaHTTP, "https://exemplo.com/relatorio.pdf", vaCaminho);
+HttpDownload(vaHTTP, "https://example.com/relatorio.pdf", vaCaminho);
 
 HttpLeCodigoResposta(vaHTTP, vnStatus);
 Se (vnStatus = 200) {
