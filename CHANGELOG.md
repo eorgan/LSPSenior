@@ -8,6 +8,38 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [1.15.0] - 2026-08-28
+
+### ✨ Adicionado
+- **19 funções `Ftp*` no catálogo (`functions.json`): transferência de arquivos por FTP e SFTP.**
+  `FtpConexao`, `FtpSetaSFTP`, `FtpSSH`, `FtpUpload`, `FtpDownload`, `FtpListar`/`FtpListaItem*`,
+  `FtpCriarDiretorio`, `FtpApagarArquivo`/`FtpApagarDiretorio`, `FtpRenomear`, `FtpModoConexao`,
+  `FtpModoTransferencia`, `FtpModoErro`, `FtpProxy`, `FtpUltimoErro`. Nova categoria `ftp`.
+  Autocomplete, hover, signature help e realce de sintaxe passam a reconhecê-las.
+  Total: **670 funções**.
+- **Docs por função** (`docs/functions/Ftp*.md`) com exemplo real e as pegadinhas da família:
+  a LSP **não faz FTPS/FTPES**; SFTP exige `FtpSetaSFTP` antes, e chave SSH exige `FtpSSH` com a
+  senha do `FtpConexao` **vazia** (formato `.ppk` não é aceito); no `FtpUpload` o arquivo local
+  vem antes do diretório remoto, no `FtpDownload` é o inverso; retorno `0` = falha, com o texto
+  em `FtpUltimoErro`.
+- **Skill `lsp-senior`: seção 📡 de FTP/SFTP** no `SKILL.md`, com a tabela de protocolo suportado
+  e os padrões de upload e de autenticação por chave.
+
+### 🐛 Corrigido
+- **`Sleep` perdia a descrição a cada regeneração do catálogo** — a correção de 1.14.0
+  (parâmetro em **milissegundos**) estava só no `functions.json`, que é gerado. Migrada para o
+  overlay `data/functions-api.json`, junto com os 4 binds `SQL_Definir*`, que também sumiriam na
+  próxima execução do `generate-functions.js`.
+- **`buscar_funcao.py --full` mostrava o campo `code` como "Exemplo"** — `code` é o código da
+  função no ERP (ex: `895`), não um exemplo. Agora o exemplo vem de `docs/functions/<Nome>.md`,
+  o que vale para todas as funções documentadas, não só as curadas à mão.
+
+### 🔧 Interno
+- `generate-functions.js` reconhece o prefixo `Ftp` como categoria própria (`rule`/`sql`/`http`/`ftp`).
+- README da skill reescrito: estrutura atual (6 scripts de consulta, 10 arquivos de `reference/`)
+  e o fluxo de manutenção — função que falta entra em `data/functions-api.json` e **regenera**;
+  editar `functions.json` à mão some na próxima geração.
+
 ## [1.14.0] - 2026-08-13
 
 ### ✨ Adicionado

@@ -1,6 +1,6 @@
 # LSPT Language Support - Guia do Usuário
 
-> Extensão completa para desenvolvimento em **LSP** (Linguagem Senior de Programação) com IntelliSense, syntax highlighting, linter e autocomplete para **647+ funções built-in** documentadas (assinatura, parâmetros, valores de retorno e exemplos) — incluindo as APIs **`SQL_*`** (cursores) e **`Http*`** (requisições).
+> Extensão completa para desenvolvimento em **LSP** (Linguagem Senior de Programação) com IntelliSense, syntax highlighting, linter e autocomplete para **670 funções built-in** documentadas (assinatura, parâmetros, valores de retorno e exemplos) — incluindo as APIs **`SQL_*`** (cursores e bind), **`Http*`** (requisições) e **`Ftp*`** (transferência de arquivos).
 
 ## 🚀 Instalação Rápida
 
@@ -10,7 +10,7 @@ editor (VS Code, Antigravity e outros baseados em Open VSX) e clique em *Install
 
 ### Método 2: Via VSIX
 ```bash
-code --install-extension lspt-language-support-1.7.0.vsix
+code --install-extension lspt-language-support-1.15.0.vsix
 ```
 
 ### Método 3: Compilar do Código Fonte
@@ -18,7 +18,7 @@ code --install-extension lspt-language-support-1.7.0.vsix
 git clone https://github.com/eorgan/LSPSenior.git
 cd LSPSenior
 npm run package
-code --install-extension lspt-language-support-1.7.0.vsix
+code --install-extension lspt-language-support-1.15.0.vsix
 ```
 
 ---
@@ -27,7 +27,7 @@ code --install-extension lspt-language-support-1.7.0.vsix
 
 Resumo dos recursos:
 
-- **Autocomplete** de 647+ funções (regras + APIs `SQL_*` de cursor e `Http*` de requisição), palavras reservadas e variáveis de sistema (com ou sem `Dev.`)
+- **Autocomplete** de 670 funções (regras + APIs `SQL_*` de cursor/bind, `Http*` de requisição e `Ftp*` de transferência de arquivos), palavras reservadas e variáveis de sistema (com ou sem `Dev.`)
 - **Signature help** e **hover** com descrição de parâmetros, valores de retorno e link para a doc oficial
 - **Linter** que avisa sobre as armadilhas da LSP (operação dentro de parâmetro, `Pare`/`Continue` fora de loop, `SQL_AbrirCursor` sem `SQL_FecharCursor`/`SQL_Destruir`)
 - **Outline** das funções do arquivo, **folding** inteligente — funções (preview mostra `Funcao Nome();`), blocos `Se`/`Senao`/`Para`/`Enquanto` (`Inicio`/`Fim` e `{`/`}`) e seções `@-- ... --@` como regiões dobráveis (`Cmd+K Cmd+8`)
@@ -931,8 +931,8 @@ WebService em Modo Local).
 
 Veja [CHANGELOG.md](CHANGELOG.md) para histórico completo de versões.
 
-### Destaques recentes (1.6.x – 1.7.0)
-- 📚 Catálogo ampliado para **647+ funções** (incluindo APIs `SQL_*` de cursor e `Http*` de requisição) com descrição, parâmetros e exemplos
+### Destaques recentes (1.14.0 – 1.15.0)
+- 📚 Catálogo ampliado para **670 funções** — as 19 funções **`Ftp*`** (FTP/SFTP) entraram em 1.15.0 e os 4 binds `SQL_Definir*` em 1.14.0 — com descrição, parâmetros, valores de retorno e exemplos
 - 🩺 **Linter** das armadilhas da LSP; autocomplete geral; Outline; folding
 - 🔗 Hover/signature com valores de retorno e link para a documentação oficial
 

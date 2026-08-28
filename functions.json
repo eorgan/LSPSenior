@@ -10348,7 +10348,8 @@
       {
         "name": "aTempo",
         "type": "Numero",
-        "direction": "in"
+        "direction": "in",
+        "description": "Tempo de pausa em MILISSEGUNDOS (5000 = 5 segundos). A regra fica bloqueada durante a pausa."
       }
     ],
     "description": "Pausa (bloqueia) a execução da regra por aTempo milissegundos. Útil para aguardar entre tentativas de consulta a um WS.",
@@ -22401,114 +22402,6 @@
     "description": "Define o comando SQL (SELECT) que o cursor irá executar. Deve ser chamada antes de SQL_AbrirCursor.",
     "category": "sql"
   },
-  "SQL_DefinirAlfa": {
-    "code": "N/A",
-    "name": "SQL_DefinirAlfa",
-    "signature": "Funcao SQL_DefinirAlfa(Alfa Cursor, Alfa Parametro, Alfa Valor);",
-    "params": [
-      {
-        "name": "Cursor",
-        "type": "Alfa",
-        "direction": "in",
-        "description": "Identificador do cursor."
-      },
-      {
-        "name": "Parametro",
-        "type": "Alfa",
-        "direction": "in",
-        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos (`:xChave` no SQL → \"xChave\" aqui)."
-      },
-      {
-        "name": "Valor",
-        "type": "Alfa",
-        "direction": "in",
-        "description": "Valor Alfa atribuído ao parâmetro."
-      }
-    ],
-    "description": "Atribui valor Alfa a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor. Use bind em vez de concatenar valores no SQL.",
-    "category": "sql"
-  },
-  "SQL_DefinirInteiro": {
-    "code": "N/A",
-    "name": "SQL_DefinirInteiro",
-    "signature": "Funcao SQL_DefinirInteiro(Alfa Cursor, Alfa Parametro, Numero Valor);",
-    "params": [
-      {
-        "name": "Cursor",
-        "type": "Alfa",
-        "direction": "in",
-        "description": "Identificador do cursor."
-      },
-      {
-        "name": "Parametro",
-        "type": "Alfa",
-        "direction": "in",
-        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos."
-      },
-      {
-        "name": "Valor",
-        "type": "Numero",
-        "direction": "in",
-        "description": "Valor inteiro atribuído ao parâmetro."
-      }
-    ],
-    "description": "Atribui valor numérico inteiro a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
-    "category": "sql"
-  },
-  "SQL_DefinirFlutuante": {
-    "code": "N/A",
-    "name": "SQL_DefinirFlutuante",
-    "signature": "Funcao SQL_DefinirFlutuante(Alfa Cursor, Alfa Parametro, Numero Valor);",
-    "params": [
-      {
-        "name": "Cursor",
-        "type": "Alfa",
-        "direction": "in",
-        "description": "Identificador do cursor."
-      },
-      {
-        "name": "Parametro",
-        "type": "Alfa",
-        "direction": "in",
-        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos."
-      },
-      {
-        "name": "Valor",
-        "type": "Numero",
-        "direction": "in",
-        "description": "Valor numérico decimal atribuído ao parâmetro."
-      }
-    ],
-    "description": "Atribui valor numérico decimal a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
-    "category": "sql"
-  },
-  "SQL_DefinirData": {
-    "code": "N/A",
-    "name": "SQL_DefinirData",
-    "signature": "Funcao SQL_DefinirData(Alfa Cursor, Alfa Parametro, Data Valor);",
-    "params": [
-      {
-        "name": "Cursor",
-        "type": "Alfa",
-        "direction": "in",
-        "description": "Identificador do cursor."
-      },
-      {
-        "name": "Parametro",
-        "type": "Alfa",
-        "direction": "in",
-        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos."
-      },
-      {
-        "name": "Valor",
-        "type": "Data",
-        "direction": "in",
-        "description": "Valor Data atribuído ao parâmetro."
-      }
-    ],
-    "description": "Atribui valor Data a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
-    "category": "sql"
-  },
   "SQL_AbrirCursor": {
     "code": "N/A",
     "name": "SQL_AbrirCursor",
@@ -22695,5 +22588,739 @@
     ],
     "description": "Destrói o objeto de cursor liberando a memória associada. Deve ser a última chamada do ciclo, após SQL_FecharCursor.",
     "category": "sql"
+  },
+  "SQL_DefinirAlfa": {
+    "code": "N/A",
+    "name": "SQL_DefinirAlfa",
+    "signature": "Funcao SQL_DefinirAlfa(Alfa Cursor, Alfa Parametro, Alfa Valor);",
+    "params": [
+      {
+        "name": "Cursor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Identificador do cursor."
+      },
+      {
+        "name": "Parametro",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos (`:xChave` no SQL → \"xChave\" aqui)."
+      },
+      {
+        "name": "Valor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Valor Alfa atribuído ao parâmetro."
+      }
+    ],
+    "description": "Atribui valor Alfa a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor. Use bind em vez de concatenar valores no SQL.",
+    "category": "sql"
+  },
+  "SQL_DefinirInteiro": {
+    "code": "N/A",
+    "name": "SQL_DefinirInteiro",
+    "signature": "Funcao SQL_DefinirInteiro(Alfa Cursor, Alfa Parametro, Numero Valor);",
+    "params": [
+      {
+        "name": "Cursor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Identificador do cursor."
+      },
+      {
+        "name": "Parametro",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos."
+      },
+      {
+        "name": "Valor",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Valor inteiro atribuído ao parâmetro."
+      }
+    ],
+    "description": "Atribui valor numérico inteiro a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
+    "category": "sql"
+  },
+  "SQL_DefinirFlutuante": {
+    "code": "N/A",
+    "name": "SQL_DefinirFlutuante",
+    "signature": "Funcao SQL_DefinirFlutuante(Alfa Cursor, Alfa Parametro, Numero Valor);",
+    "params": [
+      {
+        "name": "Cursor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Identificador do cursor."
+      },
+      {
+        "name": "Parametro",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos."
+      },
+      {
+        "name": "Valor",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Valor numérico decimal atribuído ao parâmetro."
+      }
+    ],
+    "description": "Atribui valor numérico decimal a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
+    "category": "sql"
+  },
+  "SQL_DefinirData": {
+    "code": "N/A",
+    "name": "SQL_DefinirData",
+    "signature": "Funcao SQL_DefinirData(Alfa Cursor, Alfa Parametro, Data Valor);",
+    "params": [
+      {
+        "name": "Cursor",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Identificador do cursor."
+      },
+      {
+        "name": "Parametro",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do parâmetro bind usado no comando, SEM os dois-pontos."
+      },
+      {
+        "name": "Valor",
+        "type": "Data",
+        "direction": "in",
+        "description": "Valor Data atribuído ao parâmetro."
+      }
+    ],
+    "description": "Atribui valor Data a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
+    "category": "sql"
+  },
+  "FtpConexao": {
+    "code": "N/A",
+    "name": "FtpConexao",
+    "signature": "Funcao FtpConexao(Alfa end Ftp, Alfa Host, Numero Porta, Alfa Usuario, Alfa Senha);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Retorna a conexão FTP para ser utilizada nas demais funções Ftp*"
+      },
+      {
+        "name": "Host",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "IP ou domínio do servidor FTP. Somente o host: NÃO aceita esquema de URL (ftp://, ftpes://, sftp://)"
+      },
+      {
+        "name": "Porta",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Porta TCP/IP do servidor. Normalmente 21 (FTP) ou 22 (SFTP)"
+      },
+      {
+        "name": "Usuario",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Usuário para autenticação no servidor FTP"
+      },
+      {
+        "name": "Senha",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Senha do usuário. Deve ficar VAZIA (\"\") quando a autenticação for por chave SSH (FtpSSH)"
+      }
+    ],
+    "description": "Configura a conexão com o servidor FTP para ser utilizada nas demais funções. NÃO suporta FTPS/FTPES (TLS implícito ou explícito) — para SFTP (FTP sobre SSH) chame FtpSetaSFTP logo depois. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "returns": [
+      "Numero (por '='): 0 indica falha na conexão; use FtpUltimoErro para o texto do erro."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpconexao.htm",
+    "category": "ftp"
+  },
+  "FtpUpload": {
+    "code": "N/A",
+    "name": "FtpUpload",
+    "signature": "Funcao FtpUpload(Alfa Ftp, Alfa ArquivoLocal, Alfa DiretorioFtp, Alfa ArquivoFtp);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada (obtida em FtpConexao)"
+      },
+      {
+        "name": "ArquivoLocal",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Caminho completo do arquivo local. Por exemplo, C:\\temp\\arquivo.doc"
+      },
+      {
+        "name": "DiretorioFtp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Diretório de destino no FTP. Por exemplo, /arquivos"
+      },
+      {
+        "name": "ArquivoFtp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do arquivo no FTP. Por exemplo, documento.doc"
+      }
+    ],
+    "description": "Copia um arquivo local para um diretório do servidor FTP. ATENÇÃO à ordem dos parâmetros: no Upload o arquivo local vem ANTES do diretório remoto; no FtpDownload é o inverso. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "returns": [
+      "Numero (por '='): 0 = o envio FALHOU; diferente de 0 = sucesso. Em falha, use FtpUltimoErro."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpupload.htm",
+    "category": "ftp"
+  },
+  "FtpDownload": {
+    "code": "N/A",
+    "name": "FtpDownload",
+    "signature": "Funcao FtpDownload(Alfa Ftp, Alfa DiretorioFtp, Alfa ArquivoFtp, Alfa ArquivoLocal);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "DiretorioFtp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Diretório onde está o arquivo no FTP. Por exemplo, /arquivos"
+      },
+      {
+        "name": "ArquivoFtp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do arquivo no FTP. Por exemplo, documento.doc"
+      },
+      {
+        "name": "ArquivoLocal",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Caminho completo do arquivo local de destino. Por exemplo, C:\\temp\\arquivo.doc"
+      }
+    ],
+    "description": "Copia um arquivo do servidor FTP para um diretório local. A ordem dos parâmetros é INVERSA à do FtpUpload (aqui o remoto vem primeiro). Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "returns": [
+      "Numero (por '='): 0 = a cópia FALHOU; diferente de 0 = sucesso. Em falha, use FtpUltimoErro."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpdownload.htm",
+    "category": "ftp"
+  },
+  "FtpUltimoErro": {
+    "code": "N/A",
+    "name": "FtpUltimoErro",
+    "signature": "Funcao FtpUltimoErro(Alfa end Erro);",
+    "params": [
+      {
+        "name": "Erro",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Recebe o texto do erro da última função Ftp* executada, caso ela tenha falhado"
+      }
+    ],
+    "description": "Retorna a mensagem de erro da última operação executada no FTP. NÃO recebe a conexão como parâmetro — é o último erro global, então leia imediatamente após detectar a falha (retorno 0), antes de qualquer outra chamada Ftp*. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "returns": [
+      "Erro: texto da mensagem de erro da última operação FTP que falhou."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpultimoerro.htm",
+    "category": "ftp"
+  },
+  "FtpSetaSFTP": {
+    "code": "N/A",
+    "name": "FtpSetaSFTP",
+    "signature": "Funcao FtpSetaSFTP(Alfa Ftp, Numero Valor);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "Valor",
+        "type": "Numero",
+        "direction": "in",
+        "description": "1 (true) seleciona servidor SFTP; 0 (false) seleciona servidor FTP"
+      }
+    ],
+    "description": "Permite o acesso a servidores SFTP (FTP sobre SSH) através da LSP. Deve ser chamada DEPOIS do FtpConexao e não deve ser usada com servidores FTP convencionais. LIMITAÇÃO: as conexões SFTP só são possíveis sem criptografia adicional — não é permitido combinar com TLS/SSL implícito ou explícito (ou seja, a LSP não faz FTPS/FTPES). No ERP exige versão 5.8.10.105 ou superior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpsetasftp.htm",
+    "category": "ftp"
+  },
+  "FtpSSH": {
+    "code": "N/A",
+    "name": "FtpSSH",
+    "signature": "Funcao FtpSSH(Alfa Ftp, Alfa DiretorioSSH, Alfa SenhaSSH);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Conexão SFTP (obrigatoriamente já marcada com FtpSetaSFTP)"
+      },
+      {
+        "name": "DiretorioSSH",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Localização na máquina onde se encontra a chave SSH privada correspondente"
+      },
+      {
+        "name": "SenhaSSH",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Senha (passphrase) da chave SSH privada; vazio se a chave não tiver senha"
+      }
+    ],
+    "description": "Autentica em servidor SFTP por chave pública/privada SSH. Ordem obrigatória: FtpConexao -> FtpSetaSFTP -> FtpSSH. A senha do FtpConexao deve ficar VAZIA, pois não haverá autenticação por usuário/senha. O formato .ppk (PuTTY Private Key) NÃO é aceito: converta a chave para um padrão compatível, como OpenSSH. Disponível a partir da versão 5.10.4 (ERP) / 6.10.4.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpssh.htm",
+    "category": "ftp"
+  },
+  "FtpModoConexao": {
+    "code": "N/A",
+    "name": "FtpModoConexao",
+    "signature": "Funcao FtpModoConexao(Alfa end Ftp, Numero Modo);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Recebe a conexão e retorna com o modo de conexão informado"
+      },
+      {
+        "name": "Modo",
+        "type": "Numero",
+        "direction": "in",
+        "description": "0 = passivo (padrão, cliente->servidor); 1 = ativo (servidor->cliente)"
+      }
+    ],
+    "description": "Define se a conexão ao servidor FTP é feita no modo passivo ou ativo. O modo passivo (0) é o padrão e o recomendado: a conexão de dados parte do cliente, o que a maioria dos servidores aceita e os firewalls não bloqueiam. No modo ativo (1) o servidor abre a conexão em direção ao cliente, o que costuma ser barrado por firewall. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpmodoconexao.htm",
+    "category": "ftp"
+  },
+  "FtpModoErro": {
+    "code": "N/A",
+    "name": "FtpModoErro",
+    "signature": "Funcao FtpModoErro(Alfa end Ftp, Numero Modo);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Recebe a conexão e retorna configurada com o modo de erro escolhido"
+      },
+      {
+        "name": "Modo",
+        "type": "Numero",
+        "direction": "in",
+        "description": "0 = silencioso (padrão); 1 = mensagem; 2 = exceção"
+      }
+    ],
+    "description": "Configura como o erro de uma operação FTP deve ser retornado. Modo 0 (silencioso, padrão): a regra NÃO é interrompida e as funções devolvem 0 em caso de falha — é o modo que combina com o tratamento por 'Se (vnRet = 0)'. Modo 1: exibe mensagem ao usuário e continua (em ambiente não interativo comporta-se como o modo 0). Modo 2: gera exceção com a mensagem do erro e INTERROMPE a execução da regra. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpmodoerro.htm",
+    "category": "ftp"
+  },
+  "FtpModoTransferencia": {
+    "code": "N/A",
+    "name": "FtpModoTransferencia",
+    "signature": "Funcao FtpModoTransferencia(Alfa end Ftp, Numero Modo);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Recebe a conexão e retorna com o modo de transferência informado"
+      },
+      {
+        "name": "Modo",
+        "type": "Numero",
+        "direction": "in",
+        "description": "0 = binário (padrão); 1 = texto"
+      }
+    ],
+    "description": "Define o modo de transferência dos dados entre servidor e cliente; pode ser alterado a qualquer momento. Modo 0 (binário, padrão): os caracteres trafegam sem nenhuma conversão — use para imagens, vídeos e arquivos compactados. Modo 1 (texto): os caracteres podem ser traduzidos pelo cliente — indicado para arquivos texto quando a codificação difere entre as plataformas. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpmodotransferencia.htm",
+    "category": "ftp"
+  },
+  "FtpProxy": {
+    "code": "N/A",
+    "name": "FtpProxy",
+    "signature": "Funcao FtpProxy(Alfa end Ftp, Numero TipoProxy, Alfa Host, Numero Porta, Alfa Usuario, Alfa Senha);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Conexão estabelecida pelo FtpConexao; retorna configurada com o proxy"
+      },
+      {
+        "name": "TipoProxy",
+        "type": "Numero",
+        "direction": "in",
+        "description": "0 = sem proxy (padrão); 1 = User; 2 = Site; 3 = Open; 4 = Integrado"
+      },
+      {
+        "name": "Host",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "IP ou domínio do proxy"
+      },
+      {
+        "name": "Porta",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Porta TCP/IP do proxy"
+      },
+      {
+        "name": "Usuario",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Usuário para autenticação no proxy"
+      },
+      {
+        "name": "Senha",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Senha do usuário no proxy (vazio quando opcional)"
+      }
+    ],
+    "description": "Configura os parâmetros de proxy para a conexão com o servidor FTP, quando o servidor está protegido por um proxy. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpproxy.htm",
+    "category": "ftp"
+  },
+  "FtpListar": {
+    "code": "N/A",
+    "name": "FtpListar",
+    "signature": "Funcao FtpListar(Alfa Ftp, Alfa Diretorio, Alfa Filtro, Alfa end Lista);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "Diretorio",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Diretório cujos arquivos e subdiretórios serão listados. Por exemplo, /arquivos"
+      },
+      {
+        "name": "Filtro",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Filtro dos itens desejados. Por exemplo, *.zip, *doc*, log*.zip. Vazio traz tudo"
+      },
+      {
+        "name": "Lista",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Retorna a listagem do FTP para uso nas demais funções de lista"
+      }
+    ],
+    "description": "Permite listar os arquivos e diretórios do servidor FTP. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "returns": [
+      "Lista: identificador da listagem, consumido por FtpListaQuantidade / FtpListaItem / FtpListaItemDetalhes / FtpListaItemPermissoes."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistar.htm",
+    "category": "ftp"
+  },
+  "FtpListaQuantidade": {
+    "code": "N/A",
+    "name": "FtpListaQuantidade",
+    "signature": "Funcao FtpListaQuantidade(Alfa Ftp, Alfa Lista, Numero end Quantidade);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "Lista",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A lista a ser utilizada (obtida em FtpListar)"
+      },
+      {
+        "name": "Quantidade",
+        "type": "Numero end",
+        "direction": "out",
+        "description": "Retorna a quantidade de itens da lista"
+      }
+    ],
+    "description": "Retorna a quantidade de itens da lista obtida com FtpListar. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "returns": [
+      "Quantidade: total de itens presentes na lista."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistaquantidade.htm",
+    "category": "ftp"
+  },
+  "FtpListaItem": {
+    "code": "N/A",
+    "name": "FtpListaItem",
+    "signature": "Funcao FtpListaItem(Alfa Ftp, Alfa Lista, Numero Indice, Alfa end Nome, Alfa end Tipo);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "Lista",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A lista a ser utilizada (obtida em FtpListar)"
+      },
+      {
+        "name": "Indice",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Posição do item na lista. O PRIMEIRO item é 1 (não 0)"
+      },
+      {
+        "name": "Nome",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Retorna o nome do item"
+      },
+      {
+        "name": "Tipo",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Retorna o tipo do item: A = arquivo, D = diretório, L = link simbólico"
+      }
+    ],
+    "description": "Obtém o nome e o tipo de um item da lista gerada por FtpListar. A lista é indexada a partir de 1. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "returns": [
+      "Nome: nome do item.",
+      "Tipo: 'A' arquivo, 'D' diretório, 'L' link simbólico."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistaitem.htm",
+    "category": "ftp"
+  },
+  "FtpListaItemDetalhes": {
+    "code": "N/A",
+    "name": "FtpListaItemDetalhes",
+    "signature": "Funcao FtpListaItemDetalhes(Alfa Ftp, Alfa Lista, Numero Indice, Numero end Tamanho, Data end DataModificacao, Numero end HoraModificacao);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "Lista",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A lista a ser utilizada (obtida em FtpListar)"
+      },
+      {
+        "name": "Indice",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Posição do item na lista. O primeiro item é 1"
+      },
+      {
+        "name": "Tamanho",
+        "type": "Numero end",
+        "direction": "out",
+        "description": "Retorna o tamanho do arquivo em bytes; diretórios normalmente retornam 4096"
+      },
+      {
+        "name": "DataModificacao",
+        "type": "Data end",
+        "direction": "out",
+        "description": "Retorna a data de modificação do arquivo ou diretório"
+      },
+      {
+        "name": "HoraModificacao",
+        "type": "Numero end",
+        "direction": "out",
+        "description": "Retorna a hora de modificação do arquivo ou diretório"
+      }
+    ],
+    "description": "Obtém informações adicionais sobre um item da lista, como tamanho, data e hora de modificação. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "returns": [
+      "Tamanho (bytes), DataModificacao (Data) e HoraModificacao (Numero) do item."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistaitemdetalhes.htm",
+    "category": "ftp"
+  },
+  "FtpListaItemPermissoes": {
+    "code": "N/A",
+    "name": "FtpListaItemPermissoes",
+    "signature": "Funcao FtpListaItemPermissoes(Alfa Ftp, Alfa Lista, Numero Indice, Alfa end Proprietario, Alfa end Grupo, Alfa end Permissoes);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "Lista",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A lista a ser utilizada (obtida em FtpListar)"
+      },
+      {
+        "name": "Indice",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Posição do item na lista. O primeiro item é 1"
+      },
+      {
+        "name": "Proprietario",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Retorna o proprietário do item"
+      },
+      {
+        "name": "Grupo",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Retorna o grupo do item"
+      },
+      {
+        "name": "Permissoes",
+        "type": "Alfa end",
+        "direction": "out",
+        "description": "Retorna as permissões de leitura, escrita e execução do item"
+      }
+    ],
+    "description": "Obtém informações sobre as permissões do item no servidor FTP. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "returns": [
+      "Proprietario, Grupo e Permissoes do item no servidor FTP."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistaitempermissoes.htm",
+    "category": "ftp"
+  },
+  "FtpCriarDiretorio": {
+    "code": "N/A",
+    "name": "FtpCriarDiretorio",
+    "signature": "Funcao FtpCriarDiretorio(Alfa Ftp, Alfa DiretorioFtp, Alfa Nome);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "DiretorioFtp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Diretório pai, onde o novo diretório será criado. Por exemplo, /arquivos"
+      },
+      {
+        "name": "Nome",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do novo diretório no FTP. Por exemplo, documentos"
+      }
+    ],
+    "description": "Permite criar um novo diretório no servidor FTP. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpcriardiretorio.htm",
+    "category": "ftp"
+  },
+  "FtpApagarDiretorio": {
+    "code": "N/A",
+    "name": "FtpApagarDiretorio",
+    "signature": "Funcao FtpApagarDiretorio(Alfa Ftp, Alfa DiretorioFtp, Alfa Nome);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "DiretorioFtp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Diretório pai, onde está o diretório a apagar. Por exemplo, /arquivos"
+      },
+      {
+        "name": "Nome",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do diretório a ser apagado. Por exemplo, documentos"
+      }
+    ],
+    "description": "Permite apagar um diretório do servidor FTP, desde que ele NÃO contenha arquivos nem subdiretórios. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpapagardiretorio.htm",
+    "category": "ftp"
+  },
+  "FtpApagarArquivo": {
+    "code": "N/A",
+    "name": "FtpApagarArquivo",
+    "signature": "Funcao FtpApagarArquivo(Alfa Ftp, Alfa DiretorioFtp, Alfa Nome);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "DiretorioFtp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Diretório onde está o arquivo no FTP. Por exemplo, /arquivos"
+      },
+      {
+        "name": "Nome",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome do arquivo no FTP. Por exemplo, documento.doc"
+      }
+    ],
+    "description": "Permite apagar um arquivo do servidor FTP. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpapagararquivo.htm",
+    "category": "ftp"
+  },
+  "FtpRenomear": {
+    "code": "N/A",
+    "name": "FtpRenomear",
+    "signature": "Funcao FtpRenomear(Alfa Ftp, Alfa DiretorioFtp, Alfa Nome, Alfa NovoNome);",
+    "params": [
+      {
+        "name": "Ftp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "A conexão FTP que deve ser utilizada"
+      },
+      {
+        "name": "DiretorioFtp",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Diretório onde está o arquivo/diretório no FTP. Por exemplo, /arquivos"
+      },
+      {
+        "name": "Nome",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome atual do diretório ou arquivo. Por exemplo, documento.doc"
+      },
+      {
+        "name": "NovoNome",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Novo nome do diretório ou arquivo. Por exemplo, documento2.doc"
+      }
+    ],
+    "description": "Permite renomear um diretório ou um arquivo do servidor FTP. Informando um caminho no NovoNome, a função também MOVE o arquivo entre diretórios. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftprenomear.htm",
+    "category": "ftp"
   }
 }

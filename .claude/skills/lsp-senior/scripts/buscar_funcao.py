@@ -3,19 +3,21 @@
 
 Uso:
     python3 buscar_funcao.py <termo>            # busca por nome (substring, case-insensitive)
-    python3 buscar_funcao.py <termo> --full     # inclui descrição completa e código de exemplo
+    python3 buscar_funcao.py <termo> --full     # inclui descrição completa e exemplo de uso
     python3 buscar_funcao.py --listar SQL_      # lista nomes que contêm o prefixo, sem detalhe
 
 Sempre confira a coluna `direction` de cada parâmetro:
     in  = você fornece o valor
     out = parâmetro de saída (marcado com `End`/`end`) — é por aqui que a função "retorna".
 
-O functions.json cobre ~640 funções, INCLUINDO as APIs SQL_* (cursores, categoria sql)
-e Http* (requisições, categoria http). Use este script para confirmar a assinatura de
-qualquer uma; reference/quick-reference.md traz os padrões de uso prontos.
+O functions.json cobre 670 funções, INCLUINDO as APIs SQL_* (cursores, categoria sql),
+Http* (requisições, categoria http) e Ftp* (transferência de arquivos, categoria ftp).
+Use este script para confirmar a assinatura de qualquer uma; reference/quick-reference.md
+traz os padrões de uso prontos.
 """
 import json
 import os
+import re
 import sys
 
 
@@ -34,6 +36,27 @@ def achar_catalogo():
     for c in candidatos:
         if os.path.isfile(c):
             return os.path.abspath(c)
+    return None
+
+
+def exemplo_do_doc(catalogo, nome):
+    """Exemplo de uso da função, lido de docs/functions/<Nome>.md (bundle da skill).
+
+    O campo `code` do catálogo é o *código* da função no ERP (ex: 895), não um exemplo;
+    os exemplos vivem nas docs, ao lado do catálogo ou na pasta da skill.
+    """
+    base = os.path.dirname(catalogo)
+    here = os.path.dirname(os.path.abspath(__file__))
+    for docs in (os.path.join(base, "docs", "functions"),
+                 os.path.join(here, "..", "docs", "functions")):
+        caminho = os.path.join(docs, f"{nome}.md")
+        if not os.path.isfile(caminho):
+            continue
+        with open(caminho, encoding="utf-8") as f:
+            texto = f.read()
+        m = re.search(r"## Exemplo de Uso\s*\n+```lspt\n(.*?)\n```", texto, re.S)
+        if m and "Adicione exemplo de uso aqui" not in m.group(1):
+            return m.group(1)
     return None
 
 
@@ -61,7 +84,7 @@ def main(argv):
     nomes = sorted(k for k in dados if termo in k.lower())
     if not nomes:
         print(f"Nenhuma função contém '{termos[0]}'. (catálogo: {caminho})")
-        print("Dica: SQL_* e Http* já estão no functions.json; veja também reference/quick-reference.md para padrões prontos.")
+        print("Dica: SQL_*, Http* e Ftp* já estão no functions.json; veja também reference/quick-reference.md para padrões prontos.")
         return 0
 
     if listar:
@@ -90,10 +113,12 @@ def main(argv):
             if not full and len(desc) > 280:
                 desc = desc[:280] + " […] (use --full)"
             print(f"  Descrição: {desc}")
-        if full and fn.get("code"):
-            print("  Exemplo:")
-            for linha in str(fn["code"]).splitlines():
-                print(f"    {linha}")
+        if full:
+            exemplo = exemplo_do_doc(caminho, n)
+            if exemplo:
+                print("  Exemplo:")
+                for linha in exemplo.splitlines():
+                    print(f"    {linha}")
     print("=" * 72)
     print(f"{len(nomes)} resultado(s). Catálogo: {caminho}")
     return 0

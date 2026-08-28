@@ -55,10 +55,11 @@ function loadOverlay() {
    return merged;
 }
 
-/** Categoria da função derivada do prefixo do nome: SQL_* → sql, Http<Maiúscula> → http, senão rule. */
+/** Categoria da função derivada do prefixo do nome: SQL_* → sql, Http<Maiúscula> → http, Ftp<Maiúscula> → ftp, senão rule. */
 function categoryOf(name) {
    if (/^SQL_/i.test(name)) return 'sql';
    if (/^Http[A-Z]/.test(name)) return 'http';
+   if (/^Ftp[A-Z]/.test(name)) return 'ftp';
    return 'rule';
 }
 
@@ -418,8 +419,8 @@ function main() {
       added++;
    }
 
-   // Categoriza cada função pelo prefixo do nome (rule/sql/http).
-   const catCount = { rule: 0, sql: 0, http: 0 };
+   // Categoriza cada função pelo prefixo do nome (rule/sql/http/ftp).
+   const catCount = { rule: 0, sql: 0, http: 0, ftp: 0 };
    for (const fn of Object.values(functions)) {
       fn.category = categoryOf(fn.name);
       catCount[fn.category]++;
@@ -430,7 +431,7 @@ function main() {
 
    console.log(`\n✅ Processamento completo!`);
    console.log(`   Total de funções: ${count + added} (CSV: ${count} + novas dos manuais: ${added})`);
-   console.log(`   Categorias: rule=${catCount.rule}, sql=${catCount.sql}, http=${catCount.http}`);
+   console.log(`   Categorias: rule=${catCount.rule}, sql=${catCount.sql}, http=${catCount.http}, ftp=${catCount.ftp}`);
    console.log(`   Enriquecidas pelo manual: ${enriched}`);
    console.log(`   Docs .md preenchidos com conteúdo real: ${docsRich}`);
    console.log(`   Arquivo gerado: ${OUTPUT_JSON}`);

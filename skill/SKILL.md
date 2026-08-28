@@ -3,7 +3,7 @@ name: lsp-senior
 description: >-
   Use ao escrever, editar ou revisar código LSP (Linguagem Senior de Programação) —
   arquivos .lsp/.lspt do ERP Senior: regras, cursores SQL, web services e relatórios.
-  Cobre o catálogo de 651 funções built-in, incluindo as APIs SQL_* e Http*.
+  Cobre o catálogo de 670 funções built-in, incluindo as APIs SQL_*, Http* e Ftp*.
 ---
 
 # Programando em LSP (Linguagem Senior de Programação) com segurança
@@ -86,8 +86,9 @@ case-insensitive, então compare nomes ignorando a caixa.
 
 Sempre cheque a `direction` de cada parâmetro: `in` = você fornece; `out` (`end`) = recebe o resultado.
 
-> ✅ O `functions.json` cobre **651 funções**, incluindo as APIs `SQL_*` (cursores,
-> categoria `sql`) e `Http*` (requisições, categoria `http`). Consulte qualquer uma com
+> ✅ O `functions.json` cobre **670 funções**, incluindo as APIs `SQL_*` (cursores,
+> categoria `sql`), `Http*` (requisições, categoria `http`) e `Ftp*` (transferência de
+> arquivos, categoria `ftp` — ver seção 📡). Consulte qualquer uma com
 > `python3 scripts/buscar_funcao.py <Nome>`; `reference/quick-reference.md` traz os padrões
 > de uso prontos (extraídos dos exemplos reais `.lspt`).
 
@@ -491,6 +492,69 @@ teste `vaPerMit = "S"`.
 SGU** a consultar `E099USU` por SQL — sobretudo onde não há flag nativa (ex.: produto não tem
 permissão nativa de ativação, ao contrário de fornecedor=`E099USU.CprAfo` e cliente=`E099USU.VenAcl`).
 
+## 📡 Transferência de arquivos por FTP/SFTP (família `Ftp*`)
+
+19 funções nativas, categoria `ftp` no `functions.json`
+(`python3 scripts/buscar_funcao.py --listar Ftp`). Antes de escrever, decida o protocolo —
+é aqui que a maioria das integrações trava:
+
+| Protocolo | Suporte na LSP |
+| --- | --- |
+| **FTP** simples (21) | ✅ `FtpConexao` direto |
+| **SFTP** — FTP sobre SSH (22) | ✅ `FtpSetaSFTP(x, 1)`; chave SSH com `FtpSSH` |
+| **FTPS / FTPES** — FTP sobre TLS | ❌ **não existe** na LSP |
+
+**Decisão:** servidor exige TLS implícito ou explícito? A família nativa **não resolve** —
+use cliente externo (WinSCP, `ftpsenior.exe`) via `ExecProg`. Não perca tempo tentando
+passar `ftpes://` no `Host`.
+
+**Padrão de envio com tratamento de erro:**
+
+```lsp
+Definir Alfa   vaFtp;
+Definir Alfa   vaErro;
+Definir Alfa   vaMsg;
+Definir Numero vnRet;
+
+FtpConexao(vaFtp, "ftp.servidor.com.br", 21, "usuario", "senha");   @ host puro, sem esquema @
+FtpModoConexao(vaFtp, 0);          @ 0 passivo (padrao) / 1 ativo @
+FtpModoTransferencia(vaFtp, 0);    @ 0 binario (padrao) / 1 texto @
+
+vnRet = FtpUpload(vaFtp, "C:\\temp\\doc.txt", "/arquivos", "doc.txt");   @ retorna por = @
+
+Se (vnRet = 0)
+   {
+      FtpUltimoErro(vaErro);                       @ leia JA: e o ultimo erro global @
+      vaMsg = "Falha no envio. Erro: " + vaErro;   @ concatena ANTES @
+      Mensagem(Retorna, vaMsg);
+   }
+```
+
+**SFTP com chave SSH** — a ordem é obrigatória e a senha do `FtpConexao` fica **vazia**:
+
+```lsp
+FtpConexao(vaFtp, "sftp.servidor.com.br", 22, "usuario", "");
+FtpSetaSFTP(vaFtp, 1);
+FtpSSH(vaFtp, "C:/keys/id_rsa", "");   @ chave OpenSSH; .ppk do PuTTY NAO e aceito @
+```
+
+**Armadilhas (todas confirmadas na doc oficial):**
+
+- `FtpConexao`, `FtpUpload` e `FtpDownload` **retornam por `=`** (exceção à regra 2 da LSP):
+  `0` = falhou. As demais não retornam nada útil — cheque o efeito.
+- `FtpUltimoErro(Alfa end Erro)` **não recebe a conexão**: é o erro global da última
+  operação. Leia imediatamente após o `0`, antes de qualquer outra chamada `Ftp*`.
+- **A ordem dos parâmetros é invertida entre Upload e Download:**
+  `FtpUpload(Ftp, ArquivoLocal, DiretorioFtp, ArquivoFtp)` ×
+  `FtpDownload(Ftp, DiretorioFtp, ArquivoFtp, ArquivoLocal)`.
+- `Host` aceita **só domínio ou IP** — nada de `ftp://`, `sftp://`, `ftpes://`.
+- `FtpSetaSFTP` vai **depois** do `FtpConexao` (ERP 5.8.10.105+); `FtpSSH` exige 5.10.4+.
+- Listagem (`FtpListar` → `FtpListaQuantidade` → `FtpListaItem`) é indexada **a partir de 1**;
+  `Tipo` volta `"A"` arquivo, `"D"` diretório, `"L"` link.
+- `FtpModoErro(x, 2)` transforma erro em **exceção que interrompe a regra**; o padrão `0`
+  (silencioso) é o que combina com o `Se (vnRet = 0)`.
+- **Não existe função de desconectar** — a conexão é um handle `Alfa` que morre com a regra.
+
 ## 🗃️ Dicionário de Tabelas e Campos (quando precisar escrever SELECTs)
 
 O ERP Senior usa tabelas Oracle nomeadas no padrão `XNNNYYY` (ex.: `E070EMP`, `E028SNF`).
@@ -702,6 +766,7 @@ acesso ao banco; o terceiro custa dois.
 - [ ] Arquivos abertos com `Abrir` têm `Fechar` correspondente.
 - [ ] Cadastro (cliente/fornecedor/produto…) criado/atualizado via **WS interno** (`interno.<pacote>.Gravar…`), não por `INSERT` cru, quando existe porta de escrita.
 - [ ] Regra acoplada a um **Identificador de Regra** existente: variáveis de **SAÍDA** (`Retorna Valor = S`) atribuídas, **ENTRADA** apenas lidas; grades `<9>` numeradas a partir de 1 sem pular (confira em `scripts/buscar_identificador.py <código>`).
+- [ ] Transferência de arquivo: protocolo do servidor confere com o que a LSP faz (FTP/SFTP **sim**, FTPS/FTPES **não** — ver 📡); `FtpUpload`/`FtpDownload` com retorno testado por `= 0` e `FtpUltimoErro` lido em seguida.
 - [ ] Nomes de tabelas e campos em SELECTs verificados contra o dicionário (`scripts/buscar_tabela.py`;
       tabelas `N*` do eDocs em `scripts/buscar_tabela_edocs.py`).
 - [ ] SQL com sintaxe nativa (`ROWNUM`/`TOP`/`LIMIT`, `NVL`/`ISNULL`…): dialeto **detectado em execução** (`RetornaValorCFG` da chave `db_kind` → `RowNum` → sonda); `db_kind` vem como `oracle_19`/`mssql_2019`, então case o **prefixo** (`ORACLE`/`MSSQL`) com `PosicaoStr` após `ConverteParaMaiusculo` — nunca igualdade exata — e mantenha fallback quando nenhum ramo casar.

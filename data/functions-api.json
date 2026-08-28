@@ -45,7 +45,10 @@
     "params": {
       "Cursor": "Identificador do cursor aberto."
     },
-    "returns": ["0 = ainda há registro corrente.", "1 = fim do resultado (sem mais registros)."]
+    "returns": [
+      "0 = ainda há registro corrente.",
+      "1 = fim do resultado (sem mais registros)."
+    ]
   },
   "SQL_Proximo": {
     "signature": "Funcao SQL_Proximo(Alfa Cursor);",
@@ -119,5 +122,300 @@
       "Objeto": "Objeto HTTP criado por HttpObjeto no qual a configuração será aplicada."
     },
     "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/requisicoes-http/http-desabilita-cookies.htm"
+  },
+  "SQL_DefinirAlfa": {
+    "signature": "Funcao SQL_DefinirAlfa(Alfa Cursor, Alfa Parametro, Alfa Valor);",
+    "description": "Atribui valor Alfa a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor. Use bind em vez de concatenar valores no SQL.",
+    "params": {
+      "Cursor": "Identificador do cursor.",
+      "Parametro": "Nome do parâmetro bind usado no comando, SEM os dois-pontos (`:xChave` no SQL → \"xChave\" aqui).",
+      "Valor": "Valor Alfa atribuído ao parâmetro."
+    },
+    "example": "Definir Alfa vaCursor;\nDefinir Alfa vaValor;\n\nSQL_Criar(vaCursor);\nSQL_UsarSqlSenior2(vaCursor, 0);\nSQL_UsarAbrangencia(vaCursor, 0);\nSQL_DefinirComando(vaCursor, \"SELECT NOMCLI FROM E085CLI WHERE CHAVE = :xChave\");\nSQL_DefinirAlfa(vaCursor, \"xChave\", vaValor);\nSQL_AbrirCursor(vaCursor);"
+  },
+  "SQL_DefinirInteiro": {
+    "signature": "Funcao SQL_DefinirInteiro(Alfa Cursor, Alfa Parametro, Numero Valor);",
+    "description": "Atribui valor numérico inteiro a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
+    "params": {
+      "Cursor": "Identificador do cursor.",
+      "Parametro": "Nome do parâmetro bind usado no comando, SEM os dois-pontos.",
+      "Valor": "Valor inteiro atribuído ao parâmetro."
+    },
+    "example": "Definir Alfa vaCursor;\nDefinir Numero vnValor;\n\nSQL_Criar(vaCursor);\nSQL_UsarSqlSenior2(vaCursor, 0);\nSQL_UsarAbrangencia(vaCursor, 0);\nSQL_DefinirComando(vaCursor, \"SELECT NOMCLI FROM E085CLI WHERE CHAVE = :xChave\");\nSQL_DefinirInteiro(vaCursor, \"xChave\", vnValor);\nSQL_AbrirCursor(vaCursor);"
+  },
+  "SQL_DefinirFlutuante": {
+    "signature": "Funcao SQL_DefinirFlutuante(Alfa Cursor, Alfa Parametro, Numero Valor);",
+    "description": "Atribui valor numérico decimal a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
+    "params": {
+      "Cursor": "Identificador do cursor.",
+      "Parametro": "Nome do parâmetro bind usado no comando, SEM os dois-pontos.",
+      "Valor": "Valor numérico decimal atribuído ao parâmetro."
+    },
+    "example": "Definir Alfa vaCursor;\nDefinir Numero vnValor;\n\nSQL_Criar(vaCursor);\nSQL_UsarSqlSenior2(vaCursor, 0);\nSQL_UsarAbrangencia(vaCursor, 0);\nSQL_DefinirComando(vaCursor, \"SELECT NOMCLI FROM E085CLI WHERE CHAVE = :xChave\");\nSQL_DefinirFlutuante(vaCursor, \"xChave\", vnValor);\nSQL_AbrirCursor(vaCursor);"
+  },
+  "SQL_DefinirData": {
+    "signature": "Funcao SQL_DefinirData(Alfa Cursor, Alfa Parametro, Data Valor);",
+    "description": "Atribui valor Data a um parâmetro bind (`:nome`) do comando. Chamar depois de SQL_DefinirComando e antes de SQL_AbrirCursor.",
+    "params": {
+      "Cursor": "Identificador do cursor.",
+      "Parametro": "Nome do parâmetro bind usado no comando, SEM os dois-pontos.",
+      "Valor": "Valor Data atribuído ao parâmetro."
+    },
+    "example": "Definir Alfa vaCursor;\nDefinir Data vdValor;\n\nSQL_Criar(vaCursor);\nSQL_UsarSqlSenior2(vaCursor, 0);\nSQL_UsarAbrangencia(vaCursor, 0);\nSQL_DefinirComando(vaCursor, \"SELECT NOMCLI FROM E085CLI WHERE CHAVE = :xChave\");\nSQL_DefinirData(vaCursor, \"xChave\", vdValor);\nSQL_AbrirCursor(vaCursor);"
+  },
+  "FtpConexao": {
+    "signature": "Funcao FtpConexao(Alfa end Ftp, Alfa Host, Numero Porta, Alfa Usuario, Alfa Senha);",
+    "description": "Configura a conexão com o servidor FTP para ser utilizada nas demais funções. NÃO suporta FTPS/FTPES (TLS implícito ou explícito) — para SFTP (FTP sobre SSH) chame FtpSetaSFTP logo depois. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "Retorna a conexão FTP para ser utilizada nas demais funções Ftp*",
+      "Host": "IP ou domínio do servidor FTP. Somente o host: NÃO aceita esquema de URL (ftp://, ftpes://, sftp://)",
+      "Porta": "Porta TCP/IP do servidor. Normalmente 21 (FTP) ou 22 (SFTP)",
+      "Usuario": "Usuário para autenticação no servidor FTP",
+      "Senha": "Senha do usuário. Deve ficar VAZIA (\"\") quando a autenticação for por chave SSH (FtpSSH)"
+    },
+    "returns": [
+      "Numero (por '='): 0 indica falha na conexão; use FtpUltimoErro para o texto do erro."
+    ],
+    "example": "Definir Alfa   vaFtp;\nDefinir Numero vnRet;\nDefinir Alfa   vaErro;\n\nvnRet = FtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nSe (vnRet = 0)\n   {\n      FtpUltimoErro(vaErro);\n      Mensagem(Retorna, vaErro);\n   }",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpconexao.htm"
+  },
+  "FtpUpload": {
+    "signature": "Funcao FtpUpload(Alfa Ftp, Alfa ArquivoLocal, Alfa DiretorioFtp, Alfa ArquivoFtp);",
+    "description": "Copia um arquivo local para um diretório do servidor FTP. ATENÇÃO à ordem dos parâmetros: no Upload o arquivo local vem ANTES do diretório remoto; no FtpDownload é o inverso. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada (obtida em FtpConexao)",
+      "ArquivoLocal": "Caminho completo do arquivo local. Por exemplo, C:\\temp\\arquivo.doc",
+      "DiretorioFtp": "Diretório de destino no FTP. Por exemplo, /arquivos",
+      "ArquivoFtp": "Nome do arquivo no FTP. Por exemplo, documento.doc"
+    },
+    "returns": [
+      "Numero (por '='): 0 = o envio FALHOU; diferente de 0 = sucesso. Em falha, use FtpUltimoErro."
+    ],
+    "example": "Definir Alfa   vaFtp;\nDefinir Numero vnRet;\nDefinir Alfa   vaErro;\nDefinir Alfa   vaMsg;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nvnRet = FtpUpload(vaFtp, \"C:\\\\temp\\\\documento.doc\", \"/arquivos\", \"documento.doc\");\n\nSe (vnRet = 0)\n   {\n      FtpUltimoErro(vaErro);\n      vaMsg = \"Nao foi possivel enviar o arquivo. Erro: \" + vaErro;\n      Mensagem(Retorna, vaMsg);\n   }",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpupload.htm"
+  },
+  "FtpDownload": {
+    "signature": "Funcao FtpDownload(Alfa Ftp, Alfa DiretorioFtp, Alfa ArquivoFtp, Alfa ArquivoLocal);",
+    "description": "Copia um arquivo do servidor FTP para um diretório local. A ordem dos parâmetros é INVERSA à do FtpUpload (aqui o remoto vem primeiro). Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "DiretorioFtp": "Diretório onde está o arquivo no FTP. Por exemplo, /arquivos",
+      "ArquivoFtp": "Nome do arquivo no FTP. Por exemplo, documento.doc",
+      "ArquivoLocal": "Caminho completo do arquivo local de destino. Por exemplo, C:\\temp\\arquivo.doc"
+    },
+    "returns": [
+      "Numero (por '='): 0 = a cópia FALHOU; diferente de 0 = sucesso. Em falha, use FtpUltimoErro."
+    ],
+    "example": "Definir Alfa   vaFtp;\nDefinir Numero vnRet;\nDefinir Alfa   vaErro;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nvnRet = FtpDownload(vaFtp, \"/arquivos\", \"documento.doc\", \"C:\\\\temp\\\\documento.doc\");\n\nSe (vnRet = 0)\n   {\n      FtpUltimoErro(vaErro);\n      Mensagem(Retorna, vaErro);\n   }",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpdownload.htm"
+  },
+  "FtpUltimoErro": {
+    "signature": "Funcao FtpUltimoErro(Alfa end Erro);",
+    "description": "Retorna a mensagem de erro da última operação executada no FTP. NÃO recebe a conexão como parâmetro — é o último erro global, então leia imediatamente após detectar a falha (retorno 0), antes de qualquer outra chamada Ftp*. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Erro": "Recebe o texto do erro da última função Ftp* executada, caso ela tenha falhado"
+    },
+    "returns": [
+      "Erro: texto da mensagem de erro da última operação FTP que falhou."
+    ],
+    "example": "Definir Alfa   vaFtp;\nDefinir Numero vnRet;\nDefinir Alfa   vaErro;\n\nvnRet = FtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\n\nSe (vnRet = 0)\n   {\n      FtpUltimoErro(vaErro);\n      Mensagem(Retorna, vaErro);\n   }",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpultimoerro.htm"
+  },
+  "FtpSetaSFTP": {
+    "signature": "Funcao FtpSetaSFTP(Alfa Ftp, Numero Valor);",
+    "description": "Permite o acesso a servidores SFTP (FTP sobre SSH) através da LSP. Deve ser chamada DEPOIS do FtpConexao e não deve ser usada com servidores FTP convencionais. LIMITAÇÃO: as conexões SFTP só são possíveis sem criptografia adicional — não é permitido combinar com TLS/SSL implícito ou explícito (ou seja, a LSP não faz FTPS/FTPES). No ERP exige versão 5.8.10.105 ou superior.",
+    "params": {
+      "Ftp": "Conexão FTP que deve ser utilizada",
+      "Valor": "1 (true) seleciona servidor SFTP; 0 (false) seleciona servidor FTP"
+    },
+    "example": "Definir Alfa   vaFtp;\nDefinir Numero vnRet;\n\nFtpConexao(vaFtp, \"s_ftp.servidor.com.br\", 22, \"usuario\", \"senha\");\nFtpSetaSFTP(vaFtp, 1);\nvnRet = FtpDownload(vaFtp, \"/\", \"upload.txt\", \"C:\\\\temp\\\\upload.txt\");",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpsetasftp.htm"
+  },
+  "FtpSSH": {
+    "signature": "Funcao FtpSSH(Alfa Ftp, Alfa DiretorioSSH, Alfa SenhaSSH);",
+    "description": "Autentica em servidor SFTP por chave pública/privada SSH. Ordem obrigatória: FtpConexao -> FtpSetaSFTP -> FtpSSH. A senha do FtpConexao deve ficar VAZIA, pois não haverá autenticação por usuário/senha. O formato .ppk (PuTTY Private Key) NÃO é aceito: converta a chave para um padrão compatível, como OpenSSH. Disponível a partir da versão 5.10.4 (ERP) / 6.10.4.",
+    "params": {
+      "Ftp": "Conexão SFTP (obrigatoriamente já marcada com FtpSetaSFTP)",
+      "DiretorioSSH": "Localização na máquina onde se encontra a chave SSH privada correspondente",
+      "SenhaSSH": "Senha (passphrase) da chave SSH privada; vazio se a chave não tiver senha"
+    },
+    "example": "Definir Alfa vaFtp;\n\nFtpConexao(vaFtp, \"localhost\", 22, \"ftp\", \"\");   @ senha VAZIA: autentica por chave @\nFtpSetaSFTP(vaFtp, 1);\nFtpSSH(vaFtp, \"C:/keys/key\", \"\");                @ chave privada em formato OpenSSH @\nFtpCriarDiretorio(vaFtp, \"\", \"documentos\");",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpssh.htm"
+  },
+  "FtpModoConexao": {
+    "signature": "Funcao FtpModoConexao(Alfa end Ftp, Numero Modo);",
+    "description": "Define se a conexão ao servidor FTP é feita no modo passivo ou ativo. O modo passivo (0) é o padrão e o recomendado: a conexão de dados parte do cliente, o que a maioria dos servidores aceita e os firewalls não bloqueiam. No modo ativo (1) o servidor abre a conexão em direção ao cliente, o que costuma ser barrado por firewall. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "Recebe a conexão e retorna com o modo de conexão informado",
+      "Modo": "0 = passivo (padrão, cliente->servidor); 1 = ativo (servidor->cliente)"
+    },
+    "example": "Definir Alfa vaFtp;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpModoConexao(vaFtp, 1);   @ modo ativo @\nFtpModoConexao(vaFtp, 0);   @ volta ao modo passivo (padrao) @",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpmodoconexao.htm"
+  },
+  "FtpModoErro": {
+    "signature": "Funcao FtpModoErro(Alfa end Ftp, Numero Modo);",
+    "description": "Configura como o erro de uma operação FTP deve ser retornado. Modo 0 (silencioso, padrão): a regra NÃO é interrompida e as funções devolvem 0 em caso de falha — é o modo que combina com o tratamento por 'Se (vnRet = 0)'. Modo 1: exibe mensagem ao usuário e continua (em ambiente não interativo comporta-se como o modo 0). Modo 2: gera exceção com a mensagem do erro e INTERROMPE a execução da regra. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "Recebe a conexão e retorna configurada com o modo de erro escolhido",
+      "Modo": "0 = silencioso (padrão); 1 = mensagem; 2 = exceção"
+    },
+    "example": "Definir Alfa vaFtp;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpModoErro(vaFtp, 1);   @ passa a exibir mensagem ao usuario em caso de erro @",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpmodoerro.htm"
+  },
+  "FtpModoTransferencia": {
+    "signature": "Funcao FtpModoTransferencia(Alfa end Ftp, Numero Modo);",
+    "description": "Define o modo de transferência dos dados entre servidor e cliente; pode ser alterado a qualquer momento. Modo 0 (binário, padrão): os caracteres trafegam sem nenhuma conversão — use para imagens, vídeos e arquivos compactados. Modo 1 (texto): os caracteres podem ser traduzidos pelo cliente — indicado para arquivos texto quando a codificação difere entre as plataformas. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "Recebe a conexão e retorna com o modo de transferência informado",
+      "Modo": "0 = binário (padrão); 1 = texto"
+    },
+    "example": "Definir Alfa vaFtp;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpModoTransferencia(vaFtp, 1);   @ transferencia em modo texto @",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpmodotransferencia.htm"
+  },
+  "FtpProxy": {
+    "signature": "Funcao FtpProxy(Alfa end Ftp, Numero TipoProxy, Alfa Host, Numero Porta, Alfa Usuario, Alfa Senha);",
+    "description": "Configura os parâmetros de proxy para a conexão com o servidor FTP, quando o servidor está protegido por um proxy. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "Conexão estabelecida pelo FtpConexao; retorna configurada com o proxy",
+      "TipoProxy": "0 = sem proxy (padrão); 1 = User; 2 = Site; 3 = Open; 4 = Integrado",
+      "Host": "IP ou domínio do proxy",
+      "Porta": "Porta TCP/IP do proxy",
+      "Usuario": "Usuário para autenticação no proxy",
+      "Senha": "Senha do usuário no proxy (vazio quando opcional)"
+    },
+    "example": "Definir Alfa vaFtp;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpProxy(vaFtp, 1, \"proxy.servidor.com.br\", 3128, \"usuarioproxy\", \"senhaproxy\");",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpproxy.htm"
+  },
+  "FtpListar": {
+    "signature": "Funcao FtpListar(Alfa Ftp, Alfa Diretorio, Alfa Filtro, Alfa end Lista);",
+    "description": "Permite listar os arquivos e diretórios do servidor FTP. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "Diretorio": "Diretório cujos arquivos e subdiretórios serão listados. Por exemplo, /arquivos",
+      "Filtro": "Filtro dos itens desejados. Por exemplo, *.zip, *doc*, log*.zip. Vazio traz tudo",
+      "Lista": "Retorna a listagem do FTP para uso nas demais funções de lista"
+    },
+    "returns": [
+      "Lista: identificador da listagem, consumido por FtpListaQuantidade / FtpListaItem / FtpListaItemDetalhes / FtpListaItemPermissoes."
+    ],
+    "example": "Definir Alfa vaFtp;\nDefinir Alfa vaLista;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpListar(vaFtp, \"/arquivos\", \"*.zip\", vaLista);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistar.htm"
+  },
+  "FtpListaQuantidade": {
+    "signature": "Funcao FtpListaQuantidade(Alfa Ftp, Alfa Lista, Numero end Quantidade);",
+    "description": "Retorna a quantidade de itens da lista obtida com FtpListar. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "Lista": "A lista a ser utilizada (obtida em FtpListar)",
+      "Quantidade": "Retorna a quantidade de itens da lista"
+    },
+    "returns": [
+      "Quantidade: total de itens presentes na lista."
+    ],
+    "example": "Definir Alfa   vaFtp;\nDefinir Alfa   vaLista;\nDefinir Numero vnQtde;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpListar(vaFtp, \"/arquivos\", \"*.zip\", vaLista);\nFtpListaQuantidade(vaFtp, vaLista, vnQtde);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistaquantidade.htm"
+  },
+  "FtpListaItem": {
+    "signature": "Funcao FtpListaItem(Alfa Ftp, Alfa Lista, Numero Indice, Alfa end Nome, Alfa end Tipo);",
+    "description": "Obtém o nome e o tipo de um item da lista gerada por FtpListar. A lista é indexada a partir de 1. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "Lista": "A lista a ser utilizada (obtida em FtpListar)",
+      "Indice": "Posição do item na lista. O PRIMEIRO item é 1 (não 0)",
+      "Nome": "Retorna o nome do item",
+      "Tipo": "Retorna o tipo do item: A = arquivo, D = diretório, L = link simbólico"
+    },
+    "returns": [
+      "Nome: nome do item.",
+      "Tipo: 'A' arquivo, 'D' diretório, 'L' link simbólico."
+    ],
+    "example": "Definir Alfa   vaFtp;\nDefinir Alfa   vaLista;\nDefinir Alfa   vaNome;\nDefinir Alfa   vaTipo;\nDefinir Alfa   vaMsg;\nDefinir Numero vnQtde;\nDefinir Numero vnIndice;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpListar(vaFtp, \"/arquivos\", \"\", vaLista);\nFtpListaQuantidade(vaFtp, vaLista, vnQtde);\n\nvnIndice = 1;\nEnquanto (vnIndice <= vnQtde)\n   {\n      FtpListaItem(vaFtp, vaLista, vnIndice, vaNome, vaTipo);\n      Se (vaTipo = \"A\")\n         {\n            vaMsg = \"Arquivo: \" + vaNome;   @ concatena ANTES de chamar @\n            Mensagem(Retorna, vaMsg);\n         }\n      vnIndice = vnIndice + 1;\n   }",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistaitem.htm"
+  },
+  "FtpListaItemDetalhes": {
+    "signature": "Funcao FtpListaItemDetalhes(Alfa Ftp, Alfa Lista, Numero Indice, Numero end Tamanho, Data end DataModificacao, Numero end HoraModificacao);",
+    "description": "Obtém informações adicionais sobre um item da lista, como tamanho, data e hora de modificação. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "Lista": "A lista a ser utilizada (obtida em FtpListar)",
+      "Indice": "Posição do item na lista. O primeiro item é 1",
+      "Tamanho": "Retorna o tamanho do arquivo em bytes; diretórios normalmente retornam 4096",
+      "DataModificacao": "Retorna a data de modificação do arquivo ou diretório",
+      "HoraModificacao": "Retorna a hora de modificação do arquivo ou diretório"
+    },
+    "returns": [
+      "Tamanho (bytes), DataModificacao (Data) e HoraModificacao (Numero) do item."
+    ],
+    "example": "Definir Alfa   vaFtp;\nDefinir Alfa   vaLista;\nDefinir Numero vnTamanho;\nDefinir Data   vdModific;\nDefinir Numero vnHoraMod;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpListar(vaFtp, \"/arquivos\", \"\", vaLista);\nFtpListaItemDetalhes(vaFtp, vaLista, 1, vnTamanho, vdModific, vnHoraMod);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistaitemdetalhes.htm"
+  },
+  "FtpListaItemPermissoes": {
+    "signature": "Funcao FtpListaItemPermissoes(Alfa Ftp, Alfa Lista, Numero Indice, Alfa end Proprietario, Alfa end Grupo, Alfa end Permissoes);",
+    "description": "Obtém informações sobre as permissões do item no servidor FTP. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "Lista": "A lista a ser utilizada (obtida em FtpListar)",
+      "Indice": "Posição do item na lista. O primeiro item é 1",
+      "Proprietario": "Retorna o proprietário do item",
+      "Grupo": "Retorna o grupo do item",
+      "Permissoes": "Retorna as permissões de leitura, escrita e execução do item"
+    },
+    "returns": [
+      "Proprietario, Grupo e Permissoes do item no servidor FTP."
+    ],
+    "example": "Definir Alfa vaFtp;\nDefinir Alfa vaLista;\nDefinir Alfa vaProprie;\nDefinir Alfa vaGrupo;\nDefinir Alfa vaPermiss;\nDefinir Alfa vaMsg;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpListar(vaFtp, \"/arquivos\", \"\", vaLista);\nFtpListaItemPermissoes(vaFtp, vaLista, 1, vaProprie, vaGrupo, vaPermiss);\n\nvaMsg = \"Proprietario: \" + vaProprie + \", Grupo: \" + vaGrupo;\nvaMsg = vaMsg + \", Permissoes: \" + vaPermiss;\nMensagem(Retorna, vaMsg);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftplistaitempermissoes.htm"
+  },
+  "FtpCriarDiretorio": {
+    "signature": "Funcao FtpCriarDiretorio(Alfa Ftp, Alfa DiretorioFtp, Alfa Nome);",
+    "description": "Permite criar um novo diretório no servidor FTP. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "DiretorioFtp": "Diretório pai, onde o novo diretório será criado. Por exemplo, /arquivos",
+      "Nome": "Nome do novo diretório no FTP. Por exemplo, documentos"
+    },
+    "example": "Definir Alfa vaFtp;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpCriarDiretorio(vaFtp, \"/arquivos\", \"documentos\");",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpcriardiretorio.htm"
+  },
+  "FtpApagarDiretorio": {
+    "signature": "Funcao FtpApagarDiretorio(Alfa Ftp, Alfa DiretorioFtp, Alfa Nome);",
+    "description": "Permite apagar um diretório do servidor FTP, desde que ele NÃO contenha arquivos nem subdiretórios. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "DiretorioFtp": "Diretório pai, onde está o diretório a apagar. Por exemplo, /arquivos",
+      "Nome": "Nome do diretório a ser apagado. Por exemplo, documentos"
+    },
+    "example": "Definir Alfa vaFtp;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpApagarDiretorio(vaFtp, \"/arquivos\", \"documentos\");",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpapagardiretorio.htm"
+  },
+  "FtpApagarArquivo": {
+    "signature": "Funcao FtpApagarArquivo(Alfa Ftp, Alfa DiretorioFtp, Alfa Nome);",
+    "description": "Permite apagar um arquivo do servidor FTP. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "DiretorioFtp": "Diretório onde está o arquivo no FTP. Por exemplo, /arquivos",
+      "Nome": "Nome do arquivo no FTP. Por exemplo, documento.doc"
+    },
+    "example": "Definir Alfa vaFtp;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpApagarArquivo(vaFtp, \"/arquivos\", \"documento.zip\");",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftpapagararquivo.htm"
+  },
+  "FtpRenomear": {
+    "signature": "Funcao FtpRenomear(Alfa Ftp, Alfa DiretorioFtp, Alfa Nome, Alfa NovoNome);",
+    "description": "Permite renomear um diretório ou um arquivo do servidor FTP. Informando um caminho no NovoNome, a função também MOVE o arquivo entre diretórios. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "Ftp": "A conexão FTP que deve ser utilizada",
+      "DiretorioFtp": "Diretório onde está o arquivo/diretório no FTP. Por exemplo, /arquivos",
+      "Nome": "Nome atual do diretório ou arquivo. Por exemplo, documento.doc",
+      "NovoNome": "Novo nome do diretório ou arquivo. Por exemplo, documento2.doc"
+    },
+    "example": "Definir Alfa vaFtp;\n\nFtpConexao(vaFtp, \"ftp.servidor.com.br\", 21, \"usuario\", \"senha\");\nFtpRenomear(vaFtp, \"/arquivos/diretorio\", \"documento.doc\", \"documento2.doc\");\nFtpRenomear(vaFtp, \"/processar\", \"teste.txt\", \"/processados/teste.txt\");   @ move @",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftprenomear.htm"
+  },
+  "Sleep": {
+    "signature": "Funcao Sleep(Numero aTempo);",
+    "description": "Pausa (bloqueia) a execução da regra por aTempo milissegundos. Útil para aguardar entre tentativas de consulta a um WS.",
+    "params": {
+      "aTempo": "Tempo de pausa em MILISSEGUNDOS (5000 = 5 segundos). A regra fica bloqueada durante a pausa."
+    }
   }
 }
