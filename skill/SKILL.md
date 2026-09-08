@@ -58,6 +58,57 @@ A função `Mensagem` é a vítima mais comum desse erro.
     @ ERRADO @  Enquanto (vnI < vnQtd E vaAchou = "S")
     @ CORRETO @ Enquanto ((vnI < vnQtd) E (vaAchou = "S"))
     ```
+12. **Linha física longa demais estoura o compilador da regra:** o motor de regras rejeita
+    linhas de código muito compridas, **independente da técnica usada**. O caso típico é
+    o SQL grande (`SQL_DefinirComando`, `ExecutarComandoSQL`, `Cur.SQL`): nunca gere o
+    comando numa linha só. Quebre em **várias linhas curtas** — uma cláusula por linha,
+    3 a 5 colunas por linha. Regra prática: **nada acima de ~120 caracteres por linha**.
+
+    Há duas técnicas de quebra e elas **não podem ser misturadas no mesmo comando**:
+
+    - **`+` (concatenação em variável `Alfa`) — preferida.** É a única que permite
+      **injetar valores de variáveis LSP** no meio do comando (SQL dinâmico: filtro
+      opcional, nome de tabela variável, dialeto do banco).
+    - **`\` (continuação de linha dentro de um literal único) — só para SQL 100% estático.**
+      O literal é um texto só: não aceita `+` nem variável no meio.
+
+    ```lsp
+    @ ERRADO @ comando inteiro numa linha (300+ caracteres) — não compila
+    SQL_DefinirComando(xCur,"INSERT INTO USU_TTAB (COD, NOM, DAT, VLR, OBS) SELECT USU_COD, USU_NOM, USU_DAT, USU_VLR, USU_OBS FROM USU_TORI WHERE USU_CHV = :xChv");
+
+    @ ERRADO @ misturar as duas técnicas no mesmo comando
+    vaCmd = "INSERT INTO USU_TTAB (COD, NOM) \
+             VALUES (:xCod, :xNom) " + vaFiltro;
+
+    @ CORRETO @ '+' em pedaços curtos — permite SQL dinâmico
+    Definir Alfa vaCmd;
+    vaCmd = "INSERT INTO USU_TTAB (COD, NOM, DAT, VLR, OBS) ";
+    vaCmd = vaCmd + "SELECT USU_COD, USU_NOM, USU_DAT, USU_VLR, USU_OBS ";
+    vaCmd = vaCmd +   "FROM USU_TORI ";
+    vaCmd = vaCmd +  "WHERE USU_CHV = :xChv";
+    SQL_DefinirComando(xCur, vaCmd);
+
+    @ CORRETO @ '\' num literal único e estático (sem '+', sem variável no meio)
+    SQL_DefinirComando(xCur,"SELECT USU_COD, USU_NOM \
+                               FROM USU_TORI \
+                              WHERE USU_CHV = :xChv");
+    ```
+
+    Atenção ao espaço no fim de cada pedaço concatenado (`"... COD, NOM) "`): sem ele as
+    cláusulas colam (`...NOM)SELECT...`) e o banco recusa o comando.
+13. **Variáveis de função NÃO são isoladas por função** `[fato de campo — 08/09/2026, ColetaEVT 0.8]`:
+    uma função chamada que declara um `va*`/`vn*` com o mesmo nome de uma variável do chamador
+    **sobrescreve o valor do chamador**. Regra prática: **nome único por função** (prefixo curto da
+    função depois do prefixo de tipo, ex.: `vaTkResto`), sobretudo em funções chamadas dentro de
+    laços. Sintoma clássico: laço que processa **só o primeiro item**.
+    ```lsp
+    @ ERRADO — TokenizarChave() declara o proprio vaResto e zera o do chamador @
+    Funcao ReobservarEstado();  Inicio  Definir Alfa vaResto; ... TokenizarChave(); ... Fim;
+    Funcao TokenizarChave();    Inicio  Definir Alfa vaResto; ...                     Fim;
+
+    @ CORRETO — prefixo da funcao depois do prefixo de tipo @
+    Funcao TokenizarChave();    Inicio  Definir Alfa vaTkResto; ...                   Fim;
+    ```
 
 
 
@@ -759,8 +810,12 @@ acesso ao banco; o terceiro custa dois.
 - [ ] Resultados obtidos por parâmetro de saída (`end`), não por `=`.
 - [ ] Toda função usada existe no `functions.json` com a assinatura/ordem corretas.
 - [ ] Variáveis declaradas no topo, com prefixo de tipo (`va`/`vn`/`vd`).
+- [ ] Nenhuma função chamada reutiliza nome de variável do chamador (nome único por função — ver Limitação 13).
 - [ ] Cursores SQL fechados (`SQL_FecharCursor` + `SQL_Destruir`) — o linter avisa se faltar.
 - [ ] `Pare;` apenas dentro de `Para`/`Enquanto`.
+- [ ] Nenhuma linha de código muito comprida (~120 caracteres): SQL grande quebrado em
+      linhas curtas, com `+` (preferido, aceita variável) **ou** `\` (só literal estático) —
+      nunca as duas técnicas no mesmo comando.
 - [ ] Corpos das funções (`Funcao ... Inicio ... Fim;`) no **fim** do arquivo; no topo só as declarações `Definir Funcao`.
 - [ ] Comentários de mais de uma linha em `/* ... */`; `@ ... @` só em linha única (nunca `@ @` empilhado como bloco).
 - [ ] Arquivos abertos com `Abrir` têm `Fechar` correspondente.
