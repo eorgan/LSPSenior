@@ -96,6 +96,12 @@ A função `Mensagem` é a vítima mais comum desse erro.
 
     Atenção ao espaço no fim de cada pedaço concatenado (`"... COD, NOM) "`): sem ele as
     cláusulas colam (`...NOM)SELECT...`) e o banco recusa o comando.
+
+    **Muitos `+` num único comando também não compila** (`O Comando é muito complexo`),
+    mesmo com cada linha física curta: um `vaCmd = "..." + "..." + ... ;` que atravessa
+    dezenas de linhas estoura o limite de complexidade da expressão. Monte o SQL em
+    **vários comandos** `vaCmd = vaCmd + "...";`, uma cláusula por comando — foi o que
+    destravou o `ORDER BY` com 13 `Case When` do WS `scania.DeterminaST_Tic` (06/10/2026).
 13. **Variáveis de função NÃO são isoladas por função** `[fato de campo — 08/09/2026, ColetaEVT 0.8]`:
     uma função chamada que declara um `va*`/`vn*` com o mesmo nome de uma variável do chamador
     **sobrescreve o valor do chamador**. Regra prática: **nome único por função** (prefixo curto da
