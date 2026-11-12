@@ -46,6 +46,12 @@ A função `Mensagem` é a vítima mais comum desse erro.
 4. **Declare variáveis no início** (com `Definir`), não no meio do fluxo.
 5. **Funções de usuário não aceitam parâmetros do tipo `Alfa`:** Funções criadas pelo usuário (declaradas com `Definir Funcao`) aceitam apenas parâmetros numéricos (`Numero`) ou nenhum. Para passar ou retornar strings (`Alfa`), utilize variáveis globais como canal de comunicação.
 6. **Nunca utilize `SELECT 1` em Cursores da Senior (`Definir Cursor`):** O motor de regras da Senior exige que seja selecionada uma coluna física real existente da tabela (ex: `SELECT SEQTXT FROM ...`), pois constantes como `1` não existem como definição de coluna no banco da Senior e causam erros de definição ou execução no cursor.
+   **Pelo mesmo motivo, o cursor nativo não aceita função de agregação nem alias de coluna**
+   (`SELECT MIN(SEQISC) MINISC ...` → *"Erro de sintaxe, Comando SQL definido incorretamente: O campo
+   precisa ser informado com a tabela no método TSSQLGen.Select"*, confirmado 20/10/2026). Para o
+   menor/maior valor, selecione a coluna física com `ORDER BY` e leia a primeira linha; para `MIN`/
+   `MAX`/`COUNT`/`SUM`/`UNION` de verdade, use a API `SQL_*` (`SQL_Criar` → `SQL_DefinirComando`),
+   que aceita SQL livre.
 7. **Evite campos NULL em inserções diretas via SQL:** As tabelas do ERP Senior normalmente não aceitam valores `NULL` e frequentemente não têm valores padrão configurados diretamente na estrutura física do banco. Portanto, ao executar inserções manuais via SQL (`ExecutarComandoSQL`), informe explicitamente os valores default de todas as colunas não nulas (ex: `' '` para campos do tipo `Alfa`, `0` para campos do tipo `Numero`, ou valores default de negócios do ERP).
 8. **Variáveis de sistema (`CodUsu`, `DatSis`, `HorSis`, etc.) nunca entram como texto cru no SQL:** Elas existem apenas no contexto da LSP, não no banco. Extraia o valor antes (`IntParaAlfa(CodUsu, vaUsuGer)`, `vdHoje = DatSis` + `ConverteMascara(3, vdHoje, vaDataGer, "DD/MM/YYYY")`, `IntParaAlfa(HorSis, vaHoraGer)`) e concatene o **valor** no comando. Colocar o literal `"CodUsu"` na string SQL faz o banco tentar interpretá-lo como coluna/identificador e o comando falha.
 9. **`ProcuraEnter` em loop pode não terminar:** ao varrer um texto linha a linha com `ProcuraEnter`, a última linha sem `ENTER` final pode fazer a função devolver o restante sem consumir nada — `vaResto` não diminui e o laço entra em **loop infinito**. Use **guarda de progresso**: guarde `vaResto` antes da chamada e, se o retorno `StrResto` for igual ao valor anterior, trate o que sobrou como a última linha e zere `vaResto`. Para leitura de arquivo, `Abrir`/`Lernl` (que sinaliza EOF) é mais seguro que carregar tudo e fatiar.
@@ -118,6 +124,12 @@ A função `Mensagem` é a vítima mais comum desse erro.
 
 
 
+14. **Função de usuário não pode ter o nome de uma função nativa** `[campo — 30/10/2026]`: o
+    compilador resolve o nome pela built-in e acusa *"Faltam parâmetros na chamada da função
+    GERAMOVIMENTO"* (a nativa `GeraMovimento(Numero)` existe no catálogo). Antes de nomear uma
+    `Definir Funcao`, confira: `python3 scripts/buscar_funcao.py <Nome>` — se achar, use outro
+    nome (ex.: sufixo do contexto, `GeraMovimentoWs`).
+
 ## 🏷️ Nomenclatura de variáveis
 
 Prefixo por tipo + CamelCase, descritivo, sem acento, sem palavra reservada:
@@ -174,9 +186,11 @@ no nível raiz do arquivo. Controlado por `lspt.diagnostics.sqlCursorLeak` (padr
 Mantenha este SKILL.md como guia rápido; abra o arquivo de referência quando precisar:
 
 - **`reference/sintaxe.md`** — operadores (incl. ausência de `%` → `RestoDivisao`),
-  palavras reservadas, variáveis de sistema, tipos, declaração (arrays/tamanho), blocos.
-- **`reference/erros-comuns.md`** — os 12 erros mais frequentes (incl. `Chr()` inexistente,
-  `FormatarData` com `Numero`, atribuição de data, `Truncar`, `p...` em `SQL_Retornar*`).
+  palavras reservadas, variáveis de sistema, variáveis de regras por evento
+  (`NumRegraEvento`, `Formulario`, `AbaAtiva`), tipos, declaração (arrays/tamanho), blocos.
+- **`reference/erros-comuns.md`** — os 13 erros mais frequentes (incl. `Chr()` inexistente,
+  `FormatarData` com `Numero`, atribuição de data, `Truncar`, `p...` em `SQL_Retornar*`,
+  colchetes em `Mensagem`).
 - **`reference/quick-reference.md`** — cartões por categoria (strings, conversões, datas,
   validação, HTTP, banco de dados) com nomes de função já validados.
 - **`reference/padroes.md`** — padrões prontos: validação, conversão segura, tratamento de erro.
@@ -817,6 +831,7 @@ acesso ao banco; o terceiro custa dois.
 - [ ] Toda função usada existe no `functions.json` com a assinatura/ordem corretas.
 - [ ] Variáveis declaradas no topo, com prefixo de tipo (`va`/`vn`/`vd`).
 - [ ] Nenhuma função chamada reutiliza nome de variável do chamador (nome único por função — ver Limitação 13).
+- [ ] Nenhuma `Definir Funcao` com nome de função nativa do catálogo (`buscar_funcao.py <Nome>` não acha — ver Limitação 14).
 - [ ] Cursores SQL fechados (`SQL_FecharCursor` + `SQL_Destruir`) — o linter avisa se faltar.
 - [ ] `Pare;` apenas dentro de `Para`/`Enquanto`.
 - [ ] Nenhuma linha de código muito comprida (~120 caracteres): SQL grande quebrado em

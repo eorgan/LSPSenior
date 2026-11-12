@@ -167,3 +167,74 @@ Disponíveis no gerador de relatórios — não declare, apenas use:
 | `DesRodape` | Descrição para rodapé. |
 | `GerTabAlf` | Vetor alfanumérico (2000 ocorrências). |
 | `GerTabNum` | Vetor numérico flutuante (999 ocorrências). |
+
+## Variáveis de regras por evento
+
+Disponíveis nas **regras por evento** (cadastradas por formulário — tabela `R900RPP`):
+
+| Variável | Descrição |
+| --- | --- |
+| `NumRegraEvento` | ID do evento que disparou a regra (compare com as constantes abaixo). |
+| `Formulario` | Nome do formulário, ex.: `"FR030EMP"`. **Deve ser declarada** quando usada na regra. |
+| `AbaAtiva` | Número da aba ativa, começando em `0`. |
+| `DescAbaAtiva` | Descrição da aba ativa. **Deve ser declarada** quando usada na regra. |
+
+Constantes de evento (valor de `NumRegraEvento`):
+
+| Evento | Constante | Valor |
+| --- | --- | --- |
+| Antes de Inserir | `EventoAntesDeInserir` | 0 |
+| Após Inserir | `EventoAposInserir` | 1 |
+| Antes de Alterar | `EventoAntesDeAlterar` | 2 |
+| Após Alterar | `EventoAposAlterar` | 3 |
+| Antes de Excluir | `EventoAntesDeExcluir` | 4 |
+| Após Excluir | `EventoAposExcluir` | 5 |
+| Ao abrir a tela | `EventoAoAbrirATela` | 6 |
+| Ao sair da tela | `EventoAoSairDaTela` | 7 |
+
+Função auxiliar: `VerificaAbaAtiva(Alfa DescAba)` — retorna `1` se `DescAba` é a
+descrição da aba ativa, `0` caso contrário.
+
+```lsp
+Definir Alfa Formulario;
+Definir Alfa DescAbaAtiva;
+
+Se ((NumRegraEvento = EventoAntesDeInserir) ou (NumRegraEvento = EventoAntesDeAlterar))
+{
+   @ validações antes de gravar @
+}
+```
+
+## Telas SGI (Gerador de Telas) — `CodOpe` e campos
+
+As regras de tela SGI ficam em quatro lugares: botão Regra da Interface, Ação da Interface,
+botão Regra da Tabela e Ação da Tabela. A **regra da tabela** roda em vários momentos, e a
+variável nativa **`CodOpe`** (Alfa) diz qual é. Fonte: Universidade Senior, "Condições e Regras".
+
+| `CodOpe` | Momento |
+| --- | --- |
+| `"Iniciando"` | ao abrir a tela; use para valor inicial, como empresa ou filial |
+| `"DepoisSelecionar"` | depois de posicionar/selecionar um registro |
+| `"AntesInserir"` / `"DepoisInserir"` | inclusão |
+| `"AntesAlterar"` / `"DepoisAlterar"` | alteração |
+| `"AntesExcluir"` / `"DepoisExcluir"` | exclusão |
+| `"AoCancelar"` | ao cancelar a edição |
+
+- Campos da tela viram variáveis `<BLOCO>_<CAMPO>` (ex.: `E070EMP_fDocCli`, `USU_TE085LCP_USU_DOCIDE`);
+  leitura e escrita.
+- **Nunca atribua campo sem testar o `CodOpe`**: a mesma regra roda em todos os momentos.
+- Funções usadas junto: `AtualizarTabela("TABELA")` (recarrega a grade), `InserirValoresSGI()`
+  (sincroniza tela ↔ variáveis), `Cancel(n)`.
+- ⚠️ Na regra da tabela SGI, `Mensagem` **só aceita string literal**: `Mensagem(Retorna, vaMsg)` dá
+  `Cláusula "Mensagem", falta "mensagem"` (confirmado em 2026-11-09).
+
+```lsp
+Se (CodOpe = "Iniciando")
+  USU_TABELA_USU_CODEMP = CodEmp;          @ valor inicial ao abrir a tela @
+
+Se (CodOpe = "AntesInserir")
+{
+  Se (USU_TABELA_USU_CODEMP = 0)
+    USU_TABELA_USU_CODEMP = CodEmp;        @ garantia na gravação @
+}
+```

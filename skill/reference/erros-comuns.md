@@ -156,3 +156,18 @@ Funcao minhaFuncao(Numero pCodigo, Numero End pResultado); {
 
 > Nota: `SQL_*` e `Http*` agora constam no `functions.json` (categorias `sql`/`http`);
 > confirme a assinatura com `python3 scripts/buscar_funcao.py <Nome>`.
+
+### #8 — Colchetes em `Mensagem(Retorna, ...)` viram botões
+
+Em `Mensagem(Retorna, texto)` o trecho entre **colchetes** é interpretado como a lista de
+botões da caixa de diálogo (`"Confirma? [Sim][Nao]"`). Um `[...]` usado como decoração no
+texto corta a mensagem naquele ponto e vira um botão truncado — confirmado em 29/10/2026
+(`" [SIMULACAO - nada foi gravado]"` apareceu como botão `CAO - nada foi` e o resumo sumiu).
+
+```lsp
+@ ERRADO @  Mensagem(Retorna, "Resumo [SIMULACAO - nada gravado]" + vaDetalhe);
+@ CORRETO @ Mensagem(Retorna, "Resumo - SIMULACAO, nada gravado" + vaDetalhe);
+```
+
+Use parênteses ou travessão para destacar; reserve `[` `]` para botões de verdade. Texto de
+erro vindo do banco (`vaResSql`) também pode trazer colchetes — mostre-o com `Mensagem(Erro, ...)`.
