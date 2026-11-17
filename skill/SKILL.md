@@ -68,7 +68,9 @@ A função `Mensagem` é a vítima mais comum desse erro.
     linhas de código muito compridas, **independente da técnica usada**. O caso típico é
     o SQL grande (`SQL_DefinirComando`, `ExecutarComandoSQL`, `Cur.SQL`): nunca gere o
     comando numa linha só. Quebre em **várias linhas curtas** — uma cláusula por linha,
-    3 a 5 colunas por linha. Regra prática: **nada acima de ~120 caracteres por linha**.
+    3 a 5 colunas por linha. Regra prática: **nada acima de ~120 caracteres por linha**. A conta é da **linha física
+    inteira, com a indentação** — um `SQL_DefinirComando(vaCur, "SELECT ... WHERE ... AND ...")` dentro de
+    dois `Se` aninhados passa de 120 fácil. SQL com mais de uma cláusula `WHERE`/`AND`: monte em `vaCmd`.
 
     Há duas técnicas de quebra e elas **não podem ser misturadas no mesmo comando**:
 
@@ -129,6 +131,14 @@ A função `Mensagem` é a vítima mais comum desse erro.
     GERAMOVIMENTO"* (a nativa `GeraMovimento(Numero)` existe no catálogo). Antes de nomear uma
     `Definir Funcao`, confira: `python3 scripts/buscar_funcao.py <Nome>` — se achar, use outro
     nome (ex.: sufixo do contexto, `GeraMovimentoWs`).
+
+15. **Colchetes em `Mensagem` viram botões** `[campo — 29/10/2026]`: em `Mensagem(Retorna, texto)` o trecho
+    entre `[` `]` é a lista de botões da caixa (`"Confirma? [Sim][Nao]"`). Um `[AVISO]` decorativo corta a
+    mensagem e vira um botão truncado. Destaque com parênteses ou travessão (`"AVISO - ..."`). **Ao revisar
+    código existente, troque também os colchetes decorativos** — o texto parece inofensivo, mas é bug.
+16. **Nunca escreva `@` dentro do texto de um comentário `@ ... @`:** o segundo `@` fecha o comentário e o
+    resto da linha vira código (ex.: `@ conecta em usuario@host @` quebra a regra). Comentário que precisa
+    citar e-mail, URL `usuario@host` ou `@Author` vai em `/* ... */`.
 
 ## 🏷️ Nomenclatura de variáveis
 
@@ -839,6 +849,8 @@ acesso ao banco; o terceiro custa dois.
       nunca as duas técnicas no mesmo comando.
 - [ ] Corpos das funções (`Funcao ... Inicio ... Fim;`) no **fim** do arquivo; no topo só as declarações `Definir Funcao`.
 - [ ] Comentários de mais de uma linha em `/* ... */`; `@ ... @` só em linha única (nunca `@ @` empilhado como bloco).
+- [ ] Nenhum `@` dentro do texto de comentário `@ ... @` (e-mail, `usuario@host`) — use `/* ... */` (Limitação 16).
+- [ ] Nenhum colchete decorativo em texto de `Mensagem` (`[AVISO]`, `[OK]`) — vira botão (Limitação 15).
 - [ ] Arquivos abertos com `Abrir` têm `Fechar` correspondente.
 - [ ] Cadastro (cliente/fornecedor/produto…) criado/atualizado via **WS interno** (`interno.<pacote>.Gravar…`), não por `INSERT` cru, quando existe porta de escrita.
 - [ ] Regra acoplada a um **Identificador de Regra** existente: variáveis de **SAÍDA** (`Retorna Valor = S`) atribuídas, **ENTRADA** apenas lidas; grades `<9>` numeradas a partir de 1 sem pular (confira em `scripts/buscar_identificador.py <código>`).
