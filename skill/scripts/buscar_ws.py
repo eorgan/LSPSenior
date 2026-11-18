@@ -260,7 +260,7 @@ def info_da_tabela(tabela):
         if cand in header:
             i_desc = header.index(cand)
             break
-    for linha in tabela[2:]:  # pula cabeçalho e separador '---'
+    for linha in tabela[1:]:  # pula o cabeçalho; a doc às vezes não tem separador '---' (ele é pulado abaixo)
         cols = [c.strip() for c in linha.strip("|").split("|")]
         if len(cols) <= i_nome:
             continue
