@@ -16,9 +16,11 @@ Uso:
     python3 buscar_tabela.py --enum <LSTNAM>      # valores possíveis de uma lista/enum
     python3 buscar_tabela.py --indice             # regenera reference/tabelas.md no stdout
 
-Tipos de dados (DATTYP):
-    1 = Alfa (texto)   2 = Num (numérico)   3 = Data
-    4 = Lóg (lógico)   5 = Memo             8 = Bin (binário)
+Tipos de dados (DATTYP), conferidos no R996FLD:
+    1 = Alfa (texto)                 2 = Num (numérico)
+    3 = Lóg (lógico S/N, tamanho 1)  4 = Data
+    5 = Hora (minutos desde 00:00, tamanho 5)
+    8 = Blob (memo/binário: XML, JSON, imagem)
 
 Localize os CSVs por, nesta ordem:
     1. variável de ambiente  SENIOR_DB_DIR=/caminho/para/pasta/com/os/csvs
@@ -29,7 +31,7 @@ import os
 import re
 import sys
 
-TIPOS = {"1": "Alfa", "2": "Num", "3": "Data", "4": "Lóg", "5": "Memo", "8": "Bin"}
+TIPOS = {"1": "Alfa", "2": "Num", "3": "Lóg", "4": "Data", "5": "Hora", "8": "Blob"}
 
 
 def achar_dir():

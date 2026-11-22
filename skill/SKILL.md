@@ -662,9 +662,10 @@ buscar_tabela.py --enum LTipNfe          → 1=Normal, 2=Complementar… (via EN
 | --- | --- | --- |
 | 1 | Alfa (texto) | variável `va…` / parâmetro Alfa |
 | 2 | Num (numérico) | variável `vn…` / parâmetro Numero |
-| 3 | Data | variável `vd…` / parâmetro Data |
-| 4 | Lóg (lógico) | variável `vn…` (0/1) |
-| 5 | Memo | variável `va…` longa |
+| 3 | Lóg (lógico, tamanho 1) | `'S'`/`'N'` no banco → `SQL_RetornarAlfa` / variável `va…` |
+| 4 | Data | variável `vd…` / parâmetro Data |
+| 5 | Hora (minutos desde 00:00) | variável `vn…` (ex.: 13:30 = 810) |
+| 8 | Blob (memo/binário: XML, JSON, imagem) | raro em regra; o catálogo não tem `SQL_Retornar` próprio para Blob |
 
 **Regras ao escrever SELECTs em LSP:**
 - Use `SQL_Criar` → `SQL_DefinirComando` → `SQL_AbrirCursor` → `SQL_Retornar*` → `SQL_FecharCursor` → `SQL_Destruir`.
