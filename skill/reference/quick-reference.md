@@ -102,8 +102,10 @@ Funções `SQL_*` agora **constam no catálogo** (`functions.json`/`docs/functio
 | Iterar | `Enquanto (SQL_EOF(sql) = 0) { ... SQL_Proximo(sql); }` |
 | Ler campo | `SQL_RetornarAlfa` / `SQL_RetornarInteiro` / `SQL_RetornarFlutuante` / `SQL_RetornarData` |
 | Encerrar | `SQL_FecharCursor(sql)` · `SQL_Destruir(sql)` |
+| Cursor nativo | `Definir Cursor Cur_X;` · `Cur_X.SQL "SELECT ... :variavel";` · `Cur_X.AbrirCursor();` · `Cur_X.Achou` / `Cur_X.Campo` / `Cur_X.Proximo();` · `Cur_X.FecharCursor();` |
+| Escrita com bind | `ExecSql "UPDATE ... WHERE CAMPO = :variavel";` — comando, sem parênteses; erro de banco interrompe a regra |
 | Escrita | `ExecSQLEx(comando, xErro, xMensagem)` e trate `xErro` (0 = sucesso) — sem página no manual da Senior, validada em regras reais |
 | Transação | `IniciarTransacao();` … `FinalizarTransacao();` ou `DesfazerTransacao();` — sem parâmetros; sem página no manual, validadas em regras reais |
 | Stored procedure | `ExecSP(nome, entrada, saida)` — parâmetros em texto `NOME=valor;NOME2=valor2` |
 
-Modelo completo de cursor está no `SKILL.md`.
+Modelo completo de cursor (API `SQL_*` e nativo) e a tabela de qual escrita usar estão no `SKILL.md`.

@@ -191,8 +191,45 @@ Funcao BuscaDados();
 
 ---
 
+## PADRÃO: cursor-nativo
+**Uso:** Ler registros com o cursor nativo (`Definir Cursor`), comum em regras já existentes
+**Tags:** sql, cursor, nativo, tipo1, definir cursor, achou, proximo, legado
+
+```lspt
+Definir Cursor Cur_TABELA;               @ TODO: Cur_ + nome da tabela @
+Definir Alfa   vaCampo;
+
+@ SQL literal; :variavel faz o bind com a variavel da regra; "\" continua a linha @
+Cur_TABELA.SQL "SELECT CAMPO1, CAMPO2 FROM TABELA \
+                 WHERE CODEMP = :vnCodEmp \
+                 ORDER BY CAMPO1";
+Cur_TABELA.AbrirCursor();
+Enquanto (Cur_TABELA.Achou)
+   {
+      vaCampo = Cur_TABELA.Campo1;       @ TODO: ler as colunas @
+      Cur_TABELA.Proximo();
+   }
+Cur_TABELA.FecharCursor();
+```
+
+---
+
+## PADRÃO: execsql-bind
+**Uso:** Gravar com o comando `ExecSql` (INSERT/UPDATE/DELETE fixo, valores por bind)
+**Tags:** sql, execsql, comando, bind, insert, update, delete, transacao
+
+```lspt
+@ Comando, nao funcao: sem parenteses e sem retorno; erro de banco interrompe a regra @
+IniciarTransacao();
+ExecSql "UPDATE USU_TTABELA SET USU_CAMPO = :vaValor \
+          WHERE USU_CODEMP = :vnCodEmp AND USU_CHAVE = :vnChave";   @ TODO: ajustar @
+FinalizarTransacao();
+```
+
+---
+
 ## PADRÃO: execsql-direto
-**Uso:** Executar INSERT/UPDATE/DELETE direto sem cursor (DML)
+**Uso:** Executar INSERT/UPDATE montado em variável, com o erro tratado na regra
 **Tags:** sql, execsql, insert, update, delete, dml, direto
 
 ```lspt

@@ -16,6 +16,15 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
   `DesfazerTransacao` (sem página no manual; assinatura conferida pelo uso em 2.569 regras
   reais de 20 bases: sempre a mesma quantidade de parâmetros, em 10 a 13 clientes cada).
 
+### 📝 Skill
+- **Cursor nativo (`Definir Cursor`) e comando `ExecSql` documentados** no `SKILL.md`, no cartão
+  rápido e nos snippets de SQL: são as formas mais usadas nas regras reais (cursor nativo em 73%
+  delas) e a skill não ensinava nenhuma das duas.
+- **Contradições de SQL resolvidas:** leitura é sempre por cursor (`ExecutarComandoSQL` não faz
+  `SELECT`), e a escrita direta passou a ter uma tabela de decisão por alvo (tabela/campo de
+  usuário, campo nativo, registro novo em tabela nativa) no lugar do "nunca" que conflitava com
+  os próprios exemplos.
+
 ### 🐛 Corrigido
 - **Aviso falso "Operação dentro do parâmetro de 'e'/'ou'/'and'/'nvl'…".** O linter tratava
   como chamada de função (1) os operadores lógicos seguidos de parêntese, como em

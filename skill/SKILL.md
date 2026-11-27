@@ -273,11 +273,52 @@ Mantenha este SKILL.md como guia rápido; abra o arquivo de referência quando p
   → `SQL_AbrirCursor` → loop `Enquanto (SQL_EOF(...) = 0)` com `SQL_RetornarAlfa/Inteiro/...`
   → `SQL_Proximo` → `SQL_FecharCursor` → `SQL_Destruir`.
   ⚠️ O linter avisa se `SQL_AbrirCursor` for usado sem `SQL_FecharCursor`/`SQL_Destruir`.
+- **Cursor nativo (`Definir Cursor`, o "tipo 1"):** é o que mais aparece em regra já existente;
+  saiba ler e manter. Em regra nova prefira `SQL_*`; use o nativo para SELECT simples ou para
+  seguir o estilo da regra que está sendo alterada.
+  ```lsp
+  Definir Cursor Cur_E075PRO;            @ convencao: Cur_ + tabela @
+  Definir Alfa   vaDesPro;
+
+  Cur_E075PRO.SQL "SELECT CODPRO, DESPRO FROM E075PRO \
+                    WHERE CODEMP = :vnCodEmp AND CODFAM = :vaCodFam \
+                    ORDER BY CODPRO";
+  Cur_E075PRO.AbrirCursor();
+  Enquanto (Cur_E075PRO.Achou)
+     {
+        vaDesPro = Cur_E075PRO.DesPro;   @ coluna lida como Cursor.Campo @
+        Cur_E075PRO.Proximo();
+     }
+  Cur_E075PRO.FecharCursor();
+  ```
+  - O SQL é um **literal** logo depois de `.SQL` (sem `=` e sem parênteses); quebre a linha com
+    `\` no fim (Limitação 12).
+  - `:variavel` dentro do texto faz o bind direto com a variável da regra, já tipado: não
+    concatene nem ponha aspas em volta.
+  - Um registro só: `Se (Cur.Achou)`. Vários: `Enquanto (Cur.Achou)` com `Cur.Proximo()` no fim
+    do laço. Também existe `Cur.NaoAchou`. Sempre `FecharCursor()`.
+  - Não aceita `SELECT 1`, agregação na lista de colunas nem alias (Limitação 6). Agregação em
+    subconsulta do `WHERE` (`... = (SELECT MAX(...) ...)`) funciona.
+- **Comando `ExecSql` (escrita com bind):** executa `INSERT`/`UPDATE`/`DELETE` escrito como
+  literal, com o mesmo bind `:variavel` do cursor nativo. Não é função: não tem parênteses nem
+  parâmetro de saída, e um erro de banco interrompe a regra com a mensagem do banco.
+  ```lsp
+  ExecSql "UPDATE USU_TLOGIMP SET USU_SITIMP = :vaSitImp \
+            WHERE USU_CODEMP = :vnCodEmp AND USU_SEQIMP = :vnSeqImp";
+  ```
+  Qual usar para gravar:
+  | Situação | Use |
+  |---|---|
+  | Comando fixo, valores em variáveis | `ExecSql "..."` (bind, sem concatenar) |
+  | Comando montado em variável Alfa, erro tratado na regra | `ExecSQLEx(vaComando, vnErro, vaMsg)` (`vnErro = 0` é sucesso) |
+  | Precisa das linhas afetadas, `DELETE` não entra | `ExecutarComandoSQL` (abaixo) |
+  | Várias gravações que valem juntas | `IniciarTransacao()` … `FinalizarTransacao()`; no erro, `DesfazerTransacao()` |
 - **HTTP:** `HttpObjeto` → cabeçalhos → `HttpGet`/`HttpPost` → `HttpLeCodigoResposta`.
 - **JSON:** `ValorElementoJson` (campo simples); `ListaRegraCarregarJson` + `ListaRegraPrimeiro`/
   `ListaRegraProximo`/`ListaRegraObterValorAlfa` (coleções).
 - **Validação:** `EstaNulo(vaVar, vnNulo)` e cheque `vnNulo = 1`.
-- **SQL com escrita:** `ExecutarComandoSQL(vaComando, "N", vnLinhas, vaResSql)` — sucesso quando o
+- **SQL com escrita (comando em variável):** `ExecutarComandoSQL(vaComando, "N", vnLinhas, vaResSql)`
+  — só `INSERT`/`UPDATE`; **não executa `SELECT`** (leitura é sempre por cursor). Sucesso quando o
   parâmetro de saída `vaResSql` retorna `"OK"`; em erro, `vaResSql` traz o texto da exceção. (`"N"` = sem
   conexão paralela; com `"S"` o `vnLinhas` volta 0.)
 - **UPSERT (atualiza-ou-insere) via cursor:** antes de gravar, verifique se a chave já existe e
@@ -686,8 +727,15 @@ buscar_tabela.py --enum LTipNfe          → 1=Normal, 2=Complementar… (via EN
 - Chave primária da tabela está em `PKFLDS` no índice — sempre inclua no `WHERE` de joins.
 - Confirmação de tabela/campo: consulte `reference/tabelas.md` ou o script acima.
 
-**Decisão:** precisa unir ou filtrar dados nativos do ERP? **Use SELECT via `ExecutarComandoSQL`
-(leitura) ou WS interno (escrita/cadastro).** Nunca `INSERT`/`UPDATE`/`DELETE` direto nas tabelas nativas.
+**Decisão — leitura:** sempre por cursor (`SQL_*` ou cursor nativo). `ExecutarComandoSQL` não lê.
+
+**Decisão — escrita:** depende do que está sendo gravado.
+| Alvo | Caminho |
+|---|---|
+| Tabela de usuário (`USU_T...`) | SQL direto (`ExecSql`, `ExecSQLEx`, `ExecutarComandoSQL`) é o normal |
+| Campo de usuário (`USU_...`) em tabela nativa | `UPDATE` direto, com a chave primária completa no `WHERE` |
+| Campo nativo de registro já existente | Prefira WS interno ou a variável de saída do identificador de regra; `UPDATE` direto só para campo sem regra de negócio atrelada, e avise o usuário |
+| Registro novo ou exclusão em tabela nativa (cadastro, pedido, título, nota) | WS interno (seção 🌐). `INSERT`/`DELETE` direto pula validações, numeração e tabelas filhas: só a pedido explícito, com todos os defaults (Limitação 7) |
 
 ## 📄 Dicionário do eDocs (documentos eletrônicos — banco separado)
 
