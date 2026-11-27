@@ -87,7 +87,8 @@ Definir Numero vnIdade;
 Definir Data   vdNascimento;
 ```
 
-- Declare **no topo** da regra/função — nunca dentro de `Se`/loops (ver `erros-comuns.md`).
+- Prefira declarar **no topo** da regra/função (convenção de estilo; o motor aceita `Definir` no
+  meio do fluxo — ver `erros-comuns.md` #3).
 - Nome: até 100 caracteres, pode conter `_`, **sem acentuação**, sem palavra reservada.
 - O nome não pode colidir com nome de parâmetro de função nem com campo de lista.
 

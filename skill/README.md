@@ -28,6 +28,10 @@ lsp-senior/
     ├── tabelas.md                 ← índice do dicionário de tabelas do ERP
     ├── tabelas-edocs.md           ← índice do dicionário do eDocs
     ├── parametros-linha-comando.md
+    ├── seguranca-sgu.md           ← permissão por usuário/grupo (SegEnt*)
+    ├── ftp.md                     ← FTP/SFTP (família Ftp*)
+    ├── edocs.md                   ← eDocs: banco separado, faixas de tabelas
+    ├── banco-sgbd.md              ← descobrir Oracle/SQL Server/PostgreSQL
     └── snippets/                  ← sql, http, ws, log, funções, parâmetros
 ```
 
@@ -35,8 +39,17 @@ lsp-senior/
 
 ### No Claude Code (carregamento automático)
 
-A skill está registrada em `.claude/skills/lsp-senior/`. Claude Code a ativa
-automaticamente quando você trabalha com arquivos `.lsp`/`.lspt`.
+Esta pasta (`LSPSenior/skill`) é a fonte da skill. O Claude Code só a ativa sozinho
+(ao trabalhar com arquivos `.lsp`/`.lspt`) no projeto que tiver uma cópia dela em
+`.claude/skills/lsp-senior/`; hoje essa cópia fica em `geradorRegrasLSP`. Depois de alterar
+a skill aqui, atualize a cópia:
+
+```bash
+rsync -a --delete --exclude .claude --exclude settings.local.json --exclude __pycache__ ~/GitHub/LSPSenior/skill/ ~/GitHub/geradorRegrasLSP/.claude/skills/lsp-senior/
+```
+
+O agente local `lsp-local` (Gemma) lê esta pasta diretamente e não precisa de cópia.
+A pasta `LSPSenior/.claude/skills/lsp-senior` é uma versão antiga e não é usada.
 
 ### Consultar o catálogo de funções
 
@@ -58,9 +71,9 @@ python3 scripts/buscar_snippet.py cursor
 ## O que a skill cobre
 
 - **Regra de ouro:** manipule antes, passe variável pronta — nunca opere dentro de parâmetros
-- **Limitações críticas:** retorno por parâmetro de saída, declaração no topo, sem operação em
-  parâmetro, funções de usuário sem `Alfa`, corpo das funções no fim do arquivo, cursores sem
-  `SELECT 1`, NULL em INSERTs, variáveis de sistema no SQL, `ProcuraEnter` em loop, parênteses
+- **Limitações críticas:** retorno por parâmetro de saída, sem operação em
+  parâmetro, funções de usuário sem `Alfa`, corpo das funções no fim do arquivo, cursor nativo sem
+  `SELECT 1`/agregação na lista de colunas do SELECT principal, NULL em INSERTs, variáveis de sistema no SQL, `ProcuraEnter` em loop, parênteses
   por comparação, comentários `@ … @` (linha) × `/* … */` (bloco)
 - **Nomenclatura:** `va` (Alfa), `vn` (Numero), `vd` (Data)
 - **Catálogo:** 676 funções built-in com assinatura, parâmetros e direção — inclui `SQL_*`

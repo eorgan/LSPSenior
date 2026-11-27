@@ -43,19 +43,25 @@ A função `Mensagem` é a vítima mais comum desse erro.
    ```
    Para saber qual parâmetro é saída, veja a direção (`Saída`/`end`) no catálogo.
 3. **Grids/tabelas:** conversões diretas falham — use variável intermediária.
-4. **Declare variáveis no início** (com `Definir`), não no meio do fluxo.
+4. **Declare variáveis no início (convenção de estilo, não limitação do motor):** o motor aceita
+   `Definir` no meio do fluxo, e quase toda regra real em produção faz isso. Em código novo,
+   prefira declarar no topo da regra/função: fica mais fácil ver o que existe e evitar nome
+   repetido (ver Limitação 13). Ao editar regra existente, não mova declarações só por isso.
 5. **Funções de usuário não aceitam parâmetros do tipo `Alfa`:** Funções criadas pelo usuário (declaradas com `Definir Funcao`) aceitam apenas parâmetros numéricos (`Numero`) ou nenhum. Para passar ou retornar strings (`Alfa`), utilize variáveis globais como canal de comunicação.
-6. **Nunca utilize `SELECT 1` em Cursores da Senior (`Definir Cursor`):** O motor de regras da Senior exige que seja selecionada uma coluna física real existente da tabela (ex: `SELECT SEQTXT FROM ...`), pois constantes como `1` não existem como definição de coluna no banco da Senior e causam erros de definição ou execução no cursor.
-   **Pelo mesmo motivo, o cursor nativo não aceita função de agregação nem alias de coluna**
+6. **Nunca utilize `SELECT 1` na lista de colunas do SELECT principal de um cursor nativo (`Definir Cursor`):** O motor de regras da Senior exige que seja selecionada uma coluna física real existente da tabela (ex: `SELECT SEQTXT FROM ...`), pois constantes como `1` não existem como definição de coluna no banco da Senior e causam erros de definição ou execução no cursor.
+   **Pelo mesmo motivo, a lista de colunas do SELECT principal não aceita função de agregação nem alias de coluna**
    (`SELECT MIN(SEQISC) MINISC ...` → *"Erro de sintaxe, Comando SQL definido incorretamente: O campo
    precisa ser informado com a tabela no método TSSQLGen.Select"*, confirmado 20/10/2026). Para o
    menor/maior valor, selecione a coluna física com `ORDER BY` e leia a primeira linha; para `MIN`/
    `MAX`/`COUNT`/`SUM`/`UNION` de verdade, use a API `SQL_*` (`SQL_Criar` → `SQL_DefinirComando`),
    que aceita SQL livre.
+   **A proibição vale só para a lista de colunas do SELECT principal.** Dentro de subconsulta no
+   `WHERE` o SQL vai para o banco como está, e tanto `SELECT 1` quanto agregação funcionam e são
+   comuns em regras reais: `WHERE EXISTS (SELECT 1 FROM ...)`, `WHERE CAMPO = (SELECT MAX(...) FROM ...)`.
 7. **Evite campos NULL em inserções diretas via SQL:** As tabelas do ERP Senior normalmente não aceitam valores `NULL` e frequentemente não têm valores padrão configurados diretamente na estrutura física do banco. Portanto, ao executar inserções manuais via SQL (`ExecutarComandoSQL`), informe explicitamente os valores default de todas as colunas não nulas (ex: `' '` para campos do tipo `Alfa`, `0` para campos do tipo `Numero`, ou valores default de negócios do ERP).
 8. **Variáveis de sistema (`CodUsu`, `DatSis`, `HorSis`, etc.) nunca entram como texto cru no SQL:** Elas existem apenas no contexto da LSP, não no banco. Extraia o valor antes (`IntParaAlfa(CodUsu, vaUsuGer)`, `vdHoje = DatSis` + `ConverteMascara(3, vdHoje, vaDataGer, "DD/MM/YYYY")`, `IntParaAlfa(HorSis, vaHoraGer)`) e concatene o **valor** no comando. Colocar o literal `"CodUsu"` na string SQL faz o banco tentar interpretá-lo como coluna/identificador e o comando falha.
 9. **`ProcuraEnter` em loop pode não terminar:** ao varrer um texto linha a linha com `ProcuraEnter`, a última linha sem `ENTER` final pode fazer a função devolver o restante sem consumir nada — `vaResto` não diminui e o laço entra em **loop infinito**. Use **guarda de progresso**: guarde `vaResto` antes da chamada e, se o retorno `StrResto` for igual ao valor anterior, trate o que sobrou como a última linha e zere `vaResto`. Para leitura de arquivo, `Abrir`/`Lernl` (que sinaliza EOF) é mais seguro que carregar tudo e fatiar.
-10. **`ArqExiste` e `ListaQuantidade` não documentam o retorno no catálogo:** o `functions.json` não mostra parâmetro de saída (`end`) nem mecanismo de retorno claro para essas funções. Em código novo, prefira funções com saída inequívoca: valide presença/conteúdo com `EstaNulo(...)` e `TamanhoStr(...)` em vez de depender do retorno de `ListaQuantidade`/`ArqExiste`.
+10. **`ArqExiste` e `ListaQuantidade` não documentam o retorno no catálogo:** o `functions.json` não mostra parâmetro de saída (`end`) nem mecanismo de retorno claro para essas funções. Em código novo, prefira funções com saída inequívoca: valide presença/conteúdo com `EstaNulo(...)` e `TamanhoAlfa(...)` em vez de depender do retorno de `ListaQuantidade`/`ArqExiste`.
 11. **Em condições compostas, cada comparação entre parênteses próprios:** numa condição com `Ou`/`E` dentro de `Se`, `Senao Se` ou `Enquanto`, **cada** comparação (`=`, `<>`, `>`, `<`, `>=`, `<=`) tem que estar entre parênteses individuais, além do parêntese externo do comando. Sem isso o motor de regras interpreta a precedência errado e a condição falha. Comparação **única** pode manter o parêntese único do comando (`Se (vnExiste = 0)`).
     ```lsp
     @ ERRADO @  Se (gnCodResp = 0 Ou gnCodResp >= 500)
@@ -167,7 +173,7 @@ Sempre cheque a `direction` de cada parâmetro: `in` = você fornece; `out` (`en
 
 > ✅ O `functions.json` cobre **676 funções**, incluindo as APIs `SQL_*` (cursores,
 > categoria `sql`), `Http*` (requisições, categoria `http`) e `Ftp*` (transferência de
-> arquivos, categoria `ftp` — ver seção 📡). Consulte qualquer uma com
+> arquivos, categoria `ftp` — ver `reference/ftp.md`). Consulte qualquer uma com
 > `python3 scripts/buscar_funcao.py <Nome>`; `reference/quick-reference.md` traz os padrões
 > de uso prontos (extraídos dos exemplos reais `.lspt`).
 
@@ -213,9 +219,11 @@ Mantenha este SKILL.md como guia rápido; abra o arquivo de referência quando p
 - **`reference/tabelas.md`** — índice das 3120 tabelas nativas do dicionário de dados (R996TBL),
   agrupadas por módulo. Campos de uma tabela:
   `scripts/buscar_tabela.py <TABELA> --campos`. Ver seção 🗃️ abaixo.
+- **`reference/seguranca-sgu.md`**, **`reference/ftp.md`**, **`reference/edocs.md`**,
+  **`reference/banco-sgbd.md`** — temas específicos; resumo na seção 🧰 abaixo.
 - **`reference/tabelas-edocs.md`** — dicionário das 344 tabelas do **eDocs** (banco separado do
   ERP): NF-e, NFS-e, CT-e, MDF-e, eSocial, GNRE, NFC-e… Busca:
-  `scripts/buscar_tabela_edocs.py <termo|TABELA> [--campos]`. Ver seção 📄 abaixo.
+  `scripts/buscar_tabela_edocs.py <termo|TABELA> [--campos]`. Ver `reference/edocs.md`.
 
 ## 🧩 Estrutura e sintaxe
 
@@ -297,8 +305,9 @@ Mantenha este SKILL.md como guia rápido; abra o arquivo de referência quando p
     concatene nem ponha aspas em volta.
   - Um registro só: `Se (Cur.Achou)`. Vários: `Enquanto (Cur.Achou)` com `Cur.Proximo()` no fim
     do laço. Também existe `Cur.NaoAchou`. Sempre `FecharCursor()`.
-  - Não aceita `SELECT 1`, agregação na lista de colunas nem alias (Limitação 6). Agregação em
-    subconsulta do `WHERE` (`... = (SELECT MAX(...) ...)`) funciona.
+  - A lista de colunas do SELECT principal não aceita `SELECT 1`, agregação nem alias
+    (Limitação 6). Em subconsulta do `WHERE` os dois funcionam: `EXISTS (SELECT 1 ...)`,
+    `... = (SELECT MAX(...) ...)`.
 - **Comando `ExecSql` (escrita com bind):** executa `INSERT`/`UPDATE`/`DELETE` escrito como
   literal, com o mesmo bind `:variavel` do cursor nativo. Não é função: não tem parênteses nem
   parâmetro de saída, e um erro de banco interrompe a regra com a mensagem do banco.
@@ -341,8 +350,9 @@ Mantenha este SKILL.md como guia rápido; abra o arquivo de referência quando p
   `SQL_DefinirComando`/`SQL_AbrirCursor`/`SQL_FecharCursor` por linha e `SQL_Destruir` ao final.
 - **Segurança SQL:** prefira placeholders; nunca concatene entrada do usuário cru no SQL.
 - **Leitura de CSV linha a linha:** use guarda de progresso com `ProcuraEnter` (ver Limitação 9) ou
-  `Abrir`/`Lernl`. Sanitize numéricos com `StrParaInt`→`IntParaAlfa`, limpe CRLF com
-  `CaracterParaAlfa(13, vaCR)` + `TrocaString(...)` e espaços com `LimpaEspacos`. Pule cabeçalhos e
+  `Abrir`/`Lernl`. Sanitize numéricos com `AlfaParaInt`→`IntParaAlfa`, limpe CRLF com
+  `CaracterParaAlfa(13, vaCR)` + `SubstAlfa(vaCR, "", vaLinha)` (altera `vaLinha` no lugar;
+  `TrocaString` faz o mesmo devolvendo em outra variável) e espaços com `LimpaEspacos`. Pule cabeçalhos e
   valide campos obrigatórios com `EstaNulo` antes de gravar.
 
 ## 🔁 Exemplo completo (antes → depois)
@@ -554,128 +564,21 @@ Se ((vaRet = "OK")) { @ ok @ } Senao { @ trata erro @ }
 
 **Decisão:** a entidade tem porta `Gravar`/`Importar`/`Incluir`? **Prefira o WS ao `INSERT` cru.**
 
-## 🔐 Segurança SGU — saber a quem o usuário pertence (grupos/papéis)
+## 🧰 Temas específicos (abra o arquivo quando o pedido tocar no assunto)
 
-Quando a regra precisa decidir **com base em quem é o usuário** (ex.: só a contabilidade pode
-ativar um cadastro), use a API de **entidades do SGU** (`SegEnt*` / `SegUsu*`) em vez de ler tabelas
-`E099USU`/grupos por SQL. Vantagens: respeita a hierarquia de grupos e a segurança nativa.
+O detalhe saiu daqui para não pesar em toda regra. Fica só a armadilha de cada tema:
 
-> ⚠️ **Não estão no `functions.json`** — `buscar_funcao.py` não acha. Origem: doc dos identificadores
-> de regras (ex.: `VEN-120EXPGR01`).
->
-> ⚠️ **Exceção à regra "retorno por parâmetro de saída":** a família `SegEnt*` **retorna por `=`**
-> (valor de retorno da expressão), diferente da maioria das funções LSP.
-
-| Função | Forma | O que faz |
-|---|---|---|
-| `SegEntExistePorNome(nomeLogon)` | `n = SegEnt...` (retorna 1/0) | usuário/entidade existe no SGU? |
-| `SegEntLePorNome(nome, xObj)` | out `xObj` | lê a entidade (usuário/grupo) **pelo nome** p/ o objeto |
-| `SegEntLe(codGrupo, xObj)` | out `xObj` | lê a entidade **pelo código** p/ o objeto |
-| `SegEntLeCodigo(nomeGrupo)` | `n = SegEnt...` (retorna código) | código do grupo a partir do nome |
-| `SegEntCodigo(xObj)` | `n = SegEnt...` (retorna código) | código da entidade já lida no objeto |
-| `SegEntNome(xObj, aNome)` | out `aNome` | nome da entidade já lida no objeto |
-| `SegEntEhMembro(xObjUsu, codGrupo)` | `n = SegEnt...` (retorna 1/0) | **usuário é membro do grupo?** |
-| `SegEntAdicGrp(xObjUsu, codGrupo)` / `SegEntRemvGrp(...)` | — | adiciona/remove usuário do grupo |
-| `SegUsuSetaAtivado(xObjUsu, 0\|1)` + `SegEntGrava(xObj)` | — | (in)ativa o usuário e persiste |
-
-**Padrão — usuário pertence a um grupo (adotado neste projeto):**
-
-```lsp
-@-- canal global p/ devolver o resultado (funcao de usuario nao retorna Alfa - ver Limitacao 5) --@
-Definir Alfa   vaPerMit;
-Definir Numero nCodGrp;     @ codigo do grupo SGU a checar (setar antes de chamar) @
-Definir Alfa   aNomUsu;     @ nome de logon do usuario @
-Definir Alfa   aNomGrp;
-Definir Numero xObjGrp;     @ objeto entidade grupo @
-Definir Numero xObjUsu;     @ objeto entidade usuario @
-Definir Numero xMbo;
-
-Definir Funcao VerificaUsuarioGrupo();
-
-Funcao VerificaUsuarioGrupo();
-   Inicio
-      SegEntLe(nCodGrp, xObjGrp);            @ le o grupo pelo codigo @
-      SegEntNome(xObjGrp, aNomGrp);          @ nome do grupo (out) @
-      nCodGrp = SegEntCodigo(xObjGrp);       @ codigo do grupo (retorna por =) @
-
-      SegEntLePorNome(aNomUsu, xObjUsu);     @ le o usuario pelo nome @
-      xMbo = SegEntEhMembro(xObjUsu, nCodGrp);  @ membro? 1=sim / 0=nao (retorna por =) @
-
-      Se (xMbo = 1) { vaPerMit = "S"; }
-      Senao        { vaPerMit = "N"; }
-   Fim;
-```
-
-Para o **nome de logon** do usuário corrente, normalmente vem por variável do identificador
-(ex.: `GerANomeLogon`) ou converta `CodUsu` conforme o contexto. Depois de `VerificaUsuarioGrupo()`,
-teste `vaPerMit = "S"`.
-
-**Decisão:** a regra precisa gatear comportamento por perfil de usuário? **Prefira `SegEnt*`/grupos do
-SGU** a consultar `E099USU` por SQL — sobretudo onde não há flag nativa (ex.: produto não tem
-permissão nativa de ativação, ao contrário de fornecedor=`E099USU.CprAfo` e cliente=`E099USU.VenAcl`).
-
-## 📡 Transferência de arquivos por FTP/SFTP (família `Ftp*`)
-
-19 funções nativas, categoria `ftp` no `functions.json`
-(`python3 scripts/buscar_funcao.py --listar Ftp`). Antes de escrever, decida o protocolo —
-é aqui que a maioria das integrações trava:
-
-| Protocolo | Suporte na LSP |
-| --- | --- |
-| **FTP** simples (21) | ✅ `FtpConexao` direto |
-| **SFTP** — FTP sobre SSH (22) | ✅ `FtpSetaSFTP(x, 1)`; chave SSH com `FtpSSH` |
-| **FTPS / FTPES** — FTP sobre TLS | ❌ **não existe** na LSP |
-
-**Decisão:** servidor exige TLS implícito ou explícito? A família nativa **não resolve** —
-use cliente externo (WinSCP, `ftpsenior.exe`) via `ExecProg`. Não perca tempo tentando
-passar `ftpes://` no `Host`.
-
-**Padrão de envio com tratamento de erro:**
-
-```lsp
-Definir Alfa   vaFtp;
-Definir Alfa   vaErro;
-Definir Alfa   vaMsg;
-Definir Numero vnRet;
-
-FtpConexao(vaFtp, "ftp.servidor.com.br", 21, "usuario", "senha");   @ host puro, sem esquema @
-FtpModoConexao(vaFtp, 0);          @ 0 passivo (padrao) / 1 ativo @
-FtpModoTransferencia(vaFtp, 0);    @ 0 binario (padrao) / 1 texto @
-
-vnRet = FtpUpload(vaFtp, "C:\\temp\\doc.txt", "/arquivos", "doc.txt");   @ retorna por = @
-
-Se (vnRet = 0)
-   {
-      FtpUltimoErro(vaErro);                       @ leia JA: e o ultimo erro global @
-      vaMsg = "Falha no envio. Erro: " + vaErro;   @ concatena ANTES @
-      Mensagem(Retorna, vaMsg);
-   }
-```
-
-**SFTP com chave SSH** — a ordem é obrigatória e a senha do `FtpConexao` fica **vazia**:
-
-```lsp
-FtpConexao(vaFtp, "sftp.servidor.com.br", 22, "usuario", "");
-FtpSetaSFTP(vaFtp, 1);
-FtpSSH(vaFtp, "C:/keys/id_rsa", "");   @ chave OpenSSH; .ppk do PuTTY NAO e aceito @
-```
-
-**Armadilhas (todas confirmadas na doc oficial):**
-
-- `FtpConexao`, `FtpUpload` e `FtpDownload` **retornam por `=`** (exceção à regra 2 da LSP):
-  `0` = falhou. As demais não retornam nada útil — cheque o efeito.
-- `FtpUltimoErro(Alfa end Erro)` **não recebe a conexão**: é o erro global da última
-  operação. Leia imediatamente após o `0`, antes de qualquer outra chamada `Ftp*`.
-- **A ordem dos parâmetros é invertida entre Upload e Download:**
-  `FtpUpload(Ftp, ArquivoLocal, DiretorioFtp, ArquivoFtp)` ×
-  `FtpDownload(Ftp, DiretorioFtp, ArquivoFtp, ArquivoLocal)`.
-- `Host` aceita **só domínio ou IP** — nada de `ftp://`, `sftp://`, `ftpes://`.
-- `FtpSetaSFTP` vai **depois** do `FtpConexao` (ERP 5.8.10.105+); `FtpSSH` exige 5.10.4+.
-- Listagem (`FtpListar` → `FtpListaQuantidade` → `FtpListaItem`) é indexada **a partir de 1**;
-  `Tipo` volta `"A"` arquivo, `"D"` diretório, `"L"` link.
-- `FtpModoErro(x, 2)` transforma erro em **exceção que interrompe a regra**; o padrão `0`
-  (silencioso) é o que combina com o `Se (vnRet = 0)`.
-- **Não existe função de desconectar** — a conexão é um handle `Alfa` que morre com a regra.
+- **Permissão por usuário/grupo (SGU)** → `reference/seguranca-sgu.md`. Use a família `SegEnt*`
+  em vez de SQL em `E099USU`. Ela **não está no `functions.json`** e **retorna por `=`**
+  (exceção à Limitação 2).
+- **FTP/SFTP** → `reference/ftp.md`. FTP simples e SFTP (`FtpSetaSFTP`) funcionam; **FTPS/FTPES
+  (TLS) não existe na LSP**: use cliente externo via `ExecProg`.
+- **eDocs (NF-e, CT-e, NFS-e…)** → `reference/edocs.md`. Banco **separado** do ERP, tabelas
+  `Nxxx`/`INTERF_*`; busque com `scripts/buscar_tabela_edocs.py <termo|TABELA> [--campos]`.
+- **SQL nativo que muda por banco (Oracle, SQL Server, PostgreSQL)** → `reference/banco-sgbd.md`.
+  Se der, escreva em Senior SQL 2 (`SQL_UsarSqlSenior2`) e não detecte nada. Se precisar,
+  `RetornaValorCFG` na chave `com.senior.database.sapiens.db_kind` e compare pelo **prefixo**
+  (`ORACLE`, `MSSQL`), nunca por igualdade.
 
 ## 🗃️ Dicionário de Tabelas e Campos (quando precisar escrever SELECTs)
 
@@ -737,158 +640,12 @@ buscar_tabela.py --enum LTipNfe          → 1=Normal, 2=Complementar… (via EN
 | Campo nativo de registro já existente | Prefira WS interno ou a variável de saída do identificador de regra; `UPDATE` direto só para campo sem regra de negócio atrelada, e avise o usuário |
 | Registro novo ou exclusão em tabela nativa (cadastro, pedido, título, nota) | WS interno (seção 🌐). `INSERT`/`DELETE` direto pula validações, numeração e tabelas filhas: só a pedido explícito, com todos os defaults (Limitação 7) |
 
-## 📄 Dicionário do eDocs (documentos eletrônicos — banco separado)
-
-O **eDocs** (SDE) tem banco próprio, com 344 tabelas no padrão `Nxxx…` (uma faixa por documento
-eletrônico) mais as tabelas legadas da camada de interface (`INTERF_*`, `LOTE_*`, `EVENTO_NFE`).
-**Não são as tabelas `E0*` do ERP** — se a regra precisa de dados de NF-e/CT-e/NFS-e autorizados,
-confirme primeiro em qual conexão está consultando.
-
-```
-python3 scripts/buscar_tabela_edocs.py <termo>            # busca por nome ou descrição
-python3 scripts/buscar_tabela_edocs.py <TABELA> --campos  # campos, tipos por SGBD, FKs, índices
-python3 scripts/buscar_tabela_edocs.py --modulo N130      # tabelas de um módulo
-python3 scripts/buscar_tabela_edocs.py --modulos          # índice dos módulos
-```
-
-**Faixas por documento eletrônico:**
-
-| Prefixo | Módulo | Prefixo | Módulo |
-| --- | --- | --- | --- |
-| `N010` | Sistema, segurança, parâmetros, multitenant | `N220` | GNRE |
-| `N100` | Cadastros gerais (filiais, certificados, e-mail, XML) | `N230` | Bloco X |
-| `N130` | NF-e (produto) e seus eventos | `N240` | GRF-GTS |
-| `N140` | NFS-e (serviço) | `N250` | Receituário agronômico |
-| `N150` | CT-e | `N260` | Recintos aduaneiros |
-| `N170` | MDF-e | `N270` | SISDEV |
-| `N180` | eSocial | `N280` | IDAF |
-| `N190` | NFC-e | `N290` | DT-e |
-| `N200` | CF-e / SAT | `N310` | NF3-e |
-| `N210` | EFD-Reinf | `N320`/`N330`/`N340` | NFTS / DC-e / NFCom |
-
-**Padrões que se repetem em todos os módulos:**
-- `<mod>` + documento (`N130NFE`, `N140NFS`, `N150CTE`, `N170MDF`, `N190NFC`, `N220GNR`) — o documento em si.
-- `*EVT` — eventos de sistema (histórico de estados/ações) do documento.
-- `*XML` — associação documento/evento ↔ XML armazenado; o conteúdo fica em `N100XML`.
-- `*CAN`, `*INU`, `*CCE` — cancelamento, inutilização, carta de correção.
-- `*LOT` / `*NNL` / `*LTC` — lote e as N-N entre lote e documento (0 campos próprios, 2 FKs).
-- Chave primária sempre `SEQ<xxx>` (`NUMBER(15,0)`); FK da filial é `SEQFIL → N100FIL`.
-
-**Campos de uso frequente em `N130NFE` (NF-e):** `IDENFE` (chave de 44), `IDEERP` (chave do ERP,
-para casar com o documento de origem), `SITNFE` (situação), `NUMNFE`/`SERNFE`, `DATEMI`, `PROREC`
-(protocolo), `CNPEMI`/`EMIALF` (CNPJ numérico × alfanumérico), `TIPOPE` (0=entrada, 1=saída),
-`TIPAMB` (ambiente). Detalhamento campo a campo existe para **N130, N140 e N220**; nos demais
-módulos o script mostra o resumo (nº de campos/FKs/índices e versão de criação).
-
-**Decisão:** precisa gravar algo no eDocs? **Nunca por SQL direto** — a entrada é pela camada de
-interface (`INTERF_*`, alimentada pelo ERP) ou pelos web services do próprio eDocs. Leitura por
-SELECT é aceitável para conferência/monitoramento.
-
-## 🧭 Descobrir qual banco (SGBD) o ERP está usando
-
-O ERP Senior roda sobre **Oracle**, **SQL Server** ou **PostgreSQL**, e o SQL cru muda entre eles
-(`ROWNUM` × `TOP` × `LIMIT`, `NVL` × `ISNULL`, `SYSDATE` × `GETDATE()`, `||` × `+`, `FROM DUAL`).
-Uma regra que precisa montar SQL nativo portável tem de **descobrir o dialeto em tempo de execução** —
-não presuma Oracle só porque a base atual é Oracle.
-
-> Se o SQL for simples, prefira **não** detectar nada: escreva no padrão Senior SQL 2
-> (`SQL_UsarSqlSenior2`), que o próprio ERP traduz para o banco conectado. A detecção abaixo
-> só é necessária quando o comando precisa de sintaxe nativa.
-
-### 1º método — perguntar à Central de Configurações (`RetornaValorCFG`) ✅ preferido
-
-A chave `com.senior.database.<sistema>.db_kind` guarda o **tipo de banco configurado** para
-aquele sistema. Para o ERP o `<sistema>` é `sapiens` (HCM = `vetorh`, e assim por diante).
-
-**O valor traz o produto E a versão, colados por `_`** — medido em produção: `oracle_19`,
-`mssql_2019` (SQL Server 2019). Por isso **nunca compare por igualdade**: case o **prefixo do
-produto** (`ORACLE`, `MSSQL`) com `PosicaoStr`, depois de `ConverteParaMaiusculo`.
-
-```lsp
-Definir Alfa vaChaBco;
-Definir Alfa vaKndBco;
-Definir Alfa vaDialeto;
-Definir Numero vnPosBco;
-
-vaDialeto = "";
-vaKndBco  = "";
-vaChaBco  = "com.senior.database.sapiens.db_kind";
-
-RetornaValorCFG(vaChaBco, vaKndBco);   @ ex.: "oracle_19" ou "mssql_2019" @
-
-@ normaliza ANTES de comparar — a caixa gravada no CFG não é garantida @
-LimpaEspacos(vaKndBco);
-ConverteParaMaiusculo(vaKndBco);
-
-vnPosBco = 0;
-PosicaoStr("ORACLE", vaKndBco, vnPosBco);
-Se (vnPosBco > 0)
-   {
-      vaDialeto = "ORACLE";
-   }
-
-Se (vaDialeto = "")
-   {
-      vnPosBco = 0;
-      PosicaoStr("MSSQL", vaKndBco, vnPosBco);
-      Se (vnPosBco > 0)
-         {
-            vaDialeto = "SQLSERVER";
-         }
-   }
-
-@ vaDialeto vazio aqui = não concluiu; caia no método 2, nunca chute @
-```
-
-Cuidados obrigatórios:
-
-- **Case o prefixo do produto, não a string inteira** — o sufixo de versão muda a cada
-  atualização de banco (`oracle_19` hoje, `oracle_23` amanhã) e igualdade exata quebraria em
-  silêncio, sem erro visível, na próxima migração.
-- **`ORACLE` e `MSSQL`, não `SQL`** — "MSSQL" e "POSTGRESQL" contêm "SQL"; casar só `"SQL"`
-  mandaria PostgreSQL para o ramo do SQL Server.
-- **Sempre tenha um fallback.** Se nenhum ramo casar, `vaDialeto` fica vazio: caia no método 2,
-  nunca chute. Dialeto errado = SQL inválido em *todos* os cursores da regra.
-- **A chave `PASSWORD` do CFG não é legível** por `RetornaValorCFG` (bloqueio da própria função);
-  outras chaves do grupo (`...url`, `...user`) são.
-
-**Bônus:** como o sufixo é a versão do banco, o mesmo retorno serve para liberar sintaxe que só
-existe a partir de certa release (`OFFSET/FETCH`, `LISTAGG`…). Extraia com `CopiarStr` a partir
-do `_` e converta com `AlfaParaInt` — mas trate `mssql_2019` (ano) e `oracle_19` (release) como
-escalas diferentes.
-
-### 2º método — inferir por `RowNum` (custo zero, sem tocar no banco)
-
-`RowNum(pLinhas, pPosicao, pInsAnd, pCmdRet)` devolve o fragmento de limite de linhas **já
-adaptado ao banco conectado**; as posições que não se aplicam voltam vazias, e é esse vazio
-seletivo que identifica o dialeto:
-
-| Posição | Fragmento | Banco que preenche |
-| --- | --- | --- |
-| `"S"` (Select) | `TOP n` | SQL Server |
-| `"C"` (Condição) | `ROWNUM <= n` | Oracle |
-| `"F"` (Final) | `LIMIT n` | PostgreSQL |
-
-Gere sempre as três variáveis, aplique `LimpaEspacos` em cada uma e só conclua com
-**exclusividade** (uma preenchida **e** a outra vazia). Implementação de referência:
-`DetectarDialeto()` em `MonitoringScania/Lista os registros … R960PAR - v3/v4.lspt`.
-
-### 3º método — sonda de banco (último recurso, 2 round-trips)
-
-`ExecutarComandoSQL` só aceita `INSERT`/`UPDATE`, mas devolve a exceção no parâmetro de retorno
-em vez de abortar a regra — o que permite sondar. Dois `UPDATE ... WHERE 1=0` (nada é alterado):
-um **controle** portável (se falhar, o problema não é o dialeto) e uma **sonda** com `ROWNUM`,
-que só o Oracle aceita. Use apenas como rede de segurança dos métodos 1 e 2.
-
-**Ordem recomendada:** `RetornaValorCFG` → `RowNum` → sonda. Os dois primeiros custam zero
-acesso ao banco; o terceiro custa dois.
-
 ## ✅ Checklist antes de finalizar
 
 - [ ] Nenhuma operação/concatenação/conversão dentro de parâmetros de função.
 - [ ] Resultados obtidos por parâmetro de saída (`end`), não por `=`.
 - [ ] Toda função usada existe no `functions.json` com a assinatura/ordem corretas.
-- [ ] Variáveis declaradas no topo, com prefixo de tipo (`va`/`vn`/`vd`).
+- [ ] Variáveis com prefixo de tipo (`va`/`vn`/`vd`); em código novo, declaradas no topo (estilo).
 - [ ] Nenhuma função chamada reutiliza nome de variável do chamador (nome único por função — ver Limitação 13).
 - [ ] Nenhuma `Definir Funcao` com nome de função nativa do catálogo (`buscar_funcao.py <Nome>` não acha — ver Limitação 14).
 - [ ] Cursores SQL fechados (`SQL_FecharCursor` + `SQL_Destruir`) — o linter avisa se faltar.
@@ -903,7 +660,7 @@ acesso ao banco; o terceiro custa dois.
 - [ ] Arquivos abertos com `Abrir` têm `Fechar` correspondente.
 - [ ] Cadastro (cliente/fornecedor/produto…) criado/atualizado via **WS interno** (`interno.<pacote>.Gravar…`), não por `INSERT` cru, quando existe porta de escrita.
 - [ ] Regra acoplada a um **Identificador de Regra** existente: variáveis de **SAÍDA** (`Retorna Valor = S`) atribuídas, **ENTRADA** apenas lidas; grades `<9>` numeradas a partir de 1 sem pular (confira em `scripts/buscar_identificador.py <código>`).
-- [ ] Transferência de arquivo: protocolo do servidor confere com o que a LSP faz (FTP/SFTP **sim**, FTPS/FTPES **não** — ver 📡); `FtpUpload`/`FtpDownload` com retorno testado por `= 0` e `FtpUltimoErro` lido em seguida.
+- [ ] Transferência de arquivo: protocolo do servidor confere com o que a LSP faz (FTP/SFTP **sim**, FTPS/FTPES **não** — ver `reference/ftp.md`); `FtpUpload`/`FtpDownload` com retorno testado por `= 0` e `FtpUltimoErro` lido em seguida.
 - [ ] Nomes de tabelas e campos em SELECTs verificados contra o dicionário (`scripts/buscar_tabela.py`;
       tabelas `N*` do eDocs em `scripts/buscar_tabela_edocs.py`).
 - [ ] SQL com sintaxe nativa (`ROWNUM`/`TOP`/`LIMIT`, `NVL`/`ISNULL`…): dialeto **detectado em execução** (`RetornaValorCFG` da chave `db_kind` → `RowNum` → sonda); `db_kind` vem como `oracle_19`/`mssql_2019`, então case o **prefixo** (`ORACLE`/`MSSQL`) com `PosicaoStr` após `ConverteParaMaiusculo` — nunca igualdade exata — e mantenha fallback quando nenhum ramo casar.

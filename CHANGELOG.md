@@ -24,6 +24,20 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
   `SELECT`), e a escrita direta passou a ter uma tabela de decisão por alvo (tabela/campo de
   usuário, campo nativo, registro novo em tabela nativa) no lugar do "nunca" que conflitava com
   os próprios exemplos.
+- **Funções `*Alfa` como forma principal** (`TamanhoAlfa`, `AlfaParaInt`, `CopiarAlfa`,
+  `SubstAlfa`), no lugar das `*Str` que quase não aparecem em regra real. `TrocaString` segue
+  citada como alternativa de `SubstAlfa`: tem 4 parâmetros e devolve em outra variável, em vez
+  de alterar o texto no lugar. O cartão rápido dizia que `CopiarAlfa` "retorna trecho"; ela
+  altera a própria variável.
+- **"Declare variáveis no início" virou convenção de estilo:** o motor aceita `Definir` no meio
+  do fluxo (97% das regras reais fazem isso). A Limitação 4 manteve o número.
+- **Limitação 6 com ressalva:** a proibição de `SELECT 1`, agregação e alias vale só para a
+  lista de colunas do SELECT principal do cursor nativo; em subconsulta do `WHERE`
+  (`EXISTS (SELECT 1 ...)`, `= (SELECT MAX(...) ...)`) funciona.
+- **`SKILL.md` mais enxuto (51 → 40 KB):** quatro temas de nicho saíram para `reference/`
+  (`seguranca-sgu.md`, `ftp.md`, `edocs.md`, `banco-sgbd.md`), sem perda de texto; no lugar
+  ficou a seção 🧰 com a armadilha de cada um. O README passou a explicar qual pasta é a fonte
+  da skill e como atualizar a cópia usada pelo Claude Code.
 
 ### 🐛 Corrigido
 - **Aviso falso "Operação dentro do parâmetro de 'e'/'ou'/'and'/'nvl'…".** O linter tratava

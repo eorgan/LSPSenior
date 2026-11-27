@@ -93,13 +93,17 @@ Se (vnEhNulo = 0) { ... }     @ compara a variável @
 Para descobrir qual parâmetro é de saída, use `scripts/buscar_funcao.py <Nome>` e veja
 quais aparecem como `→ SAÍDA`. (Exceções que retornam por `=`: ex. `Truncar`.)
 
-### #3 — Declarar variável no meio do código
+### #3 — Declarar variável no meio do código (estilo, não erro)
 
-Declare tudo no início da regra/função; nunca dentro de `Se`/loop.
+O motor aceita `Definir` no meio do fluxo, e a maioria das regras reais faz isso. Em código
+novo, prefira declarar no início da regra/função, por legibilidade e para não repetir nome.
 
 ```lsp
-@ ❌ @ Se (vnCond = 1) { Definir Alfa vaVar; vaVar = "x"; }
-@ ✅ @ Definir Alfa vaVar;  ...  Se (vnCond = 1) { vaVar = "x"; }
+@ funciona, mas evite em codigo novo @
+Se (vnCond = 1) { Definir Alfa vaVar; vaVar = "x"; }
+@ preferido @
+Definir Alfa vaVar2;
+Se (vnCond = 1) { vaVar2 = "x"; }
 ```
 
 ### #4 — Concatenar tipos não-Alfa

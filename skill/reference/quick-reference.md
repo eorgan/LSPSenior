@@ -25,8 +25,9 @@ Enquanto (cond) { ... }       @ atualize a condição! @
 | --- | --- |
 | `TamanhoAlfa(texto, tamanho)` | tamanho ← Numero (saída) |
 | `PosicaoAlfa(busca, texto, pos)` | pos ← posição (saída) |
-| `SubstAlfa(antigo, novo, texto)` | texto ← resultado (saída) |
-| `CopiarAlfa(texto, posInicial, qtd)` | retorna trecho |
+| `SubstAlfa(antigo, novo, texto)` | texto ← resultado, no lugar (saída) |
+| `TrocaString(texto, antigo, novo, destino)` | igual a `SubstAlfa`, mas preserva `texto` e devolve em `destino` (saída) |
+| `CopiarAlfa(texto, posInicial, qtd)` | texto ← só o trecho, no lugar (copie antes se precisar do original) |
 | `LimpaEspacos(texto)` | texto ← sem espaços (saída) |
 | `DeletarAlfa(texto, pos, qtd)` | remove trecho |
 | `InserirAlfa(valor, texto, pos)` | insere em texto (saída) |
@@ -42,7 +43,7 @@ Enquanto (cond) { ... }       @ atualize a condição! @
 | `AlfaParaInt(texto, numero)` | Alfa → Numero |
 | `AlfaParaDecimal(texto, decimal)` | Alfa → Numero decimal |
 | `DecimalParaAlfa(decimal, texto)` | Numero → Alfa |
-| `StrParaInt(texto, numero)` / `IntParaStr(numero, texto)` | Str ↔ Int |
+| `StrParaInt(texto, numero)` / `IntParaStr(numero, texto)` | Str ↔ Int (equivalentes de compatibilidade; prefira `AlfaParaInt`/`IntParaAlfa`) |
 | `AlfaParaData(texto, data)` | Alfa → Data |
 | `ConverteMascara(tipo, origem, dest, mascara)` | aplica máscara |
 

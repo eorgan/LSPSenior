@@ -108,5 +108,5 @@ Se (vnEhNulo = 0)
 - [ ] Toda função existe no `functions.json` (`scripts/buscar_funcao.py <Nome>`) — exceto `SQL_*`/`Http*`, validados nos exemplos reais.
 - [ ] Resultados lidos por parâmetro de saída (`→ SAÍDA`), nunca por `=` (salvo exceções como `Truncar`).
 - [ ] Nenhuma operação/conversão/concatenação dentro de parâmetro.
-- [ ] Variáveis declaradas no topo, com prefixo de tipo.
+- [ ] Variáveis com prefixo de tipo; em código novo, declaradas no topo (estilo).
 - [ ] Cursores fechados/destruídos; arquivos fechados; loops com condição que evolui.
