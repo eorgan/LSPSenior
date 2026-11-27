@@ -30,6 +30,10 @@ const RESERVED_LOWER = new Set(RESERVED_WORDS.map((w) => w.toLowerCase()));
 // Construções de fluxo cujos parênteses contêm EXPRESSÕES (não são chamadas de função).
 // Só estas são isentas da regra "sem operação dentro de parâmetro".
 const CONTROL_FLOW_LOWER = new Set(['se', 'senao', 'enquanto', 'para', 'funcao']);
+// Operadores lógicos seguidos de "(" — `Se ((a = 1) e (b > 2))` — não são chamadas de função.
+const LOGICAL_OPS_LOWER = new Set(['e', 'ou', 'nao', 'and', 'or', 'not']);
+// Texto entre aspas que continua na linha de baixo (SQL de cursor nativo, ExecSql): limite da busca pelo fechamento.
+const MAX_MULTILINE_STRING = 80;
 
 // Variáveis de sistema da LSP, com descrição (fonte: manual oficial).
 const SYSTEM_VARS = {
@@ -143,6 +147,15 @@ function stripCommentsAndStrings(line) {
    s = s.replace(/"(?:[^"\\]|\\.)*"/g, (m) => ' '.repeat(m.length));
    s = s.replace(/'(?:[^'\\]|\\.)*'/g, (m) => ' '.repeat(m.length));
    return s;
+}
+
+/** Índice da primeira aspa dupla não escapada da linha, ou -1. */
+function firstUnescapedQuote(text) {
+   for (let i = 0; i < text.length; i++) {
+      if (text[i] === '\\') i++;
+      else if (text[i] === '"') return i;
+   }
+   return -1;
 }
 
 /** Extrai os argumentos de uma chamada a partir do índice do "(" (linha única). */
@@ -573,9 +586,21 @@ function computeDiagnostics(document) {
    const funcScopeDepths = [];
    let pendingFuncao = false;
    const rootCursorScope = new Map();
+   let multiStrEnd = -1; // linha em que fecha o texto entre aspas aberto em linha anterior
 
    for (let lineNo = 0; lineNo < document.lineCount; lineNo++) {
       let raw = document.lineAt(lineNo).text;
+
+      // Texto entre aspas multi-linha: o miolo não é código (ex.: SQL com `and (a + b)` ou `nvl(x, 0)`).
+      if (multiStrEnd !== -1) {
+         if (lineNo < multiStrEnd) {
+            raw = ' '.repeat(raw.length);
+         } else {
+            const fim = firstUnescapedQuote(raw);
+            raw = ' '.repeat(fim + 1) + raw.slice(fim + 1);
+            multiStrEnd = -1;
+         }
+      }
 
       // Comentário de bloco /* */ multi-linha.
       if (inBlockComment) {
@@ -590,7 +615,20 @@ function computeDiagnostics(document) {
          inBlockComment = true;
       }
 
-      const line = stripCommentsAndStrings(raw);
+      let line = stripCommentsAndStrings(raw);
+
+      // Aspas sem par na linha: o texto continua abaixo, se houver fechamento por perto.
+      const aspaAberta = line.indexOf('"');
+      if (aspaAberta !== -1) {
+         const limite = Math.min(document.lineCount, lineNo + 1 + MAX_MULTILINE_STRING);
+         for (let j = lineNo + 1; j < limite; j++) {
+            if (firstUnescapedQuote(document.lineAt(j).text) !== -1) {
+               multiStrEnd = j;
+               break;
+            }
+         }
+         if (multiStrEnd !== -1) line = line.slice(0, aspaAberta) + ' '.repeat(line.length - aspaAberta);
+      }
 
       // Detecta início de definição de função para abrir escopo de cursor
       if (sqlCursorLeakEnabled && /\bFuncao\b/i.test(line)) {
@@ -680,6 +718,7 @@ function computeDiagnostics(document) {
          const nome = cm[1];
          const lower = nome.toLowerCase();
          if (CONTROL_FLOW_LOWER.has(lower)) continue; // Se/Enquanto/Para/Funcao: expressões, não chamadas
+         if (LOGICAL_OPS_LOWER.has(lower)) continue; // e/ou antes de parêntese: operador, não chamada
          if (line[cm.index - 1] === '.') continue; // método de objeto (cursor/WS) — não analisa
 
          const isBuiltin = lower in FUNCTIONS_LOWER;
