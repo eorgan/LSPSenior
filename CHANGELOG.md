@@ -38,6 +38,10 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
   (`seguranca-sgu.md`, `ftp.md`, `edocs.md`, `banco-sgbd.md`), sem perda de texto; no lugar
   ficou a seção 🧰 com a armadilha de cada um. O README passou a explicar qual pasta é a fonte
   da skill e como atualizar a cópia usada pelo Claude Code.
+- **Snippets seguem a regra de ouro:** oito exemplos (`http`, `log`, `parametros`, `sql`, `ws` e
+  um "CORRETO" do `erros-comuns.md`) concatenavam dentro do parâmetro de `Mensagem` ou de
+  `HttpAlteraCabecalhoRequisicao`, dois deles com `Numero`. Agora montam o texto em variável
+  (convertendo com `IntParaAlfa`) e passam só a variável.
 
 ### 🐛 Corrigido
 - **Aviso falso "Operação dentro do parâmetro de 'e'/'ou'/'and'/'nvl'…".** O linter tratava
