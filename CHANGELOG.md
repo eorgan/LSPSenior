@@ -8,6 +8,22 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 
 
+## [Não publicado]
+
+### ✨ Adicionado
+- **6 funções no catálogo (`functions.json`), total 676:** `ExecSP` e `IniciaBarraProgresso`
+  (documentadas pela Senior) e `ExecSQLEx`, `IniciarTransacao`, `FinalizarTransacao` e
+  `DesfazerTransacao` (sem página no manual; assinatura conferida pelo uso em 2.569 regras
+  reais de 20 bases: sempre a mesma quantidade de parâmetros, em 10 a 13 clientes cada).
+
+### 🐛 Corrigido
+- **Aviso falso "Operação dentro do parâmetro de 'e'/'ou'/'and'/'nvl'…".** O linter tratava
+  como chamada de função (1) os operadores lógicos seguidos de parêntese, como em
+  `Se ((a = 1) e (b + 1 > 2))`, e (2) o miolo de textos entre aspas que continuam na linha de
+  baixo, como o SQL de `Cur.SQL "SELECT ... \n WHERE ... and (x + 1)"`. Medido nas mesmas regras
+  reais: o aviso caiu de 2.313 ocorrências em 532 regras para 95 em 46, e as regras com algum
+  aviso do linter, de 555 para 74.
+
 ## [1.15.1] - 2026-08-28
 
 ### 🐛 Corrigido

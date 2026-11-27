@@ -3,7 +3,7 @@ name: lsp-senior
 description: >-
   Use ao escrever, editar ou revisar código LSP (Linguagem Senior de Programação) —
   arquivos .lsp/.lspt do ERP Senior: regras, cursores SQL, web services e relatórios.
-  Cobre o catálogo de 670 funções built-in, incluindo as APIs SQL_*, Http* e Ftp*.
+  Cobre o catálogo de 676 funções built-in, incluindo as APIs SQL_*, Http* e Ftp*.
 ---
 
 # Programando em LSP (Linguagem Senior de Programação) com segurança
@@ -165,7 +165,7 @@ case-insensitive, então compare nomes ignorando a caixa.
 
 Sempre cheque a `direction` de cada parâmetro: `in` = você fornece; `out` (`end`) = recebe o resultado.
 
-> ✅ O `functions.json` cobre **670 funções**, incluindo as APIs `SQL_*` (cursores,
+> ✅ O `functions.json` cobre **676 funções**, incluindo as APIs `SQL_*` (cursores,
 > categoria `sql`), `Http*` (requisições, categoria `http`) e `Ftp*` (transferência de
 > arquivos, categoria `ftp` — ver seção 📡). Consulte qualquer uma com
 > `python3 scripts/buscar_funcao.py <Nome>`; `reference/quick-reference.md` traz os padrões

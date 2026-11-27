@@ -102,6 +102,8 @@ Funções `SQL_*` agora **constam no catálogo** (`functions.json`/`docs/functio
 | Iterar | `Enquanto (SQL_EOF(sql) = 0) { ... SQL_Proximo(sql); }` |
 | Ler campo | `SQL_RetornarAlfa` / `SQL_RetornarInteiro` / `SQL_RetornarFlutuante` / `SQL_RetornarData` |
 | Encerrar | `SQL_FecharCursor(sql)` · `SQL_Destruir(sql)` |
-| Escrita | `ExecSQLEx(comando, xErro, xMensagem)` e trate `xErro` — **fora do catálogo**, validada em regras `.lspt` reais |
+| Escrita | `ExecSQLEx(comando, xErro, xMensagem)` e trate `xErro` (0 = sucesso) — sem página no manual da Senior, validada em regras reais |
+| Transação | `IniciarTransacao();` … `FinalizarTransacao();` ou `DesfazerTransacao();` — sem parâmetros; sem página no manual, validadas em regras reais |
+| Stored procedure | `ExecSP(nome, entrada, saida)` — parâmetros em texto `NOME=valor;NOME2=valor2` |
 
 Modelo completo de cursor está no `SKILL.md`.

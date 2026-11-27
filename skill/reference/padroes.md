@@ -72,9 +72,11 @@ Senao
   }
 ```
 
-> ⚠️ `ExecSQLEx` **não está no `functions.json`** (buraco do catálogo, como a família
-> `SQL_Definir*`): assinatura validada nas regras `.lspt` reais —
-> `ExecSQLEx(comando, erro, mensagem)`, com `erro` comparado a `0`/`1` (0 = sucesso).
+> ℹ️ `ExecSQLEx` não tem página no manual da Senior. Está no `functions.json` com a assinatura
+> conferida em regras reais de produção — `ExecSQLEx(comando, erro, mensagem)`, com `erro`
+> comparado a `0`/`1` (0 = sucesso). O mesmo vale para `IniciarTransacao()`,
+> `FinalizarTransacao()` e `DesfazerTransacao()` (sem parâmetros), usadas em volta de escritas
+> que precisam valer juntas.
 
 ## Padrão: validação de entrada externa (ex.: CPF/CEP)
 

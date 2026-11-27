@@ -17607,6 +17607,22 @@
     "source": "https://documentacao.senior.com.br/gestaoempresarialerp/5.10.4/regra_funcoes/incluiroperacaoop.htm",
     "category": "rule"
   },
+  "IniciaBarraProgresso": {
+    "code": "N/A",
+    "name": "IniciaBarraProgresso",
+    "signature": "Funcao IniciaBarraProgresso(Numero VlrMax);",
+    "params": [
+      {
+        "name": "VlrMax",
+        "type": "Numero",
+        "direction": "in",
+        "description": "Valor máximo da barra de progresso (quantidade total de passos)."
+      }
+    ],
+    "description": "Inicia a barra de progresso que mostra ao usuário o andamento de um processo longo. Use com AtualizaBarraProgresso (dentro do laço) e FinalizaBarraProgresso (ao terminar). Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/iniciabarraprogresso.htm",
+    "category": "rule"
+  },
   "IniciarGravacaoDadosEntrada": {
     "code": "N/A",
     "name": "IniciarGravacaoDadosEntrada",
@@ -23322,5 +23338,90 @@
     "description": "Permite renomear um diretório ou um arquivo do servidor FTP. Informando um caminho no NovoNome, a função também MOVE o arquivo entre diretórios. Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
     "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/ftp/ftprenomear.htm",
     "category": "ftp"
+  },
+  "ExecSP": {
+    "code": "N/A",
+    "name": "ExecSP",
+    "signature": "Funcao ExecSP(Alfa pNome, Alfa pParamEntrada, Alfa End pParamSaida);",
+    "params": [
+      {
+        "name": "pNome",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Nome da Stored Procedure a executar."
+      },
+      {
+        "name": "pParamEntrada",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Valores de entrada, identificados pelo nome do parâmetro (NOME=valor;NOME2=valor2). Ponha o valor entre aspas simples, obrigatoriamente quando ele contém ponto e vírgula."
+      },
+      {
+        "name": "pParamSaida",
+        "type": "Alfa End",
+        "direction": "out",
+        "description": "Retorna os valores informados e os valores devolvidos pela procedure, no mesmo formato."
+      }
+    ],
+    "description": "Executa uma Stored Procedure do banco de dados definida no TBS. Os parâmetros vão e voltam em texto, no formato NOME=valor;NOME2=valor2. Não é obrigatório informar todos os parâmetros de entrada; todos os de saída voltam, mesmo sem valor. Datas seguem o formato padrão do sistema. Para ler um valor do retorno use ObtemValorParam.",
+    "returns": [
+      "O resultado vem em pParamSaida; a função não documenta código de erro próprio."
+    ],
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/execucao-de-stored-procedures-nas-regras/execsp.htm",
+    "category": "rule"
+  },
+  "ExecSQLEx": {
+    "code": "N/A",
+    "name": "ExecSQLEx",
+    "signature": "Funcao ExecSQLEx(Alfa Comando, Numero End Erro, Alfa End Mensagem);",
+    "params": [
+      {
+        "name": "Comando",
+        "type": "Alfa",
+        "direction": "in",
+        "description": "Texto do comando SQL a executar."
+      },
+      {
+        "name": "Erro",
+        "type": "Numero End",
+        "direction": "out",
+        "description": "Retorna 0 quando o comando executou com sucesso e 1 quando houve erro."
+      },
+      {
+        "name": "Mensagem",
+        "type": "Alfa End",
+        "direction": "out",
+        "description": "Retorna a mensagem de erro do banco quando Erro = 1."
+      }
+    ],
+    "description": "Executa um comando SQL de escrita (INSERT, UPDATE, DELETE) e devolve o resultado em vez de interromper a regra em caso de erro. Sempre teste Erro depois da chamada. Não tem página no manual da Senior: assinatura conferida pelo uso em regras reais de produção (3 parâmetros em todas as 464 chamadas, 11 clientes).",
+    "returns": [
+      "Sem retorno por '='. O resultado vem nos parâmetros Erro e Mensagem."
+    ],
+    "category": "rule"
+  },
+  "IniciarTransacao": {
+    "code": "N/A",
+    "name": "IniciarTransacao",
+    "signature": "Funcao IniciarTransacao();",
+    "params": [],
+    "description": "Abre uma transação no banco de dados: os comandos de escrita seguintes só valem depois de FinalizarTransacao e podem ser desfeitos com DesfazerTransacao. Não tem página no manual da Senior: assinatura conferida pelo uso em regras reais de produção (sempre sem parâmetros, 13 clientes); o comportamento descrito é o que o nome e o uso indicam.",
+    "category": "rule"
+  },
+  "FinalizarTransacao": {
+    "code": "N/A",
+    "name": "FinalizarTransacao",
+    "signature": "Funcao FinalizarTransacao();",
+    "params": [],
+    "description": "Confirma (commit) a transação aberta com IniciarTransacao. Não tem página no manual da Senior: assinatura conferida pelo uso em regras reais de produção (sempre sem parâmetros, 13 clientes); o comportamento descrito é o que o nome e o uso indicam.",
+    "category": "rule"
+  },
+  "DesfazerTransacao": {
+    "code": "N/A",
+    "name": "DesfazerTransacao",
+    "signature": "Funcao DesfazerTransacao();",
+    "params": [],
+    "description": "Desfaz (rollback) os comandos executados desde IniciarTransacao. Não tem página no manual da Senior: assinatura conferida pelo uso em regras reais de produção (sempre sem parâmetros, 10 clientes); o comportamento descrito é o que o nome e o uso indicam.",
+    "category": "rule"
   }
 }

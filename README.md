@@ -27,7 +27,7 @@ code --install-extension lspt-language-support-1.15.1.vsix
 
 Resumo dos recursos:
 
-- **Autocomplete** de 670 funções (regras + APIs `SQL_*` de cursor/bind, `Http*` de requisição e `Ftp*` de transferência de arquivos), palavras reservadas e variáveis de sistema (com ou sem `Dev.`)
+- **Autocomplete** de 676 funções (regras + APIs `SQL_*` de cursor/bind, `Http*` de requisição e `Ftp*` de transferência de arquivos), palavras reservadas e variáveis de sistema (com ou sem `Dev.`)
 - **Signature help** e **hover** com descrição de parâmetros, valores de retorno e link para a doc oficial
 - **Linter** que avisa sobre as armadilhas da LSP (operação dentro de parâmetro, `Pare`/`Continue` fora de loop, `SQL_AbrirCursor` sem `SQL_FecharCursor`/`SQL_Destruir`)
 - **Outline** das funções do arquivo, **folding** inteligente — funções (preview mostra `Funcao Nome();`), blocos `Se`/`Senao`/`Para`/`Enquanto` (`Inicio`/`Fim` e `{`/`}`) e seções `@-- ... --@` como regiões dobráveis (`Cmd+K Cmd+8`)

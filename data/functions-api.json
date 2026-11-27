@@ -417,5 +417,57 @@
     "params": {
       "aTempo": "Tempo de pausa em MILISSEGUNDOS (5000 = 5 segundos). A regra fica bloqueada durante a pausa."
     }
+  },
+  "IniciaBarraProgresso": {
+    "signature": "Funcao IniciaBarraProgresso(Numero VlrMax);",
+    "description": "Inicia a barra de progresso que mostra ao usuário o andamento de um processo longo. Use com AtualizaBarraProgresso (dentro do laço) e FinalizaBarraProgresso (ao terminar). Disponível em Gestão Empresarial | ERP, Gestão Empresarial PME | GO UP, Gestão de Pessoas | HCM e Ronda Senior.",
+    "params": {
+      "VlrMax": "Valor máximo da barra de progresso (quantidade total de passos)."
+    },
+    "example": "Definir Numero vnTotal;\n\nvnTotal = 200;\nIniciaBarraProgresso(vnTotal);\n@ ... laço com AtualizaBarraProgresso ... @\nFinalizaBarraProgresso();",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/gerais/iniciabarraprogresso.htm"
+  },
+  "ExecSP": {
+    "signature": "Funcao ExecSP(Alfa pNome, Alfa pParamEntrada, Alfa End pParamSaida);",
+    "description": "Executa uma Stored Procedure do banco de dados definida no TBS. Os parâmetros vão e voltam em texto, no formato NOME=valor;NOME2=valor2. Não é obrigatório informar todos os parâmetros de entrada; todos os de saída voltam, mesmo sem valor. Datas seguem o formato padrão do sistema. Para ler um valor do retorno use ObtemValorParam.",
+    "params": {
+      "pNome": "Nome da Stored Procedure a executar.",
+      "pParamEntrada": "Valores de entrada, identificados pelo nome do parâmetro (NOME=valor;NOME2=valor2). Ponha o valor entre aspas simples, obrigatoriamente quando ele contém ponto e vírgula.",
+      "pParamSaida": "Retorna os valores informados e os valores devolvidos pela procedure, no mesmo formato."
+    },
+    "returns": [
+      "O resultado vem em pParamSaida; a função não documenta código de erro próprio."
+    ],
+    "example": "Definir Alfa vaEntrada;\nDefinir Alfa vaRetorno;\n\nvaEntrada = \"p_idtpes='0100011000000001';p_numcra='010000000001'\";\nExecSP(\"SP_ATUPRMLOC\", vaEntrada, vaRetorno);",
+    "source": "https://documentacao.senior.com.br/tecnologia/5.10.4/lsp/funcoes/execucao-de-stored-procedures-nas-regras/execsp.htm"
+  },
+  "ExecSQLEx": {
+    "signature": "Funcao ExecSQLEx(Alfa Comando, Numero End Erro, Alfa End Mensagem);",
+    "description": "Executa um comando SQL de escrita (INSERT, UPDATE, DELETE) e devolve o resultado em vez de interromper a regra em caso de erro. Sempre teste Erro depois da chamada. Não tem página no manual da Senior: assinatura conferida pelo uso em regras reais de produção (3 parâmetros em todas as 464 chamadas, 11 clientes).",
+    "params": {
+      "Comando": "Texto do comando SQL a executar.",
+      "Erro": "Retorna 0 quando o comando executou com sucesso e 1 quando houve erro.",
+      "Mensagem": "Retorna a mensagem de erro do banco quando Erro = 1."
+    },
+    "returns": [
+      "Sem retorno por '='. O resultado vem nos parâmetros Erro e Mensagem."
+    ],
+    "example": "Definir Alfa   vaComando;\nDefinir Numero xErro;\nDefinir Alfa   xMensagem;\n\nvaComando = \"UPDATE E085CLI SET SITCLI = 'I' WHERE CODCLI = 123\";\nExecSQLEx(vaComando, xErro, xMensagem);\nSe (xErro <> 0)\nInicio\n   Mensagem(Erro, xMensagem);\nFim;"
+  },
+  "IniciarTransacao": {
+    "signature": "Funcao IniciarTransacao();",
+    "description": "Abre uma transação no banco de dados: os comandos de escrita seguintes só valem depois de FinalizarTransacao e podem ser desfeitos com DesfazerTransacao. Não tem página no manual da Senior: assinatura conferida pelo uso em regras reais de produção (sempre sem parâmetros, 13 clientes); o comportamento descrito é o que o nome e o uso indicam.",
+    "params": {},
+    "example": "Definir Alfa   vaComando;\nDefinir Numero xErro;\nDefinir Alfa   xMensagem;\n\nvaComando = \"UPDATE E085CLI SET SITCLI = 'I' WHERE CODCLI = 123\";\nIniciarTransacao();\nExecSQLEx(vaComando, xErro, xMensagem);\nSe (xErro = 0)\nInicio\n   FinalizarTransacao();\nFim;\nSenao\nInicio\n   DesfazerTransacao();\n   Mensagem(Erro, xMensagem);\nFim;"
+  },
+  "FinalizarTransacao": {
+    "signature": "Funcao FinalizarTransacao();",
+    "description": "Confirma (commit) a transação aberta com IniciarTransacao. Não tem página no manual da Senior: assinatura conferida pelo uso em regras reais de produção (sempre sem parâmetros, 13 clientes); o comportamento descrito é o que o nome e o uso indicam.",
+    "params": {}
+  },
+  "DesfazerTransacao": {
+    "signature": "Funcao DesfazerTransacao();",
+    "description": "Desfaz (rollback) os comandos executados desde IniciarTransacao. Não tem página no manual da Senior: assinatura conferida pelo uso em regras reais de produção (sempre sem parâmetros, 10 clientes); o comportamento descrito é o que o nome e o uso indicam.",
+    "params": {}
   }
 }

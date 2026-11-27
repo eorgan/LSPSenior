@@ -8,7 +8,7 @@ com segurança — evitando os erros mais comuns do ERP Senior (G5).
 ```
 lsp-senior/
 ├── SKILL.md                       ← skill principal (carregada automaticamente pelo Claude Code)
-├── functions.json                 ← catálogo de 670 funções (assinatura, params, direção, retorno)
+├── functions.json                 ← catálogo de 676 funções (assinatura, params, direção, retorno)
 ├── scripts/
 │   ├── buscar_funcao.py           ← catálogo de funções built-in
 │   ├── buscar_ws.py               ← 434 web services do ERP (entrada/saída de cada um)
@@ -63,7 +63,7 @@ python3 scripts/buscar_snippet.py cursor
   `SELECT 1`, NULL em INSERTs, variáveis de sistema no SQL, `ProcuraEnter` em loop, parênteses
   por comparação, comentários `@ … @` (linha) × `/* … */` (bloco)
 - **Nomenclatura:** `va` (Alfa), `vn` (Numero), `vd` (Data)
-- **Catálogo:** 670 funções built-in com assinatura, parâmetros e direção — inclui `SQL_*`
+- **Catálogo:** 676 funções built-in com assinatura, parâmetros e direção — inclui `SQL_*`
   (cursores e bind), `Http*` e `Ftp*`
 - **FTP/SFTP:** a LSP **não** faz FTPS/FTPES; SFTP exige `FtpSetaSFTP` (+ `FtpSSH` para chave)
 - **Web services internos:** proxy `interno.*`, `ModoExecucao`, `CriarLinha`
