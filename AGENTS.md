@@ -14,7 +14,8 @@ Leia primeiro a skill **[.claude/skills/lsp-senior/SKILL.md](.claude/skills/lsp-
 2. **Funções retornam por parâmetro de saída (`end`), não por `=`.**
    `RetDiaSemana(vnData, vnDia);` — `vnDia` recebe o resultado.
 3. **Confirme toda função no catálogo antes de usar** (não invente assinaturas).
-4. **Declare variáveis no topo**, com prefixo de tipo: `va` (Alfa), `vn` (Numero), `vd` (Data).
+4. **Use prefixo de tipo nas variáveis:** `va` (Alfa), `vn` (Numero), `vd` (Data). Em código
+   novo, prefira declarar no topo (convenção de estilo; o motor aceita `Definir` no meio do fluxo).
 5. A LSP é **case-insensitive**; comandos terminam com `;`; blocos `{ }` ou `Inicio/Fim;`.
 
 ## Catálogo de funções (fonte da verdade deste projeto)
