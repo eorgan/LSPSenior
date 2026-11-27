@@ -29,7 +29,8 @@ HttpObjeto(vaHTTP);
 
 ```lspt
 HttpAlteraCabecalhoRequisicao(vaHTTP, "Content-Type", "application/json"); @ TODO: ajustar @
-HttpAlteraCabecalhoRequisicao(vaHTTP, "Authorization", "Bearer " + vaToken); @ TODO: ajustar ou remover @
+vaAuth = "Bearer " + vaToken; @ monte antes: nada de concatenar dentro do parâmetro @
+HttpAlteraCabecalhoRequisicao(vaHTTP, "Authorization", vaAuth); @ TODO: ajustar ou remover @
 ```
 
 ---
@@ -58,12 +59,16 @@ Definir Alfa vaDados;
 Definir Alfa vaURL;
 Definir Alfa vaToken;
 Definir Numero vnCodHttp;
+Definir Alfa vaCodHttp;
+Definir Alfa vaMsgErro;
 
 @ --- Chamada --- @
 ChamarAPI();
 Se (vnCodHttp <> 200)
    {
-      Mensagem(Erro, "Falha na chamada HTTP. Código: " + vnCodHttp); @ TODO: ajustar @
+      IntParaAlfa(vnCodHttp, vaCodHttp);
+      vaMsgErro = "Falha na chamada HTTP. Código: " + vaCodHttp; @ TODO: ajustar @
+      Mensagem(Erro, vaMsgErro);
    }
 
 @ --- Implementação --- @

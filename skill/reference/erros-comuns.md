@@ -170,7 +170,9 @@ texto corta a mensagem naquele ponto e vira um botão truncado — confirmado em
 
 ```lsp
 @ ERRADO @  Mensagem(Retorna, "Resumo [SIMULACAO - nada gravado]" + vaDetalhe);
-@ CORRETO @ Mensagem(Retorna, "Resumo - SIMULACAO, nada gravado" + vaDetalhe);
+@ CORRETO @
+vaMsg = "Resumo - SIMULACAO, nada gravado" + vaDetalhe;
+Mensagem(Retorna, vaMsg);
 ```
 
 Use parênteses ou travessão para destacar; reserve `[` `]` para botões de verdade. Texto de

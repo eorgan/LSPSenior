@@ -236,6 +236,7 @@ FinalizarTransacao();
 @ --- Declarações --- @
 Definir Alfa   vaComandoDML;
 Definir Alfa   vaResExec;
+Definir Alfa   vaMsgErro;
 Definir Numero vnLinhas;
 
 /*
@@ -252,6 +253,7 @@ vaComandoDML = vaComandoDML + " WHERE CHAVE = '" + vaChave + "'"; @ TODO: ajusta
 ExecutarComandoSQL(vaComandoDML, "N", vnLinhas, vaResExec); @ "N" = sem conexão paralela @
 Se (vaResExec <> "OK")
    {
-      Mensagem(Erro, "Falha ao executar SQL: " + vaResExec); @ TODO: ajustar mensagem @
+      vaMsgErro = "Falha ao executar SQL: " + vaResExec; @ TODO: ajustar mensagem @
+      Mensagem(Erro, vaMsgErro);
    }
 ```

@@ -66,13 +66,15 @@ Para (vnLin = 0; vnLin < vnQtd; vnLin++)
 Definir interno.com.senior.g5.MODULO.SUBMODULO.NomeWS wsNome; @ TODO: ajustar @
 Definir Funcao ChamarWS(); @ TODO: renomear @
 Definir Alfa vaErroExec;
+Definir Alfa vaMsgErro;
 Definir Alfa vaResultado; @ TODO: ajustar tipo/nome @
 
 @ --- Chamada --- @
 ChamarWS();
 Se (vaErroExec <> "")
    {
-      Mensagem(Erro, "Erro no WS: " + vaErroExec); @ TODO: ajustar @
+      vaMsgErro = "Erro no WS: " + vaErroExec; @ TODO: ajustar @
+      Mensagem(Erro, vaMsgErro);
    }
 
 @ --- Implementação --- @
@@ -100,6 +102,8 @@ Definir Numero vnQtdItens;
 Definir Numero vnLin;
 Definir Alfa   vaErroExec;
 Definir Alfa   vaMsgRet;
+Definir Alfa   vaMsgErro;
+Definir Alfa   vaLin;
 Definir Numero vnTipRet;
 
 @ --- Chamada --- @
@@ -123,7 +127,8 @@ Funcao ChamarWSMulti();
       vaErroExec = wsNome.erroExecucao;
       Se (vaErroExec <> "")
          {
-            Mensagem(Erro, "Erro no WS: " + vaErroExec); @ TODO: ajustar @
+            vaMsgErro = "Erro no WS: " + vaErroExec; @ TODO: ajustar @
+            Mensagem(Erro, vaMsgErro);
          }
       Senao
          {
@@ -135,7 +140,9 @@ Funcao ChamarWSMulti();
                   vaMsgRet = wsNome.GridRetorno.Mensagem;
                   Se (vnTipRet <> 1)
                      {
-                        Mensagem(Retorna, "Linha " + vnLin + ": " + vaMsgRet);
+                        IntParaAlfa(vnLin, vaLin);
+                        vaMsgErro = "Linha " + vaLin + ": " + vaMsgRet;
+                        Mensagem(Retorna, vaMsgErro);
                      }
                Fim;
          }

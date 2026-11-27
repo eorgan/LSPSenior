@@ -26,6 +26,7 @@ Definir Alfa   vaComLog;
 Definir Alfa   vaResLog;
 Definir Numero vnLinLog;
 Definir Alfa   vaEmpSql;
+Definir Alfa   vaMsgLog;
 
 IntParaAlfa(xEmp, vaEmpSql);
 vaComLog = "INSERT INTO TABELA_LOG (CODEMP, DATSYS, HORSYS, CODUSU, DESLOG)"; @ TODO: ajustar tabela e colunas @
@@ -35,7 +36,8 @@ vaComLog = vaComLog + ", '" + xUsu + "', '" + vaDescricao + "')"; @ TODO: ajusta
 ExecutarComandoSQL(vaComLog, "N", vnLinLog, vaResLog); @ "N" = sem conexão paralela @
 Se (vaResLog <> "OK")
    {
-      Mensagem(Retorna, "Falha ao gravar log: " + vaResLog);
+      vaMsgLog = "Falha ao gravar log: " + vaResLog;
+      Mensagem(Retorna, vaMsgLog);
    }
 ```
 

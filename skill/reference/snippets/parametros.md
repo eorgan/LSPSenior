@@ -59,13 +59,15 @@ SQL_Destruir(vaCursorPdv);
 Definir Funcao BuscaParametro();
 Definir Alfa gaChaParam;  @ ENTRADA: chave a buscar (CHAPDV) @
 Definir Alfa gaValParam;  @ SAÍDA:   valor retornado (VLRPDV) @
+Definir Alfa vaMsgParam;
 
 @ --- Uso --- @
 gaChaParam = "MINHA_CHAVE"; @ TODO: ajustar chave @
 BuscaParametro();
 Se (gaValParam = "")
    {
-      Mensagem(Retorna, "Parâmetro não configurado: " + gaChaParam);
+      vaMsgParam = "Parâmetro não configurado: " + gaChaParam;
+      Mensagem(Retorna, vaMsgParam);
    }
 
 @ --- Implementação --- @
